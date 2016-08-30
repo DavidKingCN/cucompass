@@ -1,0 +1,8 @@
+package cn.wetime.p2pmart.jdbc;
+
+public class JdbcUtilFactory {
+	public static Persistence createPersistence(){
+		return new Persistence();
+	}
+	
+}

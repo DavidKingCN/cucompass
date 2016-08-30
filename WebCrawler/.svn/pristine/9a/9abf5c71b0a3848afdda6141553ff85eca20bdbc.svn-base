@@ -1,0 +1,21 @@
+package cn.wetime.p2pmart.util;
+
+import java.util.Date;
+/**
+ * 
+ * @author daikai
+ * 
+ */
+public final class TimeKit {
+	public static long getLastMillTimes(){
+		return new Date().getTime();
+	}
+	
+	public static double computSeconds(long millTimes){
+		return millTimes/1000;
+	}
+	
+	public static long computPeriod(long now,long last){
+		return now - last;
+	}
+}

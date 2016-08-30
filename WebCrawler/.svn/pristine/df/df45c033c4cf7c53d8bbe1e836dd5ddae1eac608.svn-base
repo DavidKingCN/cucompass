@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 查找最新的schemaLocation 访问 http://www.springframework.org/schema/ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop
+    	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    	http://www.springframework.org/schema/tx
+    	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core-5.9.0.xsd">
+		 
+    <context:property-placeholder location="classpath:redis.properties"/>
+    <!-- Jedis 连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+    p:maxActive="${redis.maxActive}"
+    p:maxIdle="${redis.maxIdle}"
+    p:maxWait="${redis.maxWait}"
+    p:testOnBorrow="${redis.testOnBorrow}"
+    >
+<!--         <property name="maxActive" value="${redis.maxActive}"/> -->
+<!--         <property name="maxIdle" value="${redis.maxIdle}"/> -->
+<!--         <property name="maxWait" value="${redis.maxWait}"/> -->
+<!--         <property name="testOnBorrow" value="${redis.testOnBorrow}"/> -->
+
+    </bean>
+
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool" scope="singleton">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.host}"/>
+                    <constructor-arg index="1" value="${redis.port}"/>
+                    <constructor-arg index="2" value="${redis.maxWait}"/>
+                    <constructor-arg index="3" value="1"/>
+                </bean>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.host}"/>
+                    <constructor-arg index="1" value="${redis.port}"/>
+                    <constructor-arg index="2" value="${redis.maxWait}"/>
+                    <constructor-arg index="3" value="1"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="cache" class="com.cino.cache.impl.IRedisCacheImpl">
+        <property name="jedisPool" ref="shardedJedisPool"></property>
+    </bean>
+</beans>

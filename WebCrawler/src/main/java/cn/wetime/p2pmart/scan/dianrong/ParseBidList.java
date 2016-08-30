@@ -1,0 +1,72 @@
+/*
+ *    系统名称   ： 扒取功能实现
+ *    
+ *    (C) Copyright davidking 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于网络传阅，禁止商业使用
+ */
+package cn.wetime.p2pmart.scan.dianrong;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.wetime.http.core.HttpTemplate;
+import cn.wetime.http.core.ResponseTextType;
+import cn.wetime.p2pmart.WebCrawler;
+import cn.wetime.p2pmart.pojo.Product;
+import cn.wetime.p2pmart.util.JsonValidator;
+import cn.wetime.p2pmart.util.StringUtil;
+import flexjson.JSONDeserializer;
+/**
+ * 
+ * @author daikai
+ *
+ */
+@SuppressWarnings("all")
+public class ParseBidList extends AbsDianRongList {
+	private static final String URL="https://www.dianrong.com/mobile/searchLoans"
+			+ "?pageSize=20"
+			+ "&includeFullyFunded=true"
+			+ "&primaryTabShow=true"
+			+ "&tabSwitch=false"
+			+ "&page=";
+	public List<Product> getResultsByHtmlCrawler() throws Exception {
+		
+		int page = 0;
+		
+		String data = HttpTemplate.doGet(
+				URL+page, null,null,null,
+				ResponseTextType.CONTENT_TYPE_JSON);
+		System.out.println(data);
+		if(!JsonValidator.checkJsonValid(data))
+			return null;
+		JSONDeserializer<DianRongBidList> loans = new JSONDeserializer<DianRongBidList>();
+		DianRongBidList pojo = loans.deserialize(data, DianRongBidList.class);
+		List<Product> products = new ArrayList<Product>();
+		for(DianRongBidObj obj:pojo.getContent().getLoans()){
+			if(obj.getLoan_status().equals("INFUNDING")){
+				Product product = new Product();
+				product.setProductId(String.valueOf(obj.getLoanGUID()));//产品ID
+				product.setProductName(obj.getTitle());               //产品名
+				product.setInvestAmount(String.valueOf(obj.getLoanAmt()));             //投资金额
+				product.setInvestPeriod(String.valueOf(obj.getLoanLength()));             //投资期限
+				product.setProfitMode("");                             //收益方式
+				product.setRate(String.valueOf(obj.getLoanRate()));                   //利率
+				product.setProgress(
+						StringUtil.getPercentStr(1-obj.getLoanAmtRemaining()/obj.getLoanAmt()));          //进度
+				product.setPlatformName("点融网-投标");                   //平台名称
+				products.add(product);
+			}
+		}
+		return products;
+	}
+	public static void main(String[] args)throws Exception {
+		WebCrawler webCrawler = new ParseBidList();
+		List<Product>products = webCrawler.getResultsByHtmlCrawler();
+		
+		for(Product product:products){
+			System.out.println(product);
+		}
+	}
+}

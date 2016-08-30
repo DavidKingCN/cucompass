@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript">
+var baseURL = "http://127.0.0.1:8080/p2pmall/";
+</script>
+<head>
+	<meta charset="UTF-8">
+	<title>Custom DataGrid Pager - jQuery EasyUI Demo</title>
+	<meta http-equiv="refresh" content="120" />
+	<meta http-equiv="pragma" content="no-cache"  />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/demo/demo.css">
+    <script type="text/javascript" src="http://127.0.0.1:8080/p2pmall/resources/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:8080/p2pmall/resources/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:8080/p2pmall/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<div id="datasGrid" style="margin:20px 0;text-align: center;">
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('#datasGrid').datagrid({
+				 title: "p2p商品列表",
+			     width: 'auto',
+			     height: 'auto',
+			     collapsible: true,
+			     url: convertUrl(baseURL+"page/products"),
+			     queryParams:{},
+			     method: 'GET',
+			     sortName: 'title',
+			     loadMsg: "数据加载中...",
+			     pagination:true,
+			     singleSelect:true,
+			     rownumbers:true,
+			     striped: true,
+			     selectOnCheck:true,
+			     fit:true,
+			     idField:'productId',
+			     columns:[[
+			         {title: '商品标号', field: 'productId',  width: 80, align: 'center'}, 
+			         {title: '商品名称', field: 'productName', width: 400, align: 'center'},
+			         {title: '利率', field: 'rate', width: 80, align: 'center'},
+			         {title: '投资周期', field: 'investPeriod', width: 180, align: 'center'},
+			         {title: '收益模式', field: 'profitMode', width: 240, align: 'center'},
+			         {title: '投资额度', field: 'investAmount', width: 160, align: 'center'},
+			         {title: '进度', field: 'progress', width: 100, align: 'center'},
+			         {title: '平台名称', field: 'platformName', width: 120, align: 'center'}
+			     ]]
+			});
+			
+			$('#datasGrid').datagrid('getPager').pagination({
+				pageList:[10,20,40],
+				afterPageText:'/{pages}页',
+				displayMsg:'从{from}到{to},共{total}条记录',
+				showRefresh:true,
+				buttons:[]
+			});		
+	});
+	// 加上时间戳
+	function convertUrl(url) {
+		var timestamp = (new Date()).valueOf();
+		if (url.indexOf("?") >= 0) {
+			url = url + "&t=" + timestamp;
+		} else {
+			url = url + "?t=" + timestamp;
+		}
+		return url;
+	}
+	</script>
+</body>
+</html>

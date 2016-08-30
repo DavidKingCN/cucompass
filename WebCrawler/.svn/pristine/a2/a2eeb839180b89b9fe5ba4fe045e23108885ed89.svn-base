@@ -1,0 +1,86 @@
+/*
+ *    系统名称   ： p2p商品超市
+ *    
+ *    (C) Copyright wetime.cn 2014
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于八青社科技（北京）有限公司内部使用，禁止转发
+ */
+package cn.wetime.p2pmart.util;
+/*
+ *    客户     ： 
+ *    (C) Copyright 2014
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于内部使用，禁止转发
+ */
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+/**
+ * 
+ * @author daikai
+ *
+ */
+public class PageBean {
+	
+	private Long total;
+	private List<? extends Object> rows;
+	private static final String ROWS = "rows"; 
+	private static final int DEFAULT_ROWS = 10;
+	private static final String PAGE = "page"; 
+	
+	public PageBean() {
+		super();
+	}
+	public PageBean(List<? extends Object> rows, Long total) {
+		super();
+		this.rows = rows;
+		this.total = total;
+	}
+	
+	public List<? extends Object> getRows() {
+		return rows;
+	}
+	public void setRows(List<? extends Object> rows) {
+		this.rows = rows;
+	}
+	public Long getTotal() {
+		return total;
+	}
+	public void setTotal(Long total) {
+		this.total = total;
+	}
+	
+	/**
+	 * 得到每页的条目数
+	 * @return
+	 */
+	public static int getPageSize(HttpServletRequest request){
+		String pageSizeStr = request.getParameter(ROWS);
+		int pageSize = DEFAULT_ROWS;// 每页条目数
+		if (pageSizeStr != null) {
+			pageSize = Integer.parseInt(pageSizeStr);
+		}
+		return pageSize;
+	}
+	/**
+	 * 得到起始行数索引
+	 * @param request
+	 * @return
+	 */
+	public static int getFirstResult(HttpServletRequest request){
+		String nextPage = request.getParameter(PAGE);
+		int nextPageNo = 1;
+		if (nextPage != null) {
+			nextPageNo = Integer.parseInt(nextPage);
+		}
+		if (nextPageNo == 0)
+			nextPageNo = 1;
+
+		// 起始行数索引
+		int firstResult = getPageSize(request) * (nextPageNo - 1);
+		
+		return firstResult;
+	}
+}

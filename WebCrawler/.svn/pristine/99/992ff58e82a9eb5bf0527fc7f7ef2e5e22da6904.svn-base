@@ -1,0 +1,30 @@
+/*
+ *    系统名称   ： p2p商品超市
+ *    
+ *    (C) Copyright wetime.cn 2014
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于八青社科技（北京）有限公司内部使用，禁止转发
+ */
+package cn.wetime.http.core;
+
+
+/**
+ * 请求执行接口及常量
+ * 
+ * @author daikai
+ * @version 1.0
+ */
+public interface WtRequest {
+	public static final int SUCCESS = 0;
+
+	public static final int FAIL = 1;
+	
+	public static final int NOT_MATCH = -1;				//获取内容类型与需求类型不匹配
+
+	public static final int ACCESS_TOKEN_INVALID = 2;
+
+	public String exeRequest(Object...params);
+	
+
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Custom DataGrid Pager - jQuery EasyUI Demo</title>
+	<meta http-equiv="refresh" content="120" />
+	<meta http-equiv="pragma" content="no-cache"  />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/p2pmall/resources/easyui/demo/demo.css">
+    <script type="text/javascript" src="http://127.0.0.1:8080/p2pmall/resources/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:8080/p2pmall/resources/json2.js"></script>
+	<script type="text/javascript" src="http://127.0.0.1:8080/p2pmall/resources/form.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:8080/p2pmall/resources/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>Custom DataGrid Pager</h2>
+	<p>You can append some buttons to the standard datagrid pager bar.</p>
+	<div style="margin:20px 0;"></div>
+	<table id="dg" title="Custom DataGrid Pager" style="width:100%;height:800px"
+			data-options="
+			rownumbers:true,
+			singleSelect:true,
+			pagination:true,
+			url:'http://127.0.0.1:8080/p2pmall/page/products',
+			method:'get'">
+		<thead>
+			<tr>
+				<th data-options="field:'productId',width:80">商品ID</th>
+				<th data-options="field:'productName',width:400">商品名称</th>
+				<th data-options="field:'rate',width:80,align:'right'">利率</th>
+				<th data-options="field:'investPeriod',width:180,align:'right'">投资周期</th>
+				<th data-options="field:'profitMode',width:240">收益模式</th>
+				<th data-options="field:'investAmount',width:160,align:'center'">投资额度</th>
+				<th data-options="field:'progress',width:100,align:'center'">进度</th>
+				<th data-options="field:'platformName',width:120,align:'center'">平台名称</th>
+			</tr>
+		</thead>
+	</table>
+	<script type="text/javascript">
+		$(function(){
+			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+			
+			//only pagination not have search , add ,edit or delete 通过js脚本来控制是否显示
+			pager.pagination(/*{
+				buttons:[{
+					iconCls:'icon-search',
+					handler:function(){
+						alert('search');
+					}
+				},{
+					iconCls:'icon-add',
+					handler:function(){
+						alert('add');
+					}
+				},{
+					iconCls:'icon-edit',
+					handler:function(){
+						alert('edit');
+					}
+				}]
+			}*/);			
+		})
+	</script>
+</body>
+</html>

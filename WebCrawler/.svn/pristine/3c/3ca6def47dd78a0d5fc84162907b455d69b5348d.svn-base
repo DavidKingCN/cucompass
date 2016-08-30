@@ -1,0 +1,344 @@
+package cn.wetime.p2pmart.scan.renrendai;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.Header;
+import org.apache.http.message.BasicHeader;
+
+import cn.wetime.p2pmart.WebCrawler;
+import flexjson.JSONDeserializer;
+
+public abstract class AbsRenDaiList implements WebCrawler {
+	protected static final String U_PLAN_RESERVE = "1"; 
+	protected static final String U_PLAN_OPEN_JOIN = "4"; 
+	
+	protected static final String SHARE_LEFT = "0";
+	
+	protected static final double FINISHED_RATIO = 100;
+	
+	protected List<Header> getReqHeaders() {
+		List<Header> headers = new ArrayList<Header>();
+		headers.add(new BasicHeader("Accept","application/json, text/javascript, */*; q=0.01"));
+		headers.add(new BasicHeader("Accept-Encoding","gzip,deflate,sdch"));
+		headers.add(new BasicHeader("Accept-Language","zh-CN,zh;q=0.8"));
+		return headers;
+	}
+	
+	protected List<Header> getRespHeaders(){
+		List<Header> respHeaders = new ArrayList<Header>();
+		respHeaders.add(new BasicHeader("Content-Encoding", "gzip"));
+		respHeaders.add(new BasicHeader("Content-Type", "application/json;charset=UTF-8"));
+		respHeaders.add(new BasicHeader("Content-Language", "zh-CN"));
+		return respHeaders;
+	}
+	
+	protected synchronized RenRenLoanPojo deserial(String data)throws Exception{
+		JSONDeserializer<RenRenLoanPojo> loans = new JSONDeserializer<RenRenLoanPojo>();
+		RenRenLoanPojo pojo = loans.deserialize(data, RenRenLoanPojo.class);
+		return pojo;
+	}
+}
+
+/**
+ * 人人贷json数据项
+ * 
+ * @author daikai
+ *
+ */
+class RenRenLoanPojo {
+	private RenRenLoanList data = new RenRenLoanList();
+
+	private String message = null;
+	private double status;
+
+	public RenRenLoanList getData() {
+		return data;
+	}
+
+	public void setData(RenRenLoanList data) {
+		this.data = data;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public double getStatus() {
+		return status;
+	}
+
+	public void setStatus(double status) {
+		this.status = status;
+	}
+}
+
+/**
+ * 人人贷列表项
+ * 
+ * @author daikai
+ *
+ */
+class RenRenLoanList {
+	private List<RenRenUPlan> plans = new ArrayList<RenRenUPlan>();
+	private List<RenSbLoan> loans = new ArrayList<RenSbLoan>();
+	private List<TransferLoan> transferList = new ArrayList<TransferLoan>();
+	private double totalPage;
+	private double pageIndex;
+
+	public List<RenRenUPlan> getPlans() {
+		return plans;
+	}
+
+	public void setPlans(List<RenRenUPlan> plans) {
+		this.plans = plans;
+	}
+	
+	
+	public List<TransferLoan> getTransferList() {
+		return transferList;
+	}
+
+	public void setTransferList(List<TransferLoan> transferList) {
+		this.transferList = transferList;
+	}
+
+	public double getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(double totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public double getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(double pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+	public List<RenSbLoan> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(List<RenSbLoan> loans) {
+		this.loans = loans;
+	}
+
+}
+
+/**
+ * 人人贷散标数据项
+ * 
+ * @author daikai
+ *
+ */
+class RenSbLoan {
+	private double loanId;
+	private String title;// 借款标题
+	private double amount;// 金额
+	private double interest;// 年利率
+	private double months;// 期限
+	private String borrowerLevel;// 信用等级
+	private String status;
+	private double finishedRatio;// 进度
+
+	public double getLoanId() {
+		return loanId;
+	}
+
+	public void setLoanId(double loanId) {
+		this.loanId = loanId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public double getInterest() {
+		return interest;
+	}
+
+	public void setInterest(double interest) {
+		this.interest = interest;
+	}
+
+	public double getMonths() {
+		return months;
+	}
+
+	public void setMonths(double months) {
+		this.months = months;
+	}
+
+	public String getBorrowerLevel() {
+		return borrowerLevel;
+	}
+
+	public void setBorrowerLevel(String borrowerLevel) {
+		this.borrowerLevel = borrowerLevel;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public double getFinishedRatio() {
+		return finishedRatio;
+	}
+
+	public void setFinishedRatio(double finishedRatio) {
+		this.finishedRatio = finishedRatio;
+	}
+
+}
+
+/**
+ * 人人贷Uplan数据项
+ * 
+ * @author daikai
+ *
+ */
+class RenRenUPlan {
+
+	private double id;// 产品ID
+	private String name;// 产品名称
+	private String expectedYearRate; // 利率
+	// 收益期限
+	// 收益方式
+	private double amount;
+	private double processRatio; // 进度
+
+	private String status;
+
+	public double getId() {
+		return id;
+	}
+
+	public void setId(double id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getProcessRatio() {
+		return processRatio;
+	}
+
+	public void setProcessRatio(double processRatio) {
+		this.processRatio = processRatio;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public String getExpectedYearRate() {
+		return expectedYearRate;
+	}
+
+	public void setExpectedYearRate(String expectedYearRate) {
+		this.expectedYearRate = expectedYearRate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+}
+//转让
+class TransferLoan{
+	private String id;				//id
+	private String title;			//名称
+	private String interest;		//利率
+	private String leftPhaseCount;	//剩余期限
+	private String share;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getInterest() {
+		return interest;
+	}
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
+	public String getLeftPhaseCount() {
+		return leftPhaseCount;
+	}
+	public void setLeftPhaseCount(String leftPhaseCount) {
+		this.leftPhaseCount = leftPhaseCount;
+	}
+	public String getShare() {
+		return share;
+	}
+	public void setShare(String share) {
+		this.share = share;
+	}
+	
+	
+}
+enum UPlanType{
+	U_PLAN_A("3","A"),U_PLAN_B("6","B"),U_PLAN_C("9","C");
+	
+	private final String value;
+
+	private final String name;
+	
+	private UPlanType(String value,String name){
+		this.value = value;
+		this.name = name;
+	}
+	
+	public String getValue() {
+		return this.value;
+	}
+	
+	public String getName() {
+		return name;
+	}
+}

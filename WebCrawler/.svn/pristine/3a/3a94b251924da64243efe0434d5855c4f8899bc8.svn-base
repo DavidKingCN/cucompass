@@ -1,0 +1,88 @@
+/*
+ *    系统名称   ： p2p商品超市
+ *    
+ *    (C) Copyright wetime.cn 2014
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于八青社科技（北京）有限公司内部使用，禁止转发
+ */
+package cn.wetime.p2pmart.engine;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+
+import cn.wetime.p2pmart.WebCrawler;
+import cn.wetime.p2pmart.pojo.Product;
+
+public class Crawler implements Observer, Callable<Map<Boolean,List<Product>>> {
+	
+	private WebCrawler webCrawler;
+//	private long last;
+	private boolean hasDone=false;
+//	private boolean timeout=false;
+	
+	long interval = 0;//间隔时间跨度
+	
+	//注册
+	private static void register(){
+	}
+	static{
+		register();
+	}
+	public Crawler() {
+		super();
+	}
+	
+	public Crawler(WebCrawler webCrawler) {
+		super();
+		this.webCrawler = webCrawler;
+	}
+	//通知方法
+	public boolean update(Observable o, Object arg) {
+		System.out.println("被通知了...");
+		return true;
+	}
+	//线程调用业务方法
+	public Map<Boolean,List<Product>> call() throws Exception {
+//		final int maxDelay = 0;
+		Map<Boolean,List<Product>> result = null;
+		try {
+			synchronized (this) {
+				while(!hasDone){
+					if(!hasDone){
+						result = this.doCrawler();
+						hasDone = true;
+					}
+				}
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{
+
+		}
+		return result;
+	}
+	//执行委托类的业务方法
+	private synchronized Map<Boolean,List<Product>> doCrawler(){
+		Map<Boolean,List<Product>> result = new HashMap<Boolean,List<Product>>();
+		boolean success = true;
+		List<Product> products = null;
+		try {
+			products = webCrawler.getProductByWebCrawler();
+		} catch (Exception e) {
+			System.out.println("爬虫抓取异常啦...");
+			success = false;
+			products = null;
+			
+		}
+		result.put(success, products);
+        return result;
+	}
+}
+
+
+

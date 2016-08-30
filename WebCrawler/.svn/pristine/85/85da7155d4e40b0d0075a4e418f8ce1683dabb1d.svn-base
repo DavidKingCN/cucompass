@@ -1,0 +1,343 @@
+/*
+ *    系统名称   ： p2p商品超市
+ *    
+ *    (C) Copyright wetime.cn 2014
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于八青社科技（北京）有限公司内部使用，禁止转发
+ */
+package cn.wetime.p2pmart.action;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import cn.wetime.p2pmart.pojo.User;
+import cn.wetime.p2pmart.service.UserService;
+import cn.wetime.p2pmart.util.JsonUtil;
+import flexjson.JSONDeserializer;
+
+/**
+ * @author DavidKing
+ * @email 13621151569@yeah.net
+ * @date
+ */
+@Controller
+@RequestMapping("/user")
+public class UserAction {
+	@Autowired
+	private UserService userService;
+
+	public List<User> list = null;
+
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		User user = new User();
+		user.setUserName(username);
+		user.setPassword(password);
+
+		if (list == null) {
+			list = getUserList();
+		}
+		ModelMap model = preOperation();
+		if (model.containsKey("list")) {
+			model.remove(list);
+		}
+
+		model.addAttribute("user", user);
+		return new ModelAndView("redirect:/user/", model);
+	}
+
+	/**
+	 * user路径下默认显示用户列表
+	 * 
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public String index(HttpServletRequest request, HttpServletResponse response) {
+
+		if (list == null) {
+			list = getUserList();
+
+		}
+		request.setAttribute("list", list);
+		return "user/index";
+	}
+
+	private ModelMap preOperation() {
+		ModelMap model = new ModelMap();
+		model.addAttribute("list", list);
+		return model;
+	}
+
+	/**
+	 * 跳转到添加用户页面，约定优于配置，默认匹配文件/WEB-INF/views/user/add.jsp
+	 */
+	@RequestMapping("add")
+	public void add() {
+	}
+
+	/**
+	 * 新增保存用户
+	 * 
+	 * @param user
+	 * @return ModelAndView
+	 */
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView addUser(User user) {
+		if (list == null) {
+			list = getUserList();
+		}
+		list.add(user);
+		userService.addUser(user);
+		ModelMap model = new ModelMap();
+		model.addAttribute("list", list);
+
+		return new ModelAndView("redirect:/user/", model);
+	}
+
+	@RequestMapping(value = "/newUser", method = RequestMethod.POST)
+	public @ResponseBody
+	ResponseEntity<String> newUser(@RequestParam("id") int id,
+			@RequestParam("username") String username,
+			@RequestParam("password") String password) {
+		HttpHeaders headers = new HttpHeaders();
+//		JSONDeserializer<User> userJson = new JSONDeserializer<User>();
+//		User user = userJson.deserialize(json);
+		User user = new User();
+		user.setId(id);
+		user.setUserName(username);
+		user.setPassword(password);
+		userService.addUser(user);
+		String resultStatus = "OK";
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put("status", resultStatus);
+		// 响应头
+
+		return new ResponseEntity(JsonUtil.serialOffClass(result), headers,
+				HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/newUser2", method = RequestMethod.POST)
+	public @ResponseBody
+	ResponseEntity<String> newUser2(@RequestParam("user") String userJson) {
+		HttpHeaders headers = new HttpHeaders();
+		JSONDeserializer<User> jsonJX = new JSONDeserializer<User>();
+		User user = jsonJX.deserialize(userJson, User.class);
+		
+		userService.addUser(user);
+		String resultStatus = "OK";
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put("status", resultStatus);
+		// 响应头
+
+		return new ResponseEntity(JsonUtil.serialOffClass(result), headers,
+				HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/updateUser/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	ResponseEntity<String> updateUser(@PathVariable("id") int id,
+			@RequestParam("user") String userJson) {
+		HttpHeaders headers = new HttpHeaders();
+		JSONDeserializer<User> jsonJX = new JSONDeserializer<User>();
+		User user = jsonJX.deserialize(userJson, User.class);
+		
+		userService.updateUser(id,user);
+		String resultStatus = "OK";
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put("status", resultStatus);
+
+		return new ResponseEntity(JsonUtil.serialOffClass(result), headers,
+				HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/delUser/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	ResponseEntity<String> delUser(@PathVariable("id") int id) {
+		HttpHeaders headers = new HttpHeaders();
+		
+		
+		userService.removeUser(id);
+		boolean resultStatus = true;
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put("success", resultStatus);
+
+		return new ResponseEntity(JsonUtil.serialOffClass(result), headers,
+				HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/findUsers", method = RequestMethod.POST)
+	public @ResponseBody
+	ResponseEntity<String> findUsers() {
+		HttpHeaders headers = new HttpHeaders();
+		List<User> users = userService.findUsers();
+				
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put("total", users.size());
+		result.put("rows", users);
+		// 响应头
+
+		return new ResponseEntity(JsonUtil.deepSerialOffClass(result), headers,
+				HttpStatus.OK);
+	}
+	/**
+	 * 查看用户详细信息
+	 * 
+	 * @param id
+	 * @return ModelAndView
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "{id}")
+	public ModelAndView viewUser(@PathVariable("id") Integer id) {
+		User user = findUserById(id);
+		ModelMap model = new ModelMap();
+		model.addAttribute("user", user);
+
+		return new ModelAndView("user/view", model);
+	}
+
+	/**
+	 * 删除用户
+	 * 
+	 * @param id
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.DELETE, value = "{id}")
+	public String deleteUser(@PathVariable("id") Integer id) {
+		if (list == null) {
+			list = getUserList();
+		}
+
+		removeUserByUserId(id);
+		return "suc";
+	}
+
+	/**
+	 * 跳转到编辑页面
+	 * 
+	 * @param id
+	 * @return ModelAndView
+	 */
+	@RequestMapping("{id}/edit")
+	public ModelAndView toEdit(@PathVariable("id") Integer id) {
+
+		User user = findUserById(id);
+		ModelMap model = new ModelMap();
+		model.addAttribute("user", user);
+
+		return new ModelAndView("user/edit", model);
+	}
+
+	/**
+	 * 更新用户并跳转到用户列表页面
+	 * 
+	 * @param user
+	 * @return ModelAndView
+	 */
+	@RequestMapping(method = RequestMethod.PUT)
+	public ModelAndView edit(User user) {
+		updateUser(user);
+		return new ModelAndView("redirect:/user/");
+	}
+
+	/**
+	 * 造10个用户
+	 * 
+	 * @return List<User>
+	 */
+	private List<User> getUserList() {
+		List<User> list = new ArrayList<User>();
+		for (int i = 0; i < 10; i++) {
+			list.add(new User((i + 1), "李四" + (i + 1)));
+		}
+		return list;
+	}
+
+	/**
+	 * 删除用户
+	 * 
+	 * @param id
+	 * @return List<User>
+	 */
+	private List<User> removeUserByUserId(int id) {
+		if (list == null)
+			return null;
+		boolean exist = false;
+		for (User user : list) {
+			if (user.getId() == id) {
+				exist = true;
+				break;
+			}
+		}
+		if (exist) {
+			list.remove(findUserById(id));
+		}
+		return list;
+	}
+
+	/**
+	 * 查找用户
+	 * 
+	 * @param id
+	 * @return User
+	 */
+	private User findUserById(int id) {
+		User user = null;
+		if (list == null)
+			return null;
+		for (User _user : list) {
+			if (_user.getId() == id) {
+				user = _user;
+				break;
+			}
+		}
+		return user;
+	}
+
+	/**
+	 * 更新用户
+	 * 
+	 * @param user
+	 */
+	private void updateUser(User user) {
+		for (User _user : list) {
+			if (_user.getId() == user.getId()) {
+				_user.setUserName(user.getUserName());
+				break;
+			}
+		}
+	}
+
+	@RequestMapping(value = "/buildStringUser")
+	public @ResponseBody
+	ResponseEntity<String> buildStringUser() {
+		// 响应头
+		HttpHeaders headers = new HttpHeaders();
+		User user = new User();
+		user.setId(9);
+		user.setUserName("MM");
+		return new ResponseEntity<String>(JsonUtil.serialOffClass(user),
+				headers, HttpStatus.OK);
+	}
+
+}

@@ -1,0 +1,17 @@
+/*
+ *    系统名称   ： p2p商品超市
+ *    
+ *    (C) Copyright wetime.cn 2014
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于八青社科技（北京）有限公司内部使用，禁止转发
+ */
+package cn.wetime.p2pmart.util;
+/**
+ * 对properties文件的操作utility
+ * @author daikai
+ *
+ */
+public class PropertiesUtil {
+	
+}

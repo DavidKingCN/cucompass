@@ -1,0 +1,101 @@
+/*
+ *    系统名称   ： 扒取功能实现
+ *    
+ *    (C) Copyright davidking 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 本内容仅限于网络传阅，禁止商业使用
+ */
+package cn.wetime.p2pmart.scan.renrendai;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.wetime.http.core.HttpTemplate;
+import cn.wetime.http.core.ResponseTextType;
+import cn.wetime.p2pmart.WebCrawler;
+import cn.wetime.p2pmart.pojo.Product;
+import cn.wetime.p2pmart.util.JsonValidator;
+@SuppressWarnings("all")
+public class ParseRenUPlanList extends  AbsRenDaiList {
+
+	String URL = "http://www.renrendai.com/"+
+			"/financeplan/listPlan!listPlanJson.action?category=";
+	private static final String[] CATEGORYS = {
+		UPlanType.U_PLAN_A.getName(),
+		UPlanType.U_PLAN_B.getName(),
+		UPlanType.U_PLAN_C.getName()}; 
+	
+	public List<Product> getResultsByHtmlCrawler() throws Exception {
+		
+		List<Product> products = new ArrayList<Product>();
+		for(String category:CATEGORYS){
+			
+			boolean hasBreak = false;
+			int pageIndex = 1;
+			while(true){
+				try {
+					
+					String data = 
+							HttpTemplate.doGet(
+									URL+category+"&pageIndex="+pageIndex, getReqHeaders(),null,
+									getRespHeaders(),
+									ResponseTextType.CONTENT_TYPE_JSON);
+					System.out.println(data);
+					if(!JsonValidator.checkJsonValid(data)){
+						return null;
+					}
+					RenRenLoanPojo pojo = null; 
+					try{
+						pojo = deserial(data);
+					}catch(Exception e){
+						return null;
+					}
+					
+					for(RenRenUPlan renRenUPlan:pojo.getData().getPlans()){
+						if(renRenUPlan.getStatus().equals(U_PLAN_RESERVE)||
+								renRenUPlan.getStatus().equals(U_PLAN_OPEN_JOIN)){
+							Product product = new Product();
+							product.setProductId(String.valueOf(renRenUPlan.getId()));
+							product.setProductName(renRenUPlan.getName());               //产品名
+							product.setInvestAmount(String.valueOf(renRenUPlan.getAmount()));     //投资金额
+							if(category.equals(UPlanType.U_PLAN_A.getName()))
+								product.setInvestPeriod(UPlanType.U_PLAN_A.getValue());
+							else if(category.equals(UPlanType.U_PLAN_B.getName()))
+								product.setInvestPeriod(UPlanType.U_PLAN_B.getValue());
+							else if(category.equals(UPlanType.U_PLAN_C.getName()))
+								product.setInvestPeriod(UPlanType.U_PLAN_C.getValue());						   //投资期限
+							product.setProfitMode("");                             //收益方式
+							product.setRate(renRenUPlan.getExpectedYearRate());                   //利率
+							product.setProgress(String.valueOf(renRenUPlan.getProcessRatio()));          //进度
+							product.setPlatformName("人人贷-U计划"+category);                   //平台名称
+							products.add(product);
+						}else{
+							hasBreak = true;
+							break;
+						}
+							
+					}
+					pageIndex++;
+					if(hasBreak){
+						break;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}	
+				
+			}
+		}
+		
+		return products;
+	}
+	
+	public static void main(String[] args)throws Exception {
+		WebCrawler webCrawler = new ParseRenUPlanList();
+		List<Product> products = webCrawler.getResultsByHtmlCrawler();
+		if(products!=null)
+			for(Product product:products){
+				System.out.println(product);
+			}
+	}
+}
