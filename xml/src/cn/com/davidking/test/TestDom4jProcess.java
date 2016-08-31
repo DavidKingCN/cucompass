@@ -1,11 +1,10 @@
-/**
- * 	      功能名称 ：xml反序列化解析1.0
- *       
- *        (C)   Copyright  DavidKing 2016
- *        All   Right  Reserved.
- * 
- * 		    注意	：使用该功能的可以联系作者
- *         联系方式 13621151569@yeah.net
+/*
+ *    功能名称   ： xml反序列化实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
  */
 package cn.com.davidking.test;
 
@@ -39,7 +38,7 @@ public class TestDom4jProcess {
 		boolean valid = xmlProcess.checkSchemaValid();
 		if(valid){
 			//xml文件合法则调用获取该文件的类类型数据
-			 List<Book> books = xmlProcess.getArrays();
+			 List<Book> books = xmlProcess.deserialArrays();
 			 if(books!=null && books.size()!=0)
 				for(Book book : books){
 					System.out.println(book.toString());

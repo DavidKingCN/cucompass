@@ -1,11 +1,10 @@
-/**
- * 	      功能名称 ：xml反序列化解析1.0
- *       
- *        (C)   Copyright  DavidKing 2016
- *        All   Right  Reserved.
- * 
- * 		    注意	：使用该功能的可以联系作者
- *         联系方式 13621151569@yeah.net
+/*
+ *    功能名称   ： xml反序列化实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
  */
 package cn.com.davidking.xml.sax;
 
@@ -58,7 +57,7 @@ public class SaxProcess extends AbsXmlProcess {
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.xml.XmlProcess#getArrays()
 	 */
-	public <T> List<T> getArrays() throws Exception {
+	public <T> List<T> deserialArrays() throws Exception {
 		try {
 			SaxParser parser = new SaxParser(this.getClazz());
 			SAXParserFactory.newInstance().newSAXParser()

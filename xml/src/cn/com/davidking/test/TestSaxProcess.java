@@ -38,7 +38,7 @@ public class TestSaxProcess {
 		boolean valid = xmlProcess.checkSchemaValid();
 		if(valid){
 			//xml文件合法则调用获取该文件的类类型数据
-			 List<Book> books = xmlProcess.getArrays();
+			 List<Book> books = xmlProcess.deserialArrays();
 			 if(books!=null && books.size()!=0)
 				for(Book book : books){
 					System.out.println(book.toString());

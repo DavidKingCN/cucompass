@@ -1,11 +1,10 @@
-/**
- * 	      功能名称 ：xml反序列化解析1.0
- *       
- *        (C)   Copyright  DavidKing 2016
- *        All   Right  Reserved.
- * 
- * 		    注意	：使用该功能的可以联系作者
- *         联系方式 13621151569@yeah.net
+/*
+ *    功能名称   ： xml反序列化实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
  */
 package cn.com.davidking.xml;
 
@@ -110,10 +109,12 @@ public abstract class AbsXmlProcess<T> implements XmlProcess {
     	    SAXReader reader = new SAXReader();
 //    	    reader.setFeature("http://apache.org/xml/features/validation/schema", true);
     	    reader.read(file);/*读取xml文件，获得document对象*/
-    	    System.out.println("Load "+file+" success!");
+    	    LOG.info("Load "+file+" success!");
+    	    
 
 		}catch (Exception e){
 			System.out.println(e.getMessage());
+			LOG.error(e.getMessage());
 			valid = false;
 		}
 		return valid;
