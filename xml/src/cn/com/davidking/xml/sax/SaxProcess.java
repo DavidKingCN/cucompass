@@ -56,6 +56,9 @@ public class SaxProcess extends AbsXmlProcess {
 		super(file, clazz);
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.davidking.xml.XmlProcess#deserialArrays()
+	 */
 	@Override
 	public List deserialArrays() throws Exception {
 		// TODO Auto-generated method stub

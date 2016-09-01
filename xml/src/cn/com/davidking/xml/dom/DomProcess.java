@@ -31,6 +31,8 @@ import cn.com.davidking.xml.XmlProcess;
 
 /**
  * The Class DomProcess.
+ *
+ * @param <T> the generic type
  */
 @SuppressWarnings("all")
 public class DomProcess<T> extends AbsXmlProcess {

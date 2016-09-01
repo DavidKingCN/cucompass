@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * The Interface XmlProcess.
  *
+ * @param <T> the generic type
  * @author DavidKing
  */
 public interface XmlProcess<T> {
@@ -35,8 +36,18 @@ public interface XmlProcess<T> {
 	 */
 	public abstract <T> List<T> deserialArrays()	throws Exception;
 
+	/**
+	 * Sets the clazz.
+	 *
+	 * @param clazz the clazz
+	 */
 	void setClazz(Class<T> clazz);
 
+	/**
+	 * Sets the file.
+	 *
+	 * @param file the file
+	 */
 	void setFile(String file);
 
 }

@@ -1,3 +1,11 @@
+/*
+ *    功能名称   ： xml反序列化实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
+ */
 package cn.com.davidking.context;
 
 import java.io.File;
@@ -16,16 +24,21 @@ import cn.com.davidking.xml.XmlProcess;
 import cn.com.davidking.xml.sax.SaxProcess;
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SaxProcessAppTest.
+ */
 @Configuration
 @ComponentScan
 public class SaxProcessAppTest  extends TestCase{
 
 	//指定要解析的xml的文件路径
-		public static final String file = new File("src/cn/com/davidking/test/book.xml").getAbsolutePath();
+		/** The Constant file. */
+	public static final String file = new File("src/cn/com/davidking/test/book.xml").getAbsolutePath();
+		
 		/**
 		 * The main method.
 		 *
-		 * @param args the args
 		 * @throws Exception the exception
 		 */
 		@Test
@@ -47,6 +60,11 @@ public class SaxProcessAppTest  extends TestCase{
 		}
 		
 		
+		/**
+		 * Test parse xml by spring config.
+		 *
+		 * @throws Exception the exception
+		 */
 		@Test
 		public void testParseXmlBySpringConfig()throws Exception{
 //			ApplicationContext context =
@@ -72,10 +90,22 @@ public class SaxProcessAppTest  extends TestCase{
 			}
 			
 		}
+	
+	/**
+	 * New xml process.
+	 *
+	 * @return the xml process
+	 */
 	@Bean
 	XmlProcess newXmlProcess(){
 		return new SaxProcess();
 	}
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		ApplicationContext context = 
 		          new AnnotationConfigApplicationContext(SaxProcessAppTest.class);
@@ -94,6 +124,10 @@ public class SaxProcessAppTest  extends TestCase{
 		
 		
 	}
+	
+	/**
+	 * Test sax process by spring annotation.
+	 */
 	@Test
 	public void testSaxProcessBySpringAnnotation(){
 		ApplicationContext context = 
