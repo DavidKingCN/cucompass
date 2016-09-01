@@ -31,7 +31,7 @@ import cn.com.davidking.xml.AbsXmlProcess;
  * @param <T> the generic type
  */
 @SuppressWarnings("all")
-public class JdomProcess<T> extends AbsXmlProcess<T> {
+public class JdomProcess<T> extends AbsXmlProcess {
 	
 	/** The Constant LOG. */
 	public static final Logger LOG = Logger.getLogger(JdomProcess.class);
@@ -69,7 +69,7 @@ public class JdomProcess<T> extends AbsXmlProcess<T> {
 	 * @see cn.com.davidking.xml.XmlProcess#getArrays()
 	 */
 	@Override
-	public <T> List<T> deserialArrays() throws Exception {
+	public List deserialArrays() throws Exception {
 		// TODO Auto-generated method stub
 		Map<String,String> kvs = new HashMap<String,String>();
 		

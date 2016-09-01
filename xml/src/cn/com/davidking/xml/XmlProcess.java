@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author DavidKing
  */
-public interface XmlProcess {
+public interface XmlProcess<T> {
 	
 	/**
 	 * Check schema valid.
@@ -34,5 +34,9 @@ public interface XmlProcess {
 	 * @throws Exception the exception
 	 */
 	public abstract <T> List<T> deserialArrays()	throws Exception;
+
+	void setClazz(Class<T> clazz);
+
+	void setFile(String file);
 
 }

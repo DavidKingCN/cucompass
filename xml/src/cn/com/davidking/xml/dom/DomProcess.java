@@ -33,7 +33,7 @@ import cn.com.davidking.xml.XmlProcess;
  * The Class DomProcess.
  */
 @SuppressWarnings("all")
-public class DomProcess extends AbsXmlProcess {
+public class DomProcess<T> extends AbsXmlProcess {
 	
 	/** The Constant LOG. */
 	public static final Logger LOG = Logger.getLogger(DomProcess.class);
@@ -69,7 +69,7 @@ public class DomProcess extends AbsXmlProcess {
 	 * @see cn.com.davidking.xml.XmlProcess#getArrays()
 	 */
 	@Override
-	public <T> List<T> deserialArrays() throws Exception {
+	public List deserialArrays() throws Exception {
 		
 		Map<String,String> kvs = new HashMap<String,String>();
 		

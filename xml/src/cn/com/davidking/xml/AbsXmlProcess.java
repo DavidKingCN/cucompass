@@ -11,6 +11,7 @@ package cn.com.davidking.xml;
 import org.apache.log4j.Logger;
 import org.dom4j.io.SAXReader;
 // TODO: Auto-generated Javadoc
+import org.springframework.stereotype.Component;
 
 /**
  * The Class AbsXmlProcess.
@@ -76,6 +77,7 @@ public abstract class AbsXmlProcess<T> implements XmlProcess {
 	 *
 	 * @param file the file
 	 */
+	@Override
 	public void setFile(String file) {
 		this.file = file;
 	}
@@ -95,14 +97,13 @@ public abstract class AbsXmlProcess<T> implements XmlProcess {
 	 *
 	 * @param clazz the clazz
 	 */
-	public void setClazz(Class<T> clazz) {
+	public void setClazz(Class clazz) {
 		this.clazz = clazz;
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.xml.XmlProcess#checkSchemaValid()
 	 */
-	@Override
 	public boolean checkSchemaValid() throws Exception {
 		boolean valid = true;
 		try{

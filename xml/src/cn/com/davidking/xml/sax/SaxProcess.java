@@ -18,6 +18,7 @@ import java.util.Map;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -31,6 +32,7 @@ import cn.com.davidking.xml.AbsXmlProcess;
  * The Class SaxProcess.
  */
 @SuppressWarnings("all")
+//@Component
 public class SaxProcess extends AbsXmlProcess {
 	
 	/** The Constant LOG. */
@@ -54,10 +56,9 @@ public class SaxProcess extends AbsXmlProcess {
 		super(file, clazz);
 	}
 
-	/* (non-Javadoc)
-	 * @see cn.com.davidking.xml.XmlProcess#getArrays()
-	 */
-	public <T> List<T> deserialArrays() throws Exception {
+	@Override
+	public List deserialArrays() throws Exception {
+		// TODO Auto-generated method stub
 		try {
 			SaxParser parser = new SaxParser(this.getClazz());
 			SAXParserFactory.newInstance().newSAXParser()
@@ -69,7 +70,13 @@ public class SaxProcess extends AbsXmlProcess {
 		}
 
 		return null;
+
 	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.davidking.xml.XmlProcess#getArrays()
+	 */
+	
 
 }
 
