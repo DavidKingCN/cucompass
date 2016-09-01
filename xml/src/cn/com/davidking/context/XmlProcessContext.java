@@ -12,18 +12,14 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import cn.com.davidking.xml.XmlProcess;
-import cn.com.davidking.xml.sax.SaxProcess;
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class XmlProcessContext.
  */
+@SuppressWarnings("all")
 @Component
 public class XmlProcessContext {
 	
@@ -32,18 +28,13 @@ public class XmlProcessContext {
 	
 	/** The xml process. */
 	private XmlProcess xmlProcess;
-	
-//	@Bean
-//	XmlProcess newXmlProcess(){
-//		return new SaxProcess();
-//	}
 
 	/**
  * The Constructor.
  *
  * @param xmlProcess the xml process
  */
-@Autowired
+	@Autowired
 	public XmlProcessContext(XmlProcess xmlProcess) {
 		super();
 		this.xmlProcess = xmlProcess;
@@ -72,8 +63,6 @@ public class XmlProcessContext {
 		xmlProcess.setClazz(clazz);
 		xmlProcess.setFile(file);
 		
-		// 通过指定路径的xml文件以及类类型构建sax解析的实现
-		// XmlProcess xmlProcess = new SaxProcess( file, clazz);
 		// 检查xml文件是否合法
 		boolean valid = xmlProcess.checkSchemaValid();
 		List<T> books = null;

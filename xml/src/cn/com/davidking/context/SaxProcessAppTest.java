@@ -28,6 +28,7 @@ import junit.framework.TestCase;
 /**
  * The Class SaxProcessAppTest.
  */
+@SuppressWarnings("all")
 @Configuration
 @ComponentScan
 public class SaxProcessAppTest  extends TestCase{
