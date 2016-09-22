@@ -17,7 +17,7 @@ import java.util.List;
  * @param <T> the generic type
  * @author DavidKing
  */
-public interface XmlProcess<T> {
+public interface XmlProcess {
 	
 	/**
 	 * Check schema valid.
@@ -41,7 +41,7 @@ public interface XmlProcess<T> {
 	 *
 	 * @param clazz the clazz
 	 */
-	void setClazz(Class<T> clazz);
+	<T>void setClazz(Class<T> clazz);
 
 	/**
 	 * Sets the file.

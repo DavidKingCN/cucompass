@@ -11,6 +11,7 @@ package cn.com.davidking.context;
 import java.io.File;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -32,6 +33,8 @@ import junit.framework.TestCase;
 @Configuration
 @ComponentScan
 public class SaxProcessAppTest  extends TestCase{
+	
+	public static final Logger LOG = Logger.getLogger(SaxProcessAppTest.class);
 
 	//指定要解析的xml的文件路径
 		/** The Constant file. */
@@ -51,6 +54,7 @@ public class SaxProcessAppTest  extends TestCase{
 			//检查xml文件是否合法
 			boolean valid = xmlProcess.checkSchemaValid();
 			if(valid){
+				LOG.info("file is valid!");
 				//xml文件合法则调用获取该文件的类类型数据
 				 List<Book> books = xmlProcess.deserialArrays();
 				 if(books!=null && books.size()!=0)
