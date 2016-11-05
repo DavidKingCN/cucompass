@@ -8,13 +8,13 @@ import java.util.Map;
 import cn.com.davidking.json.Constant;
 
 
-public class MapAllRegExp extends JsonPullerManager implements JsonPuller,JsonResult{
-	public MapAllRegExp(){}
-	public MapAllRegExp(String nodeName,String targetJson,Map<String,Object> rtMap){
+public class PickMultiKeyVal extends JsonPickTools implements JsonPicker,JsonResult{
+	public PickMultiKeyVal(){}
+	public PickMultiKeyVal(String nodeName,String targetJson,Map<String,Object> rtMap){
 		super(nodeName,targetJson,rtMap);
 	}
 	@Override
-	public void jsonPull() {
+	public void pick() {
 		String targetKeysStr = nodeName.substring(nodeName.indexOf("{")+1, nodeName.lastIndexOf("}"));
 		String[] targetKeys = targetKeysStr.split(",");
 		List<String>jsons = getElementsByJsonArr(targetJson);

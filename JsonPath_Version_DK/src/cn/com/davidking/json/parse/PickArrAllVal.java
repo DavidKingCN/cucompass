@@ -3,15 +3,15 @@ package cn.com.davidking.json.parse;
 import cn.com.davidking.json.Constant;
 import cn.com.davidking.json.util.MatchUtils;
 
-public class JavaArrAllRegExp extends JsonPullerManager implements JsonPuller,JsonTransition{
+public class PickArrAllVal extends JsonPickTools implements JsonPicker,JsonTransition{
 	
-	public JavaArrAllRegExp(){}
+	public PickArrAllVal(){}
 	
-	public JavaArrAllRegExp(boolean isArrAll,String nodeName,String targetJson,boolean error){
+	public PickArrAllVal(boolean isArrAll,String nodeName,String targetJson,boolean error){
 		super(isArrAll,nodeName,targetJson,error);
 	}
 	@Override
-	public void jsonPull() {
+	public void pick() {
 		isArrAll = true;
 		
 		String key = MatchUtils.getOnlyMatchs(nodeName, Constant.javaNameRegExp);

@@ -27,13 +27,13 @@ public class JsonParser  {
 				}
 				
 				if(nodeName.matches(Constant.mapAllRegExp)){
-					MapAllRegExp mapAllRegExp = new MapAllRegExp(nodeName,args.getTargetJson(),rtMap);
-					mapAllRegExp.jsonPull();
+					PickMultiKeyVal mapAllRegExp = new PickMultiKeyVal(nodeName,args.getTargetJson(),rtMap);
+					mapAllRegExp.pick();
 					rtMap = mapAllRegExp.result();
 					
 				}else if(nodeName.matches(Constant.javaNameRegExp)){
-					JavaNameRegExp javaNameRegExp = 
-							new JavaNameRegExp(
+					PickSingleKeyVal javaNameRegExp = 
+							new PickSingleKeyVal(
 									layerLens,
 									args.getTargetJson(),
 									rtMap,
@@ -44,25 +44,25 @@ public class JsonParser  {
 									i,
 									nodeName,
 									args.getArrIdx());
-					javaNameRegExp.jsonPull();
+					javaNameRegExp.pick();
 					
 					rtMap = javaNameRegExp.result();
 				}else if(nodeName.matches(Constant.javaArrAllRegExp)){
-					JavaArrAllRegExp javaArrAllRegExp = new JavaArrAllRegExp(
+					PickArrAllVal javaArrAllRegExp = new PickArrAllVal(
 							args.isArrAll(),
 							nodeName,
 							args.getTargetJson(),
 							args.isError());
-					javaArrAllRegExp.jsonPull();
+					javaArrAllRegExp.pick();
 					args = javaArrAllRegExp.peek();
 				}else if(nodeName.matches(Constant.javaArrOneRegExp)){
-					JavaArrOneRegExp javaArrOneRegExp = new JavaArrOneRegExp(
+					PickArrOneVal javaArrOneRegExp = new PickArrOneVal(
 							args.isArrOne(),
 							args.getArrIdx(),
 							nodeName,
 							args.getTargetJson(),
 							args.isError());
-					javaArrOneRegExp.jsonPull();
+					javaArrOneRegExp.pick();
 					args = javaArrOneRegExp.peek();
 				}else{
 					rtMap =  null;

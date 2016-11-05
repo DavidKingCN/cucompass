@@ -3,17 +3,17 @@ package cn.com.davidking.json.parse;
 import cn.com.davidking.json.Constant;
 import cn.com.davidking.json.util.MatchUtils;
 
-public class JavaArrOneRegExp extends JsonPullerManager implements JsonPuller,JsonTransition{
+public class PickArrOneVal extends JsonPickTools implements JsonPicker,JsonTransition{
 	
-	public JavaArrOneRegExp(){
+	public PickArrOneVal(){
 		super();
 	}
 	
-	public JavaArrOneRegExp(boolean isArrOne,int arrIdx,String nodeName,String targetJson,boolean error){
+	public PickArrOneVal(boolean isArrOne,int arrIdx,String nodeName,String targetJson,boolean error){
 		super(isArrOne,arrIdx,nodeName,targetJson,error);
 	}
 	@Override
-	public void jsonPull() {
+	public void pick() {
 		arrIdx = Integer.parseInt(MatchUtils.getSingleValByReg(nodeName, Constant.arrOneRegExp));
 		
 		isArrOne = true;

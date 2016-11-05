@@ -1,3 +1,11 @@
+/*
+ *    功能名称   ： json path实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
+ */
 package cn.com.davidking.json.parse.test;
 
 import java.io.File;
@@ -10,8 +18,18 @@ import cn.com.davidking.json.util.FileUtil;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestJsonPath.
+ */
 public class TestJsonPath {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 * @throws Exception the exception
+	 */
 	public static void main(String[] args) throws Exception{
 		int  times = 1;
 		long slfTm  = 0;
@@ -22,6 +40,12 @@ public class TestJsonPath {
 	}
 	
 	
+	/**
+	 * Test slf json path.
+	 *
+	 * @param times the times
+	 * @return the long
+	 */
 	public static long testSlfJsonPath(int times){
 		long bgTm = new Date().getTime();
 		File jsonFile = new File("resources/json.json");

@@ -6,14 +6,14 @@ import java.util.Map;
 import cn.com.davidking.json.Constant;
 
 
-public class JavaNameRegExp extends JsonPullerManager implements JsonPuller,JsonResult{
-	public JavaNameRegExp(){}
-	public JavaNameRegExp(int layerLens, String targetJson, Map<String, Object> rtMap, List<String> results,
+public class PickSingleKeyVal extends JsonPickTools implements JsonPicker,JsonResult{
+	public PickSingleKeyVal(){}
+	public PickSingleKeyVal(int layerLens, String targetJson, Map<String, Object> rtMap, List<String> results,
 			boolean error, boolean isArrAll, boolean isArrOne, int i, String nodeName, int arrIdx){
 		super(layerLens,targetJson,rtMap,results,error,isArrAll,isArrOne,i,nodeName,arrIdx);
 	}
 	@Override
-	public void jsonPull() {
+	public void pick() {
 		if(isArrAll){
 			results = getElementsByJsonArr(targetJson, nodeName);
 			if(i==layerLens&&results!=null){
