@@ -1,0 +1,26 @@
+{	"id":1,
+	"name": "爷爷",
+	"children": [
+		{
+			"id":21,
+			"name": "爸爸",
+			"children": [
+				{
+					"id":211,
+					"name": "大儿子",
+					"children": []
+				} ,
+				{
+					"id":212,
+					"name": "小儿子",
+					"children": []
+				}
+			]
+		},
+		{
+			"id":22,
+			"name": "叔叔",
+			"children": []
+		}
+	]
+}
