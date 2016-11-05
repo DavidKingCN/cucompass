@@ -1,3 +1,11 @@
+/*
+ *    功能名称   ： json path实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
+ */
 package cn.com.davidking.json.parse;
 
 import java.util.HashMap;
@@ -6,8 +14,19 @@ import java.util.Map;
 import cn.com.davidking.json.Constant;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JsonParser.
+ */
 public class JsonParser  {  
     
+    /**
+     * Json path.
+     *
+     * @param json the json
+     * @param path the path
+     * @return the map< string, object>
+     */
     public Map<String,Object> jsonPath(String json,String path){
 		String[] namesArr = path.split(Constant.regSeparator);
 		int layerLens  = namesArr.length-1;

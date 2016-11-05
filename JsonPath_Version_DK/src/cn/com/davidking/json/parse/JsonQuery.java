@@ -1,3 +1,11 @@
+/*
+ *    功能名称   ： json path实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
+ */
 package cn.com.davidking.json.parse;
 
 import java.util.List;
@@ -6,7 +14,19 @@ import java.util.Map;
 import cn.com.davidking.json.Constant;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JsonQuery.
+ */
 public class JsonQuery {
+	
+	/**
+	 * Gets the single val.
+	 *
+	 * @param json the json
+	 * @param path the path
+	 * @return the single val
+	 */
 	public static String getSingleVal(String json, String path) {
 		Map<String,Object> result = new JsonParser().jsonPath(json, path);
 		if (result != null)
@@ -16,10 +36,11 @@ public class JsonQuery {
 	}
 
 	/**
-	 * 
-	 * @param json
-	 * @param path
-	 * @return
+	 * Gets the list val.
+	 *
+	 * @param json the json
+	 * @param path the path
+	 * @return the list val
 	 */
 	public static List<String> getListVal(String json, String path) {
 		
@@ -31,6 +52,13 @@ public class JsonQuery {
 
 	}
 
+	/**
+	 * Gets the map val.
+	 *
+	 * @param json the json
+	 * @param path the path
+	 * @return the map val
+	 */
 	public static List<Map<String, String>> getMapVal(String json, String path) {
 		Map<String,Object> result = new JsonParser().jsonPath(json, path);
 		if (result != null)

@@ -1,31 +1,41 @@
 /*
- *    系统名称   ： 扒取功能实现
+ *    功能名称   ： json path实现1.0
  *    
- *    (C) Copyright davidking 2016
+ *    (C) Copyright DavidKing 2016
  *    All Rights Reserved.
  *	  
- *    注意： 本内容仅限于网络传阅，禁止商业使用
+ *    注意： 有问题联系作者13621151569@yeah.net
  */
 package cn.com.davidking.json.util;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+// TODO: Auto-generated Javadoc
+
 /**
- * 用于校验一个字符串是否是合法的JSON格式 
- * @author daikai
+ * 用于校验一个字符串是否是合法的JSON格式.
  *
+ * @author daikai
  */
 public class JsonValidator {
  
+    /** The it. */
     private CharacterIterator it;
+    
+    /** The c. */
     private char              c;
+    
+    /** The col. */
     private int               col;
  
+    /**
+     * The Constructor.
+     */
     public JsonValidator(){
     }
  
     /**
-     * 验证一个字符串是否是合法的JSON串
-     * 
+     * 验证一个字符串是否是合法的JSON串.
+     *
      * @param input 要验证的字符串
      * @return true-合法 ，false-非法
      */
@@ -35,6 +45,12 @@ public class JsonValidator {
         return ret;
     }
  
+    /**
+     * Valid.
+     *
+     * @param input the input
+     * @return true, if valid
+     */
     private boolean valid(String input) {
         if ("".equals(input)) return true;
  
@@ -54,10 +70,21 @@ public class JsonValidator {
         return ret;
     }
  
+    /**
+     * Value.
+     *
+     * @return true, if value
+     */
     private boolean value() {
         return literal("true") || literal("false") || literal("null") || string() || number() || object() || array();
     }
  
+    /**
+     * Literal.
+     *
+     * @param text the text
+     * @return true, if literal
+     */
     private boolean literal(String text) {
         CharacterIterator ci = new StringCharacterIterator(text);
         char t = ci.first();
@@ -76,14 +103,32 @@ public class JsonValidator {
         return ret;
     }
  
+    /**
+     * Array.
+     *
+     * @return true, if array
+     */
     private boolean array() {
         return aggregate('[', ']', false);
     }
  
+    /**
+     * Object.
+     *
+     * @return true, if object
+     */
     private boolean object() {
         return aggregate('{', '}', true);
     }
  
+    /**
+     * Aggregate.
+     *
+     * @param entryCharacter the entry character
+     * @param exitCharacter the exit character
+     * @param prefix the prefix
+     * @return true, if aggregate
+     */
     private boolean aggregate(char entryCharacter, char exitCharacter, boolean prefix) {
         if (c != entryCharacter) return false;
         nextCharacter();
@@ -121,6 +166,11 @@ public class JsonValidator {
         return true;
     }
  
+    /**
+     * Number.
+     *
+     * @return true, if number
+     */
     private boolean number() {
         if (!Character.isDigit(c) && c != '-') return false;
         int start = col;
@@ -157,6 +207,11 @@ public class JsonValidator {
         return true;
     }
  
+    /**
+     * String.
+     *
+     * @return true, if string
+     */
     private boolean string() {
         if (c != '"') return false;
  
@@ -178,6 +233,11 @@ public class JsonValidator {
         return error("quoted string", start);
     }
  
+    /**
+     * Escape.
+     *
+     * @return true, if escape
+     */
     private boolean escape() {
         int start = col - 1;
         if (" \\\"/bfnrtu".indexOf(c) < 0) {
@@ -192,34 +252,64 @@ public class JsonValidator {
         return true;
     }
  
+    /**
+     * Ishex.
+     *
+     * @param d the d
+     * @return true, if ishex
+     */
     private boolean ishex(char d) {
         return "0123456789abcdefABCDEF".indexOf(d) >= 0;
     }
  
+    /**
+     * Next character.
+     *
+     * @return the char
+     */
     private char nextCharacter() {
         c = it.next();
         ++col;
         return c;
     }
  
+    /**
+     * Skip white space.
+     */
     private void skipWhiteSpace() {
         while (Character.isWhitespace(c)) {
             nextCharacter();
         }
     }
  
+    /**
+     * Error.
+     *
+     * @param type the type
+     * @param col the col
+     * @return true, if error
+     */
     private boolean error(String type, int col) {
          System.out.printf("type: %s, col: %s%s", type, col, System.getProperty("line.separator"));
         return false;
     }
+    
+    /**
+     * The main method.
+     *
+     * @param args the args
+     */
     public static void main(String[] args){
         String jsonStr = "{\"website\":\"oschina.net\"}";
         System.out.println(jsonStr+":"+new JsonValidator().validate(jsonStr));
     }
-    /***
-     * 检测json是否合法
-     * @param json
-     * @return
+    
+    /**
+     * *
+     * 检测json是否合法.
+     *
+     * @param json the json
+     * @return true, if check json valid
      */
     public static boolean checkJsonValid(String json){
     	return new JsonValidator().validate(json);
