@@ -14,6 +14,7 @@ import java.util.Map;
 
 import cn.com.davidking.json.parse.JsonQuery;
 import cn.com.davidking.json.util.FileUtil;
+import cn.com.davidking.test.ExecRtChecker;
 import cn.com.davidking.test.MethodExec;
 
 // TODO: Auto-generated Javadoc
@@ -32,12 +33,12 @@ public class TestSlfJsonPath extends MethodExec {
 
 		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
 		List<String> names = JsonQuery.getListVal(json, "$.children[*].name");
-		//System.out.println("self:" + names);
+		System.out.println("self:" + names);
 		String name = JsonQuery.getSingleVal(json, "$.children[0].children[1].id");
-		//System.out.println("self:" + name);
+		System.out.println("self:" + name);
 
 		List<Map<String, String>> maps = JsonQuery.getMapVal(json, "$.children[0].children[*].{name,id}");
-		//System.out.println("self:" + maps);
+		System.out.println("self:" + maps);
 	}
 
 	
@@ -48,7 +49,6 @@ public class TestSlfJsonPath extends MethodExec {
 	 */
 	public static void main(String[] args) {
 		
-		new TestSlfJsonPath().calcTms(100, true, true ,TestSlfJsonPath.class);
-		
+		ExecRtChecker.checkExecRt(new TestSlfJsonPath());
 	}
 }

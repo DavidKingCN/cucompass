@@ -7,11 +7,13 @@
  *    注意： 有问题联系作者13621151569@yeah.net
  */
 package cn.com.davidking.test;
-import net.sf.cglib.proxy.MethodInterceptor;  
-import net.sf.cglib.proxy.MethodProxy;  
-  
 import java.lang.reflect.Method;
-import java.util.Date;  
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;  
   
   
 // TODO: Auto-generated Javadoc
@@ -21,13 +23,16 @@ import java.util.Date;
 public class AutoProxy implements MethodInterceptor { 
 	
 	/** The times. */
-	private int times;		//执行次数
+	private int times=1;		//执行次数
 	
 	/** The need total. */
-	private boolean needTotal; 	//是否需要总时间
+	private boolean needTotal=false; 	//是否需要总时间
 	
 	/** The need avg. */
-	private boolean needAvg;	//是否需要平均时间
+	private boolean needAvg=false;	//是否需要平均时间
+	
+	/** The exec tms. */
+	private Map<String,String> execTms ;
 	
     /**
      * The Constructor.
@@ -67,15 +72,20 @@ public class AutoProxy implements MethodInterceptor {
 			for(int i=1;i<times;i++)
 				methodProxy.invokeSuper(o, args);
 		
-		long endTm = new Date().getTime();
 		
-		long totalTms = endTm - bgTm;
-		long avgTms = totalTms/times;
 		if(exeOK){
+			long endTm = new Date().getTime();
+			
+			long totalTms = endTm - bgTm;
+			long avgTms = totalTms/times;
+			execTms = new HashMap<String,String>();
+			execTms.put(TmsCounter.TMS_TOTAL, totalTms+"");
+			execTms.put(TmsCounter.TMS_AVG, avgTms+"");
 			if(needTotal)
 				System.out.println("执行"+method.getDeclaringClass().getSimpleName()+"."+method.getName()+"() "+times+"次总耗时："+totalTms+"毫秒数！");
 			if(needAvg)
 				System.out.println("执行"+method.getDeclaringClass().getSimpleName()+"."+method.getName()+"() "+"单次平均耗时："+avgTms+"毫秒数！");
+			
 		}else{
 			System.out.println("执行失败...");
 		}
@@ -141,6 +151,24 @@ public class AutoProxy implements MethodInterceptor {
 	 */
 	public void setNeedAvg(boolean needAvg) {
 		this.needAvg = needAvg;
+	}
+
+	/**
+	 * Gets the exec tms.
+	 *
+	 * @return the exec tms
+	 */
+	public Map<String, String> getExecTms() {
+		return execTms;
+	}
+
+	/**
+	 * Sets the exec tms.
+	 *
+	 * @param execTms the exec tms
+	 */
+	public void setExecTms(Map<String, String> execTms) {
+		this.execTms = execTms;
 	}
 
 
