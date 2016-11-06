@@ -73,9 +73,9 @@ public class AutoProxy implements MethodInterceptor {
 		long avgTms = totalTms/times;
 		if(exeOK){
 			if(needTotal)
-				System.out.println("执行"+times+"次总耗时："+totalTms+"毫秒数！");
+				System.out.println("执行"+method.getDeclaringClass().getSimpleName()+"."+method.getName()+"() "+times+"次总耗时："+totalTms+"毫秒数！");
 			if(needAvg)
-				System.out.println("执行单次平均耗时："+avgTms+"毫秒数！");
+				System.out.println("执行"+method.getDeclaringClass().getSimpleName()+"."+method.getName()+"() "+"单次平均耗时："+avgTms+"毫秒数！");
 		}else{
 			System.out.println("执行失败...");
 		}
