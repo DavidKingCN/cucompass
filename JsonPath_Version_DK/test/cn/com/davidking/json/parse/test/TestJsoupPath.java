@@ -14,7 +14,7 @@ import java.util.List;
 import com.jayway.jsonpath.JsonPath;
 
 import cn.com.davidking.json.util.FileUtil;
-import cn.com.davidking.test.ExecRtChecker;
+import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
 
 // TODO: Auto-generated Javadoc
@@ -48,7 +48,7 @@ public class TestJsoupPath extends MethodExec {
 	 */
 	public static void main(String[] args) {
 		
-		ExecRtChecker.checkExecRt(new TestJsoupPath());	
+		ExecChecker.checkExecRt(new TestJsoupPath());	
 			
 	}
 }

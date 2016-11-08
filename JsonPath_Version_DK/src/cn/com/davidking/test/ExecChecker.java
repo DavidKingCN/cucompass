@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * The Class ExecRtChecker.
  */
-public final class ExecRtChecker {
+public final class ExecChecker {
 
 	/**
 	 * Check exec rt.

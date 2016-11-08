@@ -11,7 +11,7 @@ package cn.com.davidking.json.parse.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.davidking.test.ExecRtChecker;
+import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.TmsCounter;
 
 // TODO: Auto-generated Javadoc
@@ -28,19 +28,17 @@ public class TestMain {
 	public static void main(String[] args) {
 		
 		
-		//测试执行结果 
-//		ExecRtChecker.checkExecRt(new TestJsoupPath());
-//		ExecRtChecker.checkExecRt(new TestSlfJsonPath());
+		//测试执行结果
+		ExecChecker.checkExecRt(new QuerySfJson());
+		ExecChecker.checkExecRt(new TestJsoupPath());
+		
 		//测试性能
-		final int N = 1;
+		/*final int N = 1;
 		List<TmsCounter> tcs = new ArrayList<TmsCounter>();
 		tcs.add(new QuerySfJson());
 		tcs.add(new TestJsoupPath());
 		
-		
-		
-		
-		ExecRtChecker.checkExecPerf(tcs,N);
+		ExecRtChecker.checkExecPerf(tcs,N);*/
 	}
 
 }

@@ -14,7 +14,7 @@ import java.util.Map;
 
 import cn.com.davidking.json.parse.JsonQuery;
 import cn.com.davidking.json.util.FileUtil;
-import cn.com.davidking.test.ExecRtChecker;
+import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
 
 // TODO: Auto-generated Javadoc
@@ -49,6 +49,6 @@ public class QuerySfJson extends MethodExec {
 	 */
 	public static void main(String[] args) {
 		
-		ExecRtChecker.checkExecRt(new QuerySfJson());
+		ExecChecker.checkExecRt(new QuerySfJson());
 	}
 }

@@ -140,7 +140,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return the layer lens
 	 */
-	public int getLayerLens() {
+	protected int getLayerLens() {
 		return layerLens;
 	}
 	
@@ -149,7 +149,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param layerLens the layer lens
 	 */
-	public void setLayerLens(int layerLens) {
+	protected void setLayerLens(int layerLens) {
 		this.layerLens = layerLens;
 	}
 	
@@ -158,7 +158,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return the target json
 	 */
-	public String getTargetJson() {
+	protected String getTargetJson() {
 		return targetJson;
 	}
 	
@@ -167,7 +167,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param targetJson the target json
 	 */
-	public void setTargetJson(String targetJson) {
+	protected void setTargetJson(String targetJson) {
 		this.targetJson = targetJson;
 	}
 	
@@ -176,7 +176,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return the rt map
 	 */
-	public Map<String, Object> getRtMap() {
+	protected Map<String, Object> getRtMap() {
 		return rtMap;
 	}
 	
@@ -185,7 +185,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param rtMap the rt map
 	 */
-	public void setRtMap(Map<String, Object> rtMap) {
+	protected void setRtMap(Map<String, Object> rtMap) {
 		this.rtMap = rtMap;
 	}
 	
@@ -194,7 +194,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return the results
 	 */
-	public List<String> getResults() {
+	protected List<String> getResults() {
 		return results;
 	}
 	
@@ -203,7 +203,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param results the results
 	 */
-	public void setResults(List<String> results) {
+	protected void setResults(List<String> results) {
 		this.results = results;
 	}
 	
@@ -212,7 +212,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return true, if checks if is error
 	 */
-	public boolean isError() {
+	protected boolean isError() {
 		return error;
 	}
 	
@@ -221,7 +221,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param error the error
 	 */
-	public void setError(boolean error) {
+	protected void setError(boolean error) {
 		this.error = error;
 	}
 	
@@ -230,7 +230,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return true, if checks if is arr all
 	 */
-	public boolean isArrAll() {
+	protected boolean isArrAll() {
 		return isArrAll;
 	}
 	
@@ -239,7 +239,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param isArrAll the arr all
 	 */
-	public void setArrAll(boolean isArrAll) {
+	protected void setArrAll(boolean isArrAll) {
 		this.isArrAll = isArrAll;
 	}
 	
@@ -248,7 +248,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return true, if checks if is arr one
 	 */
-	public boolean isArrOne() {
+	protected boolean isArrOne() {
 		return isArrOne;
 	}
 	
@@ -257,7 +257,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param isArrOne the arr one
 	 */
-	public void setArrOne(boolean isArrOne) {
+	protected void setArrOne(boolean isArrOne) {
 		this.isArrOne = isArrOne;
 	}
 	
@@ -266,7 +266,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return the I
 	 */
-	public int getI() {
+	protected int getI() {
 		return i;
 	}
 	
@@ -275,7 +275,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param i the I
 	 */
-	public void setI(int i) {
+	protected void setI(int i) {
 		this.i = i;
 	}
 	
@@ -284,7 +284,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return the node name
 	 */
-	public String getNodeName() {
+	protected String getNodeName() {
 		return nodeName;
 	}
 	
@@ -293,7 +293,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param nodeName the node name
 	 */
-	public void setNodeName(String nodeName) {
+	protected void setNodeName(String nodeName) {
 		this.nodeName = nodeName;
 	}
 	
@@ -302,7 +302,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @return the arr idx
 	 */
-	public int getArrIdx() {
+	protected int getArrIdx() {
 		return arrIdx;
 	}
 	
@@ -311,7 +311,7 @@ public abstract class JsonPickTools{
 	 *
 	 * @param arrIdx the arr idx
 	 */
-	public void setArrIdx(int arrIdx) {
+	protected void setArrIdx(int arrIdx) {
 		this.arrIdx = arrIdx;
 	}
 	
@@ -322,7 +322,7 @@ public abstract class JsonPickTools{
 	 * @param jsonArr the json arr
 	 * @return the elements by json arr
 	 */
-	public  List<String> getElementsByJsonArr(String jsonArr){
+	protected  List<String> getElementsByJsonArr(String jsonArr){
 		int firstPos = jsonArr.indexOf(Constant.OPEN_BRACKET);
 		int lastPos = jsonArr.lastIndexOf(Constant.CLOSE_BRACKET);
 		
@@ -386,11 +386,9 @@ public abstract class JsonPickTools{
 	 * @param key 需要处理的key值
 	 * @return the elements by json arr
 	 */
-	public  List<String> getElementsByJsonArr(String json,String key){
+	protected  List<String> getElementsByJsonArr(String json,String key){
 		int firstPos = json.indexOf(Constant.OPEN_BRACKET);
 		int lastPos = json.lastIndexOf(Constant.CLOSE_BRACKET);
-		
-		
 		
 		String st = json.substring(firstPos+1, lastPos);
 		st = st.trim();
@@ -449,14 +447,11 @@ public abstract class JsonPickTools{
 	 * @param key 指定需要的key值
 	 * @return the vals
 	 */
-	public  String getVals(String json,String key){
+	private  String getVals(String json,String key){
 		
 		String splitReg = "\""+key+"\":";
 		
-		
 		String[] splitArr = json.split(splitReg);
-		
-		
 		
 		if(splitArr.length==2){
 			String targetSplit = splitArr[1];
@@ -544,7 +539,7 @@ public abstract class JsonPickTools{
 	 * @param key 指定需要的key值
 	 * @return the closure json
 	 */
-	public  String getClosureJson(String json,String key){
+	protected  String getClosureJson(String json,String key){
 		return getClosureJson(json,key,false);
 	}
 	
@@ -556,7 +551,7 @@ public abstract class JsonPickTools{
 	 * @param needPrefix 指定是否需要key值 true 需要 false 不需要
 	 * @return the closure json
 	 */
-	public  String getClosureJson(String json,String key,boolean needPrefix){
+	protected  String getClosureJson(String json,String key,boolean needPrefix){
 		
 		if(json==null||json.equals("")){
 			//LOG.error("json不能为空！");
