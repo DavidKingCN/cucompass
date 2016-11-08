@@ -31,6 +31,7 @@ public abstract class MethodExec implements ExecProc, TmsCounter {
 	/** The exec tms. */
 	protected Map<String,String> execTms ;
 	
+	
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.test.TmsCounter#calcTms()
 	 */

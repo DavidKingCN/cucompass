@@ -21,7 +21,7 @@ import cn.com.davidking.test.MethodExec;
 /**
  * The Class TestJsonPath.
  */
-public class TestSlfJsonPath extends MethodExec {
+public class QuerySfJson extends MethodExec {
 
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.test.ExecProc#process()
@@ -49,6 +49,6 @@ public class TestSlfJsonPath extends MethodExec {
 	 */
 	public static void main(String[] args) {
 		
-		ExecRtChecker.checkExecRt(new TestSlfJsonPath());
+		ExecRtChecker.checkExecRt(new QuerySfJson());
 	}
 }

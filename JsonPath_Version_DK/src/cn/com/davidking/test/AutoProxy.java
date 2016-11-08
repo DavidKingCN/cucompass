@@ -34,6 +34,8 @@ public class AutoProxy implements MethodInterceptor {
 	/** The exec tms. */
 	private Map<String,String> execTms ;
 	
+	private Object lock = new Object();
+	
     /**
      * The Constructor.
      */
@@ -60,8 +62,11 @@ public class AutoProxy implements MethodInterceptor {
 	 */
 	@Override  
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
-		long bgTm = new Date().getTime();
+		
 		Object o1 =null;
+		
+		long bgTm = new Date().getTime();
+		
 		boolean exeOK = true;
 		try {
 			o1 = methodProxy.invokeSuper(o, args);
@@ -78,9 +83,11 @@ public class AutoProxy implements MethodInterceptor {
 			
 			long totalTms = endTm - bgTm;
 			long avgTms = totalTms/times;
-			execTms = new HashMap<String,String>();
-			execTms.put(TmsCounter.TMS_TOTAL, totalTms+"");
-			execTms.put(TmsCounter.TMS_AVG, avgTms+"");
+			synchronized(lock){
+				execTms = new HashMap<String,String>();
+				execTms.put(TmsCounter.TMS_TOTAL, totalTms+"");
+				execTms.put(TmsCounter.TMS_AVG, avgTms+"");
+			}
 			if(needTotal)
 				System.out.println("执行"+method.getDeclaringClass().getSimpleName()+"."+method.getName()+"() "+times+"次总耗时："+totalTms+"毫秒数！");
 			if(needAvg)
@@ -89,7 +96,6 @@ public class AutoProxy implements MethodInterceptor {
 		}else{
 			System.out.println("执行失败...");
 		}
-        
         return o1;  
     }
 

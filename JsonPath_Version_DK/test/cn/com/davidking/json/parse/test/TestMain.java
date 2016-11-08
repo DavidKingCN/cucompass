@@ -34,8 +34,11 @@ public class TestMain {
 		//测试性能
 		final int N = 1;
 		List<TmsCounter> tcs = new ArrayList<TmsCounter>();
+		tcs.add(new QuerySfJson());
 		tcs.add(new TestJsoupPath());
-		tcs.add(new TestSlfJsonPath());
+		
+		
+		
 		
 		ExecRtChecker.checkExecPerf(tcs,N);
 	}
