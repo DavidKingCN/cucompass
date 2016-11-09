@@ -68,7 +68,9 @@ public abstract class JsonPickTools{
 	 * @param targetJson the target json
 	 * @param rtMap the rt map
 	 */
-	public JsonPickTools(String nodeName,String targetJson,Map<String,Object> rtMap){
+	//bug_fatal_2016_11_09_001  解决$.{name,id} 取不出来
+	public JsonPickTools(int layerLens,String nodeName,String targetJson,Map<String,Object> rtMap){
+		this.layerLens = layerLens;
 		this.nodeName = nodeName;
 		this.targetJson = targetJson;
 		this.rtMap = rtMap;
@@ -326,21 +328,22 @@ public abstract class JsonPickTools{
 		int firstPos = jsonArr.indexOf(Constant.OPEN_BRACKET);
 		int lastPos = jsonArr.lastIndexOf(Constant.CLOSE_BRACKET);
 		
-		
-		
 		String st = jsonArr.substring(firstPos+1, lastPos);
 		st = st.trim();
 		int lastNeedPos = st.lastIndexOf(Constant.CLOSE_BRACE);
 		
 		List<Integer> commaPs = new ArrayList<Integer>();
-		
+		//bug_fatal_2016_11_09_002 
 		int counter = 1;
-		int pos = 1;
-		boolean again=false;
-		for(int i=1;i<st.length();i++){
+		int pos = 0;
+		boolean again=true;
+		for(int i=0;i<st.length();i++){
 			if(st.charAt(i)=='{'){
-				if(again)
+				if(again){
+					pos++;
+					again = false;
 					continue;
+				}
 				counter++;
 			}else if(st.charAt(i)=='}'){
 				counter--;
@@ -397,12 +400,16 @@ public abstract class JsonPickTools{
 		List<Integer> commaPs = new ArrayList<Integer>();
 		
 		int counter = 1;
-		int pos = 1;
-		boolean again=false;
-		for(int i=1;i<st.length();i++){
+		int pos = 0;
+		//bug_fatal_2016_11_09_002 
+		boolean again=true;
+		for(int i=0;i<st.length();i++){
 			if(st.charAt(i)=='{'){
-				if(again)
+				if(again){
+					pos++;
+					again = false;
 					continue;
+				}
 				counter++;
 			}else if(st.charAt(i)=='}'){
 				counter--;

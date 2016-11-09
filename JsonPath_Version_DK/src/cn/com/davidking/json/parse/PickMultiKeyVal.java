@@ -34,8 +34,9 @@ public class PickMultiKeyVal extends JsonPickTools implements JsonPicker,JsonRes
 	 * @param targetJson the target json
 	 * @param rtMap the rt map
 	 */
-	public PickMultiKeyVal(String nodeName,String targetJson,Map<String,Object> rtMap){
-		super(nodeName,targetJson,rtMap);
+	//bug_fatal_2016_11_09_001  解决$.{name,id} 取不出来
+	public PickMultiKeyVal(int layerLens,String nodeName,String targetJson,Map<String,Object> rtMap){
+		super(layerLens,nodeName,targetJson,rtMap);
 	}
 	
 	/* (non-Javadoc)
@@ -48,15 +49,26 @@ public class PickMultiKeyVal extends JsonPickTools implements JsonPicker,JsonRes
 		List<String>jsons = getElementsByJsonArr(targetJson);
 		
 		List<Map<String,String>> listMaps = new ArrayList<Map<String,String>>();
-		if(targetKeys!=null && targetKeys.length>1){
-			jsons.forEach(jsn->{
+		//bug_fatal_2016_11_09_001  解决$.{name,id} 取不出来
+		if(layerLens==1){
+			if(targetKeys!=null && targetKeys.length>1){
 				Map<String,String> targetMap = new HashMap<String,String>();
 				for(String targetKey:targetKeys){
-					targetMap.put(targetKey, getClosureJson(jsn, targetKey));
+					targetMap.put(targetKey, getClosureJson(targetJson, targetKey));
 				}
 				listMaps.add(targetMap);
-			});
-			
+			}
+		}else{
+			if(targetKeys!=null && targetKeys.length>1){
+				jsons.forEach(jsn->{
+					Map<String,String> targetMap = new HashMap<String,String>();
+					for(String targetKey:targetKeys){
+						targetMap.put(targetKey, getClosureJson(jsn, targetKey));
+					}
+					listMaps.add(targetMap);
+				});
+				
+			}
 		}
 		rtMap.put(Constant.MAP_VALUE_KEY, listMaps);
 	}

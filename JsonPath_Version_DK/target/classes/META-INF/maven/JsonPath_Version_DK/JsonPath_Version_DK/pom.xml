@@ -14,7 +14,11 @@
 		<http.client>4.3.6</http.client>
 	</properties>
 	<dependencies>
-
+		<dependency>
+			<groupId>http.template</groupId>
+			<artifactId>httpRq</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<!-- 依赖的公共类库 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
