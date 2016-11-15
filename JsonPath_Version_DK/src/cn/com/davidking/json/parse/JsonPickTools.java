@@ -325,60 +325,6 @@ public abstract class JsonPickTools{
 	 * @return the elements by json arr
 	 */
 	protected  List<String> getElementsByJsonArr(String jsonArr){
-		/*int firstPos = jsonArr.indexOf(Constant.OPEN_BRACKET);
-		int lastPos = jsonArr.lastIndexOf(Constant.CLOSE_BRACKET);
-		
-		String st = jsonArr.substring(firstPos+1, lastPos);
-		st = st.trim();
-		int lastNeedPos = st.lastIndexOf(Constant.CLOSE_BRACE);
-		
-		List<Integer> commaPs = new ArrayList<Integer>();
-		//bug_fatal_2016_11_09_002 
-		int counter = 1;
-		int pos = 0;
-		boolean again=true;
-		for(int i=0;i<st.length();i++){
-			if(st.charAt(i)=='{'){
-				if(again){
-					pos++;
-					again = false;
-					continue;
-				}
-				counter++;
-			}else if(st.charAt(i)=='}'){
-				counter--;
-			}
-			
-			pos++;
-			if(pos>lastNeedPos)
-				break;
-			if(counter==0&&st.charAt(pos)==','){
-				commaPs.add(pos);
-				counter = 1;
-				again = true;
-			}
-			
-		}
-		commaPs.add(lastNeedPos+1);
-		int frontInt=0;
-		int lastInt;
-		String nd = "";
-		List<String> result = new ArrayList<String>();
-		for(int i=0;i<commaPs.size();i++){
-			if(i!=0){
-				frontInt = commaPs.get(i-1);
-			}
-			lastInt = commaPs.get(i);
-			if(i==0){
-				nd = st.substring(frontInt, lastInt);
-			}else{
-				nd = st.substring(frontInt+1, lastInt);
-			}
-			result.add(nd);
-		}
-		
-		return result;*/
-		
 		//code_refact_2016_11_15_001
 		return getElementsByJsonArr(jsonArr,null);
 	}
@@ -536,6 +482,7 @@ public abstract class JsonPickTools{
 			for(int i=1;i<targetLen;i++){
 				
 				pos++;
+				//small_bug_2016_11_15_003 ecapse string \"
 				if(targetSplit.charAt(i-1)!='\\'&&targetSplit.charAt(i)=='"'){
 					break;
 				}
