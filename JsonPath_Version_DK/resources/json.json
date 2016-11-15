@@ -8,6 +8,17 @@
 			"name": "爸爸\"芭比",
 			"age": 70,
 			"hobby":["dog_芭比","cat_芭比"],
+			"girls":[
+				{
+				"id":2101,
+				"name":"办公室秘书小李",
+				"feature":"暧昧"
+				},
+				{
+				"id":2102,
+				"name":"隔壁小刘",
+				"feature":"炮友"
+				}],
 			"children": [
 				{
 					"id":211,

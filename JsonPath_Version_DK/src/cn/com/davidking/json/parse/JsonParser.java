@@ -45,8 +45,13 @@ public class JsonParser  {
 					break;
 				}
 				
-				
-				if(nodeName.matches(Constant.mapAllRegExp)){
+				//$.children[0].girls[*].[<name>]  \[<([$_a-zA-Z]{1}[$_a-zA-Z0-9]+,?)+>(<[~!@#$%&-,.]+>)?\]
+				if(nodeName.matches(Constant.mapStandRegExp)){
+					PickStandKeyVal psk = new PickStandKeyVal(layerLens,nodeName,args.getTargetJson(),rtMap);
+					psk.pick();
+					rtMap = psk.result();
+					
+				}else if(nodeName.matches(Constant.mapAllRegExp)){
 					//bug_fatal_2016_11_09_001  解决$.{name,id} 取不出来
 					PickMultiKeyVal mapAllRegExp = new PickMultiKeyVal(layerLens,nodeName,args.getTargetJson(),rtMap);
 					mapAllRegExp.pick();

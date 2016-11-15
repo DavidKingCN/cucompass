@@ -1,3 +1,17 @@
+目前支持的语义解析包括如下
+1.取单值 .....{"name":"zhangsan"....}  $.name
+2.取数组里一组name的值$.xxxList[*].name
+3.去数组里一组<name,值> <id,值>的List的取值 $.xxxList[*]{name,id}
+4.取单值 有数组内的各个值拼串  $.xxxList[*][<name,id....><,;>] 一个数组内的key值根据分割符拼接字符串 默认分隔符为,后面拼接最多有2个
+ 必须程序指定的字符目前支持~!@#$%&-,.;
+
+
+
+
+
+
+
+
 java目录下
 cn.com.davidking.json
 					常量类一个

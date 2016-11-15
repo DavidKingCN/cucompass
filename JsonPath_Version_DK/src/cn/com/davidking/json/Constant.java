@@ -19,7 +19,7 @@ public class Constant {
 	public static final String javaNameRegExp = "[$_a-zA-Z]{1}[$_a-zA-Z0-9]+";
 	
 	/** The Constant mapAllRegExp. */
-	public static final String mapStandRegExp = "\\{([$_a-zA-Z]{1}[$_a-zA-Z0-9]+){1}\\}";
+	public static final String mapStandRegExp = "\\[<([$_a-zA-Z]{1}[$_a-zA-Z0-9]+,?)+>(<[~!@#$%&\\-,.;]+>)?\\]";
 	/** The Constant mapAllRegExp. */
 	public static final String mapAllRegExp = "\\{([$_a-zA-Z]{1}[$_a-zA-Z0-9]+,?)+\\}";
 	
@@ -37,6 +37,8 @@ public class Constant {
 	
 	/** The Constant regSeparator. */
 	public static final String regSeparator = "\\.";
+	
+	public static final String Stand_Separator = ",";
 	
 	/** The Constant jsonEmptyArrRegExp. */
 	public static final String jsonEmptyArrRegExp ="\\[\\s*\\]"; 

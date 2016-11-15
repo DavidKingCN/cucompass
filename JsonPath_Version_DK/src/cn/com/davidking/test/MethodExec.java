@@ -37,9 +37,8 @@ public abstract class MethodExec implements ExecProc, TmsCounter {
 	 */
 	@Override
 	public void calcTms() {
-		if(this instanceof ExecProc){
-			calcTms(this.times,this.needTotal,this.needAvg,this.getClass());	
-		}
+		//去掉多余的判断
+		calcTms(this.times,this.needTotal,this.needAvg,this.getClass());	
 	}
 	/**
 	 * Calc tms.

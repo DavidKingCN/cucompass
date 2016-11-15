@@ -50,8 +50,8 @@ public class PickMultiKeyVal extends JsonPickTools implements JsonPicker,JsonRes
 		
 		List<Map<String,String>> listMaps = new ArrayList<Map<String,String>>();
 		//bug_fatal_2016_11_09_001  解决$.{name,id} 取不出来
-		if(layerLens==1){
-			if(targetKeys!=null && targetKeys.length>1){
+		if(layerLens==1){//small_bug_2016_11_15_002 解决$.{name}
+			if(targetKeys!=null && targetKeys.length>=1){
 				Map<String,String> targetMap = new HashMap<String,String>();
 				for(String targetKey:targetKeys){
 					targetMap.put(targetKey, getClosureJson(targetJson, targetKey));
@@ -59,7 +59,7 @@ public class PickMultiKeyVal extends JsonPickTools implements JsonPicker,JsonRes
 				listMaps.add(targetMap);
 			}
 		}else{
-			//small_bug_2016_11_15_002 解决$.{name}或$.xxxList[*].{name}取不了值的情况
+			//small_bug_2016_11_15_002 解决$.xxxList[*].{name}取不了值的情况
 			if(targetKeys!=null && targetKeys.length>=1){
 				jsons.forEach(jsn->{
 					Map<String,String> targetMap = new HashMap<String,String>();
