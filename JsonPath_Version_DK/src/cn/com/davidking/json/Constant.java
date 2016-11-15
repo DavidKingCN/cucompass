@@ -19,6 +19,8 @@ public class Constant {
 	public static final String javaNameRegExp = "[$_a-zA-Z]{1}[$_a-zA-Z0-9]+";
 	
 	/** The Constant mapAllRegExp. */
+	public static final String mapStandRegExp = "\\{([$_a-zA-Z]{1}[$_a-zA-Z0-9]+){1}\\}";
+	/** The Constant mapAllRegExp. */
 	public static final String mapAllRegExp = "\\{([$_a-zA-Z]{1}[$_a-zA-Z0-9]+,?)+\\}";
 	
 	/** The Constant javaArrAllRegExp. */

@@ -45,6 +45,7 @@ public class JsonParser  {
 					break;
 				}
 				
+				
 				if(nodeName.matches(Constant.mapAllRegExp)){
 					//bug_fatal_2016_11_09_001  解决$.{name,id} 取不出来
 					PickMultiKeyVal mapAllRegExp = new PickMultiKeyVal(layerLens,nodeName,args.getTargetJson(),rtMap);

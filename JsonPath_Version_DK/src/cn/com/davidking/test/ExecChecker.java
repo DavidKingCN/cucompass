@@ -28,6 +28,18 @@ public final class ExecChecker {
 		tc.setTimes(1).setNeedTotal(true).setNeedAvg(true).calcTms();
 	}
 
+	public static void checkExecPerf(TmsCounter tc,int times){
+		tc
+		.setTimes(times)
+		.setNeedTotal(false)
+		.setNeedAvg(false)
+		.calcTms();
+		
+		System.out.print(
+				"执行"+tc.getClass().getSimpleName()+" "+times+"次总耗时"+tc.getExecTms().get(TmsCounter.TMS_TOTAL)+"毫秒.\n"+
+				"执行"+tc.getClass().getSimpleName()+" "+times+"次平均每次耗时"+tc.getExecTms().get(TmsCounter.TMS_AVG)+"毫秒.\n"
+				);
+	}
 	/**
 	 * Check exec perf.
 	 *

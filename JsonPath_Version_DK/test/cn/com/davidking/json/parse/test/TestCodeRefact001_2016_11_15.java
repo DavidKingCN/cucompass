@@ -8,38 +8,32 @@
  */
 package cn.com.davidking.json.parse.test;
 
-
 import java.util.List;
-import java.util.Map;
 
 import cn.com.davidking.JsonToolKitBuilder;
 import cn.com.davidking.http.core.HttpTemplate;
-import cn.com.davidking.json.parse.JsonQuery;
 import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
 // TODO: Auto-generated Javadoc
 
 /**
- * 测试致命bug001.
+ * 测试代码重整001 2016_11_15.
  *
- * @author daikai
+ * @author davidking
  */
-public class TestFatalBug001_2016_11_09 extends MethodExec {
+public class TestCodeRefact001_2016_11_15 extends MethodExec {
 
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.test.ExecProc#process()
 	 */
 	@Override
 	public void process() {
-		String json = HttpTemplate.doGet(
-				"http://www.ly.com/hotel/handler/gethotelcomments.json?hotelid=93700&tagid=1", 
-				null,
-				null,
-				null);
-		String testJson = JsonToolKitBuilder.newJsonToolKit().getClosureJson(json, "body");
-		System.out.println("json val = "+testJson);
-		List<Map<String,String>> rs = JsonQuery.getMapVal(testJson, "$.{starNum,goodNum}");
-		System.out.println("multi keys vals = "+rs);
+		String json = HttpTemplate.doGet("http://www.ly.com/hotel/handler/GetHotelList.json?page=1&txtCityId=374&orderby=4", null,null,null);
+		String testJsonArr = JsonToolKitBuilder.newJsonToolKit().getClosureJson(json, "hotelList");
+		List<String> jsons = JsonToolKitBuilder.newJsonToolKit().getElementsByJsonArr(testJsonArr);
+		for(String gson:jsons){
+			System.out.println(gson);
+		}
 	}
 
 	/**
@@ -48,7 +42,7 @@ public class TestFatalBug001_2016_11_09 extends MethodExec {
 	 * @param args the args
 	 */
 	public static void main(String[] args) {
-		ExecChecker.checkExecRt(new TestFatalBug001_2016_11_09());
+		ExecChecker.checkExecRt(new TestCodeRefact001_2016_11_15());
 	}
 
 }

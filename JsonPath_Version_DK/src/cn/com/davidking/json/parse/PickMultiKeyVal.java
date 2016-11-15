@@ -59,7 +59,8 @@ public class PickMultiKeyVal extends JsonPickTools implements JsonPicker,JsonRes
 				listMaps.add(targetMap);
 			}
 		}else{
-			if(targetKeys!=null && targetKeys.length>1){
+			//small_bug_2016_11_15_002 解决$.{name}或$.xxxList[*].{name}取不了值的情况
+			if(targetKeys!=null && targetKeys.length>=1){
 				jsons.forEach(jsn->{
 					Map<String,String> targetMap = new HashMap<String,String>();
 					for(String targetKey:targetKeys){

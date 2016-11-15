@@ -28,10 +28,16 @@ public class JsonQuery {
 	 * @return the single val
 	 */
 	public static String getSingleVal(String json, String path) {
-		Map<String,Object> result = new JsonParser().jsonPath(json, path);
-		if (result != null)
-			return result.get(Constant.SINGLE_VALUE_KEY).toString();
-		return null;
+		String single = null;
+		try {
+			Map<String,Object> result = new JsonParser().jsonPath(json, path);
+			if (result != null)
+				single = result.get(Constant.SINGLE_VALUE_KEY).toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return single;
 
 	}
 
@@ -43,12 +49,17 @@ public class JsonQuery {
 	 * @return the list val
 	 */
 	public static List<String> getListVal(String json, String path) {
-		
-		Map<String,Object> result = new JsonParser().jsonPath(json, path);
-		if (result != null)
-			return (List<String>) result.get(Constant.LIST_VALUE_KEY);
+		List<String> resultList = null;
+		try {
+			Map<String,Object> result = new JsonParser().jsonPath(json, path);
+			if (result != null)
+				resultList= (List<String>) result.get(Constant.LIST_VALUE_KEY);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		return null;
+		return resultList;
 
 	}
 
@@ -60,9 +71,16 @@ public class JsonQuery {
 	 * @return the map val
 	 */
 	public static List<Map<String, String>> getMapVal(String json, String path) {
-		Map<String,Object> result = new JsonParser().jsonPath(json, path);
-		if (result != null)
-			return (List<Map<String, String>>) result.get(Constant.MAP_VALUE_KEY);
-		return null;
+		
+		List<Map<String, String>> ms = null;
+		try {
+			Map<String,Object> result = new JsonParser().jsonPath(json, path);
+			if (result != null)
+				ms =  (List<Map<String, String>>) result.get(Constant.MAP_VALUE_KEY);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ms;
 	}
 }

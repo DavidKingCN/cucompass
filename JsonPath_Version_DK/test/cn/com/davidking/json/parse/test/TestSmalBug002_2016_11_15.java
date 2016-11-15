@@ -19,36 +19,48 @@ import cn.com.davidking.test.MethodExec;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestJsonPath.
+ * The Class TestSmalBug002_2016_11_15.
  */
-public class QuerySfJson extends MethodExec {
+public class TestSmalBug002_2016_11_15 extends MethodExec {
 
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.test.ExecProc#process()
 	 */
 	@Override
 	public void process() {
-
 		File jsonFile = new File("resources/json.json");
 
 		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
-		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[*].name");
-		System.out.println("self:" + names);
-		String name = JsonQuery.getSingleVal(json, "$.children[0].children[1].id");
-		System.out.println("self:" + name);
 
-		List<Map<String, String>> maps = JsonQuery.getMapVal(json, "$.children[0].children[*].{name,id}");
-		System.out.println("self:" + maps);
+		/*String age = JsonQuery.getSingleVal(json, "$.children[0].children[0].age");
+		System.out.println("age="+age);
+		
+		String hobby = JsonQuery.getSingleVal(json, "$.children[0].children[0].hobby");
+		
+		System.out.println("hobby="+hobby);
+		
+		
+		String name = JsonQuery.getSingleVal(json, "$.children[0].name");
+		
+		System.out.println("name="+name);*/
+		List<Map<String,String>> rt = JsonQuery.getMapVal(json, "$.children[*].{name}");
+		rt.forEach(r->{
+			r.forEach((k,v)->{
+				System.out.println(k+"="+v);
+			});
+		});
+		
+		
+		
 	}
 
-	
 	/**
 	 * The main method.
 	 *
 	 * @param args the args
 	 */
 	public static void main(String[] args) {
-		
-		ExecChecker.checkExecRt(new QuerySfJson());
+		ExecChecker.checkExecRt(new TestSmalBug002_2016_11_15());
 	}
+
 }

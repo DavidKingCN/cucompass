@@ -325,7 +325,7 @@ public abstract class JsonPickTools{
 	 * @return the elements by json arr
 	 */
 	protected  List<String> getElementsByJsonArr(String jsonArr){
-		int firstPos = jsonArr.indexOf(Constant.OPEN_BRACKET);
+		/*int firstPos = jsonArr.indexOf(Constant.OPEN_BRACKET);
 		int lastPos = jsonArr.lastIndexOf(Constant.CLOSE_BRACKET);
 		
 		String st = jsonArr.substring(firstPos+1, lastPos);
@@ -377,7 +377,10 @@ public abstract class JsonPickTools{
 			result.add(nd);
 		}
 		
-		return result;
+		return result;*/
+		
+		//code_refact_2016_11_15_001
+		return getElementsByJsonArr(jsonArr,null);
 	}
 	
 	
@@ -425,7 +428,8 @@ public abstract class JsonPickTools{
 			}
 			
 		}
-		commaPs.add(lastNeedPos);
+		//small_bug_2016_11_15_001
+		commaPs.add(lastNeedPos+1);
 		int frontInt=0;
 		int lastInt;
 		String nd = "";
@@ -440,7 +444,12 @@ public abstract class JsonPickTools{
 			}else{
 				nd = st.substring(frontInt+1, lastInt);
 			}
-			result.add(getVals(nd,key));
+			
+			//code_refact_2016_11_15_001
+			if(key!=null&&!key.equals(""))
+				result.add(getVals(nd,key));
+			else
+				result.add(nd);
 		}
 		
 		return result;
@@ -521,14 +530,13 @@ public abstract class JsonPickTools{
 				}
 				
 			}
-			
 			return targetSplit.substring(0, pos);
 			
 		} else if(firstChar=='"'){
 			for(int i=1;i<targetLen;i++){
 				
 				pos++;
-				if(targetSplit.charAt(i)=='"'){
+				if(targetSplit.charAt(i-1)!='\\'&&targetSplit.charAt(i)=='"'){
 					break;
 				}
 			}
