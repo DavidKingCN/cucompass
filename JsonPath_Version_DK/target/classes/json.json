@@ -8,16 +8,20 @@
 			"name": "爸爸\"芭比",
 			"age": 70,
 			"hobby":["dog_芭比","cat_芭比"],
+			"yearly_salary":"20万",
+			"retired_desc":"2008年10月8日退休，之前在清华大学叫兽了好多年，曾任*公司主管10年。",
 			"girls":[
 				{
 				"id":2101,
 				"name":"办公室秘书小李",
-				"feature":"暧昧"
+				"feature":"暧昧",
+				"age":"28岁"
 				},
 				{
 				"id":2102,
 				"name":"隔壁小刘",
-				"feature":"炮友"
+				"feature":"炮友",
+				"age":"18岁"
 				}],
 			"children": [
 				{

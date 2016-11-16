@@ -1,3 +1,11 @@
+/*
+ *    功能名称   ： json path实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
+ */
 package cn.com.davidking.json.parse;
 
 import java.util.List;
@@ -5,18 +13,39 @@ import java.util.Map;
 
 import cn.com.davidking.json.Constant;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PickStandKeyVal.
+ * 支持语义 为 $.xxxList[*].[<name,feature><,;>] 
+ * 返回单值，有数组内的各个key（一个或多个）的值根据指定的分隔符拼串
+ * 最简洁为 $.xxxList[*].[<name>]默认分隔符为,分隔符最多2个，否则返回空
+ */
 public class PickStandKeyVal extends JsonPickTools implements JsonPicker, JsonResult {
 
 	
+	/**
+	 * The Constructor.
+	 */
 	public PickStandKeyVal() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * The Constructor.
+	 *
+	 * @param layerLens the layer lens
+	 * @param nodeName the node name
+	 * @param targetJson the target json
+	 * @param rtMap the rt map
+	 */
 	public PickStandKeyVal(int layerLens,String nodeName,String targetJson,Map<String,Object> rtMap){
 		super(layerLens,nodeName,targetJson,rtMap);
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.davidking.json.parse.JsonPicker#pick()
+	 */
 	@Override
 	public void pick() {
 		String targetKeysStr = nodeName.substring(nodeName.indexOf("[")+1, nodeName.lastIndexOf("]"));
@@ -44,8 +73,10 @@ public class PickStandKeyVal extends JsonPickTools implements JsonPicker, JsonRe
 		}else
 			tk = targetKeys_;
 		
-		if(sepLen>2)
+		if(sepLen>2){
+			rtMap.put(Constant.SINGLE_VALUE_KEY, null);
 			return;
+		}
 		
 		List<String>jsons = getElementsByJsonArr(targetJson);
 		StringBuffer standRt = new StringBuffer();
@@ -66,11 +97,26 @@ public class PickStandKeyVal extends JsonPickTools implements JsonPicker, JsonRe
 		rtMap.put(Constant.SINGLE_VALUE_KEY, standRt);
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.davidking.json.parse.JsonResult#result()
+	 */
 	@Override
 	public Map<String, Object> result() {
 		return this.rtMap;
 	}
 
+	/**
+	 * Multi key.
+	 *
+	 * @param jsons the jsons
+	 * @param targetKeys the target keys
+	 * @param seps the seps
+	 * @param sepLen the sep len
+	 * @param containSep the contain sep
+	 * @param singleSep the single sep
+	 * @param standRt the stand rt
+	 * @return the string buffer
+	 */
 	private StringBuffer multiKey(List<String> jsons,String[] targetKeys,String[] seps,int sepLen,boolean containSep,String singleSep,StringBuffer standRt){
 		int idx = 0;
 		for(String json:jsons){
@@ -91,6 +137,17 @@ public class PickStandKeyVal extends JsonPickTools implements JsonPicker, JsonRe
 		}
 		return standRt;
 	}
+	
+	/**
+	 * Single key.
+	 *
+	 * @param jsons the jsons
+	 * @param tk the tk
+	 * @param containSep the contain sep
+	 * @param sep the sep
+	 * @param standRt the stand rt
+	 * @return the string buffer
+	 */
 	private StringBuffer singleKey(List<String> jsons,String tk,boolean containSep,String sep,StringBuffer standRt){
 		int idx = 0;
 		for(String json:jsons){

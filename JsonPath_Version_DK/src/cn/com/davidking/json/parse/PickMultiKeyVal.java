@@ -18,6 +18,7 @@ import cn.com.davidking.json.Constant;
 
 // TODO: Auto-generated Javadoc
 /**
+ * 语义 $.xxList[*].{name,id} 返回含有<name,name值><id,id值>的List
  * The Class PickMultiKeyVal.
  */
 public class PickMultiKeyVal extends JsonPickTools implements JsonPicker,JsonResult{

@@ -44,8 +44,25 @@ public class JsonParser  {
 					rtMap =  null;
 					break;
 				}
-				
-				//$.children[0].girls[*].[<name>]  \[<([$_a-zA-Z]{1}[$_a-zA-Z0-9]+,?)+>(<[~!@#$%&-,.]+>)?\]
+				//$.children[0].retired_desc([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日)
+				if(nodeName.matches(Constant.mapSingleVByReg)){
+					PickSingleVMatchReg psvmr = 
+							new PickSingleVMatchReg(
+									layerLens,
+									args.getTargetJson(),
+									rtMap,
+									args.getResults(),
+									args.isError(),
+									args.isArrAll(),
+									args.isArrOne(),
+									i,
+									nodeName,
+									args.getArrIdx()
+									);
+					psvmr.pick();
+					rtMap = psvmr.result();
+				}else
+				//$.children[0].girls[*].[<name>]  \[<([$_a-zA-Z]{1}[$_a-zA-Z0-9]+,?)+>(<[~!@#$%&-,]+>)?\]
 				if(nodeName.matches(Constant.mapStandRegExp)){
 					PickStandKeyVal psk = new PickStandKeyVal(layerLens,nodeName,args.getTargetJson(),rtMap);
 					psk.pick();
