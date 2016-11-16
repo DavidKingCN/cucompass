@@ -6,7 +6,7 @@
  *	  
  *    注意： 有问题联系作者13621151569@yeah.net
  */
-package cn.com.davidking.json.JsonQuery;
+package cn.com.davidking.json;
 
 
 import cn.com.davidking.test.ExecChecker;

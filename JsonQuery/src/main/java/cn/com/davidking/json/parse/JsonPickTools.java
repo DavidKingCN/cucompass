@@ -21,6 +21,7 @@ import cn.com.davidking.util.MatchUtils;
 /**
  * The Class JsonPickTools.
  */
+@SuppressWarnings("all")
 public abstract class JsonPickTools{
 	
 	/** The layer lens. */
@@ -181,7 +182,6 @@ public abstract class JsonPickTools{
 	 * @return the elements by json arr
 	 */
 	protected  List<String> getElementsByJsonArr(String jsonArr){
-		//code_refact_2016_11_15_001
 		return getElementsByJsonArr(jsonArr,null);
 	}
 	
@@ -206,7 +206,6 @@ public abstract class JsonPickTools{
 		
 		int counter = 1;
 		int pos = 0;
-		//bug_fatal_2016_11_09_002 
 		boolean again=true;
 		for(int i=0;i<st.length();i++){
 			if(st.charAt(i)=='{'){
@@ -230,7 +229,6 @@ public abstract class JsonPickTools{
 			}
 			
 		}
-		//small_bug_2016_11_15_001
 		commaPs.add(lastNeedPos+1);
 		int frontInt=0;
 		int lastInt;
@@ -247,7 +245,6 @@ public abstract class JsonPickTools{
 				nd = st.substring(frontInt+1, lastInt);
 			}
 			
-			//code_refact_2016_11_15_001
 			if(key!=null&&!key.equals(""))
 				result.add(getVals(nd,key));
 			else
@@ -338,7 +335,6 @@ public abstract class JsonPickTools{
 			for(int i=1;i<targetLen;i++){
 				
 				pos++;
-				//small_bug_2016_11_15_003 ecapse string \"
 				if(targetSplit.charAt(i-1)!='\\'&&targetSplit.charAt(i)=='"'){
 					break;
 				}

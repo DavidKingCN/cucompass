@@ -6,15 +6,14 @@
  *	  
  *    注意： 有问题联系作者13621151569@yeah.net
  */
-package cn.com.davidking.json.JsonQuery;
+package cn.com.davidking.json;
 
 import java.io.File;
 import java.util.List;
 
-import cn.com.davidking.json.parse.JsonQuery;
-import cn.com.davidking.util.FileUtil;
 import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
+import cn.com.davidking.util.FileUtil;
 
 // TODO: Auto-generated Javadoc
 /**

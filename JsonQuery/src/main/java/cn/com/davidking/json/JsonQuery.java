@@ -6,19 +6,20 @@
  *	  
  *    注意： 有问题联系作者13621151569@yeah.net
  */
-package cn.com.davidking.json.parse;
+package cn.com.davidking.json;
 
 import java.util.List;
 import java.util.Map;
 
-import cn.com.davidking.json.Constant;
+import cn.com.davidking.json.parse.JsonParser;
 
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class JsonQuery.
  */
-public class JsonQuery {
+@SuppressWarnings("all")
+public final class JsonQuery {
 	
 	/**
 	 * Gets the single val.

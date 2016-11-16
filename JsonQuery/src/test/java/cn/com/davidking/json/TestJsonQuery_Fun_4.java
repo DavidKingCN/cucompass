@@ -6,49 +6,43 @@
  *	  
  *    注意： 有问题联系作者13621151569@yeah.net
  */
-package cn.com.davidking.json.JsonQuery;
+package cn.com.davidking.json;
 
 import java.io.File;
-import java.util.List;
-import java.util.Map;
 
-import cn.com.davidking.json.parse.JsonQuery;
 import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
 import cn.com.davidking.util.FileUtil;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestJsonPath.
+ * The Class TestStandPase.
  */
-public class TestJsonQuery_Fun_0 extends MethodExec {
+public class TestJsonQuery_Fun_4 extends MethodExec {
 
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.test.ExecProc#process()
 	 */
 	@Override
 	public void process() {
-
 		File jsonFile = new File("src/main/resources/json.json");
 
 		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
-		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[*].name");
-		System.out.println("self:" + names);
-		String name = JsonQuery.getSingleVal(json, "$.children[0].children[1].id");
-		System.out.println("self:" + name);
-
-		List<Map<String, String>> maps = JsonQuery.getMapVal(json, "$.children[0].children[*].{name,id}");
-		System.out.println("self:" + maps);
+		
+		String girlsName = JsonQuery.getSingleVal(json, "$.children[0].girls[*].[<name>]");
+		System.out.println("和爸爸有一腿的女生的名字："+girlsName);
+		
+		String girlsNameAndFeatures = JsonQuery.getSingleVal(json, "$.children[0].girls[*].[<name,feature><,;>]");
+		System.out.println("和爸爸有一腿的女生的名字和特色："+girlsNameAndFeatures);
 	}
 
-	
 	/**
 	 * The main method.
 	 *
 	 * @param args the args
 	 */
 	public static void main(String[] args) {
-		
-		ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
+		ExecChecker.checkExecRt(new TestJsonQuery_Fun_4());
 	}
+
 }
