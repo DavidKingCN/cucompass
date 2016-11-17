@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import cn.com.davidking.json.Constant;
+import cn.com.davidking.util.RegisterUtil;
 
 
 // TODO: Auto-generated Javadoc
@@ -24,12 +25,7 @@ public class JsonParser  {
 	/** The pickers. */
 	private static Map<String,JsonPicker> pickers = new HashMap<String,JsonPicker>();
 	static{
-		pickers.put(Constant.mapSingleVByReg, 	new PickSingleVMatchReg());
-		pickers.put(Constant.mapStandRegExp, 	new PickStandKeyVal());
-		pickers.put(Constant.mapAllRegExp,		new PickMultiKeyVal());
-		pickers.put(Constant.javaNameRegExp,	new PickSingleKeyVal());
-		pickers.put(Constant.javaArrAllRegExp,	new PickArrAllVal());
-		pickers.put(Constant.javaArrOneRegExp,	new PickArrOneVal());
+		pickers =RegisterUtil.initJsonPickers();
 	}
     
     /**

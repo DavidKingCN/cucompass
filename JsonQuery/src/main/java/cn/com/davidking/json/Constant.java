@@ -70,5 +70,9 @@ public class Constant {
 	
 	/** The Constant MAP_VALUE_KEY. */
 	public static final String MAP_VALUE_KEY = "map";
+	
+	public static final String PARSE_PACK = "cn.com.davidking.json.parse.";
+	
+	public static final String CONSTANT_CLASS="cn.com.davidking.json.Constant";
 
 }
