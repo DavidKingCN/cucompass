@@ -10,7 +10,7 @@ package cn.com.davidking.json;
 
 import java.io.File;
 
-import cn.com.davidking.JsonToolKitBuilder;
+import cn.com.davidking.JsonParserBuilder;
 import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
 import cn.com.davidking.util.FileUtil;
@@ -30,7 +30,7 @@ public class TestJsonToolKit_Func_1 extends MethodExec {
 		File jsonFile = new File("src/main/resources/json.json");
 
 		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
-		System.out.println(JsonToolKitBuilder.newJsonToolKit().getClosureJson(json, "children"));
+		System.out.println(JsonParserBuilder.newJsonToolKit().getClosureJson(json, "children"));
 	}
 
 	

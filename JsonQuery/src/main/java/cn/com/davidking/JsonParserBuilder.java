@@ -10,13 +10,14 @@ package cn.com.davidking;
 
 import cn.com.davidking.json.JsonToolKit;
 // TODO: Auto-generated Javadoc
+import cn.com.davidking.json.parse.JsonParser;
 
 /**
  * The Class JsonToolKitBuilder.
  *
  * @author daikai
  */
-public final class JsonToolKitBuilder {
+public final class JsonParserBuilder {
 	
 	/**
 	 * New json tool kit.
@@ -25,5 +26,9 @@ public final class JsonToolKitBuilder {
 	 */
 	public static JsonToolKit newJsonToolKit(){
 		return new JsonToolKit();
+	}
+	
+	public static JsonParser newJsonParser(){
+		return new JsonParser();
 	}
 }

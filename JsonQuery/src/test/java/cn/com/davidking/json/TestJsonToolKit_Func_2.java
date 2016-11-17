@@ -10,7 +10,7 @@ package cn.com.davidking.json;
 
 import java.util.List;
 
-import cn.com.davidking.JsonToolKitBuilder;
+import cn.com.davidking.JsonParserBuilder;
 import cn.com.davidking.http.core.HttpTemplate;
 import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
@@ -29,8 +29,8 @@ public class TestJsonToolKit_Func_2 extends MethodExec {
 	@Override
 	public void process() {
 		String json = HttpTemplate.doGet("http://www.ly.com/hotel/handler/GetHotelList.json?page=1&txtCityId=374&orderby=4", null,null,null);
-		String testJsonArr = JsonToolKitBuilder.newJsonToolKit().getClosureJson(json, "hotelList");
-		List<String> jsons = JsonToolKitBuilder.newJsonToolKit().getElementsByJsonArr(testJsonArr);
+		String testJsonArr = JsonParserBuilder.newJsonToolKit().getClosureJson(json, "hotelList");
+		List<String> jsons = JsonParserBuilder.newJsonToolKit().getElementsByJsonArr(testJsonArr);
 		for(String gson:jsons){
 			System.out.println(gson);
 		}

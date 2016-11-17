@@ -11,6 +11,7 @@ package cn.com.davidking.json;
 import java.util.List;
 import java.util.Map;
 
+import cn.com.davidking.JsonParserBuilder;
 import cn.com.davidking.json.parse.JsonParser;
 
 
@@ -29,15 +30,11 @@ public final class JsonQuery {
 	 * @return the single val
 	 */
 	public static String getSingleVal(String json, String path) {
-		String single = null;
-		try {
-			Map<String,Object> result = new JsonParser().jsonPath(json, path);
-			if (result != null)
-				single = result.get(Constant.SINGLE_VALUE_KEY).toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return single;
+		return JsonParserBuilder
+				.newJsonParser()
+				.jsonPath(json, path)
+				.get(Constant.SINGLE_VALUE_KEY)
+				.toString();
 
 	}
 
@@ -49,17 +46,11 @@ public final class JsonQuery {
 	 * @return the list val
 	 */
 	public static List<String> getListVal(String json, String path) {
-		List<String> resultList = null;
-		try {
-			Map<String,Object> result = new JsonParser().jsonPath(json, path);
-			if (result != null)
-				resultList= (List<String>) result.get(Constant.LIST_VALUE_KEY);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return resultList;
-
+		return (List<String>) 
+				JsonParserBuilder
+				.newJsonParser()
+				.jsonPath(json, path)
+				.get(Constant.LIST_VALUE_KEY);
 	}
 
 	/**
@@ -70,15 +61,10 @@ public final class JsonQuery {
 	 * @return the map val
 	 */
 	public static List<Map<String, String>> getMapVal(String json, String path) {
-		
-		List<Map<String, String>> ms = null;
-		try {
-			Map<String,Object> result = new JsonParser().jsonPath(json, path);
-			if (result != null)
-				ms =  (List<Map<String, String>>) result.get(Constant.MAP_VALUE_KEY);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return ms;
+		return (List<Map<String, String>>) 
+				JsonParserBuilder
+				.newJsonParser()
+				.jsonPath(json, path)
+				.get(Constant.MAP_VALUE_KEY);
 	}
 }
