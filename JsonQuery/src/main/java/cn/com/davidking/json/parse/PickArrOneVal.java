@@ -59,7 +59,13 @@ public class PickArrOneVal extends JsonPickTools implements PickTransition{
 		
 		args.setTargetJson(getClosureJson(args.getTargetJson(), key));
 		if(args.getTargetJson()!=null&&!args.getTargetJson().matches(Constant.jsonEmptyArrRegExp)){
-			args.setTargetJson(getElementsByJsonArr(args.getTargetJson()).get(args.getArrIdx()));
+			try {
+				args.setTargetJson(getElementsByJsonArr(args.getTargetJson()).get(args.getArrIdx()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				args.setError(true);
+			}
 		} else{
 			args.setError(true);
 		}

@@ -9,7 +9,11 @@
 package cn.com.davidking.json;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.com.davidking.test.ExecChecker;
+import cn.com.davidking.test.TmsCounter;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -26,14 +30,14 @@ public class TestExecChecker {
 		
 		
 		//测试执行结果
-		ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
+		//ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
 		
 		//测试性能
-		/*final int N = 1;
+		final int N = 10000;
 		List<TmsCounter> tcs = new ArrayList<TmsCounter>();
-		tcs.add(new QuerySfJson());
+		tcs.add(new TestJsonQuery_Fun_0());
 		
-		ExecRtChecker.checkExecPerf(tcs,N);*/
+		ExecChecker.checkExecPerf(tcs,N);
 	}
 
 }

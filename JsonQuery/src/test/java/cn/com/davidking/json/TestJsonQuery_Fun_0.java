@@ -22,16 +22,17 @@ import cn.com.davidking.util.FileUtil;
  */
 public class TestJsonQuery_Fun_0 extends MethodExec {
 
+
+
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.test.ExecProc#process()
 	 */
 	@Override
 	public void process() {
-
 		File jsonFile = new File("src/main/resources/json.json");
 
 		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
-		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[*].name");
+		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[3].name");
 		System.out.println("self:" + names);
 		String name = JsonQuery.getSingleVal(json, "$.children[0].children[1].id");
 		System.out.println("self:" + name);
@@ -49,5 +50,10 @@ public class TestJsonQuery_Fun_0 extends MethodExec {
 	public static void main(String[] args) {
 		
 		ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
+//		File jsonFile = new File("src/main/resources/json.json");
+//
+//		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
+//		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[3].name");
+//		System.out.println("self:" + names);
 	}
 }
