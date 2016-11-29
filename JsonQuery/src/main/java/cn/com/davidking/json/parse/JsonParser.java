@@ -25,7 +25,7 @@ public class JsonParser  {
 	/** The pickers. */
 	private static Map<String,JsonPicker> pickers = new HashMap<String,JsonPicker>();
 	static{
-		pickers =RegisterUtil.initJsonPickers();
+		pickers =RegisterUtil.initJsonPickers(); 
 	}
     
     /**

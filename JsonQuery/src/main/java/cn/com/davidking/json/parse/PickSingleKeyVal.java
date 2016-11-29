@@ -56,7 +56,12 @@ public class PickSingleKeyVal extends JsonPickTools implements PickResult{
 	@Override
 	public void pick() {
 		if(args.isArrAll()){
-			args.setResults(getElementsByJsonArr(args.getTargetJson(), nodeName));
+			try {
+				args.setResults(getElementsByJsonArr(args.getTargetJson(), nodeName));
+			} catch (Exception e) {
+				args.setError(true);
+				return;
+			}
 			if(i==layerLens&&args.getResults()!=null){
 				rtMap.put(Constant.LIST_VALUE_KEY, args.getResults());
 			}

@@ -64,12 +64,13 @@ public final class JsonQuery {
 	
 	public static Map<String,Object> getResult(String json,String path){
 		Map<String,Object> initVal = new HashMap<>();
-		initVal.put(Constant.MAP_VALUE_KEY, "");
+		initVal.put(Constant.SINGLE_VALUE_KEY, "");
 		initVal.put(Constant.LIST_VALUE_KEY, null);
 		initVal.put(Constant.MAP_VALUE_KEY, null);
-		Map<String,Object> rt = JsonParserBuilder
-				.newJsonParser()
-				.jsonPath(json, path);
+		Map<String, Object> rt=JsonParserBuilder
+					.newJsonParser()
+					.jsonPath(json, path);
+		
 		return rt==null?initVal:rt;
 	}
 }

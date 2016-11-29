@@ -33,8 +33,8 @@ public class TestExecChecker {
 		//ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
 		
 		//测试性能
-		final int N = 10000;
-		List<TmsCounter> tcs = new ArrayList<TmsCounter>();
+		final int N = 1;
+		List<TmsCounter> tcs = new ArrayList<>();
 		tcs.add(new TestJsonQuery_Fun_0());
 		
 		ExecChecker.checkExecPerf(tcs,N);

@@ -24,6 +24,8 @@ import cn.com.davidking.util.MatchUtils;
 @SuppressWarnings("all")
 public abstract class JsonPickTools{
 	
+	protected static final String MARK_SEP = "#;#";
+	
 	/** The layer lens. */
 	protected int layerLens  ;
 
@@ -202,7 +204,7 @@ public abstract class JsonPickTools{
 		st = st.trim();
 		int lastNeedPos = st.lastIndexOf(Constant.CLOSE_BRACE);
 		
-		List<Integer> commaPs = new ArrayList<Integer>();
+		List<Integer> commaPs = new ArrayList<>();
 		
 		int counter = 1;
 		int pos = 0;
@@ -210,22 +212,15 @@ public abstract class JsonPickTools{
 		for(int i=0;i<st.length();i++){
 			if(st.charAt(i)=='{'){
 				if(again){
-					pos++;
-					again = false;
-					continue;
+					pos++;again = false;continue;
 				}
 				counter++;
-			}else if(st.charAt(i)=='}'){
-				counter--;
-			}
+			}else if(st.charAt(i)=='}')	counter--;
 			
 			pos++;
-			if(pos>lastNeedPos)
-				break;
+			if(pos>lastNeedPos)	break;
 			if(counter==0&&st.charAt(pos)==','){
-				commaPs.add(pos);
-				counter = 1;
-				again = true;
+				commaPs.add(pos);counter = 1;again = true;
 			}
 			
 		}
@@ -235,20 +230,14 @@ public abstract class JsonPickTools{
 		String nd = "";
 		List<String> result = new ArrayList<String>();
 		for(int i=0;i<commaPs.size();i++){
-			if(i!=0){
-				frontInt = commaPs.get(i-1);
-			}
+			if(i!=0)frontInt = commaPs.get(i-1);
 			lastInt = commaPs.get(i);
-			if(i==0){
-				nd = st.substring(frontInt, lastInt);
-			}else{
-				nd = st.substring(frontInt+1, lastInt);
-			}
+			if(i==0)nd = st.substring(frontInt, lastInt);
+			else nd = st.substring(frontInt+1, lastInt);
 			
 			if(key!=null&&!key.equals(""))
 				result.add(getVals(nd,key));
-			else
-				result.add(nd);
+			else result.add(nd);
 		}
 		
 		return result;
@@ -274,15 +263,10 @@ public abstract class JsonPickTools{
 			return computClosureStr(targetSplit);
 		}else{
 			int splitBgInx = json.indexOf(splitReg);
-			
 			int splitRegLen = splitReg.length();
-			
 			int subStrBgInx = splitBgInx + splitRegLen+1;
-			
 			int jsonLen = json.length();
-			
 			String subStr = json.substring(subStrBgInx, jsonLen);
-			
 			return computClosureStr(subStr);
 		}
 	}
@@ -301,48 +285,37 @@ public abstract class JsonPickTools{
 		int targetLen = targetSplit.length();
 		if(firstChar=='{'){
 			for(int i=1;i<targetLen;i++){
-				if(targetSplit.charAt(i)=='{'){
+				if(targetSplit.charAt(i)=='{')
 					counter++;
-				}else if(targetSplit.charAt(i)=='}'){
+				else if(targetSplit.charAt(i)=='}')
 					counter--;
-				}
-				
 				pos++;
-				if(counter==0){
-					break;
-				}
-				
+				if(counter==0) break;
 			}
 			
 			return targetSplit.substring(0, pos);
 		} else if(firstChar=='['){
 			for(int i=1;i<targetLen;i++){
-				if(targetSplit.charAt(i)=='['){
+				if(targetSplit.charAt(i)=='[')
 					counter++;
-				}else if(targetSplit.charAt(i)==']'){
+				else if(targetSplit.charAt(i)==']')
 					counter--;
-				}
 				
 				pos++;
-				if(counter==0){
-					break;
-				}
+				if(counter==0) break;
 				
 			}
 			return targetSplit.substring(0, pos);
 			
 		} else if(firstChar=='"'){
 			for(int i=1;i<targetLen;i++){
-				
 				pos++;
-				if(targetSplit.charAt(i-1)!='\\'&&targetSplit.charAt(i)=='"'){
+				if(targetSplit.charAt(i-1)!='\\'&&targetSplit.charAt(i)=='"')
 					break;
-				}
 			}
 			return targetSplit.substring(1, pos-1);
-		} else {
+		} else 
 			return MatchUtils.getOnlyMatchs(targetSplit, Constant.ZZS_REG);
-		}
 	}
 	
 	
@@ -395,9 +368,7 @@ public abstract class JsonPickTools{
 			result+=splitReg;
 			result+=rt;
 			result+=Constant.CLOSE_BRACE;
-		}else{
-			result = rt;
-		}
+		}else result = rt;
 		
 		return result;
 	}

@@ -49,11 +49,13 @@ public class TestJsonQuery_Fun_0 extends MethodExec {
 	 */
 	public static void main(String[] args) {
 		
-		ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
-//		File jsonFile = new File("src/main/resources/json.json");
-//
-//		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
-//		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[3].name");
-//		System.out.println("self:" + names);
+		//ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
+		
+		//数组越界测试代码
+		File jsonFile = new File("src/main/resources/json.json");
+
+		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
+		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[3].name");
+		System.out.println("self:" + names);
 	}
 }

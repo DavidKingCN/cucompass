@@ -24,7 +24,7 @@ public final class JsonParserBuilder {
 	 *
 	 * @return the json tool kit
 	 */
-	public static JsonToolKit newJsonToolKit(){
+	public static JsonToolKit newJsonToolKit(){ 
 		return new JsonToolKit();
 	}
 	

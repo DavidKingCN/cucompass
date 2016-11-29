@@ -18,6 +18,9 @@ public class Constant {
 	/** The Constant javaNameRegExp. */
 	public static final String javaNameRegExp = "[$_a-zA-Z]{1}[$_a-zA-Z0-9]+";
 	
+	public static final String KEYHOP = "[$_a-zA-Z]{1}[$_a-zA-Z0-9]+->hop";
+	//
+	
 	/** The Constant mapSingleVByReg. */
 	public static final String mapSingleVByReg = "[$_a-zA-Z]{1}[$_a-zA-Z0-9]+\\(.*?\\)";
 	/** The Constant mapAllRegExp. */

@@ -87,7 +87,36 @@ public class PickStandKeyVal extends JsonPickTools implements PickResult {
 			return;
 		}
 		
-		List<String>jsons = getElementsByJsonArr(args.getTargetJson());
+		//check args.targetJson if null daikai@2016_11_29_16:43PM
+		if(args.getTargetJson()==null || args.getTargetJson().equals("")){
+			args.setResults(null);
+			args.setError(true);
+			return;
+		}
+		if(!targetKeys_.contains(Constant.Stand_Separator))
+		//add new func that daikai@2016_11_29_16:43PM
+			if(args.getTargetJson().contains(MARK_SEP)){
+				StringBuffer result = new StringBuffer();
+				String[] jsonStrs = args.getTargetJson().split(MARK_SEP);
+				int len = jsonStrs.length;
+				int idx = 0;
+				for(String gson:jsonStrs){
+					result.append(getClosureJson(gson, targetKeys_));
+					result.append(idx++==len-1?"":Constant.Stand_Separator);
+				}
+				rtMap.put(Constant.SINGLE_VALUE_KEY, result.toString());
+				return;
+			}
+		
+		List<String>jsons = null;
+		
+		try {
+			jsons = getElementsByJsonArr(args.getTargetJson());
+		} catch (Exception e) {
+			args.setError(true);
+			rtMap.put(Constant.SINGLE_VALUE_KEY, "");
+			return;
+		}
 		StringBuffer standRt = new StringBuffer();
 		if(layerLens==1){
 			if(targetKeys!=null && targetKeys.length>=1){
