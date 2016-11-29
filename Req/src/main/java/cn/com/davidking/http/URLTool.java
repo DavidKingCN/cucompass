@@ -18,7 +18,7 @@ import java.net.URL;
 public class URLTool {
 	
 	/** The Constant match_reg. */
-	static final String match_reg = "http[s]?:\\/\\/([a-zA-Z0-9\\-]+[\\.]?)+(:\\d+)?[/]?";
+	static final String DOMAIN_NAME_REG_EXP = "http[s]?:\\/\\/([a-zA-Z0-9\\-]+[\\.]?)+(:\\d+)?[/]?";
 
 	/**
 	 * Ext domain.
@@ -27,7 +27,7 @@ public class URLTool {
 	 * @return the string
 	 */
 	public static String extDomain(String url){
-		return MatchUtils.getOnlyMatchs(url, match_reg);
+		return MatchUtils.getOnlyMatchs(url, DOMAIN_NAME_REG_EXP);
 	}
 
 	/**

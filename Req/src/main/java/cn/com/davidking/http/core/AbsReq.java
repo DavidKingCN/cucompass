@@ -16,6 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -31,6 +32,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.FutureRequestExecutionService;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
@@ -95,7 +97,20 @@ public abstract class AbsReq {
 
 	/** The Constant CHARSET. */
 	protected static final String CHARSET_UTF8 = Consts.UTF_8.displayName();
+	//构建线程池
+	/** The exe service. */
+	public static ExecutorService exeService;// = Executors.newFixedThreadPool(4);
 	
+	public static void setExeService(ExecutorService exeService) {
+		AsynReqImpl.exeService = exeService;
+	}
+
+	public static  FutureRequestExecutionService getfReqExeService() {
+		return fReqExeService;
+	}
+
+	/** The f req exe service. */
+	static FutureRequestExecutionService fReqExeService;
 	/**
 	 * Check domain valid.
 	 *

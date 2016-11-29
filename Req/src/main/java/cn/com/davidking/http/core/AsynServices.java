@@ -66,7 +66,8 @@ public class AsynServices implements ResourceClose {
 			LOG.error("关闭连接池异常:"+e);
 		}finally{
 			try {
-				fReqExeService.close();
+				if(fReqExeService!=null)
+					fReqExeService.close();
 			} catch (IOException e) {
 				LOG.error("关闭请求连接池异常:"+e);
 			}

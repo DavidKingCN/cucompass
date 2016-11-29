@@ -99,9 +99,9 @@ public class HttpReqImpl extends AbsReq implements HttpReq {
 	 * @see cn.wetime.http.core.WtRequest#exeRequest(java.lang.Object[])
 	 */
 	public synchronized String execReq(Object...params){
-		if(!super.checkDomainValid())
-			return String.valueOf(FAIL);
-		defaultSet();
+//		if(!super.checkDomainValid())
+//			return String.valueOf(FAIL);
+		//defaultSet();
 		//处理请求头
 		processRqHeaders(params);
 		//设置cookiestore

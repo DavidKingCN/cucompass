@@ -61,12 +61,7 @@ public class AsynReqImpl extends AbsReq implements HttpReq,ResourceClose {
 	/** The result. */
 	String result;
 	
-	//构建线程池
-	/** The exe service. */
-	ExecutorService exeService = Executors.newFixedThreadPool(4);
 	
-	/** The f req exe service. */
-	FutureRequestExecutionService fReqExeService;
 	
 	/** The shutdown. */
 	boolean shutdown=false;
@@ -102,16 +97,16 @@ public class AsynReqImpl extends AbsReq implements HttpReq,ResourceClose {
 	 * @see cn.com.davidking.http.core.HttpReq#execReq(java.lang.Object[])
 	 */
 	@Override
-	public String execReq(Object... params) {
-		if(!super.checkDomainValid())
-			result = String.valueOf(FAIL);
+	public synchronized String execReq(Object... params) {
+//		if(!super.checkDomainValid())
+//			result = String.valueOf(FAIL);
 		processRqHeaders(params);
 		//设置cookiestore
 		setCookieStore();
 		//处理请求参数
 		processRqArgs(params);
 		execRq();
-		if(shutdown) close();
+		//if(shutdown) close();
 		return result;
 	}
 
@@ -153,7 +148,7 @@ public class AsynReqImpl extends AbsReq implements HttpReq,ResourceClose {
 	 * @see cn.com.davidking.http.core.ResourceClose#close()
 	 */
 	public void close(){
-		
+		//if(shutdown)
 		try {
 			exeService.shutdown();
 			while(!exeService.isTerminated()){
@@ -201,7 +196,7 @@ public class AsynReqImpl extends AbsReq implements HttpReq,ResourceClose {
     	 * @see org.apache.http.concurrent.FutureCallback#completed(java.lang.Object)
     	 */
     	public void completed(final ExecRt result) {
-	    	System.out.println(result.isOk()?"请求执行成功!":"请求执行失败!");
+	    	//System.out.println(result.isOk()?"请求执行成功!":"请求执行失败!");
 	    }
 	
 	    /* (non-Javadoc)
