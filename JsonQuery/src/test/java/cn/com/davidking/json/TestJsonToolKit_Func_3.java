@@ -17,11 +17,11 @@ import cn.com.davidking.test.MethodExec;
 // TODO: Auto-generated Javadoc
 
 /**
- * The Class TestJsonToolKit_Func_2.
- *
+ * The Class TestJsonToolKit_Func_3.
+ * 
  * @author daikai
  */
-public class TestJsonToolKit_Func_2 extends MethodExec {
+public class TestJsonToolKit_Func_3 extends MethodExec {
 
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.test.ExecProc#process()
@@ -32,7 +32,7 @@ public class TestJsonToolKit_Func_2 extends MethodExec {
 		String testJsonArr = JsonParserBuilder.newJsonToolKit().getClosureJson(json, "hotelList");
 		List<String> jsons = JsonParserBuilder.newJsonToolKit().getElementsByJsonArr(testJsonArr);
 		for(String gson:jsons){
-			System.out.println(gson);
+			System.out.println(JsonParserBuilder.newJsonToolKit().getCurrLayerjson(gson));
 		}
 	}
 
@@ -42,7 +42,7 @@ public class TestJsonToolKit_Func_2 extends MethodExec {
 	 * @param args the args
 	 */
 	public static void main(String[] args) {
-		ExecChecker.checkExecRt(new TestJsonToolKit_Func_2());
+		ExecChecker.checkExecRt(new TestJsonToolKit_Func_3());
 	}
 
 }

@@ -9,8 +9,10 @@
 package cn.com.davidking.json.parse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import cn.com.davidking.json.Constant;
 import cn.com.davidking.util.JsonValidator;
@@ -372,6 +374,53 @@ public abstract class JsonPickTools{
 		
 		return result;
 	}
+	//cut 
+	protected String cutByClosedChar(String json,char bgChar,char endChar){
+		
+		String procStr = json.trim();
+		int counter = 1;
+		int pos = 1;
+		boolean again=true;
+		int targetLen = procStr.length();
+		int firstPos = -1;
+		int endPos = -1;
+		Map<Integer,Integer> posNeeds = new HashMap<Integer,Integer>();
+		for(int i=1;i<targetLen-1;i++){
+			if(procStr.charAt(i)!='\\'&&procStr.charAt(i)==bgChar){
+				if(again){
+					firstPos=pos++;again = false;continue;
+				}
+				counter++;
+			} else if(procStr.charAt(i)!='\\'&&procStr.charAt(i)==endChar)
+				counter--;
+			pos++;
+			if(pos>=targetLen-1)
+				break;
+			if(counter==0){
+				endPos = pos;counter = 1;again = true;
+				//记忆前后位置就可以了...
+				posNeeds.put(firstPos, endPos);
+			}
+		}
+		List<String> rpls = new ArrayList<String>();
+		if(posNeeds.size()>0){
+			for(Entry<Integer,Integer> posNeed:posNeeds.entrySet()){
+				rpls.add(procStr.substring(posNeed.getKey(), posNeed.getValue()));
+			}
+		}
+		for(String rpl:rpls){
+			if(!rpl.matches("\\"+bgChar+"\\s*\\"+endChar))
+			procStr = procStr.replace(rpl,"\"\"");
+		}
+		return procStr;
+	}
 	
-	
+	protected String cutAll(String json){
+		String rt = json;
+		try {
+			rt = cutByClosedChar(json, '[', ']');
+			rt = cutByClosedChar(rt, '{', '}');
+		} catch (Exception ignore) {}
+		return rt;
+	}
 }

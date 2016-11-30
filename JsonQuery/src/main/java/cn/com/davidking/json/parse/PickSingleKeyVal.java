@@ -67,7 +67,7 @@ public class PickSingleKeyVal extends JsonPickTools implements PickResult{
 			}
 			
 			if(args.getResults()==null){
-				args.setError(true);
+				args.setError(true);return;
 			}
 		}
 		
@@ -75,7 +75,14 @@ public class PickSingleKeyVal extends JsonPickTools implements PickResult{
 			args.setArrOne(false);
 			args.setArrIdx(0);
 		}
-		args.setTargetJson(getClosureJson(args.getTargetJson(), nodeName));
+		
+		if(args.getTargetJson()==null||args.getTargetJson().equals("")){
+			rtMap.put(Constant.SINGLE_VALUE_KEY, "");
+			return;
+		}
+//		String proJson = cutByClosedChar(args.getTargetJson(), '[', ']');
+//		proJson = cutByClosedChar(args.getTargetJson(), '{', '}');
+		args.setTargetJson(getClosureJson(cutAll(args.getTargetJson()), nodeName));
 		if(i==layerLens&&args.getTargetJson()!=null){
 			rtMap.put(Constant.SINGLE_VALUE_KEY, args.getTargetJson());
 		}

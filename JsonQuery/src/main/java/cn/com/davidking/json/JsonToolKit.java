@@ -45,4 +45,8 @@ public class JsonToolKit extends JsonPickTools {
 	public  String getClosureJson(String json,String key,boolean needPrefix){
 		return super.getClosureJson(json, key, needPrefix);
 	}
+	//获取当前层级的json
+	public String getCurrLayerjson(String json){
+		return super.cutAll(json);
+	}
 }

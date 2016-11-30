@@ -59,73 +59,42 @@ public class PickMultiKeyVal extends JsonPickTools implements PickResult{
 		String targetKeysStr = nodeName.substring(nodeName.indexOf("{")+1, nodeName.lastIndexOf("}"));
 		String[] targetKeys = targetKeysStr.split(",");
 		if(args.getTargetJson()!=null && !args.getTargetJson().equals("")){
-			List<String>jsons_ = getElementsByJsonArr(args.getTargetJson());
-			List<String>jsons = new ArrayList<>();
-			//把这个json中{""}部分找到并赋值为""
-			for(String json:jsons_){
+			try {
+				List<String>stJsons = getElementsByJsonArr(args.getTargetJson());
+				List<String>ndJsons = new ArrayList<>();
+				List<String>jsons = new ArrayList<>();
+				if(stJsons!=null)
+				for(String json:stJsons) ndJsons.add(this.cutByClosedChar(json, '[', ']'));
+				if(ndJsons!=null)
+				for(String json:ndJsons) jsons.add(this.cutByClosedChar(json, '{', '}'));
 				
-				String procStr = json.trim();//.substring(json.indexOf("{"), json.lastIndexOf("}"))
-				int counter = 1;
-				int pos = 1;
-				boolean again=true;
-				int targetLen = procStr.length();
-				int firstPos = -1;
-				int endPos = -1;
-				Map<Integer,Integer> posNeeds = new HashMap<Integer,Integer>();
-				for(int i=1;i<targetLen-1;i++){
-					if(procStr.charAt(i)!='\\'&&procStr.charAt(i)=='['){
-						if(again){
-							firstPos=pos++;again = false;continue;
-						}
-						counter++;
-					} else if(procStr.charAt(i)!='\\'&&procStr.charAt(i)==']')
-						counter--;
-					pos++;
-					if(pos>=targetLen-1)
-						break;
-					if(counter==0&&procStr.charAt(pos)==','){// 
-						endPos = pos;counter = 1;again = true;
-						//记忆前后位置就可以了...
-						posNeeds.put(firstPos, endPos);
-					}
-				}
-				List<String> rpls = new ArrayList<String>();
-				if(posNeeds.size()>0){
-					for(Entry<Integer,Integer> posNeed:posNeeds.entrySet()){
-						rpls.add(procStr.substring(posNeed.getKey(), posNeed.getValue()));
-						//procStr = procStr.replace(procStr.substring(posNeed.getKey(), posNeed.getValue()),"\"\"");
-					}
-				}
-				for(String rpl:rpls){
-					if(!rpl.matches("\\[\\s*\\]"))
-					procStr = procStr.replace(rpl,"\"\"");
-				}
-				//System.out.println(procStr);
-				jsons.add(procStr);
-			}
-			
-			List<Map<String,String>> listMaps = new ArrayList<Map<String,String>>();
-			if(layerLens==1){
-				if(targetKeys!=null && targetKeys.length>=1){
-					Map<String,String> targetMap = new HashMap<String,String>();
-					for(String targetKey:targetKeys){
-						targetMap.put(targetKey, getClosureJson(args.getTargetJson(), targetKey));
-					}
-					listMaps.add(targetMap);
-				}
-			}else{
-				if(targetKeys!=null && targetKeys.length>=1){
-					jsons.forEach(jsn->{
+				List<Map<String,String>> listMaps = new ArrayList<Map<String,String>>();
+				if(layerLens==1){
+					if(targetKeys!=null && targetKeys.length>=1){
 						Map<String,String> targetMap = new HashMap<String,String>();
 						for(String targetKey:targetKeys){
-							targetMap.put(targetKey, getClosureJson(jsn, targetKey));
+							targetMap.put(targetKey, getClosureJson(args.getTargetJson(), targetKey));
 						}
 						listMaps.add(targetMap);
-					});
-					
+					}
+				}else{
+					if(targetKeys!=null && targetKeys.length>=1){
+						ndJsons.forEach(jsn->{
+							Map<String,String> targetMap = new HashMap<String,String>();
+							for(String targetKey:targetKeys){
+								targetMap.put(targetKey, getClosureJson(jsn, targetKey));
+							}
+							listMaps.add(targetMap);
+						});
+						
+					}
 				}
+				rtMap.put(Constant.MAP_VALUE_KEY, listMaps);
+			} catch (Exception e) {
+				args.setError(true);
+				rtMap.put(Constant.MAP_VALUE_KEY, null);
+				return;
 			}
-			rtMap.put(Constant.MAP_VALUE_KEY, listMaps);
 		}else{
 			rtMap.put(Constant.MAP_VALUE_KEY, null);
 		}

@@ -55,7 +55,7 @@ public class TestJsonQuery_Fun_0 extends MethodExec {
 		File jsonFile = new File("src/main/resources/json.json");
 
 		String json = FileUtil.nioReadFile(jsonFile.getAbsolutePath());
-		List<String> names = JsonQuery.getListVal(json, "$.children[0].children[3].name");
-		System.out.println("self:" + names);
+		String name = JsonQuery.getSingleVal(json, "$.name");
+		System.out.println("self:" + name);
 	}
 }
