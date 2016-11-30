@@ -82,11 +82,12 @@ public class PickSingleKeyVal extends JsonPickTools implements PickResult{
 		}
 //		String proJson = cutByClosedChar(args.getTargetJson(), '[', ']');
 //		proJson = cutByClosedChar(args.getTargetJson(), '{', '}');
-		args.setTargetJson(getClosureJson(cutAll(args.getTargetJson()), nodeName));
-		if(i==layerLens&&args.getTargetJson()!=null){
-			rtMap.put(Constant.SINGLE_VALUE_KEY, args.getTargetJson());
-		}
 		
+		if(i==layerLens){
+			args.setTargetJson(getClosureJson(cutAll(args.getTargetJson()), nodeName));
+			rtMap.put(Constant.SINGLE_VALUE_KEY, args.getTargetJson());
+		}else
+			args.setTargetJson(getClosureJson(args.getTargetJson(), nodeName));
 	}
 	
 	
