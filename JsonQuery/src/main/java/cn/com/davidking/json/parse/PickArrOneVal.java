@@ -17,7 +17,7 @@ import cn.com.davidking.util.MatchUtils;
 /**
  * The Class PickArrOneVal.
  */
-public class PickArrOneVal extends JsonPickTools implements PickTransition{
+public class PickArrOneVal extends JsonPickTools implements JsonPicker{
 	
 	/**
 	 * The Constructor.
@@ -72,9 +72,9 @@ public class PickArrOneVal extends JsonPickTools implements PickTransition{
 	/* (non-Javadoc)
 	 * @see cn.com.davidking.json.parse.JsonTransition#peek()
 	 */
-	@Override
-	public ArgsTransition peek() {
-		return args;
-	}
+//	@Override
+//	public ArgsTransition peek() {
+//		return args;
+//	}
 	
 }

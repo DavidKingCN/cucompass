@@ -24,9 +24,7 @@ public class JsonParser  {
 	
 	/** The pickers. */
 	private static Map<String,JsonPicker> pickers = new HashMap<String,JsonPicker>();
-	static{
-		pickers =RegisterUtil.initJsonPickers(); 
-	}
+	static{	pickers =RegisterUtil.initJsonPickers();}
     
     /**
      * Json path.
@@ -38,20 +36,16 @@ public class JsonParser  {
     public Map<String,Object> jsonPath(String json,String path){
 		String[] namesArr = path.split(Constant.regSeparator);
 		int layerLens  = namesArr.length-1;
-		
 		Map<String,Object> rtMap = new HashMap<String,Object>();
 
 		ArgsTransition args = new ArgsTransition();
 		args.initArgs(json);
 		Map<String,Object> params = new HashMap<String,Object>();
 		
-		if(namesArr!=null && layerLens>0){
+		if(namesArr!=null && layerLens>0)
 			for(int i=1;i<=layerLens;i++){
 				String nodeName = namesArr[i];
-				if(nodeName==null ||nodeName.equals("")){
-					rtMap =  null;
-					break;
-				}
+				if(nodeName==null ||nodeName.equals("")){ rtMap =  null; break;}
 				//
 				params	.put("layerLens", layerLens);
 				params	.put("rtMap", rtMap);
@@ -59,33 +53,19 @@ public class JsonParser  {
 				params	.put("nodeName", nodeName);
 				params	.put("args", args);
 				boolean match = false;
+				boolean over = i == layerLens;
 				for(Entry<String,JsonPicker> item:pickers.entrySet()){
-					String rule = item.getKey();
+					String rule 	  = item.getKey();
 					JsonPicker picker = item.getValue();
 					if(nodeName.matches(rule)){
-						match = true;
-						picker.init(params);
-						picker.pick();
-						if(picker instanceof JsonResult){
+						match = true; picker.init(params); picker.pick();
+						if(over && picker instanceof JsonResult)
 							rtMap = ((JsonResult) picker).result();
-						}else if(picker instanceof JsonTransition){
-							args = ((JsonTransition) picker).peek();
-						}
-						
 					}
 				}
-				if(!match){
-					rtMap = null;
-					break;
-				}
-
-				if(args.isError()){
-					rtMap =  null;
-					break;
-				}
-				
+				if(!match||args.isError()){	rtMap = null; break;}
 			}
-		}
+		
 		return rtMap;
 	}
 }  

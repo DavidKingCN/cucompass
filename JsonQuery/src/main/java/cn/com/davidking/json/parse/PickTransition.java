@@ -11,6 +11,7 @@ package cn.com.davidking.json.parse;
 /**
  * The Interface PickTransition.
  */
+@Deprecated
 public interface PickTransition extends JsonPicker, JsonTransition {
 
 }

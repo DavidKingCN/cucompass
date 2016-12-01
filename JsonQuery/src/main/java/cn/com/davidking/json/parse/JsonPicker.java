@@ -29,4 +29,5 @@ public interface JsonPicker {
 	 * @param kvs the kvs
 	 */
 	void init(Map<String,Object> kvs);
+	
 }

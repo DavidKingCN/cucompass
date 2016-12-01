@@ -12,6 +12,7 @@ package cn.com.davidking.json.parse;
 /**
  * The Interface JsonTransition.
  */
+@Deprecated
 public interface JsonTransition{
 	
 	/**

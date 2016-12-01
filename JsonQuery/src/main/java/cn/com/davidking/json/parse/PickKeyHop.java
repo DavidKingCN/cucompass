@@ -23,7 +23,7 @@ import cn.com.davidking.json.Constant;
  * 跳转到执行代码中{{},{}}  
  * The Class PickKeyHop.
  */
-public class PickKeyHop extends JsonPickTools implements PickTransition{
+public class PickKeyHop extends JsonPickTools implements JsonPicker{
 	
 	/**
 	 * The Constructor.
@@ -95,10 +95,10 @@ public class PickKeyHop extends JsonPickTools implements PickTransition{
 	}
 
 
-	@Override
-	public ArgsTransition peek() {
-		return args;
-	}
+//	@Override
+//	public ArgsTransition peek() {
+//		return args;
+//	}
 	
 	
 	public static void main(String[] args) {
