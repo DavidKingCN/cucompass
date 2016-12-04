@@ -1,0 +1,7 @@
+add_header=true
+eclipse.preferences.version=1
+header_text=/*\r\n *    \u529F\u80FD\u540D\u79F0   \uFF1A xpath\u6570\u636E\u63D0\u53D6\u5B9E\u73B01.1\r\n *    \r\n *    (C) Copyright DavidKing 2016\r\n *    All Rights Reserved.\r\n *\t  \r\n *    \u6CE8\u610F\uFF1A \u6709\u95EE\u9898\u8054\u7CFB\u4F5C\u800513621151569@yeah.net\r\n */
+multi_header=true
+project_specific_settings=true
+replace_header=true
+replacements=<?xml version\="1.0" standalone\="yes"?>\n\n<replacements>\n<replacement key\="get" scope\="1" mode\="0">Gets the</replacement>\n<replacement key\="set" scope\="1" mode\="0">Sets the</replacement>\n<replacement key\="add" scope\="1" mode\="0">Adds the</replacement>\n<replacement key\="edit" scope\="1" mode\="0">Edits the</replacement>\n<replacement key\="remove" scope\="1" mode\="0">Removes the</replacement>\n<replacement key\="init" scope\="1" mode\="0">Inits the</replacement>\n<replacement key\="parse" scope\="1" mode\="0">Parses the</replacement>\n<replacement key\="create" scope\="1" mode\="0">Creates the</replacement>\n<replacement key\="build" scope\="1" mode\="0">Builds the</replacement>\n<replacement key\="is" scope\="1" mode\="0">Checks if is</replacement>\n<replacement key\="print" scope\="1" mode\="0">Prints the</replacement>\n<replacement key\="has" scope\="1" mode\="0">Checks for</replacement>\n</replacements>\n\n
