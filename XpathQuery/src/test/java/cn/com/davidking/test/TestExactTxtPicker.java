@@ -35,7 +35,6 @@ public class TestExactTxtPicker {
 					.addSubPath("/font[@style='FONT-SIZE: 15px'](【荣誉记录】)")
 					.addSubPath("/font[@style='FONT-SIZE: 15px'](【经典角色】)")
 					.addSubPath("/font[@style='FONT-SIZE: 15px'](【公益活动】)")
-					//.setMoreGroup(true)
 					.query();
 			
 		results.forEach(result->{

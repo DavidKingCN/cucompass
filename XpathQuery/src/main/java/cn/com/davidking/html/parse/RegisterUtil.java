@@ -27,7 +27,7 @@ public final class RegisterUtil {
 	 */
 	public static Map<String,DataPicker> initXpathPickers(){
 
-		InputStream is = RegisterUtil.class.getResourceAsStream("/rule-picker.properties");
+		InputStream is = RegisterUtil.class.getResourceAsStream("/xpath-rule-picker.properties");
 		Properties p = new Properties();
 		Map<String,DataPicker> pickers = new HashMap<String,DataPicker>();
 		try {

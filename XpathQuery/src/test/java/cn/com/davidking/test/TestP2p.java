@@ -40,9 +40,9 @@ public class TestP2p {
 				XpathQuery.newXpathQuery()
 					.setHtml(rt)
 					.setRootPath("//ul[@class='main-list']/li")
-					.addSubPath("/dl[@class='product-info']/dt[@class='product-name']/a/@href")
-					.addSubPath("/dl[@class='product-info']/dt[@class='product-name']/a")
-					.addSubPath("/dl[@class='product-info']/dd/ul[@class='clearfix']/li[@class='interest-rate']/p[@class='num-style']")
+					.addSubPath("//dt[@class='product-name']/a/@href")
+					.addSubPath("//dt[@class='product-name']/a")
+					.addSubPath("//dd/ul/li/p[@class='num-style']")
 					.query();
 			
 		results.forEach(result->{

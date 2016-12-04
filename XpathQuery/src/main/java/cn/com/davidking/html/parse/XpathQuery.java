@@ -82,6 +82,10 @@ public class XpathQuery {
 		return this;
 	}
 	
+	public XpathQuery setSubPaths(List<String> xpaths){
+		this.xpaths = xpaths;
+		return this;
+	}
 	/**
 	 * Adds the sub path.
 	 *

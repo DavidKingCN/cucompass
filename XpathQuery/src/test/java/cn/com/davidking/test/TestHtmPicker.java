@@ -27,12 +27,12 @@ public class TestHtmPicker {
 		List<Map<String,String>> results = 
 				XpathQuery.newXpathQuery()
 					.setHtml(rt)
-					.setRootPath("//div[@class='starlist']/div/dl/dt[@class='pad_5']")
-					//.addSubPath("/a")
-					.addSubPath("/p{0,html}")
-					.addSubPath("/p{2,html}")
-					.addSubPath("/p{3,html[/images/star(\\d+).gif]}")///images/star1.gif
-					.addSubPath("/p<4>")
+					.setRootPath("//div[@class='starlist']/div")
+					.addSubPath("/a")
+					.addSubPath("/dl/dt[@class='pad_5']/p{0,html}")
+					.addSubPath("/dl/dt[@class='pad_5']/p{2,html}")
+					.addSubPath("/dl/dt[@class='pad_5']/p{3,html[/images/star(\\d+).gif]}")///images/star1.gif
+					.addSubPath("/dl/dt[@class='pad_5']/p<4>")
 					.query();
 			
 		results.forEach(result->{
