@@ -37,8 +37,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
 
-import cn.com.davidking.http.JsonValidator;
-import cn.com.davidking.http.MatchUtils;
+import cn.com.davidking.util.JsonValidator;
+import cn.com.davidking.util.MatchUtils;
 import cn.com.davidking.http.URLTool;
 
 // TODO: Auto-generated Javadoc
@@ -97,9 +97,15 @@ public abstract class AbsReq {
 
 	/** The Constant CHARSET. */
 	protected static final String CHARSET_UTF8 = Consts.UTF_8.displayName();
+	
+	public static String charset;
+	
+	public static void setCharset(String charset){
+		AsynReqImpl.charset = charset;
+	}
 	//构建线程池
 	/** The exe service. */
-	public static ExecutorService exeService;// = Executors.newFixedThreadPool(4);
+	public static ExecutorService exeService;
 	
 	public static void setExeService(ExecutorService exeService) {
 		AsynReqImpl.exeService = exeService;
@@ -207,15 +213,20 @@ public abstract class AbsReq {
 	protected String getResponseContent(HttpResponse response){
 		
 		Header[]  hs = response.getHeaders(HttpHeaders.CONTENT_TYPE);
-		String charset = CHARSET_UTF8;
+		
+		if(charset==null)
+			charset = CHARSET_UTF8;
+		
 		if(hs!=null&&hs.length>0){
 			String type  = hs[0].getValue();
 			if(type.contains("charset")){
-				String cs = MatchUtils.getOnlyMatchs(type, "charset=(.+)",1);
+				String cs = MatchUtils.getOnlyMatchs(type, "charset=([a-zA-Z\\-0-9]+)",1);
 				if(cs!=null && !cs.equals("")) charset = cs; 
-			}
+			}/*else{
+				charset = getCharsetByResp(inStream);
+			}*/
 		}
-		//System.out.println("相应头编码:"+charset);
+		System.out.println("相应头编码:"+charset);
 		// 获取响应内容
 		InputStream inStream = null;
 		BufferedReader reader = null;
@@ -238,6 +249,19 @@ public abstract class AbsReq {
 			IOUtils.closeQuietly(reader);
 		}
 		return null;
+	}
+	
+	private String getCharsetByResp(InputStream inStream){
+		String charset = CHARSET_UTF8;
+		// 获取响应内容
+		
+		try {
+			charset = MatchUtils.getOnlyMatchs(IOUtils.toString(inStream), "charset=([a-zA-Z\\-0-9]+)",1);
+		} catch (Exception e) {
+			LOG.error("读写异常!",e);
+		}
+		
+		return charset;
 	}
 
 }

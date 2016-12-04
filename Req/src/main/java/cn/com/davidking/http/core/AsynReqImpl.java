@@ -45,8 +45,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.HttpRequestFutureTask;
 import org.apache.http.impl.cookie.BasicClientCookie;
 
-import cn.com.davidking.http.JsonValidator;
-import cn.com.davidking.http.MatchUtils;
+import cn.com.davidking.util.JsonValidator;
+import cn.com.davidking.util.MatchUtils;
 // TODO: Auto-generated Javadoc
 
 /**
@@ -126,19 +126,30 @@ public class AsynReqImpl extends AbsReq implements HttpReq,ResourceClose {
 			fReqExeService =
 			    new FutureRequestExecutionService(httpclient, exeService);
 		//执行请求任务并返回执行结果
-		HttpRequestFutureTask<ExecRt> task = fReqExeService.execute(
-				request, HttpClientContext.create(),
-			    new DoRespHandler(), new DoneCallBack());
+		HttpRequestFutureTask<ExecRt> task=null;
+		try {
+			task = fReqExeService.execute(
+					request, HttpClientContext.create(),
+				    new DoRespHandler(), new DoneCallBack());
+		} catch (Exception e) {
+			LOG.error("执行请求异常:可能是套接字读写异常或者可能是客户端协议异常");
+			if(task!=null)
+				task.cancel(true);
+		}
 		
 		try {
-			ExecRt rt=task.get();
-			result = rt.getContent();
+			if(task!=null){
+				ExecRt rt=task.get();
+				result = rt.getContent();
+			}
 		} catch (InterruptedException e1) {
 			LOG.error("中断异常:"+e1);
 			result = String.valueOf(FAIL);
 		} catch (ExecutionException e1) {
 			LOG.error("执行异常:"+e1);
 			result = String.valueOf(FAIL);
+		}finally{
+			
 		}
 		
 		return normal;

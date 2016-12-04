@@ -55,8 +55,8 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.protocol.HttpContext;
 import org.springframework.http.HttpStatus;
 
-import cn.com.davidking.http.JsonValidator;
-import cn.com.davidking.http.MatchUtils;
+import cn.com.davidking.util.JsonValidator;
+import cn.com.davidking.util.MatchUtils;
 
 // TODO: Auto-generated Javadoc
 /**

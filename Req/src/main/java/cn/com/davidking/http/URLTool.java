@@ -11,6 +11,8 @@ package cn.com.davidking.http;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import cn.com.davidking.util.MatchUtils;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class URLTool.

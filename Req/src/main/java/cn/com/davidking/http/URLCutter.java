@@ -18,6 +18,7 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import cn.com.davidking.http.core.HttpTemplate;
+import cn.com.davidking.util.FileUtil;
 
 
 // TODO: Auto-generated Javadoc
