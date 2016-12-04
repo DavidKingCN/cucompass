@@ -149,9 +149,7 @@ public class XPathUtils {
 					results.add(node);
 				}
 			}
-		} catch (Exception ignore) {
-			System.out.println(ignore);
-		}
+		} catch (Exception ignore) {}
 		return results;
 	}
 	
