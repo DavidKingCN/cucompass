@@ -14,7 +14,7 @@ public final class RegisterUtil {
 	
 	public static Map<String,JsonPicker> initJsonPickers(){
 
-		InputStream is = RegisterUtil.class.getResourceAsStream("/rule-picker.properties");
+		InputStream is = RegisterUtil.class.getResourceAsStream("/json-rule-picker.properties");
 		Properties p = new Properties();
 		Map<String,JsonPicker> pickers = new HashMap<String,JsonPicker>();
 		try {
