@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 
-import cn.com.davidking.http.JsonValidator;
+import cn.com.davidking.util.JsonValidator;
 import cn.com.davidking.test.ExecChecker;
 import cn.com.davidking.test.MethodExec;
 //parent->hop.[<father>] ->hop必须写，只支持这种形式哈，复杂的暂时没空写...
