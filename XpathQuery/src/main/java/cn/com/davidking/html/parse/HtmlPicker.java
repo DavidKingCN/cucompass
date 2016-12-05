@@ -88,5 +88,12 @@ public class HtmlPicker implements DataPicker {
 		return html;
 	}
 
-	
+	//演出推荐指数：<img src="/images/star1.gif" width="55" height="12" alt="" />
+	///images/star(\\d+).gif
+	public static void main(String[] args) {
+		String s = "演出推荐指数：<img src=\"/images/star1.gif\" width=\"55\" height=\"12\" alt=\"\" />";
+		String regExp = "演出推荐指数：.+/images/star(\\d+).gif.+";
+		String rt = MatchUtils.getOnlyMatchs(s, regExp, 1);
+		System.out.println(rt);
+	}
 }

@@ -36,10 +36,7 @@ public class ExactTxtPicker implements DataPicker {
 		String val=null;
 		try {
 			val = XPathUtils.pathVal(node, realPath, isAttr);
-		} catch (XPatherException e) {
-			pickAgent.setObeyRule(true);
-			return null;
-		}
+		} catch (XPatherException ignore) {}
 		
 		String result = "";
 		if(val.contains(exactWords)){

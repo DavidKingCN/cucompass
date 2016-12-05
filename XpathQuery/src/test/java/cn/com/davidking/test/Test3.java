@@ -13,7 +13,6 @@ import cn.com.davidking.http.core.AsynTemplate;
 public class Test3 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		ExecutorService exeService= Executors.newFixedThreadPool(4);
 		AsynReqImpl.setExeService(exeService);
 		AsynReqImpl.setCharset("utf8");
@@ -28,11 +27,8 @@ public class Test3 {
 					.setHtml(rt)
 					.setRootPath("//div[@class='main-list']/li")
 					.addSubPath("/dl[@class='product-info']/dt[@class='product-name']/a/@href")
-					.addSubPath("/dl[@class='product-info']/dt[@class='product-name']/a")
-					.addSubPath("/ul[@class='clearfix']/li[@class='interest-rate']/p")
-//					.addSubPath("/dl/dt[@class='pad_5']/p{2,html}")
-//					.addSubPath("/dl/dt[@class='pad_5']/p{3,html[/images/star(\\d+).gif]}")
-//					.addSubPath("/dl/dt[@class='pad_5']/p<4>")
+					//.addSubPath("/dl[@class='product-info']/dt[@class='product-name']/a")
+					//.addSubPath("/ul[@class='clearfix']/li[@class='interest-rate']/p")
 					.query();
 			
 		results.forEach(result->{

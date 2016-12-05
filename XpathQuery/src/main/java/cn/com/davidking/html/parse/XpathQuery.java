@@ -99,17 +99,13 @@ public class XpathQuery {
 	
 	/** The pickers. */
 	static Map<String,DataPicker> pickers = new HashMap<>();
-	static{
-		pickers = RegisterUtil.initXpathPickers();
-	}
+	static{	pickers = RegisterUtil.initXpathPickers(); }
 	
 	/**
 	 * Inits the.
 	 */
 	private void init(){
-		cleaner = new HtmlCleaner();
-		this.htm = cleaner.clean(respHtm);
-		
+		cleaner = new HtmlCleaner(); this.htm = cleaner.clean(respHtm);
 	}
 	
 	/**
@@ -127,9 +123,8 @@ public class XpathQuery {
 		
 		for(TagNode node:nodes){
 			kvs = new HashMap<>();
-			for(String sub:xpaths){
-				kvs = matchRule(pickAgent, node, sub, kvs);
-			}
+			for(String sub:xpaths) kvs = matchRule(pickAgent, node, sub, kvs);
+			
 			results.add(kvs);
 		}
 		return results;
@@ -156,8 +151,7 @@ public class XpathQuery {
 				worker.init(pickAgent);
 				String rt = worker.get();
 				if(pickAgent.isObeyRule()){
-					kvs.put(sub, rt);
-					break;
+					kvs.put(sub, rt); break;
 				}
 			}
 		}

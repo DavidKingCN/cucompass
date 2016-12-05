@@ -9,6 +9,7 @@
 package cn.com.davidking.html.parse;
 
 
+
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
 
@@ -38,6 +39,7 @@ public class ArrSubPicker implements DataPicker {
 		
 		int needIdx = 0;
 		String regExp = null;
+		int groupNo = 0;
 		
 		if(limitRule.matches("\\d+,.+")){
 			int commaIdx = limitRule.indexOf(",");
@@ -45,14 +47,14 @@ public class ArrSubPicker implements DataPicker {
 			needIdx = Integer.parseInt(indxStr);
 			
 			regExp = limitRule.substring(commaIdx+1);
+			if(regExp.contains("(")&&regExp.contains(")"))
+				groupNo = 1;
 		}else{
 			needIdx = Integer.parseInt(limitRule);
 		}
 		
 		TagNode node = pickAgent.getNode();
 		
-		//List<TagNode>nodes = XPathUtils.mutilNodes(node, realPath);
-		//TagNode needNode = nodes.get(needIdx);
 		String needParseStr = null;
 		try {
 			needParseStr = XPathUtils.pathValByIdx(node, realPath,needIdx, XPathUtils.isAttr(realPath));
@@ -61,8 +63,9 @@ public class ArrSubPicker implements DataPicker {
 		String val = null;
 		if(needParseStr!=null&&!needParseStr.equals("")){
 			val = needParseStr;
-			if(regExp!=null && !regExp.equals(""))
-				val = MatchUtils.getOnlyMatchs(val, regExp, 1);
+			if(regExp!=null && !regExp.equals("")){
+				val = MatchUtils.getOnlyMatchs(val, regExp, groupNo);
+			}
 			pickAgent.setObeyRule(true);
 		}
 		

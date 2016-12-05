@@ -10,10 +10,11 @@ import cn.com.davidking.http.core.AsynReqImpl;
 import cn.com.davidking.http.core.AsynServices;
 import cn.com.davidking.http.core.AsynTemplate;
 
-public class TestHtmPicker {
+public class TestDataPicker {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		// //div[@id='infostar']/span/p
 		ExecutorService exeService= Executors.newFixedThreadPool(4);
 		AsynReqImpl.setExeService(exeService);
 		AsynReqImpl.setCharset("gbk");
@@ -28,16 +29,19 @@ public class TestHtmPicker {
 					.setHtml(htm)
 					.setRootPath("//div[@class='starlist']/div")
 					.addSubPath("/a")
-					.addSubPath("//p{0,html}")
-					.addSubPath("//p{2,html}")
-					.addSubPath("//p{3,html[/images/star(\\d+).gif]}")
-					.addSubPath("//p<4>")
+					.addSubPath("/a/img/@src")
+					.addSubPath("//p<0,【(.+)】>")//        absolute path=/dl/dt[@class='pad_5']/p{0,html}
+					.addSubPath("//p<1,职&nbsp;&nbsp;业：(.*)>")
+					.addSubPath("//p<2,\\d+.+/.+（.+）>")//		absolute path=/dl/dt[@class='pad_5']/p{0,html}
+					.addSubPath("//p{3,html[/images/star(\\d+).gif]}")///images/star1.gif
+					.addSubPath("//p<4,\\d+万/.*年（参考价）>")
+					.addSubPath("//p{5,html[/images/star(\\d+).gif]}")
 					.addSubPath("//a[@class='u']/@href")
 					.query();
 			
 		results.forEach(result->{
 			result.forEach((k,v)->{
-				System.out.println(k+"---"+v);
+				System.out.println(k+"<--->"+v);
 			});
 		});
 	}

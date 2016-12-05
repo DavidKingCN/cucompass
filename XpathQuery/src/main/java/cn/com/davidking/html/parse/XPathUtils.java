@@ -71,11 +71,8 @@ public class XPathUtils {
 		if (nodes != null && nodes.length > 0) {
 			int len = nodes.length;
 			
-			if (len == 1){
-				result = singleVal(nodes,path,isAttr);
-			} else {
-				result = selectOneVal(nodes,path,idx,isAttr);
-			}
+			if (len == 1) result = singleVal(nodes,path,isAttr);
+			else result = selectOneVal(nodes,path,idx,isAttr);
 		}
 		
 		return result;
@@ -95,12 +92,9 @@ public class XPathUtils {
 		int cursor = 0;
 		for (Object obj : nodes) {
 			String tmp = null;
-			if(obj instanceof String)
-				tmp=obj.toString();
-			else if(obj instanceof TagNode)
-				tmp=getNodeVal((TagNode) obj, path,isAttr);
-			if(cursor==idx)
-				result = tmp;
+			if(obj instanceof String) tmp=obj.toString();
+			else if(obj instanceof TagNode)	tmp=getNodeVal((TagNode) obj, path,isAttr);
+			if(cursor==idx)	result = tmp;
 			cursor ++;
 		}
 		return result;
@@ -122,11 +116,8 @@ public class XPathUtils {
 		if (nodes != null && nodes.length > 0) {
 			int len = nodes.length;
 			
-			if (len == 1){
-				result = singleVal(nodes,path,isAttr);
-			} else {
-				result = concatMoreVal(nodes,path,isAttr);
-			}
+			if (len == 1) result = singleVal(nodes,path,isAttr);
+			else result = concatMoreVal(nodes,path,isAttr);
 		}
 		
 		return result;
@@ -145,8 +136,7 @@ public class XPathUtils {
 			Object[] nodes = htmNode.evaluateXPath(path);
 			if (nodes != null && nodes.length > 0) {
 				for (Object obj : nodes) {
-					TagNode node = (TagNode) obj;
-					results.add(node);
+					TagNode node = (TagNode) obj; results.add(node);
 				}
 			}
 		} catch (Exception ignore) {}
@@ -166,10 +156,8 @@ public class XPathUtils {
 	private static String singleVal(Object[] nodes,String path,boolean isAttr){
 		String result = "";
 		Object obj = nodes[0];
-		if(obj instanceof String)
-			result = obj.toString();
-		else if(obj instanceof TagNode)
-			result = getNodeVal((TagNode) obj,path,isAttr);
+		if(obj instanceof String) result = obj.toString();
+		else if(obj instanceof TagNode) result = getNodeVal((TagNode) obj,path,isAttr);
 		return result;
 	}
 	
@@ -184,13 +172,10 @@ public class XPathUtils {
 	private static String concatMoreVal(Object[] nodes,String path,boolean isAttr){
 		String result  = "";
 		List<String> rs = new ArrayList<>();
-		for (Object obj : nodes) {
-			if(obj instanceof String)
-				rs.add(obj.toString());
-			else if(obj instanceof TagNode)
-				rs.add(getNodeVal((TagNode) obj, path,isAttr));
-			
-		}
+		for (Object obj : nodes) 
+			if(obj instanceof String) rs.add(obj.toString());
+			else if(obj instanceof TagNode)	rs.add(getNodeVal((TagNode) obj, path,isAttr));
+		
 		result = rs.stream().map(Object::toString).collect(Collectors.joining(","));
 		return result;
 	}
@@ -205,10 +190,8 @@ public class XPathUtils {
 	 */
 	private static String getNodeVal(TagNode node,String path,boolean isAttr){
 		String result  = "";
-		if (isAttr)
-			result = node.getAttributes().get(path);
-		else
-			result = node.getText().toString();
+		if (isAttr)	result = node.getAttributes().get(path);
+		else result = node.getText().toString();
 		return result ;
 	}
 }

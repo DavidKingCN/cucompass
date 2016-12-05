@@ -45,8 +45,7 @@ public class VagTxtPicker implements DataPicker {
 		
 		String result =null;
 		if(val!=null && !val.equals("")){
-			pickAgent.setObeyRule(true);
-			result = MatchUtils.getOnlyMatchs(val, vagRule, 1);
+			pickAgent.setObeyRule(true); result = MatchUtils.getOnlyMatchs(val, vagRule, 1);
 		}
 		
 		return result;

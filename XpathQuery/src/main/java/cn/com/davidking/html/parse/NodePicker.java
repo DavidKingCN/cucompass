@@ -24,14 +24,12 @@ public class NodePicker implements DataPicker {
 	 */
 	@Override
 	public String get() {
-		String result = null;
-		String needRt = null;
+		String result = null; String needRt = null;
 		try {
 			needRt = XPathUtils.pathVal(pickAgent.getNode(), pickAgent.getPath(), false);
 		} catch (XPatherException ignore) {}
 		if(needRt!=null&&!needRt.equals("")){
-			result = needRt;
-			pickAgent.setObeyRule(true);
+			result = needRt;pickAgent.setObeyRule(true);
 		}
 			
 		return result;
