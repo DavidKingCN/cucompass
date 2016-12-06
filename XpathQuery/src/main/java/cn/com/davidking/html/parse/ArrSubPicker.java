@@ -10,7 +10,6 @@ package cn.com.davidking.html.parse;
 
 
 
-import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
 
 import cn.com.davidking.util.MatchUtils;
