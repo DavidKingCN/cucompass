@@ -65,8 +65,7 @@ public class XPathUtils {
 	 * @throws XPatherException the x pather exception
 	 */
 	public static String pathValByIdx(TagNode htmNode, String path,int idx,boolean isAttr) throws XPatherException {
-		String result = "";
-		Object[] nodes = htmNode.evaluateXPath(path);
+		String result = "";	Object[] nodes = htmNode.evaluateXPath(path);
 		
 		if (nodes != null && nodes.length > 0) {
 			int len = nodes.length;
@@ -110,8 +109,7 @@ public class XPathUtils {
 	 * @throws XPatherException the x pather exception
 	 */
 	public static String pathVal(TagNode htmNode, String path,boolean isAttr) throws XPatherException {
-		String result = "";
-		Object[] nodes = htmNode.evaluateXPath(path);
+		String result = "";	Object[] nodes = htmNode.evaluateXPath(path);
 		
 		if (nodes != null && nodes.length > 0) {
 			int len = nodes.length;
@@ -154,8 +152,7 @@ public class XPathUtils {
 	 * @return the string
 	 */
 	private static String singleVal(Object[] nodes,String path,boolean isAttr){
-		String result = "";
-		Object obj = nodes[0];
+		String result = "";	Object obj = nodes[0];
 		if(obj instanceof String) result = obj.toString();
 		else if(obj instanceof TagNode) result = getNodeVal((TagNode) obj,path,isAttr);
 		return result;
@@ -170,8 +167,7 @@ public class XPathUtils {
 	 * @return the string
 	 */
 	private static String concatMoreVal(Object[] nodes,String path,boolean isAttr){
-		String result  = "";
-		List<String> rs = new ArrayList<>();
+		String result  = ""; List<String> rs = new ArrayList<>();
 		for (Object obj : nodes) 
 			if(obj instanceof String) rs.add(obj.toString());
 			else if(obj instanceof TagNode)	rs.add(getNodeVal((TagNode) obj, path,isAttr));

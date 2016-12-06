@@ -117,15 +117,13 @@ public class XpathQuery {
 		init();
 		List<Map<String,String>> results  = new ArrayList<>();
 		List<TagNode> nodes = XPathUtils.mutilNodes(htm, xpath);
-		Map<String,String> kvs = null;
 		PickAgent pickAgent = new PickAgent();
-		kvs = new HashMap<String,String>();
+		Map<String,String> kvs = null;
 		
 		for(TagNode node:nodes){
 			kvs = new HashMap<>();
 			for(String sub:xpaths) kvs = matchRule(pickAgent, node, sub, kvs);
-			
-			results.add(kvs);
+			if(kvs!=null && kvs.size()>0) results.add(kvs);
 		}
 		return results;
 	}
@@ -141,18 +139,13 @@ public class XpathQuery {
 	 * @return the map< string, string>
 	 */
 	private Map<String,String> matchRule(PickAgent pickAgent,TagNode node,String sub,Map<String,String> kvs){
-
 		pickAgent.init(cleaner, node, sub);
 		
 		for(Entry<String,DataPicker> entry:pickers.entrySet()){
-			String rule  = entry.getKey();
-			DataPicker worker = entry.getValue();
+			String rule  = entry.getKey(); DataPicker worker = entry.getValue();
 			if(sub.matches(rule)){
-				worker.init(pickAgent);
-				String rt = worker.get();
-				if(pickAgent.isObeyRule()){
-					kvs.put(sub, rt); break;
-				}
+				worker.init(pickAgent);	String rt = worker.get();
+				if(pickAgent.isObeyRule()){	kvs.put(sub, rt); break;}
 			}
 		}
 		return kvs;

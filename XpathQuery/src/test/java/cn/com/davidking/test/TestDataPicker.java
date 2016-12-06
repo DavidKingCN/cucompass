@@ -30,10 +30,10 @@ public class TestDataPicker {
 					.setRootPath("//div[@class='starlist']/div")
 					.addSubPath("/a")
 					.addSubPath("/a/img/@src")
-					.addSubPath("//p<0,【(.+)】>")//        absolute path=/dl/dt[@class='pad_5']/p{0,html}
+					.addSubPath("//p<0,【(.+)】>")
 					.addSubPath("//p<1,职&nbsp;&nbsp;业：(.*)>")
-					.addSubPath("//p<2,\\d+.+/.+（.+）>")//		absolute path=/dl/dt[@class='pad_5']/p{0,html}
-					.addSubPath("//p{3,html[/images/star(\\d+).gif]}")///images/star1.gif
+					.addSubPath("//p<2,\\d+.+/.+（.+）>")
+					.addSubPath("//p{3,html[/images/star(\\d+).gif]}")
 					.addSubPath("//p<4,\\d+万/.*年（参考价）>")
 					.addSubPath("//p{5,html[/images/star(\\d+).gif]}")
 					.addSubPath("//a[@class='u']/@href")

@@ -29,17 +29,13 @@ public class ArrSubPicker implements DataPicker {
 	 */
 	@Override
 	public String get() {
-		String path = pickAgent.getPath();
 		
-		int stIdx = path.indexOf("<");
-		int ndIdx = path.lastIndexOf(">");
+		int stIdx = pickAgent.getPath().indexOf("<");int ndIdx = pickAgent.getPath().lastIndexOf(">");
 
-		String realPath = path.substring(0, stIdx);
-		String limitRule = path.substring(stIdx+1, ndIdx);
+		String realPath = pickAgent.getPath().substring(0, stIdx);
+		String limitRule = pickAgent.getPath().substring(stIdx+1, ndIdx);
 		
-		int needIdx = 0;
-		String regExp = null;
-		int groupNo = 0;
+		int needIdx = 0;String regExp = null;int groupNo = 0;
 		
 		if(limitRule.matches("\\d+,.+")){
 			int commaIdx = limitRule.indexOf(",");
@@ -47,26 +43,18 @@ public class ArrSubPicker implements DataPicker {
 			needIdx = Integer.parseInt(indxStr);
 			
 			regExp = limitRule.substring(commaIdx+1);
-			if(regExp.contains("(")&&regExp.contains(")"))
-				groupNo = 1;
-		}else{
-			needIdx = Integer.parseInt(limitRule);
-		}
-		
-		TagNode node = pickAgent.getNode();
+			if(regExp.contains("(")&&regExp.contains(")"))	groupNo = 1;
+		}else needIdx = Integer.parseInt(limitRule);
 		
 		String needParseStr = null;
 		try {
-			needParseStr = XPathUtils.pathValByIdx(node, realPath,needIdx, XPathUtils.isAttr(realPath));
+			needParseStr = XPathUtils.pathValByIdx(pickAgent.getNode(), realPath,needIdx, XPathUtils.isAttr(realPath));
 		} catch (XPatherException ignore) {}
 		
 		String val = null;
 		if(needParseStr!=null&&!needParseStr.equals("")){
-			val = needParseStr;
-			if(regExp!=null && !regExp.equals("")){
-				val = MatchUtils.getOnlyMatchs(val, regExp, groupNo);
-			}
-			pickAgent.setObeyRule(true);
+			val = needParseStr;pickAgent.setObeyRule(true);
+			if(regExp!=null && !regExp.equals("")) val = MatchUtils.getOnlyMatchs(val, regExp, groupNo);
 		}
 		
 		return val;

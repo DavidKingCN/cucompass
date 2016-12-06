@@ -37,10 +37,7 @@ public class PickAgent {
 	 * @param path the path
 	 */
 	public void init(HtmlCleaner cleaner, TagNode node, String path) {
-		this.cleaner = cleaner;
-		this.node = node;
-		this.path = path;
-		this.obeyRule = false;
+		this.cleaner = cleaner;	this.node = node; this.path = path;	this.obeyRule = false;
 	}
 	
 	/**

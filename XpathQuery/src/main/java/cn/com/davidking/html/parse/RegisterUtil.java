@@ -18,6 +18,7 @@ import java.util.Properties;
 /**
  * The Class RegisterUtil.
  */
+@SuppressWarnings("all")
 public final class RegisterUtil {
 	
 	/**
@@ -31,22 +32,16 @@ public final class RegisterUtil {
 		Properties p = new Properties();
 		Map<String,DataPicker> pickers = new HashMap<String,DataPicker>();
 		try {
-			p.load(is);
-			Enumeration ks= p.keys();
+			p.load(is);	Enumeration ks= p.keys();
 			
 			while(ks.hasMoreElements()){
-				String rule = ks.nextElement().toString();
-				String pickerClz = XPathUtils.PARSE_PACK;
-				pickerClz += p.getProperty(rule);
-				
+				String rule = ks.nextElement().toString(); 
+				String pickerClz = XPathUtils.PARSE_PACK; pickerClz += p.getProperty(rule);
 				DataPicker picker = (DataPicker)Class.forName(pickerClz).newInstance();
 				rule = rule.replace("&eq;", "=");
 				pickers.put(rule, picker);
-				
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception ignore) {}
 		return pickers;
 	
 	}

@@ -40,14 +40,14 @@ public class TestP2p {
 				XpathQuery.newXpathQuery()
 					.setHtml(rt)
 					.setRootPath("//ul[@class='main-list']/li")
-					.addSubPath("//dt[@class='product-name']/a/@href")
-					.addSubPath("//dt[@class='product-name']/a")
-					.addSubPath("//dd/ul/li/p[@class='num-style']")
+					.addSubPath("//dt[@class='product-name']/a/@href[\\d+]")
+					//.addSubPath("//dt[@class='product-name']/a")
+					//.addSubPath("//dd/ul/li/p[@class='num-style']")
 					.query();
 			
 		results.forEach(result->{
 			result.forEach((k,v)->{
-				System.out.println(k+"---"+v);
+				System.out.println(k+"<--->"+v);
 			});
 		});
 	}
