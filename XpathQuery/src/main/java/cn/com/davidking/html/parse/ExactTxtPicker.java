@@ -26,18 +26,10 @@ public class ExactTxtPicker implements DataPicker {
 	@Override
 	public String get() {
 		int stPos = pickAgent.getPath().indexOf("("); int ndPos = pickAgent.getPath().indexOf(")");
-		String exactWords = pickAgent.getPath().substring(stPos+1, ndPos);
-		String realPath = pickAgent.getPath().substring(0,stPos);
-		boolean isAttr = XPathUtils.isAttr(realPath);
-		String val=null;
-		try {
-			val = XPathUtils.pathVal(pickAgent.getNode(), realPath, isAttr);
-		} catch (XPatherException ignore) {}
-		
-		String result = "";
-		if(val.contains(exactWords)){
-			pickAgent.setObeyRule(true); result = val;
-		}
+		String exactWords = pickAgent.getPath().substring(stPos+1, ndPos); String realPath = pickAgent.getPath().substring(0,stPos);
+		boolean isAttr = XPathUtils.isAttr(realPath); String val=null;
+		try { val = XPathUtils.pathVal(pickAgent.getNode(), realPath, isAttr);} catch (XPatherException ignore) {}
+		String result = "";	if(val.contains(exactWords)){pickAgent.setObeyRule(true); result = val;	}
 		return result;
 	}
 

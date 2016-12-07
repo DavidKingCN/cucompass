@@ -27,20 +27,12 @@ public class VagTxtPicker implements DataPicker {
 	@Override
 	public String get() {
 		int stIdx = pickAgent.getPath().lastIndexOf("["); int ndIdx = pickAgent.getPath().lastIndexOf("]");
-		String realPath = pickAgent.getPath().substring(0, stIdx);
-		String vagRule = pickAgent.getPath().substring(stIdx+1, ndIdx); 
-		int groupNo = 0; if(vagRule.contains("(")&&vagRule.contains(")")) groupNo = 1;
-		boolean isAttr = XPathUtils.isAttr(realPath);
-		String val=null;
-		try {
-			val = XPathUtils.pathVal(pickAgent.getNode(), realPath, isAttr);
-		} catch (XPatherException ignore) {}
-		
+		String realPath = pickAgent.getPath().substring(0, stIdx); String vagRule = pickAgent.getPath().substring(stIdx+1, ndIdx); 
+		int groupNo = 0; if(vagRule.contains("(")&&vagRule.contains(")")) groupNo = 1; 
+		boolean isAttr = XPathUtils.isAttr(realPath); String val=null;
+		try { val = XPathUtils.pathVal(pickAgent.getNode(), realPath, isAttr); } catch (XPatherException ignore) {}
 		String result =null;
-		if(val!=null && !val.equals("")){
-			pickAgent.setObeyRule(true); result = MatchUtils.getOnlyMatchs(val, vagRule, groupNo);
-		}
-		
+		if(val!=null && !val.equals("")){ pickAgent.setObeyRule(true); result = MatchUtils.getOnlyMatchs(val, vagRule, groupNo);}
 		return result;
 	}
 

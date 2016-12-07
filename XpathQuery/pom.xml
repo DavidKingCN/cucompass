@@ -20,5 +20,10 @@
 			<artifactId>Req</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.com.davidking</groupId>
+			<artifactId>Test</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>

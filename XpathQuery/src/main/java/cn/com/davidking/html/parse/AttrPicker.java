@@ -25,13 +25,8 @@ public class AttrPicker implements DataPicker {
 	@Override
 	public String get() {
 		String result = null; String needRt = null;
-		try {
-			needRt = XPathUtils.pathVal(pickAgent.getNode(), pickAgent.getPath(), true);
-		} catch (XPatherException ignore) {}
-		if(needRt!=null&&!needRt.equals("")){
-			result = needRt; pickAgent.setObeyRule(true);
-		}
-			
+		try { needRt = XPathUtils.pathVal(pickAgent.getNode(), pickAgent.getPath(), true);} catch (XPatherException ignore) {}
+		if(needRt!=null&&!needRt.equals("")){ result = needRt; pickAgent.setObeyRule(true);}
 		return result;
 	}
 
