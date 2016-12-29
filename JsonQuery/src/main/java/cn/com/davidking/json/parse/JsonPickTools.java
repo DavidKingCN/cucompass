@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
+
 import cn.com.davidking.json.Constant;
 import cn.com.davidking.util.JsonValidator;
 import cn.com.davidking.util.MatchUtils;
@@ -25,6 +27,8 @@ import cn.com.davidking.util.MatchUtils;
  */
 @SuppressWarnings("all")
 public abstract class JsonPickTools{
+	
+	public static final Logger LOG = Logger.getLogger(JsonPickTools.class);
 	
 	protected static final String MARK_SEP = "#;#";
 	
@@ -60,12 +64,7 @@ public abstract class JsonPickTools{
 	 * @param nodeName the node name
 	 * @param args the args
 	 */
-	public JsonPickTools(
-			int layerLens, 
-			Map<String, Object> rtMap, 
-			int i, 
-			String nodeName,
-			ArgsTransition args) {
+	public JsonPickTools(int layerLens, Map<String, Object> rtMap, int i, String nodeName, ArgsTransition args) {
 		this.layerLens = layerLens;
 		this.rtMap = rtMap;
 		this.i = i;
@@ -80,7 +79,6 @@ public abstract class JsonPickTools{
 	 * @param kvs the kvs
 	 */
 	protected void init(Map<String,Object> kvs){
-		//反射
 		this.setLayerLens((Integer)kvs.get("layerLens"));
 		this.setRtMap((Map<String,Object>)kvs.get("rtMap"));
 		this.setI((Integer)kvs.get("i"));
@@ -190,7 +188,6 @@ public abstract class JsonPickTools{
 	}
 	
 	
-	//1st 2nd 3rd 4th
 	/**
 	 * 通过 ..key:[{"name":"张三"},{..},...].. 转化成n个{"name":"张三"}集合串
 	 *
@@ -343,19 +340,19 @@ public abstract class JsonPickTools{
 	protected  String getClosureJson(String json,String key,boolean needPrefix){
 		
 		if(json==null||json.equals("")){
-			//LOG.error("json不能为空！");
+			LOG.error("json不能为空！");
 			return "";
 		}
 		if(key==null||key.equals("")){
-			//LOG.error("key值不能为空！");
+			LOG.error("key值不能为空！");
 			return "";
 		}
 		if(!JsonValidator.checkJsonValid(json)){
-			//LOG.error("字符串非json串！");
+			LOG.error("字符串非json串！");
 			return "";
 		}
 		if(!json.contains(key)){
-			//LOG.error("不含该key值！");
+			LOG.error("不含该key值！");
 			return "";
 		}
 		
@@ -420,7 +417,7 @@ public abstract class JsonPickTools{
 		try {
 			rt = cutByClosedChar(json, '[', ']');
 			rt = cutByClosedChar(rt, '{', '}');
-		} catch (Exception ignore) {}
+		} catch (Exception ignore) {LOG.error("处理层级json出错了!");}
 		return rt;
 	}
 }

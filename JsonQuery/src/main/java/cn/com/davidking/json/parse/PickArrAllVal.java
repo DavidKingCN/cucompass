@@ -57,9 +57,7 @@ public class PickArrAllVal extends JsonPickTools implements JsonPicker{
 		
 		String key = MatchUtils.getOnlyMatchs(nodeName, Constant.javaNameRegExp);
 		
-		if(key==null || key.equals("")){
-			args.setError(true);
-		}
+		if(key==null || key.equals("")){ args.setError(true); }
 		args.setTargetJson(getClosureJson(args.getTargetJson(), key));
 		
 		if(args.getTargetJson()==null||args.getTargetJson().matches(Constant.jsonEmptyArrRegExp)){

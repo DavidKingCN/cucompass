@@ -49,7 +49,7 @@ public class TestJsonQuery_Fun_0 extends MethodExec {
 	 */
 	public static void main(String[] args) {
 		
-		//ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
+		ExecChecker.checkExecRt(new TestJsonQuery_Fun_0());
 		
 		//数组越界测试代码
 		File jsonFile = new File("src/main/resources/json.json");

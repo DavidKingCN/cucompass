@@ -30,10 +30,7 @@ public final class JsonQuery {
 	 * @return the single val
 	 */
 	public static String getSingleVal(String json, String path) {
-		return getResult(json, path)
-				.get(Constant.SINGLE_VALUE_KEY)
-				.toString();
-
+		return getResult(json, path).get(Constant.SINGLE_VALUE_KEY).toString();
 	}
 
 	/**
@@ -44,9 +41,7 @@ public final class JsonQuery {
 	 * @return the list val
 	 */
 	public static List<String> getListVal(String json, String path) {
-		return (List<String>) 
-				getResult(json, path)
-				.get(Constant.LIST_VALUE_KEY);
+		return (List<String>) getResult(json, path).get(Constant.LIST_VALUE_KEY);
 	}
 
 	/**
@@ -57,9 +52,7 @@ public final class JsonQuery {
 	 * @return the map val
 	 */
 	public static List<Map<String, String>> getMapVal(String json, String path) {
-		return (List<Map<String, String>>) 
-				getResult(json, path)
-				.get(Constant.MAP_VALUE_KEY);
+		return (List<Map<String, String>>) getResult(json, path).get(Constant.MAP_VALUE_KEY);
 	}
 	
 	public static Map<String,Object> getResult(String json,String path){
@@ -67,10 +60,7 @@ public final class JsonQuery {
 		initVal.put(Constant.SINGLE_VALUE_KEY, "");
 		initVal.put(Constant.LIST_VALUE_KEY, null);
 		initVal.put(Constant.MAP_VALUE_KEY, null);
-		Map<String, Object> rt=JsonParserBuilder
-					.newJsonParser()
-					.jsonPath(json, path);
-		
+		Map<String, Object> rt=JsonParserBuilder.newJsonParser().jsonPath(json, path);
 		return rt==null?initVal:rt;
 	}
 }

@@ -10,10 +10,8 @@ package cn.com.davidking.json.parse;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import cn.com.davidking.json.Constant;
 
 
 // TODO: Auto-generated Javadoc
@@ -73,7 +71,6 @@ public class PickKeyHop extends JsonPickTools implements JsonPicker{
 		}
 		
 		if(args.isArrAll()){
-			//#;#
 			try {
 				List<String> matchJsons = getElementsByJsonArr(args.getTargetJson(), key);
 				String aimStr = matchJsons.stream().map(String::toString).collect(Collectors.joining(MARK_SEP));
@@ -83,35 +80,5 @@ public class PickKeyHop extends JsonPickTools implements JsonPicker{
 			}
 		}
 		
-		/*if(args.isArrOne()){
-			args.setArrOne(false);
-			args.setArrIdx(0);
-		}
-		args.setTargetJson(getClosureJson(args.getTargetJson(), nodeName));
-		if(i==layerLens&&args.getTargetJson()!=null){
-			rtMap.put(Constant.SINGLE_VALUE_KEY, args.getTargetJson());
-		}*/
-		
-	}
-
-
-//	@Override
-//	public ArgsTransition peek() {
-//		return args;
-//	}
-	
-	
-	public static void main(String[] args) {
-		String testStr = "dafefafa11232$we->hop";
-		boolean rt = testStr.matches(Constant.KEYHOP);
-		
-		System.out.println(rt);
-		
-		int endIdx = testStr.indexOf("->");
-		String rtStr = testStr.substring(0, endIdx);
-		String hop   = testStr.substring(endIdx+2);
-		System.out.println(rtStr);
-		
-		System.out.println(hop);
 	}
 }
