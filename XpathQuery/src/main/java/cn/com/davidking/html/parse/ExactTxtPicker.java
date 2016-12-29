@@ -39,7 +39,7 @@ public class ExactTxtPicker implements DataPicker {
 			pickAgent.setObeyRule(true); 
 			result = val;	
 		}
-		return result;
+		return result.replaceAll("\\s+", " ");
 	}
 
 	/* (non-Javadoc)

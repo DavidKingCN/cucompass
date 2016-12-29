@@ -28,6 +28,7 @@ public class AttrPicker implements DataPicker {
 		String needRt = null;
 		try { 
 			needRt = XPathUtils.pathVal(pickAgent.getNode(), pickAgent.getPath(), true);
+			needRt.replaceAll("\\s+", " ");
 		} catch (XPatherException ignore) {}
 		if(needRt!=null&&!needRt.equals("")){ 
 			result = needRt; 

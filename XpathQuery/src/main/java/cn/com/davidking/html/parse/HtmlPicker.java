@@ -71,7 +71,7 @@ public class HtmlPicker implements DataPicker {
 			if(regExp!=null && !regExp.equals("")) 
 				html = MatchUtils.getOnlyMatchs(html, regExp, 1);
 		}
-		return html;
+		return html.replaceAll("\\s+", " ");
 	}
 
 }

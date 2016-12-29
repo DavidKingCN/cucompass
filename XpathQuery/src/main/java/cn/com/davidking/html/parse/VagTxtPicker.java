@@ -43,7 +43,7 @@ public class VagTxtPicker implements DataPicker {
 			pickAgent.setObeyRule(true); 
 			result = MatchUtils.getOnlyMatchs(val, vagRule, groupNo);
 		}
-		return result;
+		return result.replaceAll("\\s+", " ");
 	}
 
 	/* (non-Javadoc)

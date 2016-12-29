@@ -33,7 +33,7 @@ public class NodePicker implements DataPicker {
 			result = needRt;
 			pickAgent.setObeyRule(true); 
 		}
-		return result;
+		return result.replaceAll("\\s+", " ");
 	}
 
 	/* (non-Javadoc)

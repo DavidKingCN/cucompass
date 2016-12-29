@@ -55,7 +55,7 @@ public class ArrSubPicker implements DataPicker {
 			if(regExp!=null && !regExp.equals("")) 
 				val = MatchUtils.getOnlyMatchs(val, regExp, groupNo);
 		}
-		return val;
+		return val.replaceAll("\\s+", " ");
 	}
 
 	/* (non-Javadoc)
