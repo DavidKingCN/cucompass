@@ -46,7 +46,8 @@ public class TestP2p {
 					.addSubPath("/dl/dt[@class='product-name']/a/@href[\\d+]")
 					.addSubPath("/dl/dt[@class='product-name']/a/@title")
 					.addSubPath("//dd/ul/li/p[@class='num-style']")
-					.addSubPath("//dd/ul/li[@class='invest-period']/p.text().trim()")
+//					.addSubPath("//dd/ul/li[@class='invest-period']/p.text()//span/span[@class='taR']/a")
+					.addSubPath("//dd/ul/li[@class='invest-period']/p.text()//span.text()")
 					.query();
 			
 		results.forEach(result->{
