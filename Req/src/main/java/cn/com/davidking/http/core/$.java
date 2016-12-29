@@ -9,6 +9,7 @@
 package cn.com.davidking.http.core;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -23,7 +24,7 @@ import org.apache.http.client.methods.HttpTrace;
  *
  * @author 异步请求模板
  */
-public final class AsynTemplate {
+public final class $ {
 
 	/** The asyn req. */
 	static HttpReq  asynReq = null;
@@ -32,7 +33,7 @@ public final class AsynTemplate {
 	static int needTotals = 0;
 	
 	
-	public static void setExeService(ExecutorService exeService){
+	public static void setExecutor(ExecutorService exeService){
 		AsynReqImpl.setExeService(exeService);
 	}
 	
@@ -40,7 +41,7 @@ public final class AsynTemplate {
 		AsynReqImpl.setCharset(charset);
 	}
 	
-	public static void closeExeService(){
+	public static void closeExecutor(){
 		ExecutorService exeService = AsynReqImpl.getExeService();
 		if(exeService!=null)
 			new AsynServices(exeService,AsynReqImpl.getfReqExeService()).close();
@@ -53,7 +54,7 @@ public final class AsynTemplate {
 	 * @param params the params
 	 * @return the string
 	 */
-	public static String doPost(String url,boolean shutdown,Object...params) {
+	public static String post(String url,boolean shutdown,Object...params) {
 		asynReq = new AsynReqImpl(url,shutdown,HttpPost.METHOD_NAME);
 		return asynReq.execReq(params);
 	}
@@ -67,8 +68,8 @@ public final class AsynTemplate {
 	 * @param params the params
 	 * @return the string
 	 */
-	public static String doPost(String url,boolean shutdown,Map<String,String> params) {
-		return doPost(url,shutdown, null,params,null);
+	public static String post(String url,boolean shutdown,Map<String,String> params) {
+		return post(url,shutdown, null,params,null);
 	}
 	
 	/**
@@ -78,8 +79,8 @@ public final class AsynTemplate {
 	 * @param params the params
 	 * @return the string
 	 */
-	public static String doPost(String url,Map<String,String> params) {
-		return doPost(url,true, null,params,null);
+	public static String post(String url,Map<String,String> params) {
+		return post(url,true, null,params,null);
 	}
 
 	/**
@@ -90,8 +91,8 @@ public final class AsynTemplate {
 	 * @param json the json
 	 * @return the string
 	 */
-	public static String doPost(String url,boolean shutdown,String json) {
-		return doPost(url,shutdown, null,json,null);
+	public static String post(String url,boolean shutdown,String json) {
+		return post(url,shutdown, null,json,null);
 	}
 	/**
 	 * Do post.
@@ -100,8 +101,8 @@ public final class AsynTemplate {
 	 * @param json the json
 	 * @return the string
 	 */
-	public static String doPost(String url,String json) {
-		return doPost(url,true, null,json,null);
+	public static String post(String url,String json) {
+		return post(url,true, null,json,null);
 	}
 	
 	/**
@@ -125,9 +126,22 @@ public final class AsynTemplate {
 	 * @param params the params
 	 * @return the string
 	 */
-	public static String doGet(String url,boolean shutdown,Object...params) {
+	public static String get(String url,boolean shutdown,Object...params) {
 		asynReq = new AsynReqImpl(url,shutdown,HttpGet.METHOD_NAME);
 		return asynReq.execReq(params);
+	}
+	
+	public static String get(String url,Callback callback,Object...params) {
+		$.setExecutor(Executors.newFixedThreadPool(4));
+		asynReq = new AsynReqImpl(url,HttpGet.METHOD_NAME);
+		String result = asynReq.execReq(params);
+		callback.closeService();
+		return result;
+	}
+	
+	public static String get(String url,Callback callback) {
+		
+		return get(url,callback,null,null,null);
 	}
 	/**
 	 * Do get.
@@ -158,8 +172,8 @@ public final class AsynTemplate {
 	 * @param shutdown the shutdown
 	 * @return the string
 	 */
-	public static String doGet(String url,boolean shutdown) {
-		return doGet(url, shutdown,null,null,null);
+	public static String get(String url,boolean shutdown) {
+		return get(url, shutdown,null,null,null);
 	}
 	
 	/**
@@ -168,8 +182,8 @@ public final class AsynTemplate {
 	 * @param url the url
 	 * @return the string
 	 */
-	public static String doGet(String url) {
-		return doGet(url, true,null,null,null);
+	public static String get(String url) {
+		return get(url, true,null,null,null);
 	}
 	//参数是键值对的形式
 	/**
@@ -180,8 +194,8 @@ public final class AsynTemplate {
 	 * @param params the params
 	 * @return the string
 	 */
-	public static String doGet(String url,boolean shutdown,Map<String,String> params) {
-		return doGet(url, shutdown,null,params,null);
+	public static String get(String url,boolean shutdown,Map<String,String> params) {
+		return get(url, shutdown,null,params,null);
 	}
 
 	/**
@@ -191,8 +205,8 @@ public final class AsynTemplate {
 	 * @param params the params
 	 * @return the string
 	 */
-	public static String doGet(String url,Map<String,String> params) {
-		return doGet(url, true,null,params,null);
+	public static String get(String url,Map<String,String> params) {
+		return get(url, true,null,params,null);
 	}
 	
 	/**
@@ -203,8 +217,8 @@ public final class AsynTemplate {
 	 * @param json the json
 	 * @return the string
 	 */
-	public static String doGet(String url,boolean shutdown,String json) {
-		return doGet(url,shutdown, null,json,null);
+	public static String get(String url,boolean shutdown,String json) {
+		return get(url,shutdown, null,json,null);
 	}
 	
 	/**
@@ -214,8 +228,8 @@ public final class AsynTemplate {
 	 * @param json the json
 	 * @return the string
 	 */
-	public static String doGet(String url,String json) {
-		return doGet(url,true, null,json,null);
+	public static String get(String url,String json) {
+		return get(url,true, null,json,null);
 	}
 	
 	/**
@@ -256,4 +270,19 @@ public final class AsynTemplate {
 		asynReq = new AsynReqImpl(url,shutdown,HttpOptions.METHOD_NAME);
 		return asynReq.execReq(params);
 	}
+	
+	public static class Callback{
+
+		public Callback() {
+			super();
+			
+		}
+		
+		public void closeService(){
+			if(AsynReqImpl.getExeService()!=null)
+				new AsynServices(AsynReqImpl.getExeService(),AsynReqImpl.getfReqExeService()).close();
+		}
+	}
 }
+
+

@@ -45,7 +45,7 @@ public class Test {
 	 * Test002.
 	 */
 	public static void test002(){
-		String url = "http://www.quartz-scheduler.org/downloads/";
+		String url = "http://www.baidu.com";
 
 		String rt = HttpTemplate.doGet(url);
 		

@@ -20,7 +20,7 @@ import cn.com.davidking.util.MatchUtils;
 public class URLTool {
 	
 	/** The Constant match_reg. */
-	static final String DOMAIN_NAME_REG_EXP = "http[s]?:\\/\\/([a-zA-Z0-9\\-]+[\\.]?)+(:\\d+)?[/]?";
+	public static final String DOMAIN_NAME_REG_EXP = "http[s]?:\\/\\/([a-zA-Z0-9\\-]+[\\.]?)+(:\\d+)?[/]?";
 
 	/**
 	 * Ext domain.

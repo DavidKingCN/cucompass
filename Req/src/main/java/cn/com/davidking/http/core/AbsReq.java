@@ -51,8 +51,6 @@ public abstract class AbsReq {
 	/** The Constant LOG. */
 	private static final Log LOG = LogFactory.getLog(AbsReq.class);
 	
-	
-	
 	/**
 	 * The Constructor.
 	 */
@@ -109,6 +107,10 @@ public abstract class AbsReq {
 	
 	public static void setExeService(ExecutorService exeService) {
 		AsynReqImpl.exeService = exeService;
+	}
+	
+	public static ExecutorService getExeService() {
+		return exeService;
 	}
 
 	public static  FutureRequestExecutionService getfReqExeService() {
@@ -183,7 +185,7 @@ public abstract class AbsReq {
 				Map<String,String>kvs = (Map<String,String>)params[1];
 				if(kvs!=null&&kvs.size()!=0){
 					for (Map.Entry<String, String> kv : kvs.entrySet()) 
-							reqBuilder.addParameter(kv.getKey(), kv.getValue());
+						reqBuilder.addParameter(kv.getKey(), kv.getValue());
 				}
 			}
 			//json para process...
@@ -222,11 +224,8 @@ public abstract class AbsReq {
 			if(type.contains("charset")){
 				String cs = MatchUtils.getOnlyMatchs(type, "charset=([a-zA-Z\\-0-9]+)",1);
 				if(cs!=null && !cs.equals("")) charset = cs; 
-			}/*else{
-				charset = getCharsetByResp(inStream);
-			}*/
+			}
 		}
-		System.out.println("相应头编码:"+charset);
 		// 获取响应内容
 		InputStream inStream = null;
 		BufferedReader reader = null;
@@ -249,19 +248,6 @@ public abstract class AbsReq {
 			IOUtils.closeQuietly(reader);
 		}
 		return null;
-	}
-	
-	private String getCharsetByResp(InputStream inStream){
-		String charset = CHARSET_UTF8;
-		// 获取响应内容
-		
-		try {
-			charset = MatchUtils.getOnlyMatchs(IOUtils.toString(inStream), "charset=([a-zA-Z\\-0-9]+)",1);
-		} catch (Exception e) {
-			LOG.error("读写异常!",e);
-		}
-		
-		return charset;
 	}
 
 }
