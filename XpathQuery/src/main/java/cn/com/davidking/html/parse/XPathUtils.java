@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
+import cn.com.davidking.http.core.$;
+import cn.com.davidking.http.core.$.Callback;
 // TODO: Auto-generated Javadoc
 
 /**
@@ -64,10 +67,19 @@ public class XPathUtils {
 	 * @return the string
 	 * @throws XPatherException the x pather exception
 	 */
-	public static String pathValByIdx(TagNode htmNode, String path,int idx,boolean isAttr) throws XPatherException {
-		String result = "";	Object[] nodes = htmNode.evaluateXPath(path);
+	public static String pathValByIdx(
+			TagNode htmNode, 
+			String path,
+			int idx,
+			boolean isAttr) throws XPatherException {
+		String result = "";	
+		Object[] nodes = htmNode.evaluateXPath(path);
 		if (nodes != null && nodes.length > 0) {
-			int len = nodes.length;	if (len == 1) result = singleVal(nodes,path,isAttr); else result = selectOneVal(nodes,path,idx,isAttr);
+			int len = nodes.length;	
+			if (len == 1) 
+				result = singleVal(nodes,path,isAttr); 
+			else 
+				result = selectOneVal(nodes,path,idx,isAttr);
 		}
 		return result;
 	}
@@ -81,11 +93,22 @@ public class XPathUtils {
 	 * @param isAttr the is attr
 	 * @return the string
 	 */
-	private static String selectOneVal(Object[] nodes,String path,int idx,boolean isAttr){
-		String result  = ""; int cursor = 0;
+	private static String selectOneVal(
+			Object[] nodes,
+			String path,
+			int idx,
+			boolean isAttr){
+		String result  = ""; 
+		int cursor = 0;
 		for (Object obj : nodes) {
-			String tmp = null; if(obj instanceof String) tmp=obj.toString(); else if(obj instanceof TagNode)	tmp=getNodeVal((TagNode) obj, path,isAttr);
-			if(cursor==idx)	result = tmp; cursor ++;
+			String tmp = null; 
+			if(obj instanceof String) 
+				tmp=obj.toString(); 
+			else if(obj instanceof TagNode)	
+				tmp=getNodeVal((TagNode) obj, path,isAttr);
+			if(cursor==idx)	
+				result = tmp; 
+			cursor ++;
 		}
 		return result;
 	}
@@ -99,10 +122,18 @@ public class XPathUtils {
 	 * @return the string
 	 * @throws XPatherException the x pather exception
 	 */
-	public static String pathVal(TagNode htmNode, String path,boolean isAttr) throws XPatherException {
-		String result = "";	Object[] nodes = htmNode.evaluateXPath(path);
+	public static String pathVal(
+			TagNode htmNode, 
+			String path,
+			boolean isAttr) throws XPatherException {
+		String result = "";	
+		Object[] nodes = htmNode.evaluateXPath(path);
 		if (nodes != null && nodes.length > 0) {
-			int len = nodes.length;	if (len == 1) result = singleVal(nodes,path,isAttr); else result = concatMoreVal(nodes,path,isAttr);
+			int len = nodes.length;	
+			if (len == 1) 
+				result = singleVal(nodes,path,isAttr); 
+			else 
+				result = concatMoreVal(nodes,path,isAttr);
 		}
 		return result;
 	}
@@ -117,7 +148,13 @@ public class XPathUtils {
 	public static List<TagNode> mutilNodes(TagNode htmNode, String path) {
 		List<TagNode> results = new ArrayList<>();
 		try {
-			Object[] nodes = htmNode.evaluateXPath(path); if (nodes != null && nodes.length > 0) { for (Object obj : nodes) { TagNode node = (TagNode) obj; results.add(node);}}
+			Object[] nodes = htmNode.evaluateXPath(path); 
+			if (nodes != null && nodes.length > 0) { 
+				for (Object obj : nodes) { 
+					TagNode node = (TagNode) obj; 
+					results.add(node);
+				}
+			}
 		} catch (Exception ignore) {}
 		return results;
 	}
@@ -132,9 +169,16 @@ public class XPathUtils {
 	 * @param isAttr the is attr
 	 * @return the string
 	 */
-	private static String singleVal(Object[] nodes,String path,boolean isAttr){
-		String result = "";	Object obj = nodes[0];
-		if(obj instanceof String) result = obj.toString(); else if(obj instanceof TagNode) result = getNodeVal((TagNode) obj,path,isAttr);
+	private static String singleVal(
+			Object[] nodes,
+			String path,
+			boolean isAttr){
+		String result = "";	
+		Object obj = nodes[0];
+		if(obj instanceof String) 
+			result = obj.toString(); 
+		else if(obj instanceof TagNode) 
+			result = getNodeVal((TagNode) obj,path,isAttr);
 		return result;
 	}
 	
@@ -146,10 +190,17 @@ public class XPathUtils {
 	 * @param isAttr the is attr
 	 * @return the string
 	 */
-	private static String concatMoreVal(Object[] nodes,String path,boolean isAttr){
-		String result  = ""; List<String> rs = new ArrayList<>();
+	private static String concatMoreVal(
+			Object[] nodes,
+			String path,
+			boolean isAttr){
+		String result  = ""; 
+		List<String> rs = new ArrayList<>();
 		for (Object obj : nodes) 
-			if(obj instanceof String) rs.add(obj.toString()); else if(obj instanceof TagNode)	rs.add(getNodeVal((TagNode) obj, path,isAttr));
+			if(obj instanceof String) 
+				rs.add(obj.toString()); 
+			else if(obj instanceof TagNode)	
+				rs.add(getNodeVal((TagNode) obj, path,isAttr));
 		result = rs.stream().map(Object::toString).collect(Collectors.joining(","));
 		return result;
 	}
@@ -162,9 +213,55 @@ public class XPathUtils {
 	 * @param isAttr the is attr
 	 * @return the node val
 	 */
-	private static String getNodeVal(TagNode node,String path,boolean isAttr){
+	private static String getNodeVal(
+			TagNode node,
+			String path,
+			boolean isAttr){
 		String result  = "";
-		if (isAttr)	result = node.getAttributes().get(path); else result = node.getText().toString();
+		if (isAttr)	
+			result = node.getAttributes().get(path); 
+		else 
+			result = node.getText().toString();
 		return result ;
+	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String recurCall(TagNode node,boolean trim){
+		
+		boolean hasChild = node.hasChildren();
+		StringBuffer resultBuf = new StringBuffer();
+		if(!hasChild){
+			resultBuf.append(trim?getNodeVal(node, "", false).trim():getNodeVal(node, "", false));
+			node.removeFromTree();
+		} else {
+			List<TagNode>ns = node.getChildTagList();
+			List<String> reverseList = new ArrayList<>();
+			for(TagNode n:ns){
+				if(n.hasChildren()){
+					String rtStr = recurCall(n,trim);
+					reverseList.add(trim?rtStr.trim():rtStr);
+				} else{
+					reverseList.add(trim?getNodeVal(node, "", false).trim():getNodeVal(node, "", false));
+					n.removeFromTree();
+				}
+			}
+			reverseList.add(trim?getNodeVal(node, "", false).trim():getNodeVal(node, "", false));
+			int len = reverseList.size();
+			for(int i=len-1;i>=0;i--){
+				resultBuf.append(reverseList.get(i)+" ");
+			}
+		}
+		
+		
+		return resultBuf.toString();
+	}
+
+	
+	public static void main(String[] args) {
+		
 	}
 }

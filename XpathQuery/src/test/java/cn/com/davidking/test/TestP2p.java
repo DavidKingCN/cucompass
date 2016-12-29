@@ -17,6 +17,8 @@ import cn.com.davidking.html.parse.XpathQuery;
 import cn.com.davidking.http.core.AsynReqImpl;
 import cn.com.davidking.http.core.AsynServices;
 import cn.com.davidking.http.core.AsynTemplate;
+import cn.com.davidking.http.core.$;
+import cn.com.davidking.http.core.$.Callback;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,25 +32,28 @@ public class TestP2p {
 	 * @param args the args
 	 */
 	public static void main(String[] args) {
-		ExecutorService exeService= Executors.newFixedThreadPool(4);
-		AsynReqImpl.setExeService(exeService);
-		//AsynReqImpl.setCharset("utf8");
-		String rt = AsynTemplate.doGet("https://list.lufax.com/list/all");
-		new AsynServices(exeService,AsynReqImpl.getfReqExeService()).close();
-		
+//		ExecutorService exeService= Executors.newFixedThreadPool(4);
+//		AsynReqImpl.setExeService(exeService);
+//		String rt = AsynTemplate.doGet("https://list.lufax.com/list/all");
+//		new AsynServices(exeService,AsynReqImpl.getfReqExeService()).close();
+//		
+		String url = "https://list.lu.com/list/all?currentPage=4";
+		String rt = $.get(url, new Callback());
 		List<Map<String,String>> results = 
 				XpathQuery.newXpathQuery()
 					.setHtml(rt)
 					.setRootPath("//ul[@class='main-list']/li")
-					.addSubPath("//dt[@class='product-name']/a/@href[\\d+]")
-					//.addSubPath("//dt[@class='product-name']/a")
-					//.addSubPath("//dd/ul/li/p[@class='num-style']")
+					.addSubPath("/dl/dt[@class='product-name']/a/@href[\\d+]")
+					.addSubPath("/dl/dt[@class='product-name']/a/@title")
+					.addSubPath("//dd/ul/li/p[@class='num-style']")
+					.addSubPath("//dd/ul/li[@class='invest-period']/p.text().trim()")
 					.query();
 			
 		results.forEach(result->{
 			result.forEach((k,v)->{
 				System.out.println(k+"<--->"+v);
 			});
+			System.out.println("");
 		});
 	}
 

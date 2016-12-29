@@ -43,19 +43,33 @@ public class HtmlPicker implements DataPicker {
 	 */
 	@Override
 	public String get() {
-		int stIdx = pickAgent.getPath().indexOf("{"); int ndIdx = pickAgent.getPath().indexOf("}");
-		String realPath = pickAgent.getPath().substring(0, stIdx); String limitRule = pickAgent.getPath().substring(stIdx+1, ndIdx);
-		int needIdx = 0; String regExp = null;
+		int stIdx = pickAgent.getPath().indexOf("{"); 
+		int ndIdx = pickAgent.getPath().indexOf("}");
+		String realPath = pickAgent.getPath().substring(0, stIdx); 
+		String limitRule = pickAgent.getPath().substring(stIdx+1, ndIdx);
+		int needIdx = 0; 
+		String regExp = null;
 		if(limitRule.matches("\\d,html\\[.+\\]")){
-			int commaIdx = limitRule.indexOf(","); String indxStr = limitRule.substring(0,commaIdx); needIdx = Integer.parseInt(indxStr);
-			int rdIdx = limitRule.indexOf("[");	int thIdx = limitRule.lastIndexOf("]");	regExp = limitRule.substring(rdIdx+1, thIdx);
+			int commaIdx = limitRule.indexOf(","); 
+			String indxStr = limitRule.substring(0,commaIdx); 
+			needIdx = Integer.parseInt(indxStr);
+			int rdIdx = limitRule.indexOf("[");	
+			int thIdx = limitRule.lastIndexOf("]");	
+			regExp = limitRule.substring(rdIdx+1, thIdx);
 		}else if(limitRule.matches("\\d,html")){
-			int commaIdx = limitRule.indexOf(","); String indxStr = limitRule.substring(0,commaIdx); needIdx = Integer.parseInt(indxStr);
+			int commaIdx = limitRule.indexOf(","); 
+			String indxStr = limitRule.substring(0,commaIdx); 
+			needIdx = Integer.parseInt(indxStr);
 		}
-		List<TagNode>nodes = XPathUtils.mutilNodes(pickAgent.getNode(), realPath); TagNode needNode = nodes.get(needIdx);
-		String html = null;	String htmlRt = pickAgent.getCleaner().getInnerHtml(needNode);
+		List<TagNode>nodes = XPathUtils.mutilNodes(pickAgent.getNode(), realPath); 
+		TagNode needNode = nodes.get(needIdx);
+		String html = null;	
+		String htmlRt = pickAgent.getCleaner().getInnerHtml(needNode);
 		if(htmlRt!=null&&!htmlRt.equals("")){
-			html = htmlRt;pickAgent.setObeyRule(true); if(regExp!=null && !regExp.equals("")) html = MatchUtils.getOnlyMatchs(html, regExp, 1);
+			html = htmlRt;
+			pickAgent.setObeyRule(true); 
+			if(regExp!=null && !regExp.equals("")) 
+				html = MatchUtils.getOnlyMatchs(html, regExp, 1);
 		}
 		return html;
 	}

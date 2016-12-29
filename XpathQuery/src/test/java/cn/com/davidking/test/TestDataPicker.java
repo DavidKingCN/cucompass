@@ -14,7 +14,6 @@ public class TestDataPicker {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// //div[@id='infostar']/span/p
 		ExecutorService exeService= Executors.newFixedThreadPool(4);
 		AsynReqImpl.setExeService(exeService);
 		AsynReqImpl.setCharset("gbk");

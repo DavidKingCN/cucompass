@@ -5,10 +5,13 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import cn.com.davidking.http.core.$;
+import cn.com.davidking.http.core.$.Callback;
 import cn.com.davidking.html.parse.XpathQuery;
 import cn.com.davidking.http.core.AsynReqImpl;
 import cn.com.davidking.http.core.AsynServices;
 import cn.com.davidking.http.core.AsynTemplate;
+import cn.com.davidking.http.core.$.Callback;
 
 public class Test3 {
 
@@ -21,7 +24,7 @@ public class Test3 {
 		
 		//release thread pool resource..
 		new AsynServices(exeService,AsynReqImpl.getfReqExeService()).close();
-		
+//		String rt = $.get("https://list.lu.com/list/all",new Callback(){});
 		List<Map<String,String>> results = 
 				XpathQuery.newXpathQuery()
 					.setHtml(rt)

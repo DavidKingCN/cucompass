@@ -18,7 +18,7 @@ public class TestMovie extends MethodExec {
 		//
 		ExecutorService exeService= Executors.newFixedThreadPool(4);
 		AsynReqImpl.setExeService(exeService);
-		String htm = AsynTemplate.doGet("http://dianying.2345.com/mingxing/808-88/");
+		String htm = AsynTemplate.doGet("http://dianying.2345.com/mingxing/808-2/");
 		new AsynServices(exeService,AsynReqImpl.getfReqExeService()).close();
 		if(htm!=null&&!htm.equals("")&&!htm.equals("-1")){
 			System.out.println(htm);

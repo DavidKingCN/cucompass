@@ -99,13 +99,16 @@ public class XpathQuery {
 	
 	/** The pickers. */
 	static Map<String,DataPicker> pickers = new HashMap<>();
-	static{	pickers = RegisterUtil.initXpathPickers(); }
+	static{	
+		pickers = RegisterUtil.initXpathPickers(); 
+	}
 	
 	/**
 	 * Inits the.
 	 */
 	private void init(){
-		cleaner = new HtmlCleaner(); this.htm = cleaner.clean(respHtm);
+		cleaner = new HtmlCleaner(); 
+		this.htm = cleaner.clean(respHtm);
 	}
 	
 	/**
@@ -114,11 +117,18 @@ public class XpathQuery {
 	 * @return the list< map< string, string>>
 	 */
 	public List<Map<String,String>> query(){
-		init();	List<Map<String,String>> results  = new ArrayList<>();List<TagNode> nodes = XPathUtils.mutilNodes(htm, xpath);
-		PickAgent pickAgent = new PickAgent(); Map<String,String> kvs = null;
+		init();	
+		List<Map<String,String>> results  = new ArrayList<>();
+		List<TagNode> nodes = XPathUtils.mutilNodes(htm, xpath);
+		PickAgent pickAgent = new PickAgent(); 
+		Map<String,String> kvs = null;
 		
 		for(TagNode node:nodes){
-			kvs = new HashMap<>(); for(String sub:xpaths) kvs = matchRule(pickAgent, node, sub, kvs); if(kvs!=null && kvs.size()>0) results.add(kvs);
+			kvs = new HashMap<>(); 
+			for(String sub:xpaths) 
+				kvs = matchRule(pickAgent, node, sub, kvs); 
+			if(kvs!=null && kvs.size()>0) 
+				results.add(kvs);
 		}
 		return results;
 	}
@@ -133,12 +143,22 @@ public class XpathQuery {
 	 * @param kvs the kvs
 	 * @return the map< string, string>
 	 */
-	private Map<String,String> matchRule(PickAgent pickAgent,TagNode node,String sub,Map<String,String> kvs){
+	private Map<String,String> matchRule(
+			PickAgent pickAgent,
+			TagNode node,
+			String sub,
+			Map<String,String> kvs){
 		pickAgent.init(cleaner, node, sub);
 		for(Entry<String,DataPicker> entry:pickers.entrySet()){
-			String rule  = entry.getKey(); DataPicker worker = entry.getValue();
+			String rule  = entry.getKey(); 
+			DataPicker worker = entry.getValue();
 			if(sub.matches(rule)){
-				worker.init(pickAgent);	String rt = worker.get(); if(pickAgent.isObeyRule()){	kvs.put(sub, rt); break;}
+				worker.init(pickAgent);	
+				String rt = worker.get(); 
+				if(pickAgent.isObeyRule()){	
+					kvs.put(sub, rt); 
+					break;
+				}
 			}
 		}
 		return kvs;
