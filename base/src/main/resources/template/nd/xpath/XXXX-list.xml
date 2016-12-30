@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mx mz="" 
+	baseUrl="http://dianying.2345.com/mingxing/list/--$page$.html" 
+	path="//div[@id='contentList']/ul/li" 
+	sffy="true" 
+	qqfs="get">
+    <zds>
+        <zd name="name" path="//span/em[@class='emTit']/a" jl="true" auto="false"/>
+        <zd name="detailUrl" path="//span/em[@class='emTit']/a/@href" jl="true" auto="false"/>
+    </zds>
+</mx>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mx mz="spider.tc_dp" 
+	baseUrl="http://www.ly.com/hotel/handler/gethotelcomments.json?pagesize=$pagesize$&amp;page=$page$&amp;hotelid=$arg0$&amp;tagid=1" 
+	splitKey="body" 
+	path="$.dpList[*]"
+	pagePath="$.pageInfo.totalPage"
+	pagesize="10" 
+	page="1" 
+	argsLen="1" 
+	sffy="true" 
+	qqfs="get">
+	<zds>
+		<zd name="url" auto="true" />
+		<zd name="website" auto="true" />
+		<zd name="dpRen" path="dpUserName" jl="true" auto="false" />
+		<zd name="dpLevel" path="DPUserLevel" jl="true" auto="false" />
+		<zd name="dpScores" path="servicePoint" jl="true" auto="false" />
+		<zd name="dpXz" path="dpTripPurpose" jl="true" auto="false" />
+		<zd name="dpType" path="dpTripPurpose" jl="true" auto="false" />
+		<zd name="rzTime" path="dpDate" jl="true" auto="false" />
+		<zd name="dpTime" path="dpDate" jl="true" auto="false" />
+		<zd name="dpTitle" path="dpCtripTitle" jl="true" auto="false" />
+		<zd name="dpContent" path="dpContent" jl="true" auto="false" />
+		<zd name="dpHotelId" auto="true" />
+		<zd name="dpHotelName" auto="true" />
+		<zd name="downloadTime" auto="true" />
+		<zd name="updateTime" auto="true" />
+		<zd name="col1" path="dpId" jl="true" auto="false" />
+	</zds>
+</mx>

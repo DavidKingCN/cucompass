@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mx mz="stars.t_star_movie" baseUrl="" splitKey="body" path="" pagesize="10" page="1" argsLen="1" sffy="false" qqfs="get" pagePath="">
+    <zds>
+        <zd name="url" path="" num="1" jl="true" auto="false"/>
+        <zd name="website" path="" num="1" jl="true" auto="false"/>
+        <zd name="starName" path="" num="1" jl="true" auto="false"/>
+        <zd name="posterPicName" path="" num="1" jl="true" auto="false"/>
+        <zd name="movieScores" path="" num="1" jl="true" auto="false"/>
+        <zd name="movieDetailUrl" path="" num="1" jl="true" auto="false"/>
+        <zd name="movieName" path="" num="1" jl="true" auto="false"/>
+        <zd name="movieLeaders" path="" num="1" jl="true" auto="false"/>
+        <zd name="type" path="" num="1" jl="true" auto="false"/>
+        <zd name="parentId" path="" num="1" jl="true" auto="false"/>
+    </zds>
+</mx>

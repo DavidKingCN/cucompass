@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mx mz="spider.t_stars" 
+	baseUrl="http://www.xgccm.com/search.asp?pg=$page$" 
+	path="//div[@class='starlist']/div" 
+	pagesize="10" 
+	page="1" 
+	sffy="true" 
+	qqfs="get">
+    <zds>
+        <zd name="url" auto="true"/>
+        <zd name="website" auto="true"/>
+        <zd name="name" path="/a" jl="true" auto="false"/>
+        <zd name="photoWebUrl" path="/a/img/@src" jl="true" auto="false"/>
+        <zd name="area" path="//p&lt;0,【(.+)】&gt;" jl="true" auto="false"/>
+        <zd name="job" path="//p&lt;1,职#space##space#业：(.+)&gt;" jl="true" auto="false"/>
+        <zd name="appearFee" path="//p&lt;2,\d+万/场（.+价）&gt;" jl="true" auto="false"/>
+        <zd name="recmdIdx" path="//p/img/@src&lt;0,/images/star(\d+).gif&gt;" jl="true" auto="false"/><!-- //p{3,html[/images/star(\\d+).gif]} -->
+        <zd name="endorseFee" path="//p&lt;4,\d+万/.*年（.+价）&gt;" jl="true" auto="false"/>
+        <zd name="adrecmdIdx" path="//p{5,html[/images/star(\d+).gif]}" jl="true" auto="false"/>
+    </zds>
+</mx>
