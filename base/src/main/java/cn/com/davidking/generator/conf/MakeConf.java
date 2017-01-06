@@ -28,6 +28,7 @@ import cn.com.davidking.util.JaxbUtil;
 /**
  * The Class TestMakeConfs.
  */
+@SuppressWarnings("all")
 public class MakeConf {
 
 	/**

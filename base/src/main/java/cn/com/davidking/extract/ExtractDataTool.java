@@ -117,10 +117,7 @@ public abstract class ExtractDataTool {
 		boolean valid = false;
 		if(mx!=null){
 			String url = mx.getBaseUrl();
-			if(url!=null&&!url.equals("")){
-				valid = true;
-			}
-			
+			if(url!=null&&!url.equals(""))	valid = true;
 		}
 		return valid;
 	}
@@ -165,7 +162,7 @@ public abstract class ExtractDataTool {
 	protected List<String> initArgsList(Mx mx){
 		if(mx.getArgsLen()==0) return null;
 		List<String> argsList = new ArrayList<String>();
-		for(int i=0;i<mx.getArgsLen();i++)argsList.add("$arg"+i+"$");
+		for(int i=0;i<mx.getArgsLen();i++) argsList.add("$arg"+i+"$");
 		return argsList;
 	}
 	
@@ -184,9 +181,9 @@ public abstract class ExtractDataTool {
 		}
 		switch (cnt) {
 			case 2:
-				intRt[1]=n%10;break;
+				intRt[1]=n%10; break;
 			case 3:
-				intRt[0]=n/100;intRt[1]=n%10;break;
+				intRt[0]=n/100; intRt[1]=n%10; break;
 			default:
 				break;
 		}
@@ -298,13 +295,13 @@ public abstract class ExtractDataTool {
 		int totalPages =0;
 		rqUrl = replaceArgs(rqUrl,argsList,args);
 		String data = httpRq(rqUrl);
-		if(data==null) return totalPages;
+		if(data == null) return totalPages;
 		
-		String aimJson = getAimJson(data,mx.getSplitKey());
+		String aimJson = getAimJson(data, mx.getSplitKey());
 		
 		String totalItems = JsonQuery.getSingleVal(aimJson, mx.getPagePath());
 		
-		if(!totalItems.matches("\\d+"))return totalPages;
+		if(!totalItems.matches("\\d+")) return totalPages;
 		
 		int items  = Integer.parseInt(totalItems); 
 		return items/mx.getPagesize();
@@ -329,11 +326,11 @@ public abstract class ExtractDataTool {
 		String data = httpRq(rqUrl);
 		if(data==null) return totalPages;
 		
-		String aimJson = getAimJson(data,splitKey);
+		String aimJson = getAimJson(data, splitKey);
 		
 		String totalItems = JsonQuery.getSingleVal(aimJson, mx.getPagePath());
 		
-		if(!totalItems.matches("\\d+"))return totalPages;
+		if(!totalItems.matches("\\d+")) return totalPages;
 		
 		int items  = Integer.parseInt(totalItems); 
 		return items/mx.getPagesize();
@@ -351,17 +348,17 @@ public abstract class ExtractDataTool {
 		String rqUrl = mx.getBaseUrl()
 					.replace(ARG_PAGE, mx.getPage()+"")
 					.replace(ARG_PAGESIZE, mx.getPagesize()+"");
-		rqUrl = replaceArgs(rqUrl,argsList,args);
+		rqUrl = replaceArgs(rqUrl, argsList, args);
 		
 		
 		int totalPages =0;
 		String data = httpRq(rqUrl);//http request
 		if(data==null) return totalPages;
 		
-		String aimJson = getAimJson(data,mx.getSplitKey());
+		String aimJson = getAimJson(data, mx.getSplitKey());
 		
 		String totalPagesStr = JsonQuery.getSingleVal(aimJson, mx.getPagePath());
-		if(!totalPagesStr.matches("\\d+"))return totalPages;
+		if(!totalPagesStr.matches("\\d+")) return totalPages;
 		//总页码数
 		return Integer.parseInt(totalPagesStr);
 		/**结束处理第一页的请求URL获取总页码数**/
@@ -391,14 +388,14 @@ public abstract class ExtractDataTool {
 		rqUrl = replaceArgs(rqUrl,argsList,args);
 		
 		
-		int totalPages =0;
+		int totalPages = 0;
 		String data = httpRq(rqUrl);//http request
 		if(data==null) return totalPages;
 		
-		String aimJson = getAimJson(data,splitKey);
+		String aimJson = getAimJson(data, splitKey);
 		
 		String totalPagesStr = JsonQuery.getSingleVal(aimJson, mx.getPagePath());
-		if(!totalPagesStr.matches("\\d+"))return totalPages;
+		if(!totalPagesStr.matches("\\d+")) return totalPages;
 		//总页码数
 		return Integer.parseInt(totalPagesStr);
 		/**结束处理第一页的请求URL获取总页码数**/
@@ -425,7 +422,7 @@ public abstract class ExtractDataTool {
 	}
 	
 	protected String procReplaceArgs(Mx mx2,int i,List<String> argsList,Map<String,String> args){
-		String url  = replacePageArgs(mx2,i); 
+		String url  = replacePageArgs(mx2, i); 
 		url 		= replaceArgs(url, argsList, args);
 		return url;
 	}
@@ -511,7 +508,7 @@ public abstract class ExtractDataTool {
 		List<String> zdVals = new ArrayList<String>();
 		mx.getZds().forEach(zd->{
 			String zdName = zd.getName();
-			zdVals.add("'"+items.get(zdName)+"'");
+			zdVals.add("'"+items.get(zdName) + "'");
 		});
 		
 		sql.append(zdVals.stream().map(Object::toString).collect(Collectors.joining(",")));
@@ -537,11 +534,11 @@ public abstract class ExtractDataTool {
 		
 		return sql.toString();
 	}
-	protected void insertSqlToFile(Mx mx2,Map<String,String> kvs){
+	protected void insertSqlToFile(Mx mx2, Map<String,String> kvs){
 		if(test){ 
 			String sql = this.sqlByMap(mx2, kvs);
 			if(sql!=null){
-				System.out.println(++CNT+":"+sql);
+				System.out.println(++CNT + ":" + sql);
 			}
 			FileUtil.nioWriteFile("D://test.sql", sql, true, true);
 		}
@@ -551,7 +548,7 @@ public abstract class ExtractDataTool {
 		if(test){ 
 			String sql = this.sqlByMap(mx2, kvs);
 			if(sql!=null){
-				System.out.println(++CNT+":"+sql);
+				System.out.println(++CNT + ":" + sql);
 			}
 			//FileUtil.nioWriteFile("D://test.sql", sql, true, true);
 			BeanFactory.newPersistence().doExecSql(sql);
@@ -561,13 +558,13 @@ public abstract class ExtractDataTool {
 		if(test){ 
 			String sql = this.sqlByMap(mx2, kvs);
 			if(sql!=null){
-				System.out.println(++CNT+":"+sql);
+				System.out.println(++CNT + ":" + sql);
 				BeanFactory.newPersistence().doExecSql(sql);
 			}
 			
 		}
 	}
-	protected void insertQueue(Mx mx2,Map<String,String> kvs){
+	protected void insertQueue(Mx mx2,Map<String, String> kvs){
 		if(!test)
 		SqlTaskSink.getInstance().inflow(
 				new SqlTask(
@@ -575,9 +572,9 @@ public abstract class ExtractDataTool {
 								this.sqlByMap(mx2, kvs))));
 	}
 	
-	protected void procDataItems(List<Map<String,String>> maps,Mx mx2,String url,String data,List<Zd> bjlzds,List<Zd> autoZds,Map<String, String> args){
+	protected void procDataItems(List<Map<String, String>> maps, Mx mx2, String url, String data, List<Zd> bjlzds, List<Zd> autoZds, Map<String, String> args){
 		int idx = 0;
-		if(maps!=null&&maps.size()>0)
+		if(maps != null && maps.size() > 0)
 		for (Map<String, String> map : maps) {
 			Map<String, String> kvs = new HashMap<String, String>();
 			kvs = this.jlZdProc(map, kvs, zdToMap(mx2));
@@ -585,12 +582,16 @@ public abstract class ExtractDataTool {
 			kvs = autoZdProc(url, autoZds, args, kvs);
 //			this.insertSqlToFile(mx2, kvs);
 //			this.insertQueue(mx2, kvs);
-			this.insertSqlToDb(mx2,kvs);
+			this.insertSqlToDb(mx2, kvs);
 		}
 	}
 	
 	protected void insertQueueOver(SqlsCreater sub){
 		if(!test)SqlTaskSink.getInstance().inflow(new SqlTask(new SqlExecRt().finalOver(sub)));
+	}
+	
+	protected void insertQueueOver(SqlsCreater sub,String errCode){
+		if(!test)SqlTaskSink.getInstance().inflow(new SqlTask(new SqlExecRt().finalOver(sub , errCode)));
 	}
 	
 	protected void closeAsynService(){

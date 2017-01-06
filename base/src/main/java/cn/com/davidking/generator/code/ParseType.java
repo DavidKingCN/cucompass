@@ -59,10 +59,10 @@ public enum ParseType {
 	}
 	
 	public static void testParseType(ParseType type){
-		System.out.println("包的相对路径                                         <> "+type.getPackagePath());
+		System.out.println("包的相对路径                                            <> "+type.getPackagePath());
 		System.out.println("模板类(或模板配置文件)的相对路径 <> "+type.getTemplateDir());
-		System.out.println("模板类的类名                                         <> "+type.getTemplateFileName());
-		System.out.println("模板类相对路径                                     <> "+type.getTemplateRelativePath());
-		System.out.println("模板xml配置文件相对路径                 <> "+type.getXmlPath());
+		System.out.println("模板类的类名                                            <> "+type.getTemplateFileName());
+		System.out.println("模板类相对路径                                        <> "+type.getTemplateRelativePath());
+		System.out.println("模板xml配置文件相对路径                  <> "+type.getXmlPath());
 	}
 }

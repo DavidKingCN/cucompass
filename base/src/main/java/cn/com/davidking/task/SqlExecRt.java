@@ -35,6 +35,8 @@ public class SqlExecRt {
 	/** The sql exec rt. */
 	private boolean sqlExecRt;
 	
+	private String errCode;
+	
 	
 	private List<Object> colVals;
 	
@@ -69,6 +71,12 @@ public class SqlExecRt {
 		return this;
 	}
 	
+	public SqlExecRt finalOver(SqlsCreater sqlsCreater,String errCode){
+		this.sqlsCreater = sqlsCreater;
+		this.finalOver = true;
+		this.errCode = errCode;
+		return this;
+	}
 	/**
 	 * Gets the sqls creater.
 	 *
@@ -165,6 +173,14 @@ public class SqlExecRt {
 
 	public void setColVals(List<Object> colVals) {
 		this.colVals = colVals;
+	}
+
+	public String getErrCode() {
+		return errCode;
+	}
+
+	public void setErrCode(String errCode) {
+		this.errCode = errCode;
 	}
 	
 	

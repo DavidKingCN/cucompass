@@ -24,7 +24,7 @@ public class CodesCreater {
 //		testGenerateStCodes();
 //		testGenerateNdCodes();
 //		testGenerateNdCreditBlackCodes();
-		entry("credit","credit.basic",ParseType.NdXpath,"http://www.creditchina.gov.cn");
+		entry("credit", "credit.basic", ParseType.NdXpath, "http://www.creditchina.gov.cn");
 	}
 	
 	public static void entry(String module , String aimKey , ParseType type , String website){
@@ -84,14 +84,14 @@ public class CodesCreater {
 	
 	public static void generateStCodes(String module,String aimKey,ParseType type,String website){
 		
-		String path = ConstantUtil.PREFIX_WORK_DIR+ConstantUtil.SLASH+module;
-		String aimAllName = StringUtil.upperFirstCapital(aimKey)+ConstantUtil.TARGET_NAME_PART+ConstantUtil.DOT+ConstantUtil.JAVA_FILE_SUFFIX_NAME;
+		String path = ConstantUtil.PREFIX_WORK_DIR + ConstantUtil.SLASH + module;
+		String aimAllName = StringUtil.upperFirstCapital(aimKey) + ConstantUtil.TARGET_NAME_PART + ConstantUtil.DOT + ConstantUtil.JAVA_FILE_SUFFIX_NAME;
 		
 		String aimName = aimAllName.substring(0, aimAllName.indexOf(ConstantUtil.DOT));
 		
 		File aimFile = null;
 		try {
-			aimFile = FileUtil.delAndNewFile(path,aimAllName);
+			aimFile = FileUtil.delAndNewFile(path, aimAllName);
 		} catch (Exception e1) { System.out.println(e1); return;}
 		
 		//src java file
@@ -99,7 +99,7 @@ public class CodesCreater {
 //		File srcFile = new File(ConstantUtil.PREFIX_WORK_DIR+type.getTemplateRelativePath());
 //		String relativePath = "/cn/com/davidking/extract"+type.getTemplateRelativePath();
 //		System.out.println(relativePath);
-		String srcFilePath = CodesCreater.class.getResource("/cn/com/davidking/extract"+type.getTemplateRelativePath()).getPath();
+		String srcFilePath = CodesCreater.class.getResource("/cn/com/davidking/extract" + type.getTemplateRelativePath()).getPath();
 		
 		System.out.println(srcFilePath);
 		
@@ -108,14 +108,18 @@ public class CodesCreater {
 		if(srcFilePath!=null && !srcFilePath.equals("")){
 			String line = "";
 			try {
-				reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(srcFilePath)),Consts.UTF_8.displayName()));
+				reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(srcFilePath)), Consts.UTF_8.displayName()));
 				
-				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(aimFile),Consts.UTF_8.displayName()));
+				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(aimFile), Consts.UTF_8.displayName()));
 				while((line=reader.readLine())!=null){
 					System.out.println(line);
 					//must
 					if(line.contains("package")){
-						line = line.replace(type.getPackagePath(), module);
+						String replaceStr = module;
+						if(module.matches("\\w+/\\w+")){
+							replaceStr = replaceStr.replace("/", ".");
+						}
+						line = line.replace(type.getPackagePath(), replaceStr);
 					}
 					//option
 					if(line.contains(type.getTemplateFileName())){
@@ -123,7 +127,7 @@ public class CodesCreater {
 					}
 					//option
 					if(line.contains(type.getTemplateDir())){
-						line = line.replace(type.getXmlPath(), ConstantUtil.SLASH+"conf"+ConstantUtil.SLASH+module+ConstantUtil.SLASH+aimKey+ConstantUtil.PARSE_SQLS_XML);
+						line = line.replace(type.getXmlPath(), ConstantUtil.SLASH + "conf" + ConstantUtil.SLASH + module + ConstantUtil.SLASH +  aimKey+ConstantUtil.PARSE_SQLS_XML);
 					}
 					//must
 					if(line.contains("WEBSITE")){
@@ -149,7 +153,7 @@ public class CodesCreater {
 		String sufKey = keys[1];//movie
 		
 		
-		String className =  StringUtil.upperFirstCapital(sufKey)+StringUtil.upperFirstCapital(preKey) + ConstantUtil.LIST_HELPER;
+		String className =  StringUtil.upperFirstCapital(sufKey) + StringUtil.upperFirstCapital(preKey) + ConstantUtil.LIST_HELPER;
 		
 		String classFile = className + ConstantUtil.DOT + ConstantUtil.JAVA_FILE_SUFFIX_NAME;
 		String path = ConstantUtil.PREFIX_WORK_DIR + ConstantUtil.SLASH + module;
@@ -163,15 +167,15 @@ public class CodesCreater {
 		
 		//src java file
 //		File srcFile = new File(ConstantUtil.PREFIX_WORK_DIR + type.getTemplateDir() + ConstantUtil.SLASH + "XXXX" + ConstantUtil.LIST_HELPER + ConstantUtil.DOT + ConstantUtil.JAVA_FILE_SUFFIX_NAME);
-		String srcFilePath = "/cn/com/davidking/extract"+type.getTemplateDir() + ConstantUtil.SLASH + "XXXX" + ConstantUtil.LIST_HELPER + ConstantUtil.DOT + ConstantUtil.JAVA_FILE_SUFFIX_NAME;
-		BufferedReader reader=null;
+		String srcFilePath = "/cn/com/davidking/extract" + type.getTemplateDir() + ConstantUtil.SLASH + "XXXX" + ConstantUtil.LIST_HELPER + ConstantUtil.DOT + ConstantUtil.JAVA_FILE_SUFFIX_NAME;
+		BufferedReader reader = null;
 		BufferedWriter writer = null;
 		if(srcFilePath!=null && !srcFilePath.equals("")){
 			String line = "";
 			try {
-				reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(srcFilePath)),Consts.UTF_8.displayName()));
+				reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(srcFilePath)), Consts.UTF_8.displayName()));
 				
-				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(aimFile),Consts.UTF_8.displayName()));
+				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(aimFile), Consts.UTF_8.displayName()));
 				while((line=reader.readLine())!=null){
 					System.out.println(line);
 					
@@ -179,18 +183,18 @@ public class CodesCreater {
 						line = line.replace(type.getPackagePath(), module);
 					}
 					if(line.contains("XXXX")){
-						line = line.replace("XXXX", StringUtil.upperFirstCapital(sufKey)+StringUtil.upperFirstCapital(preKey));
+						line = line.replace("XXXX", StringUtil.upperFirstCapital(sufKey) + StringUtil.upperFirstCapital(preKey));
 					}
 					
 					if(line.contains(type.getTemplateFileName())){
 						line = line.replace(type.getTemplateFileName(), createrClzName);
 					}
 					if(line.contains(type.getXmlPath())){
-						line = line.replace(type.getXmlPath(), ConstantUtil.SLASH+"conf"+ConstantUtil.SLASH+module+ConstantUtil.SLASH+sufKey+ConstantUtil.PARSE_SQLS_XML);
+						line = line.replace(type.getXmlPath(), ConstantUtil.SLASH + "conf" + ConstantUtil.SLASH + module + ConstantUtil.SLASH + sufKey + ConstantUtil.PARSE_SQLS_XML);
 					}
 					//option
 					if(line.contains(type.getTemplateDir()+"/XX-list.xml")){
-						line = line.replace(type.getTemplateDir()+"/XX-list.xml", ConstantUtil.SLASH+"conf"+ConstantUtil.SLASH+module+ConstantUtil.SLASH+preKey+"-list.xml");
+						line = line.replace(type.getTemplateDir() + "/XX-list.xml", ConstantUtil.SLASH + "conf" + ConstantUtil.SLASH + module + ConstantUtil.SLASH + preKey + "-list.xml");
 					}
 					//must
 					if(line.contains("WEBSITE")){
