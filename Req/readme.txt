@@ -1,19 +1,11 @@
-AsynTemplate
-HttpTemplate 提供的方法基本相同。
-举个例子
-doGet方法后面帶有3个参数，doGet(
-url,//例如http://www.baidu.com
-reqHeaders,//请求头
-req参数（支持pairs,json,parameters等）,//请求的参数 ?参数1=参数值1&.....
-相应头//响应头信息 这里含有诸如content-type charset的设置，很有用啊，不用这个包装字符流会乱码的
-)
-AsynTemplate 提供client链接池的异步访问实现，理论上并发效率应该很高吧！！
- 
+已经实现
+AsynTemplate 异步模板的实现
+HttpTemplate 常规模板实现。
+$ 为简易模拟ajax的实现。采用的是异步访问方式。
 
-doGetNotStop 跟HttpTemplate 一样
-doGet 多一个参数是关闭的条件 
-doGet(url,shutdown连接池资源标识位,reqHeaders,req参数（支持pairs,json,parameters等）,相应头)
-
-shutdown连接池资源标识位 存在的目的执行一次性任务如果所有任务有限度条件，满足限度条件则关闭
-连接池资源，等待再次调度时在开启资源，这个意义重大，后续会包装更完善某些限定的资源关闭实现
-提供了多种重载方法供调用！
+待实现的一个重要内容：
+动态代理模型设计，及对模板类的封装实现。
+原则上
+1.对网上动态ip的搜集。
+2.数据库一定阈值数量的可用ip的保持
+3.队列中对可用ip的轮询取用。

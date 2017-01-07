@@ -153,4 +153,12 @@ public final class HttpTemplate {
 		httpReq = new HttpReqImpl(url,HttpOptions.METHOD_NAME);
 		return httpReq.execReq(params);
 	}
+	
+	public static String get(){
+		return null;
+	}
+	
+	public static String post(){
+		return null;
+	}
 }
