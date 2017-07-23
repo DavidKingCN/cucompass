@@ -1,0 +1,21 @@
+package com.gcx.citygovcreditndrc.service.infoOppoCheck;
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheck;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheckAo;
+
+
+public interface InfoOppoCheckService {
+
+	 ServiceResult<Object> findRecords(InfoOppoCheckAo record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(InfoOppoCheck record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(InfoOppoCheck record);
+
+	ServiceResult<Object> findById(Integer id);
+}

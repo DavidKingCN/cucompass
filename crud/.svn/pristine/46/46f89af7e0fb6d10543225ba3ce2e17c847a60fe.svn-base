@@ -1,0 +1,80 @@
+package com.gcx.citygovcreditndrc.service.govdevelopment.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.govdevelopment.GovdevelopmentMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment;
+import com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentAo;
+import com.gcx.citygovcreditndrc.service.govdevelopment.GovdevelopmentService;
+@Service("govdevelopmentService")
+public class GovdevelopmentServiceImpl implements GovdevelopmentService{
+
+	@Autowired
+	private GovdevelopmentMapper govdevelopmentDao;
+	
+	public ServiceResult<Object> findRecords(Govdevelopment record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<Govdevelopment> list = govdevelopmentDao.findByRecord(record, limitStart, limitEnd);
+		int count = govdevelopmentDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(Govdevelopment record) {
+		String submitor = record.getSubmitor();
+		System.err.println("提交人============="+submitor);
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		 if (submitor !=null && submitor !="") {
+			 govdevelopmentDao.insertSelective(record);
+			result.setData(1);
+		} else {
+			result.setData(0);
+		}
+		return result;
+	}       
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		govdevelopmentDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData("删除成功");
+		
+		return result;
+	}
+	@Override
+	public ServiceResult<Object> findById(Integer record) {
+        Govdevelopment govdevelopment = govdevelopmentDao.selectByPrimaryKey(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(govdevelopment);
+		
+		return result;
+	}
+	
+
+	@Override
+	public ServiceResult<Object> updateRecord(Govdevelopment record) {
+		govdevelopmentDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData("修改成功");
+		
+		return result;
+	}
+
+	
+
+
+}

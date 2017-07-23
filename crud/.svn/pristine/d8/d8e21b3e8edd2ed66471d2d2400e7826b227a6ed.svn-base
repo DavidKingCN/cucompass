@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.project.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.project.Project" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PRO_NAME" property="proName" jdbcType="VARCHAR" />
+    <result column="PRO_UNIT" property="proUnit" jdbcType="VARCHAR" />
+    <result column="PRO_CHARGE" property="proCharge" jdbcType="VARCHAR" />
+    <result column="CONTACT_WAY" property="contactWay" jdbcType="VARCHAR" />
+    <result column="PRO_TYPE" property="proType" jdbcType="CHAR" />
+    <result column="PRO_NATURE" property="proNature" jdbcType="CHAR" />
+    <result column="INDUSTRY" property="industry" jdbcType="CHAR" />
+    <result column="SITE" property="site" jdbcType="VARCHAR" />
+    <result column="PRO_ADDRESS" property="proAddress" jdbcType="VARCHAR" />
+    <result column="PRO_SUM" property="proSum" jdbcType="DECIMAL" />
+    <result column="INVEST_SUM" property="investSum" jdbcType="DECIMAL" />
+    <result column="GN_INVESTOR" property="gnInvestor" jdbcType="VARCHAR" />
+    <result column="GW_INVESTOR" property="gwInvestor" jdbcType="VARCHAR" />
+    <result column="PRO_PICS" property="proPics" jdbcType="VARCHAR" />
+    <result column="PRO_PROGRESS" property="proProgress" jdbcType="CHAR" />
+    <result column="INVEST_WAY" property="investWay" jdbcType="CHAR" />
+    <result column="PRO_CONTENT_DETAIL" property="proContentDetail" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="PUBLISH_DT" property="publishDt" jdbcType="VARCHAR" />
+    <result column="OPERTOR" property="opertor" jdbcType="VARCHAR" />
+    <result column="OPER_TIME" property="operTime" jdbcType="VARCHAR" />
+    <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+    <result column="r1" property="r1" jdbcType="VARCHAR" />
+    <result column="r2" property="r2" jdbcType="VARCHAR" />
+    <result column="r3" property="r3" jdbcType="VARCHAR" />
+    <result column="r4" property="r4" jdbcType="VARCHAR" />
+    <result column="r5" property="r5" jdbcType="VARCHAR" />
+    <result column="r6" property="r6" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gcx.citygovcreditndrc.model.project.Project" extends="BaseResultMap" >
+    <result column="NOTE" property="note" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PRO_NAME, PRO_UNIT, PRO_CHARGE, CONTACT_WAY, PRO_TYPE, PRO_NATURE, INDUSTRY, 
+    SITE, PRO_ADDRESS, PRO_SUM, INVEST_SUM, GN_INVESTOR, GW_INVESTOR, PRO_PICS, PRO_PROGRESS, 
+    INVEST_WAY, PRO_CONTENT_DETAIL, STATUS, PUBLISH_DT, OPERTOR, OPER_TIME, CITY_CODE, 
+    IS_DELETE, r1, r2, r3, r4, r5, r6
+  </sql>
+  <sql id="Blob_Column_List" >
+    NOTE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gcx.citygovcreditndrc.model.project.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PROJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.project.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PROJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PROJECT
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from PROJECT
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.project.ProjectExample" >
+    delete from PROJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.project.Project" >
+    insert into PROJECT (ID, PRO_NAME, PRO_UNIT, 
+      PRO_CHARGE, CONTACT_WAY, PRO_TYPE, 
+      PRO_NATURE, INDUSTRY, SITE, 
+      PRO_ADDRESS, PRO_SUM, INVEST_SUM, 
+      GN_INVESTOR, GW_INVESTOR, PRO_PICS, 
+      PRO_PROGRESS, INVEST_WAY, PRO_CONTENT_DETAIL, 
+      STATUS, PUBLISH_DT, OPERTOR, 
+      OPER_TIME, CITY_CODE, IS_DELETE, 
+      r1, r2, r3, r4, 
+      r5, r6, NOTE)
+    values (#{id,jdbcType=INTEGER}, #{proName,jdbcType=VARCHAR}, #{proUnit,jdbcType=VARCHAR}, 
+      #{proCharge,jdbcType=VARCHAR}, #{contactWay,jdbcType=VARCHAR}, #{proType,jdbcType=CHAR}, 
+      #{proNature,jdbcType=CHAR}, #{industry,jdbcType=CHAR}, #{site,jdbcType=VARCHAR}, 
+      #{proAddress,jdbcType=VARCHAR}, #{proSum,jdbcType=DECIMAL}, #{investSum,jdbcType=DECIMAL}, 
+      #{gnInvestor,jdbcType=VARCHAR}, #{gwInvestor,jdbcType=VARCHAR}, #{proPics,jdbcType=VARCHAR}, 
+      #{proProgress,jdbcType=CHAR}, #{investWay,jdbcType=CHAR}, #{proContentDetail,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{publishDt,jdbcType=VARCHAR}, #{opertor,jdbcType=VARCHAR}, 
+      #{operTime,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{isDelete,jdbcType=CHAR}, 
+      #{r1,jdbcType=VARCHAR}, #{r2,jdbcType=VARCHAR}, #{r3,jdbcType=VARCHAR}, #{r4,jdbcType=VARCHAR}, 
+      #{r5,jdbcType=VARCHAR}, #{r6,jdbcType=VARCHAR}, #{note,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.project.Project" >
+    insert into PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="proName != null" >
+        PRO_NAME,
+      </if>
+      <if test="proUnit != null" >
+        PRO_UNIT,
+      </if>
+      <if test="proCharge != null" >
+        PRO_CHARGE,
+      </if>
+      <if test="contactWay != null" >
+        CONTACT_WAY,
+      </if>
+      <if test="proType != null" >
+        PRO_TYPE,
+      </if>
+      <if test="proNature != null" >
+        PRO_NATURE,
+      </if>
+      <if test="industry != null" >
+        INDUSTRY,
+      </if>
+      <if test="site != null" >
+        SITE,
+      </if>
+      <if test="proAddress != null" >
+        PRO_ADDRESS,
+      </if>
+      <if test="proSum != null" >
+        PRO_SUM,
+      </if>
+      <if test="investSum != null" >
+        INVEST_SUM,
+      </if>
+      <if test="gnInvestor != null" >
+        GN_INVESTOR,
+      </if>
+      <if test="gwInvestor != null" >
+        GW_INVESTOR,
+      </if>
+      <if test="proPics != null" >
+        PRO_PICS,
+      </if>
+      <if test="proProgress != null" >
+        PRO_PROGRESS,
+      </if>
+      <if test="investWay != null" >
+        INVEST_WAY,
+      </if>
+      <if test="proContentDetail != null" >
+        PRO_CONTENT_DETAIL,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="publishDt != null" >
+        PUBLISH_DT,
+      </if>
+      <if test="opertor != null" >
+        OPERTOR,
+      </if>
+      <if test="operTime != null" >
+        OPER_TIME,
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="r1 != null" >
+        r1,
+      </if>
+      <if test="r2 != null" >
+        r2,
+      </if>
+      <if test="r3 != null" >
+        r3,
+      </if>
+      <if test="r4 != null" >
+        r4,
+      </if>
+      <if test="r5 != null" >
+        r5,
+      </if>
+      <if test="r6 != null" >
+        r6,
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null" >
+        #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="proCharge != null" >
+        #{proCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null" >
+        #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="proType != null" >
+        #{proType,jdbcType=CHAR},
+      </if>
+      <if test="proNature != null" >
+        #{proNature,jdbcType=CHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=CHAR},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="proAddress != null" >
+        #{proAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="proSum != null" >
+        #{proSum,jdbcType=DECIMAL},
+      </if>
+      <if test="investSum != null" >
+        #{investSum,jdbcType=DECIMAL},
+      </if>
+      <if test="gnInvestor != null" >
+        #{gnInvestor,jdbcType=VARCHAR},
+      </if>
+      <if test="gwInvestor != null" >
+        #{gwInvestor,jdbcType=VARCHAR},
+      </if>
+      <if test="proPics != null" >
+        #{proPics,jdbcType=VARCHAR},
+      </if>
+      <if test="proProgress != null" >
+        #{proProgress,jdbcType=CHAR},
+      </if>
+      <if test="investWay != null" >
+        #{investWay,jdbcType=CHAR},
+      </if>
+      <if test="proContentDetail != null" >
+        #{proContentDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="publishDt != null" >
+        #{publishDt,jdbcType=VARCHAR},
+      </if>
+      <if test="opertor != null" >
+        #{opertor,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        #{operTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="r1 != null" >
+        #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="r3 != null" >
+        #{r3,jdbcType=VARCHAR},
+      </if>
+      <if test="r4 != null" >
+        #{r4,jdbcType=VARCHAR},
+      </if>
+      <if test="r5 != null" >
+        #{r5,jdbcType=VARCHAR},
+      </if>
+      <if test="r6 != null" >
+        #{r6,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.project.ProjectExample" resultType="java.lang.Integer" >
+    select count(*) from PROJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update PROJECT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.proName != null" >
+        PRO_NAME = #{record.proName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUnit != null" >
+        PRO_UNIT = #{record.proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proCharge != null" >
+        PRO_CHARGE = #{record.proCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactWay != null" >
+        CONTACT_WAY = #{record.contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proType != null" >
+        PRO_TYPE = #{record.proType,jdbcType=CHAR},
+      </if>
+      <if test="record.proNature != null" >
+        PRO_NATURE = #{record.proNature,jdbcType=CHAR},
+      </if>
+      <if test="record.industry != null" >
+        INDUSTRY = #{record.industry,jdbcType=CHAR},
+      </if>
+      <if test="record.site != null" >
+        SITE = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proAddress != null" >
+        PRO_ADDRESS = #{record.proAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proSum != null" >
+        PRO_SUM = #{record.proSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.investSum != null" >
+        INVEST_SUM = #{record.investSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gnInvestor != null" >
+        GN_INVESTOR = #{record.gnInvestor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gwInvestor != null" >
+        GW_INVESTOR = #{record.gwInvestor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proPics != null" >
+        PRO_PICS = #{record.proPics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proProgress != null" >
+        PRO_PROGRESS = #{record.proProgress,jdbcType=CHAR},
+      </if>
+      <if test="record.investWay != null" >
+        INVEST_WAY = #{record.investWay,jdbcType=CHAR},
+      </if>
+      <if test="record.proContentDetail != null" >
+        PRO_CONTENT_DETAIL = #{record.proContentDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.publishDt != null" >
+        PUBLISH_DT = #{record.publishDt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opertor != null" >
+        OPERTOR = #{record.opertor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operTime != null" >
+        OPER_TIME = #{record.operTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null" >
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.r1 != null" >
+        r1 = #{record.r1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r2 != null" >
+        r2 = #{record.r2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r3 != null" >
+        r3 = #{record.r3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r4 != null" >
+        r4 = #{record.r4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r5 != null" >
+        r5 = #{record.r5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r6 != null" >
+        r6 = #{record.r6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        NOTE = #{record.note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update PROJECT
+    set ID = #{record.id,jdbcType=INTEGER},
+      PRO_NAME = #{record.proName,jdbcType=VARCHAR},
+      PRO_UNIT = #{record.proUnit,jdbcType=VARCHAR},
+      PRO_CHARGE = #{record.proCharge,jdbcType=VARCHAR},
+      CONTACT_WAY = #{record.contactWay,jdbcType=VARCHAR},
+      PRO_TYPE = #{record.proType,jdbcType=CHAR},
+      PRO_NATURE = #{record.proNature,jdbcType=CHAR},
+      INDUSTRY = #{record.industry,jdbcType=CHAR},
+      SITE = #{record.site,jdbcType=VARCHAR},
+      PRO_ADDRESS = #{record.proAddress,jdbcType=VARCHAR},
+      PRO_SUM = #{record.proSum,jdbcType=DECIMAL},
+      INVEST_SUM = #{record.investSum,jdbcType=DECIMAL},
+      GN_INVESTOR = #{record.gnInvestor,jdbcType=VARCHAR},
+      GW_INVESTOR = #{record.gwInvestor,jdbcType=VARCHAR},
+      PRO_PICS = #{record.proPics,jdbcType=VARCHAR},
+      PRO_PROGRESS = #{record.proProgress,jdbcType=CHAR},
+      INVEST_WAY = #{record.investWay,jdbcType=CHAR},
+      PRO_CONTENT_DETAIL = #{record.proContentDetail,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=CHAR},
+      PUBLISH_DT = #{record.publishDt,jdbcType=VARCHAR},
+      OPERTOR = #{record.opertor,jdbcType=VARCHAR},
+      OPER_TIME = #{record.operTime,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      r1 = #{record.r1,jdbcType=VARCHAR},
+      r2 = #{record.r2,jdbcType=VARCHAR},
+      r3 = #{record.r3,jdbcType=VARCHAR},
+      r4 = #{record.r4,jdbcType=VARCHAR},
+      r5 = #{record.r5,jdbcType=VARCHAR},
+      r6 = #{record.r6,jdbcType=VARCHAR},
+      NOTE = #{record.note,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update PROJECT
+    set ID = #{record.id,jdbcType=INTEGER},
+      PRO_NAME = #{record.proName,jdbcType=VARCHAR},
+      PRO_UNIT = #{record.proUnit,jdbcType=VARCHAR},
+      PRO_CHARGE = #{record.proCharge,jdbcType=VARCHAR},
+      CONTACT_WAY = #{record.contactWay,jdbcType=VARCHAR},
+      PRO_TYPE = #{record.proType,jdbcType=CHAR},
+      PRO_NATURE = #{record.proNature,jdbcType=CHAR},
+      INDUSTRY = #{record.industry,jdbcType=CHAR},
+      SITE = #{record.site,jdbcType=VARCHAR},
+      PRO_ADDRESS = #{record.proAddress,jdbcType=VARCHAR},
+      PRO_SUM = #{record.proSum,jdbcType=DECIMAL},
+      INVEST_SUM = #{record.investSum,jdbcType=DECIMAL},
+      GN_INVESTOR = #{record.gnInvestor,jdbcType=VARCHAR},
+      GW_INVESTOR = #{record.gwInvestor,jdbcType=VARCHAR},
+      PRO_PICS = #{record.proPics,jdbcType=VARCHAR},
+      PRO_PROGRESS = #{record.proProgress,jdbcType=CHAR},
+      INVEST_WAY = #{record.investWay,jdbcType=CHAR},
+      PRO_CONTENT_DETAIL = #{record.proContentDetail,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=CHAR},
+      PUBLISH_DT = #{record.publishDt,jdbcType=VARCHAR},
+      OPERTOR = #{record.opertor,jdbcType=VARCHAR},
+      OPER_TIME = #{record.operTime,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      r1 = #{record.r1,jdbcType=VARCHAR},
+      r2 = #{record.r2,jdbcType=VARCHAR},
+      r3 = #{record.r3,jdbcType=VARCHAR},
+      r4 = #{record.r4,jdbcType=VARCHAR},
+      r5 = #{record.r5,jdbcType=VARCHAR},
+      r6 = #{record.r6,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.project.Project" >
+    update PROJECT
+    <set >
+      <if test="proName != null" >
+        PRO_NAME = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null" >
+        PRO_UNIT = #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="proCharge != null" >
+        PRO_CHARGE = #{proCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null" >
+        CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="proType != null" >
+        PRO_TYPE = #{proType,jdbcType=CHAR},
+      </if>
+      <if test="proNature != null" >
+        PRO_NATURE = #{proNature,jdbcType=CHAR},
+      </if>
+      <if test="industry != null" >
+        INDUSTRY = #{industry,jdbcType=CHAR},
+      </if>
+      <if test="site != null" >
+        SITE = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="proAddress != null" >
+        PRO_ADDRESS = #{proAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="proSum != null" >
+        PRO_SUM = #{proSum,jdbcType=DECIMAL},
+      </if>
+      <if test="investSum != null" >
+        INVEST_SUM = #{investSum,jdbcType=DECIMAL},
+      </if>
+      <if test="gnInvestor != null" >
+        GN_INVESTOR = #{gnInvestor,jdbcType=VARCHAR},
+      </if>
+      <if test="gwInvestor != null" >
+        GW_INVESTOR = #{gwInvestor,jdbcType=VARCHAR},
+      </if>
+      <if test="proPics != null" >
+        PRO_PICS = #{proPics,jdbcType=VARCHAR},
+      </if>
+      <if test="proProgress != null" >
+        PRO_PROGRESS = #{proProgress,jdbcType=CHAR},
+      </if>
+      <if test="investWay != null" >
+        INVEST_WAY = #{investWay,jdbcType=CHAR},
+      </if>
+      <if test="proContentDetail != null" >
+        PRO_CONTENT_DETAIL = #{proContentDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="publishDt != null" >
+        PUBLISH_DT = #{publishDt,jdbcType=VARCHAR},
+      </if>
+      <if test="opertor != null" >
+        OPERTOR = #{opertor,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        OPER_TIME = #{operTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="r1 != null" >
+        r1 = #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        r2 = #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="r3 != null" >
+        r3 = #{r3,jdbcType=VARCHAR},
+      </if>
+      <if test="r4 != null" >
+        r4 = #{r4,jdbcType=VARCHAR},
+      </if>
+      <if test="r5 != null" >
+        r5 = #{r5,jdbcType=VARCHAR},
+      </if>
+      <if test="r6 != null" >
+        r6 = #{r6,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gcx.citygovcreditndrc.model.project.Project" >
+    update PROJECT
+    set PRO_NAME = #{proName,jdbcType=VARCHAR},
+      PRO_UNIT = #{proUnit,jdbcType=VARCHAR},
+      PRO_CHARGE = #{proCharge,jdbcType=VARCHAR},
+      CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      PRO_TYPE = #{proType,jdbcType=CHAR},
+      PRO_NATURE = #{proNature,jdbcType=CHAR},
+      INDUSTRY = #{industry,jdbcType=CHAR},
+      SITE = #{site,jdbcType=VARCHAR},
+      PRO_ADDRESS = #{proAddress,jdbcType=VARCHAR},
+      PRO_SUM = #{proSum,jdbcType=DECIMAL},
+      INVEST_SUM = #{investSum,jdbcType=DECIMAL},
+      GN_INVESTOR = #{gnInvestor,jdbcType=VARCHAR},
+      GW_INVESTOR = #{gwInvestor,jdbcType=VARCHAR},
+      PRO_PICS = #{proPics,jdbcType=VARCHAR},
+      PRO_PROGRESS = #{proProgress,jdbcType=CHAR},
+      INVEST_WAY = #{investWay,jdbcType=CHAR},
+      PRO_CONTENT_DETAIL = #{proContentDetail,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      PUBLISH_DT = #{publishDt,jdbcType=VARCHAR},
+      OPERTOR = #{opertor,jdbcType=VARCHAR},
+      OPER_TIME = #{operTime,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      r1 = #{r1,jdbcType=VARCHAR},
+      r2 = #{r2,jdbcType=VARCHAR},
+      r3 = #{r3,jdbcType=VARCHAR},
+      r4 = #{r4,jdbcType=VARCHAR},
+      r5 = #{r5,jdbcType=VARCHAR},
+      r6 = #{r6,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.project.Project" >
+    update PROJECT
+    set PRO_NAME = #{proName,jdbcType=VARCHAR},
+      PRO_UNIT = #{proUnit,jdbcType=VARCHAR},
+      PRO_CHARGE = #{proCharge,jdbcType=VARCHAR},
+      CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      PRO_TYPE = #{proType,jdbcType=CHAR},
+      PRO_NATURE = #{proNature,jdbcType=CHAR},
+      INDUSTRY = #{industry,jdbcType=CHAR},
+      SITE = #{site,jdbcType=VARCHAR},
+      PRO_ADDRESS = #{proAddress,jdbcType=VARCHAR},
+      PRO_SUM = #{proSum,jdbcType=DECIMAL},
+      INVEST_SUM = #{investSum,jdbcType=DECIMAL},
+      GN_INVESTOR = #{gnInvestor,jdbcType=VARCHAR},
+      GW_INVESTOR = #{gwInvestor,jdbcType=VARCHAR},
+      PRO_PICS = #{proPics,jdbcType=VARCHAR},
+      PRO_PROGRESS = #{proProgress,jdbcType=CHAR},
+      INVEST_WAY = #{investWay,jdbcType=CHAR},
+      PRO_CONTENT_DETAIL = #{proContentDetail,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      PUBLISH_DT = #{publishDt,jdbcType=VARCHAR},
+      OPERTOR = #{opertor,jdbcType=VARCHAR},
+      OPER_TIME = #{operTime,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      r1 = #{r1,jdbcType=VARCHAR},
+      r2 = #{r2,jdbcType=VARCHAR},
+      r3 = #{r3,jdbcType=VARCHAR},
+      r4 = #{r4,jdbcType=VARCHAR},
+      r5 = #{r5,jdbcType=VARCHAR},
+      r6 = #{r6,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update PROJECT set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update PROJECT set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from PROJECT where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.proName != null and record.proName != "" '> and PRO_NAME = #{record.proName,jdbcType=VARCHAR} </if><if test='record.proUnit != null and record.proUnit != "" '> and PRO_UNIT = #{record.proUnit,jdbcType=VARCHAR} </if><if test='record.proCharge != null and record.proCharge != "" '> and PRO_CHARGE = #{record.proCharge,jdbcType=VARCHAR} </if><if test='record.contactWay != null and record.contactWay != "" '> and CONTACT_WAY = #{record.contactWay,jdbcType=VARCHAR} </if><if test='record.proType != null and record.proType != "" '> and PRO_TYPE = #{record.proType,jdbcType=CHAR} </if><if test='record.proNature != null and record.proNature != "" '> and PRO_NATURE = #{record.proNature,jdbcType=CHAR} </if><if test='record.industry != null and record.industry != "" '> and INDUSTRY = #{record.industry,jdbcType=CHAR} </if><if test='record.site != null and record.site != "" '> and SITE = #{record.site,jdbcType=VARCHAR} </if><if test='record.proAddress != null and record.proAddress != "" '> and PRO_ADDRESS = #{record.proAddress,jdbcType=VARCHAR} </if><if test='record.proSum != null and record.proSum != "" '> and PRO_SUM = #{record.proSum,jdbcType=DECIMAL} </if><if test='record.investSum != null and record.investSum != "" '> and INVEST_SUM = #{record.investSum,jdbcType=DECIMAL} </if><if test='record.gnInvestor != null and record.gnInvestor != "" '> and GN_INVESTOR = #{record.gnInvestor,jdbcType=VARCHAR} </if><if test='record.gwInvestor != null and record.gwInvestor != "" '> and GW_INVESTOR = #{record.gwInvestor,jdbcType=VARCHAR} </if><if test='record.proPics != null and record.proPics != "" '> and PRO_PICS = #{record.proPics,jdbcType=VARCHAR} </if><if test='record.proProgress != null and record.proProgress != "" '> and PRO_PROGRESS = #{record.proProgress,jdbcType=CHAR} </if><if test='record.investWay != null and record.investWay != "" '> and INVEST_WAY = #{record.investWay,jdbcType=CHAR} </if><if test='record.proContentDetail != null and record.proContentDetail != "" '> and PRO_CONTENT_DETAIL = #{record.proContentDetail,jdbcType=VARCHAR} </if><if test='record.status != null and record.status != "" '> and STATUS = #{record.status,jdbcType=CHAR} </if><if test='record.publishDt != null and record.publishDt != "" '> and PUBLISH_DT = #{record.publishDt,jdbcType=VARCHAR} </if><if test='record.opertor != null and record.opertor != "" '> and OPERTOR = #{record.opertor,jdbcType=VARCHAR} </if><if test='record.operTime != null and record.operTime != "" '> and OPER_TIME = #{record.operTime,jdbcType=VARCHAR} </if><if test='record.cityCode != null and record.cityCode != "" '> and CITY_CODE = #{record.cityCode,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.r1 != null and record.r1 != "" '> and r1 = #{record.r1,jdbcType=VARCHAR} </if><if test='record.r2 != null and record.r2 != "" '> and r2 = #{record.r2,jdbcType=VARCHAR} </if><if test='record.r3 != null and record.r3 != "" '> and r3 = #{record.r3,jdbcType=VARCHAR} </if><if test='record.r4 != null and record.r4 != "" '> and r4 = #{record.r4,jdbcType=VARCHAR} </if><if test='record.r5 != null and record.r5 != "" '> and r5 = #{record.r5,jdbcType=VARCHAR} </if><if test='record.r6 != null and record.r6 != "" '> and r6 = #{record.r6,jdbcType=VARCHAR} </if><if test='record.note != null and record.note != "" '> and NOTE = #{record.note,jdbcType=LONGVARCHAR} </if> limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(ID) from PROJECT where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.proName != null and record.proName != "" '> and PRO_NAME = #{record.proName,jdbcType=VARCHAR} </if><if test='record.proUnit != null and record.proUnit != "" '> and PRO_UNIT = #{record.proUnit,jdbcType=VARCHAR} </if><if test='record.proCharge != null and record.proCharge != "" '> and PRO_CHARGE = #{record.proCharge,jdbcType=VARCHAR} </if><if test='record.contactWay != null and record.contactWay != "" '> and CONTACT_WAY = #{record.contactWay,jdbcType=VARCHAR} </if><if test='record.proType != null and record.proType != "" '> and PRO_TYPE = #{record.proType,jdbcType=CHAR} </if><if test='record.proNature != null and record.proNature != "" '> and PRO_NATURE = #{record.proNature,jdbcType=CHAR} </if><if test='record.industry != null and record.industry != "" '> and INDUSTRY = #{record.industry,jdbcType=CHAR} </if><if test='record.site != null and record.site != "" '> and SITE = #{record.site,jdbcType=VARCHAR} </if><if test='record.proAddress != null and record.proAddress != "" '> and PRO_ADDRESS = #{record.proAddress,jdbcType=VARCHAR} </if><if test='record.proSum != null and record.proSum != "" '> and PRO_SUM = #{record.proSum,jdbcType=DECIMAL} </if><if test='record.investSum != null and record.investSum != "" '> and INVEST_SUM = #{record.investSum,jdbcType=DECIMAL} </if><if test='record.gnInvestor != null and record.gnInvestor != "" '> and GN_INVESTOR = #{record.gnInvestor,jdbcType=VARCHAR} </if><if test='record.gwInvestor != null and record.gwInvestor != "" '> and GW_INVESTOR = #{record.gwInvestor,jdbcType=VARCHAR} </if><if test='record.proPics != null and record.proPics != "" '> and PRO_PICS = #{record.proPics,jdbcType=VARCHAR} </if><if test='record.proProgress != null and record.proProgress != "" '> and PRO_PROGRESS = #{record.proProgress,jdbcType=CHAR} </if><if test='record.investWay != null and record.investWay != "" '> and INVEST_WAY = #{record.investWay,jdbcType=CHAR} </if><if test='record.proContentDetail != null and record.proContentDetail != "" '> and PRO_CONTENT_DETAIL = #{record.proContentDetail,jdbcType=VARCHAR} </if><if test='record.status != null and record.status != "" '> and STATUS = #{record.status,jdbcType=CHAR} </if><if test='record.publishDt != null and record.publishDt != "" '> and PUBLISH_DT = #{record.publishDt,jdbcType=VARCHAR} </if><if test='record.opertor != null and record.opertor != "" '> and OPERTOR = #{record.opertor,jdbcType=VARCHAR} </if><if test='record.operTime != null and record.operTime != "" '> and OPER_TIME = #{record.operTime,jdbcType=VARCHAR} </if><if test='record.cityCode != null and record.cityCode != "" '> and CITY_CODE = #{record.cityCode,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.r1 != null and record.r1 != "" '> and r1 = #{record.r1,jdbcType=VARCHAR} </if><if test='record.r2 != null and record.r2 != "" '> and r2 = #{record.r2,jdbcType=VARCHAR} </if><if test='record.r3 != null and record.r3 != "" '> and r3 = #{record.r3,jdbcType=VARCHAR} </if><if test='record.r4 != null and record.r4 != "" '> and r4 = #{record.r4,jdbcType=VARCHAR} </if><if test='record.r5 != null and record.r5 != "" '> and r5 = #{record.r5,jdbcType=VARCHAR} </if><if test='record.r6 != null and record.r6 != "" '> and r6 = #{record.r6,jdbcType=VARCHAR} </if><if test='record.note != null and record.note != "" '> and NOTE = #{record.note,jdbcType=LONGVARCHAR} </if>
+  </select>
+</mapper>

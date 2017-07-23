@@ -1,0 +1,47 @@
+package com.gcx.citygovcreditndrc.dao.infoOppoCheck;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheck;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheckAo;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheckExample;
+
+public interface InfoOppoCheckMapper {
+    int countByExample(InfoOppoCheckExample example);
+
+    int deleteByExample(InfoOppoCheckExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(InfoOppoCheck record);
+
+    int insertSelective(InfoOppoCheck record);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<InfoOppoCheck> findByRecord(@Param("record") InfoOppoCheckAo record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") InfoOppoCheckAo record);
+
+    List<InfoOppoCheck> selectByExampleWithBLOBs(InfoOppoCheckExample example);
+
+
+    List<InfoOppoCheck> selectByExample(InfoOppoCheckExample example);
+
+    InfoOppoCheck selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") InfoOppoCheck record, @Param("example") InfoOppoCheckExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") InfoOppoCheck record, @Param("example") InfoOppoCheckExample example);
+
+    int updateByExample(@Param("record") InfoOppoCheck record, @Param("example") InfoOppoCheckExample example);
+
+    int updateByPrimaryKeySelective(InfoOppoCheck record);
+
+    int updateByPrimaryKeyWithBLOBs(InfoOppoCheck record);
+
+    int updateByPrimaryKey(InfoOppoCheck record);
+}

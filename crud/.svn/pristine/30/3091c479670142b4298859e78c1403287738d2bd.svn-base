@@ -1,0 +1,35 @@
+package com.gcx.citygovcreditndrc.dao.assess;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment;
+import com.gcx.citygovcreditndrc.model.assess.GovernmentAssessmentExample;
+
+public interface GovernmentAssessmentMapper {
+    int countByExample(GovernmentAssessmentExample example);
+
+    int deleteByExample(GovernmentAssessmentExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(GovernmentAssessment record);
+
+    int insertSelective(GovernmentAssessment record);
+
+    List<GovernmentAssessment> selectByExample(GovernmentAssessmentExample example);
+
+    GovernmentAssessment selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") GovernmentAssessment record, @Param("example") GovernmentAssessmentExample example);
+
+    int updateByExample(@Param("record") GovernmentAssessment record, @Param("example") GovernmentAssessmentExample example);
+
+    int updateByPrimaryKeySelective(GovernmentAssessment record);
+
+    int updateByPrimaryKey(GovernmentAssessment record);
+    
+    List<GovernmentAssessment> findAssessment(@Param("record") GovernmentAssessment record,@Param("pagenow") int pagenow,@Param("pagesize") int pagesize);
+    
+    int findAssessmentCount(@Param("record") GovernmentAssessment record);
+}

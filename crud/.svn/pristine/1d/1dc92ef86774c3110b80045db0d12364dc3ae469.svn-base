@@ -1,0 +1,38 @@
+package com.gcx.citygovcreditndrc.dao.govServe;
+
+import com.gcx.citygovcreditndrc.model.govServe.GovServe;
+import com.gcx.citygovcreditndrc.model.govServe.GovServeExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+public interface GovServeMapper {
+    int countByExample(GovServeExample example);
+
+    int deleteByExample(GovServeExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(GovServe record);
+
+    int insertSelective(GovServe record);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<GovServe> findByRecord(@Param("record") GovServe record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") GovServe record);
+
+    List<GovServe> selectByExample(GovServeExample example);
+
+    GovServe selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") GovServe record, @Param("example") GovServeExample example);
+
+    int updateByExample(@Param("record") GovServe record, @Param("example") GovServeExample example);
+
+    int updateByPrimaryKeySelective(GovServe record);
+
+    int updateByPrimaryKey(GovServe record);
+}

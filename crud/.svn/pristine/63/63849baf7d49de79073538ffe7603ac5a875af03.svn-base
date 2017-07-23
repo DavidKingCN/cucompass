@@ -1,0 +1,46 @@
+package com.gcx.citygovcreditndrc.dao.personComRecord;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord;
+import com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecordExample;
+
+public interface PersonComRecordMapper {
+    int countByExample(PersonComRecordExample example);
+
+    int deleteByExample(PersonComRecordExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(PersonComRecord record);
+
+    int insertSelective(PersonComRecord record);
+
+
+    List<PersonComRecord> selectByExampleWithBLOBs(PersonComRecordExample example);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<PersonComRecord> findByRecord(@Param("record") PersonComRecord record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") PersonComRecord record);
+
+    List<PersonComRecord> selectByExample(PersonComRecordExample example);
+
+    PersonComRecord selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") PersonComRecord record, @Param("example") PersonComRecordExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") PersonComRecord record, @Param("example") PersonComRecordExample example);
+
+    int updateByExample(@Param("record") PersonComRecord record, @Param("example") PersonComRecordExample example);
+
+    int updateByPrimaryKeySelective(PersonComRecord record);
+
+    int updateByPrimaryKeyWithBLOBs(PersonComRecord record);
+
+    int updateByPrimaryKey(PersonComRecord record);
+}

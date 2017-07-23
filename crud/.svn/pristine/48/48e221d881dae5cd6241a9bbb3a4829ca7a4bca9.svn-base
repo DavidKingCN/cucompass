@@ -1,0 +1,71 @@
+package com.gcx.citygovcreditndrc.model.evaluationrecord;
+
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+
+public class EvaluationrecordAo extends Evaluationrecord {
+   
+    private Integer pagenow;
+    
+    private Integer pagesize;
+    
+    private Enclosure enclosure;
+    
+    /*private String materialTitle;
+
+    private String material;*/
+/*    
+    public String getMaterialTitle() {
+		return materialTitle;
+	}
+
+	public void setMaterialTitle(String materialTitle) {
+		this.materialTitle = materialTitle;
+	}
+
+	public String getMaterial() {
+		return material;
+	}
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+*/
+	public Enclosure getEnclosure() {
+		return enclosure;
+	}
+
+	public void setEnclosure(Enclosure enclosure) {
+		this.enclosure = enclosure;
+	}
+
+	public Integer getPagenow() {
+		return pagenow;
+	}
+
+	public void setPagenow(Integer pagenow) {
+		this.pagenow = pagenow;
+	}
+
+	public Integer getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(Integer pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	
+	public static void main(String[] args) {
+		
+		EvaluationrecordAo a = new EvaluationrecordAo();
+		Enclosure b = new Enclosure();
+		
+		b.setMaterialTitle("title");
+		b.setMaterial("sdfs");
+		a.setCityCode("beijing");
+		a.setEnclosure(b);
+		
+		System.out.println(JSONUtil.toJson(a));
+	}
+}

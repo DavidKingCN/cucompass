@@ -1,0 +1,20 @@
+package com.gcx.citygovcreditndrc.model.govServe;
+
+public class ToSupplyRo extends NowGSRo {
+	private String auditContent;//回复内容
+	private String auditTime;	//回复时间
+	public String getAuditContent() {
+		return auditContent;
+	}
+	public void setAuditContent(String auditContent) {
+		this.auditContent = auditContent;
+	}
+	public String getAuditTime() {
+		return auditTime;
+	}
+	public void setAuditTime(String auditTime) {
+		this.auditTime = auditTime;
+	}
+	
+	
+}

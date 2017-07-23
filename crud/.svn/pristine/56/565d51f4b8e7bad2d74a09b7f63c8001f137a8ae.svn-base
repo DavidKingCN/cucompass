@@ -1,0 +1,30 @@
+package com.gcx.citygovcreditndrc.model.common;
+
+
+public class EnclosureAo extends Enclosure {
+   
+	
+	private Integer pagenow;
+	
+	private Integer pagesize;
+
+	public Integer getPagenow() {
+		return pagenow;
+	}
+
+	public void setPagenow(Integer pagenow) {
+		this.pagenow = pagenow;
+	}
+
+	public Integer getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(Integer pagesize) {
+		this.pagesize = pagesize;
+	}
+	
+	
+	
+    
+}

@@ -1,0 +1,52 @@
+package com.gcx.citygovcreditndrc.model.common;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+import com.gcx.citygovcreditndrc.util.TimeUtil;
+/***
+ * 审批意见
+ * @author 戴凯
+ *
+ */
+public class Comments {
+	private List<Comment> audits  ;
+	
+	
+
+	public List<Comment> getAudits() {
+		return audits;
+	}
+
+	public void setAudits(List<Comment> audits) {
+		this.audits = audits;
+	}
+	
+	public static void main(String[] args) {
+		Comments comments = new Comments();
+		
+		List<Comment> audits = new ArrayList<>();
+		Comment comment = new Comment();
+		comment.setContent("第一次审批意见");
+		comment.setTm(TimeUtil.nowToTimeString());
+		audits.add(comment);
+		
+		
+//		audits = new ArrayList<>();
+		comment = new Comment();
+		comment.setContent("第二次审批意见");
+		comment.setTm(TimeUtil.nowToTimeString());
+		audits.add(comment);
+		
+//		audits = new ArrayList<>();
+		comment = new Comment();
+		comment.setContent("第三次审批意见");
+		comment.setTm(TimeUtil.nowToTimeString());
+		audits.add(comment);
+		
+		comments.setAudits(audits);
+		System.out.println(JSONUtil.toJson(comments));
+	}
+}
+

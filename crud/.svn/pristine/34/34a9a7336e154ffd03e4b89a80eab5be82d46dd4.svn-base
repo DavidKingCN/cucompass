@@ -1,0 +1,67 @@
+package com.gcx.citygovcreditndrc.service.impl;
+/** 
+ * @author	yang 
+ * @version 创建时间：2017年4月21日 下午3:40:13 
+ * 类说明:	
+ */
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import com.gcx.citygovcreditndrc.model.User;
+import com.gcx.citygovcreditndrc.service.util.UserRedisUtils;
+import com.gcx.citygovcreditndrc.util.CookieUtils;
+import com.gcx.citygovcreditndrc.util.UUIDUtils;
+
+@Component
+public class CommonImpl {
+
+	@Value("${gcxId}")
+	String gcxId;
+	@Autowired
+	UserRedisUtils userRedisUtils;
+
+	//获取用户信息
+	public User getUser(HttpServletRequest request, HttpServletResponse response) {
+		//用户唯一身份标示
+		String authId = "";
+		//判断是否已生成 cookie唯一标示
+		authId = CookieUtils.getCookieValue(request, gcxId);
+		//如果没有 生成 并存入cookie
+		if("".equals(authId) || authId==null){
+			authId = UUIDUtils.createUuid();
+			CookieUtils.setCookie(request, response, gcxId, authId);
+			return null;
+		}
+		//获取用户信息
+		User user = userRedisUtils.getUser(request);
+		return user;
+	}
+	//获取用户id
+	public String getUserId(HttpServletRequest request, HttpServletResponse response){
+		User user = getUser(request, response);
+		if(user != null ){
+			return user.getUserId().toString();
+		}else{
+			return null;
+		}
+	}
+	//获取用户名
+	public String getUserName(HttpServletRequest request, HttpServletResponse response){
+		User user = getUser(request, response);
+		return user.getUserName().toString();
+	}
+	//获取当前时间
+	public String getNowDate(){
+		DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.format(new Date());
+	}
+}

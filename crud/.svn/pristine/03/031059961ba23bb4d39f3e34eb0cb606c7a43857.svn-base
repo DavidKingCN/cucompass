@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.cityGvoInfo.CityGvoInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="c2" property="c2" jdbcType="VARCHAR" />
+    <result column="c3" property="c3" jdbcType="VARCHAR" />
+    <result column="c4" property="c4" jdbcType="VARCHAR" />
+    <result column="c5" property="c5" jdbcType="VARCHAR" />
+    <result column="c6" property="c6" jdbcType="VARCHAR" />
+    <result column="c7" property="c7" jdbcType="VARCHAR" />
+    <result column="c8" property="c8" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, site, content, IS_DELETE, c1, c2, c3, c4, c5, c6, c7, c8
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from city_gvo_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from city_gvo_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from city_gvo_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfoExample" >
+    delete from city_gvo_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfo" >
+    insert into city_gvo_info (id, site, content, 
+      IS_DELETE, c1, c2, c3, 
+      c4, c5, c6, c7, 
+      c8)
+    values (#{id,jdbcType=INTEGER}, #{site,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=CHAR}, #{c1,jdbcType=VARCHAR}, #{c2,jdbcType=VARCHAR}, #{c3,jdbcType=VARCHAR}, 
+      #{c4,jdbcType=VARCHAR}, #{c5,jdbcType=VARCHAR}, #{c6,jdbcType=VARCHAR}, #{c7,jdbcType=VARCHAR}, 
+      #{c8,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfo" >
+    insert into city_gvo_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+      <if test="c5 != null" >
+        c5,
+      </if>
+      <if test="c6 != null" >
+        c6,
+      </if>
+      <if test="c7 != null" >
+        c7,
+      </if>
+      <if test="c8 != null" >
+        c8,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        #{c8,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfoExample" resultType="java.lang.Integer" >
+    select count(*) from city_gvo_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update city_gvo_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.site != null" >
+        site = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c5 != null" >
+        c5 = #{record.c5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c6 != null" >
+        c6 = #{record.c6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c7 != null" >
+        c7 = #{record.c7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c8 != null" >
+        c8 = #{record.c8,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update city_gvo_info
+    set id = #{record.id,jdbcType=INTEGER},
+      site = #{record.site,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=VARCHAR},
+      c3 = #{record.c3,jdbcType=VARCHAR},
+      c4 = #{record.c4,jdbcType=VARCHAR},
+      c5 = #{record.c5,jdbcType=VARCHAR},
+      c6 = #{record.c6,jdbcType=VARCHAR},
+      c7 = #{record.c7,jdbcType=VARCHAR},
+      c8 = #{record.c8,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfo" >
+    update city_gvo_info
+    <set >
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        c5 = #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        c6 = #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        c7 = #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        c8 = #{c8,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfo" >
+    update city_gvo_info
+    set site = #{site,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=VARCHAR},
+      c4 = #{c4,jdbcType=VARCHAR},
+      c5 = #{c5,jdbcType=VARCHAR},
+      c6 = #{c6,jdbcType=VARCHAR},
+      c7 = #{c7,jdbcType=VARCHAR},
+      c8 = #{c8,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update city_gvo_info set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update city_gvo_info set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from city_gvo_info where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and id = #{record.id,jdbcType=INTEGER} </if><if test='record.site != null and record.site != "" '> and site = #{record.site,jdbcType=VARCHAR} </if><if test='record.content != null and record.content != "" '> and content = #{record.content,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and c1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and c2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and c3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and c4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and c5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and c6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and c7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and c8 = #{record.c8,jdbcType=VARCHAR} </if> limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(ID) from city_gvo_info where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and id = #{record.id,jdbcType=INTEGER} </if><if test='record.site != null and record.site != "" '> and site = #{record.site,jdbcType=VARCHAR} </if><if test='record.content != null and record.content != "" '> and content = #{record.content,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and c1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and c2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and c3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and c4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and c5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and c6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and c7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and c8 = #{record.c8,jdbcType=VARCHAR} </if>
+  </select>
+</mapper>

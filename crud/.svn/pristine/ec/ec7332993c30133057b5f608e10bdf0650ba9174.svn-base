@@ -1,0 +1,39 @@
+package com.gcx.citygovcreditndrc.dao.govdevelopment;
+
+import com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment;
+import com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentAo;
+import com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+public interface GovdevelopmentMapper {
+    int countByExample(GovdevelopmentExample example);
+
+    int deleteByExample(GovdevelopmentExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Govdevelopment record);
+
+    int insertSelective(Govdevelopment record);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<Govdevelopment> findByRecord(@Param("record") GovdevelopmentAo record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") GovdevelopmentAo record);
+
+    List<Govdevelopment> selectByExample(GovdevelopmentExample example);
+
+    Govdevelopment selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Govdevelopment record, @Param("example") GovdevelopmentExample example);
+
+    int updateByExample(@Param("record") Govdevelopment record, @Param("example") GovdevelopmentExample example);
+
+    int updateByPrimaryKeySelective(Govdevelopment record);
+
+    int updateByPrimaryKey(Govdevelopment record);
+}

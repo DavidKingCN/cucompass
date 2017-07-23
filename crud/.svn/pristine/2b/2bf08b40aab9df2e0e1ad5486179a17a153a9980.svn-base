@@ -1,0 +1,15 @@
+package com.gcx.citygovcreditndrc.util;
+
+public class FileUtil {
+	public static String getFileName(String file){
+		if(file==null || file.trim().equals("")){
+			return null;
+		}
+		file = file.replaceAll("\\\\", "/");
+		String fileName = file;
+		if(file.contains("/")){
+			fileName = file.substring(file.lastIndexOf("/"));
+		}
+		return fileName;
+	}
+}

@@ -1,0 +1,79 @@
+package com.gcx.citygovcreditndrc.service.infoOppoCheck.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.infoOppoCheck.InfoOppoCheckMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheck;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheckAo;
+import com.gcx.citygovcreditndrc.service.infoOppoCheck.InfoOppoCheckService;
+
+@Service("infoOppoCheckService")
+public class InfoOppoCheckServiceImpl implements InfoOppoCheckService{
+
+	@Autowired
+	private InfoOppoCheckMapper infoOppoCheckDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(InfoOppoCheckAo record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<InfoOppoCheck> list = infoOppoCheckDao.findByRecord(record, limitStart, limitEnd);
+		int count = infoOppoCheckDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		result.setTotal(count);
+		
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(InfoOppoCheck record) {
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		int i = infoOppoCheckDao.insertSelective(record);
+		 if (i>0) {
+			result.setData(1);
+		}else{
+			result.setData(0);
+		}
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		infoOppoCheckDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(InfoOppoCheck record) {
+		infoOppoCheckDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> findById(Integer id) {
+       InfoOppoCheck infoOppoCheck = infoOppoCheckDao.selectByPrimaryKey(id);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(infoOppoCheck);
+		return result;
+	}
+
+
+}

@@ -1,0 +1,27 @@
+package com.gcx.citygovcreditndrc.service.assess;
+
+import com.gcx.citygovcreditndrc.model.MyResult;
+import com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment;
+
+public interface AssessService {
+	/**
+	 * 根据ID查询数据
+	 * @param id
+	 * @return
+	 */
+	public MyResult<Object> findById(GovernmentAssessment governmentAssessment,int pagenow,int pagesize);
+	/**
+	 * 新增数据
+	 * @param governmentAssessment
+	 * @return
+	 */
+	public int insert(GovernmentAssessment governmentAssessment);
+	
+	/**
+	 * 根据ID修改
+	 * @param governmentAssessment
+	 * @return
+	 */
+	public int updateById(GovernmentAssessment governmentAssessment);
+
+}

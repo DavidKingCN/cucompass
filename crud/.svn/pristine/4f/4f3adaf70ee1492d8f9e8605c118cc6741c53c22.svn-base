@@ -1,0 +1,45 @@
+package com.gcx.citygovcreditndrc.service.assess.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.assess.GovernmentAssessmentMapper;
+import com.gcx.citygovcreditndrc.model.MyResult;
+import com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment;
+import com.gcx.citygovcreditndrc.service.assess.AssessService;
+
+@Service("assessService")
+public class AssessServiceImpl implements AssessService {
+	
+	@Autowired
+	GovernmentAssessmentMapper governmentAssessmentMapper;
+
+	@Override
+	public MyResult<Object> findById(GovernmentAssessment governmentAssessment,int pagenow,int pagesize) {
+		List<GovernmentAssessment> list=governmentAssessmentMapper.findAssessment(governmentAssessment,pagenow,pagesize);
+		int count=governmentAssessmentMapper.findAssessmentCount(governmentAssessment);
+		MyResult<Object> result=new MyResult<>();
+		result.setStatus(200);
+		result.setMsg("操作成功");
+		result.setData(list);
+		result.setCount(count);
+		return result;
+	}
+
+	@Override
+	public int insert(GovernmentAssessment governmentAssessment) {
+		int resultCount=governmentAssessmentMapper.insertSelective(governmentAssessment);
+		return resultCount;
+	}
+
+	@Override
+	public int updateById(GovernmentAssessment governmentAssessment) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

@@ -1,0 +1,112 @@
+package com.gcx.citygovcreditndrc.controller.infoOppoCheck;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gcx.citygovcreditndrc.model.ResponseData;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecord;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheck;
+import com.gcx.citygovcreditndrc.model.infoOppoCheck.InfoOppoCheckAo;
+import com.gcx.citygovcreditndrc.service.impl.CommonImpl;
+import com.gcx.citygovcreditndrc.service.infoOppoCheck.InfoOppoCheckService;
+@SuppressWarnings("all")
+@Controller
+@RequestMapping("/infoOppoCheck")
+public class InfoOppoCheckController {
+	@Resource
+	InfoOppoCheckService infoOppoCheckService;
+	@Resource
+	CommonImpl commonImpl;
+
+	/*@RequestMapping(value="/page/{pagenow}/{pagesize}",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseData findRecords(@RequestBody String record,@PathVariable("pagenow") int pagenow,@PathVariable("pagesize") int pagesize){
+		InfoOppoCheck recordObj = new InfoOppoCheck();
+		if(record!=null && !record.equals("")){
+			recordObj  = JSON.parseObject(record, InfoOppoCheck.class);
+		}
+		ServiceResult<Object> result = infoOppoCheckService.findRecords(recordObj, pagenow, pagesize);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}*/
+
+	
+	@RequestMapping(value="/page",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData findRecords(HttpServletRequest request,HttpServletResponse response,InfoOppoCheckAo record){
+		String userId=commonImpl.getUserId(request, response);
+		if(!"".equals(userId) || userId != null){
+			record.setOperator(userId);
+		}
+		ServiceResult<Object> result = infoOppoCheckService.findRecords(record, record.getPagenow(), record.getPagesize());
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		if(result.getTotal() !=null){
+			responseData.putDataValue("total", result.getTotal());
+		}
+		
+		
+		return responseData;
+	}
+	
+	//保存的方法
+	@ResponseBody
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public ResponseData addRecord(@RequestBody InfoOppoCheck record){
+		ServiceResult result =infoOppoCheckService.addRecord(record);
+		
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/{id}/del",method=RequestMethod.GET)
+	public ResponseData delRecord(@PathVariable("id") Integer record){
+		ServiceResult<Object> result = infoOppoCheckService.delRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public ResponseData updateRecord(@RequestBody InfoOppoCheck record){
+		ServiceResult<Object> result = infoOppoCheckService.updateRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	//根据id进行查询
+			@ResponseBody
+			@RequestMapping(value="/findById",method=RequestMethod.GET)
+			public ResponseData findById(ApplyCommentRecord record){
+				ServiceResult<Object> result = infoOppoCheckService.findById(record.getId());
+				ResponseData responseData = ResponseData.ok();
+				if(result.getData() !=null){
+					responseData.putDataValue("result", result.getData());
+				}
+				return responseData;
+			}
+	
+}

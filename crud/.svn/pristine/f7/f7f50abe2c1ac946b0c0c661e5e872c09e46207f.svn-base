@@ -1,0 +1,45 @@
+package com.gcx.citygovcreditndrc.dao.personGovRecord;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord;
+import com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecordExample;
+
+public interface PersonGovRecordMapper {
+    int countByExample(PersonGovRecordExample example);
+
+    int deleteByExample(PersonGovRecordExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(PersonGovRecord record);
+
+    int insertSelective(PersonGovRecord record);
+
+    List<PersonGovRecord> selectByExampleWithBLOBs(PersonGovRecordExample example);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<PersonGovRecord> findByRecord(@Param("record") PersonGovRecord record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") PersonGovRecord record);
+
+    List<PersonGovRecord> selectByExample(PersonGovRecordExample example);
+
+    PersonGovRecord selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") PersonGovRecord record, @Param("example") PersonGovRecordExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") PersonGovRecord record, @Param("example") PersonGovRecordExample example);
+
+    int updateByExample(@Param("record") PersonGovRecord record, @Param("example") PersonGovRecordExample example);
+
+    int updateByPrimaryKeySelective(PersonGovRecord record);
+
+    int updateByPrimaryKeyWithBLOBs(PersonGovRecord record);
+
+    int updateByPrimaryKey(PersonGovRecord record);
+}

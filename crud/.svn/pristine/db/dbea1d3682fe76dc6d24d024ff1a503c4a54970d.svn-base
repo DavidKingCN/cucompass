@@ -1,0 +1,123 @@
+package com.gcx.citygovcreditndrc.model.cityGvoInfo;
+
+public class CityGvoInfo {
+    private Integer id;
+
+    private String site;
+
+    private String content;
+
+    private String isDelete;
+
+    private String c1;
+
+    private String c2;
+
+    private String c3;
+
+    private String c4;
+
+    private String c5;
+
+    private String c6;
+
+    private String c7;
+
+    private String c8;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site == null ? null : site.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public String getC1() {
+        return c1;
+    }
+
+    public void setC1(String c1) {
+        this.c1 = c1 == null ? null : c1.trim();
+    }
+
+    public String getC2() {
+        return c2;
+    }
+
+    public void setC2(String c2) {
+        this.c2 = c2 == null ? null : c2.trim();
+    }
+
+    public String getC3() {
+        return c3;
+    }
+
+    public void setC3(String c3) {
+        this.c3 = c3 == null ? null : c3.trim();
+    }
+
+    public String getC4() {
+        return c4;
+    }
+
+    public void setC4(String c4) {
+        this.c4 = c4 == null ? null : c4.trim();
+    }
+
+    public String getC5() {
+        return c5;
+    }
+
+    public void setC5(String c5) {
+        this.c5 = c5 == null ? null : c5.trim();
+    }
+
+    public String getC6() {
+        return c6;
+    }
+
+    public void setC6(String c6) {
+        this.c6 = c6 == null ? null : c6.trim();
+    }
+
+    public String getC7() {
+        return c7;
+    }
+
+    public void setC7(String c7) {
+        this.c7 = c7 == null ? null : c7.trim();
+    }
+
+    public String getC8() {
+        return c8;
+    }
+
+    public void setC8(String c8) {
+        this.c8 = c8 == null ? null : c8.trim();
+    }
+}

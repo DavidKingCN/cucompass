@@ -1,0 +1,207 @@
+package com.gcx.citygovcreditndrc.model.evaluationrecord;
+
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+
+public class EvaluationrecordAo extends Evaluationrecord {
+    private Integer id;
+
+    private String state;
+
+    private String selectedYear;
+
+    private String selectedDepartment;
+
+    private String submitter;
+
+    private String submissionTime;
+
+    private String materialScience;
+
+    private String selectionStaff;
+
+    private String door;
+
+    private String post;
+
+    private String a1;
+
+    private String a2;
+
+    private String a3;
+
+    private String a4;
+
+    private String a5;
+
+    private String a6;
+
+    private String userid;
+    
+    private Integer pagenow;
+    
+    private Integer pagesize;
+    
+    private Enclosure enclosure;
+    
+    
+
+    public Enclosure getEnclosure() {
+		return enclosure;
+	}
+
+	public void setEnclosure(Enclosure enclosure) {
+		this.enclosure = enclosure;
+	}
+
+	public Integer getPagenow() {
+		return pagenow;
+	}
+
+	public void setPagenow(Integer pagenow) {
+		this.pagenow = pagenow;
+	}
+
+	public Integer getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(Integer pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
+    public String getSelectedYear() {
+        return selectedYear;
+    }
+
+    public void setSelectedYear(String selectedYear) {
+        this.selectedYear = selectedYear == null ? null : selectedYear.trim();
+    }
+
+    public String getSelectedDepartment() {
+        return selectedDepartment;
+    }
+
+    public void setSelectedDepartment(String selectedDepartment) {
+        this.selectedDepartment = selectedDepartment == null ? null : selectedDepartment.trim();
+    }
+
+    public String getSubmitter() {
+        return submitter;
+    }
+
+    public void setSubmitter(String submitter) {
+        this.submitter = submitter == null ? null : submitter.trim();
+    }
+
+    public String getSubmissionTime() {
+        return submissionTime;
+    }
+
+    public void setSubmissionTime(String submissionTime) {
+        this.submissionTime = submissionTime == null ? null : submissionTime.trim();
+    }
+
+    public String getMaterialScience() {
+        return materialScience;
+    }
+
+    public void setMaterialScience(String materialScience) {
+        this.materialScience = materialScience == null ? null : materialScience.trim();
+    }
+
+    public String getSelectionStaff() {
+        return selectionStaff;
+    }
+
+    public void setSelectionStaff(String selectionStaff) {
+        this.selectionStaff = selectionStaff == null ? null : selectionStaff.trim();
+    }
+
+    public String getDoor() {
+        return door;
+    }
+
+    public void setDoor(String door) {
+        this.door = door == null ? null : door.trim();
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post == null ? null : post.trim();
+    }
+
+    public String getA1() {
+        return a1;
+    }
+
+    public void setA1(String a1) {
+        this.a1 = a1 == null ? null : a1.trim();
+    }
+
+    public String getA2() {
+        return a2;
+    }
+
+    public void setA2(String a2) {
+        this.a2 = a2 == null ? null : a2.trim();
+    }
+
+    public String getA3() {
+        return a3;
+    }
+
+    public void setA3(String a3) {
+        this.a3 = a3 == null ? null : a3.trim();
+    }
+
+    public String getA4() {
+        return a4;
+    }
+
+    public void setA4(String a4) {
+        this.a4 = a4 == null ? null : a4.trim();
+    }
+
+    public String getA5() {
+        return a5;
+    }
+
+    public void setA5(String a5) {
+        this.a5 = a5 == null ? null : a5.trim();
+    }
+
+    public String getA6() {
+        return a6;
+    }
+
+    public void setA6(String a6) {
+        this.a6 = a6 == null ? null : a6.trim();
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
+    }
+}

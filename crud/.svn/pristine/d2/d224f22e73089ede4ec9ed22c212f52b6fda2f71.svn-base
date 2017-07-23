@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.personGovRecord.PersonGovRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gov_name" property="govName" jdbcType="VARCHAR" />
+    <result column="sz_provice" property="szProvice" jdbcType="VARCHAR" />
+    <result column="sz_city" property="szCity" jdbcType="VARCHAR" />
+    <result column="sz_hsien" property="szHsien" jdbcType="VARCHAR" />
+    <result column="sz_town" property="szTown" jdbcType="VARCHAR" />
+    <result column="sz_village" property="szVillage" jdbcType="VARCHAR" />
+    <result column="gov_desc" property="govDesc" jdbcType="VARCHAR" />
+    <result column="yh_name" property="yhName" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="tj_time" property="tjTime" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="c2" property="c2" jdbcType="VARCHAR" />
+    <result column="c3" property="c3" jdbcType="VARCHAR" />
+    <result column="c4" property="c4" jdbcType="VARCHAR" />
+    <result column="c5" property="c5" jdbcType="VARCHAR" />
+    <result column="c6" property="c6" jdbcType="VARCHAR" />
+    <result column="c7" property="c7" jdbcType="VARCHAR" />
+    <result column="c8" property="c8" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord" extends="BaseResultMap" >
+    <result column="note" property="note" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gov_name, sz_provice, sz_city, sz_hsien, sz_town, sz_village, gov_desc, yh_name, 
+    operator, tj_time, IS_DELETE, c1, c2, c3, c4, c5, c6, c7, c8
+  </sql>
+  <sql id="Blob_Column_List" >
+    note
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from person_gov_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from person_gov_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from person_gov_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from person_gov_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecordExample" >
+    delete from person_gov_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord" >
+    insert into person_gov_record (id, gov_name, sz_provice, 
+      sz_city, sz_hsien, sz_town, 
+      sz_village, gov_desc, yh_name, 
+      operator, tj_time, IS_DELETE, 
+      c1, c2, c3, c4, 
+      c5, c6, c7, c8, 
+      note)
+    values (#{id,jdbcType=INTEGER}, #{govName,jdbcType=VARCHAR}, #{szProvice,jdbcType=VARCHAR}, 
+      #{szCity,jdbcType=VARCHAR}, #{szHsien,jdbcType=VARCHAR}, #{szTown,jdbcType=VARCHAR}, 
+      #{szVillage,jdbcType=VARCHAR}, #{govDesc,jdbcType=VARCHAR}, #{yhName,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{tjTime,jdbcType=VARCHAR}, #{isDelete,jdbcType=CHAR}, 
+      #{c1,jdbcType=VARCHAR}, #{c2,jdbcType=VARCHAR}, #{c3,jdbcType=VARCHAR}, #{c4,jdbcType=VARCHAR}, 
+      #{c5,jdbcType=VARCHAR}, #{c6,jdbcType=VARCHAR}, #{c7,jdbcType=VARCHAR}, #{c8,jdbcType=VARCHAR}, 
+      #{note,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord" >
+    insert into person_gov_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="govName != null" >
+        gov_name,
+      </if>
+      <if test="szProvice != null" >
+        sz_provice,
+      </if>
+      <if test="szCity != null" >
+        sz_city,
+      </if>
+      <if test="szHsien != null" >
+        sz_hsien,
+      </if>
+      <if test="szTown != null" >
+        sz_town,
+      </if>
+      <if test="szVillage != null" >
+        sz_village,
+      </if>
+      <if test="govDesc != null" >
+        gov_desc,
+      </if>
+      <if test="yhName != null" >
+        yh_name,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="tjTime != null" >
+        tj_time,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+      <if test="c5 != null" >
+        c5,
+      </if>
+      <if test="c6 != null" >
+        c6,
+      </if>
+      <if test="c7 != null" >
+        c7,
+      </if>
+      <if test="c8 != null" >
+        c8,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="govName != null" >
+        #{govName,jdbcType=VARCHAR},
+      </if>
+      <if test="szProvice != null" >
+        #{szProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="szCity != null" >
+        #{szCity,jdbcType=VARCHAR},
+      </if>
+      <if test="szHsien != null" >
+        #{szHsien,jdbcType=VARCHAR},
+      </if>
+      <if test="szTown != null" >
+        #{szTown,jdbcType=VARCHAR},
+      </if>
+      <if test="szVillage != null" >
+        #{szVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="govDesc != null" >
+        #{govDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="yhName != null" >
+        #{yhName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="tjTime != null" >
+        #{tjTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        #{c8,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecordExample" resultType="java.lang.Integer" >
+    select count(*) from person_gov_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update person_gov_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.govName != null" >
+        gov_name = #{record.govName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.szProvice != null" >
+        sz_provice = #{record.szProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.szCity != null" >
+        sz_city = #{record.szCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.szHsien != null" >
+        sz_hsien = #{record.szHsien,jdbcType=VARCHAR},
+      </if>
+      <if test="record.szTown != null" >
+        sz_town = #{record.szTown,jdbcType=VARCHAR},
+      </if>
+      <if test="record.szVillage != null" >
+        sz_village = #{record.szVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.govDesc != null" >
+        gov_desc = #{record.govDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yhName != null" >
+        yh_name = #{record.yhName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tjTime != null" >
+        tj_time = #{record.tjTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c5 != null" >
+        c5 = #{record.c5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c6 != null" >
+        c6 = #{record.c6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c7 != null" >
+        c7 = #{record.c7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c8 != null" >
+        c8 = #{record.c8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update person_gov_record
+    set id = #{record.id,jdbcType=INTEGER},
+      gov_name = #{record.govName,jdbcType=VARCHAR},
+      sz_provice = #{record.szProvice,jdbcType=VARCHAR},
+      sz_city = #{record.szCity,jdbcType=VARCHAR},
+      sz_hsien = #{record.szHsien,jdbcType=VARCHAR},
+      sz_town = #{record.szTown,jdbcType=VARCHAR},
+      sz_village = #{record.szVillage,jdbcType=VARCHAR},
+      gov_desc = #{record.govDesc,jdbcType=VARCHAR},
+      yh_name = #{record.yhName,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      tj_time = #{record.tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=VARCHAR},
+      c3 = #{record.c3,jdbcType=VARCHAR},
+      c4 = #{record.c4,jdbcType=VARCHAR},
+      c5 = #{record.c5,jdbcType=VARCHAR},
+      c6 = #{record.c6,jdbcType=VARCHAR},
+      c7 = #{record.c7,jdbcType=VARCHAR},
+      c8 = #{record.c8,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update person_gov_record
+    set id = #{record.id,jdbcType=INTEGER},
+      gov_name = #{record.govName,jdbcType=VARCHAR},
+      sz_provice = #{record.szProvice,jdbcType=VARCHAR},
+      sz_city = #{record.szCity,jdbcType=VARCHAR},
+      sz_hsien = #{record.szHsien,jdbcType=VARCHAR},
+      sz_town = #{record.szTown,jdbcType=VARCHAR},
+      sz_village = #{record.szVillage,jdbcType=VARCHAR},
+      gov_desc = #{record.govDesc,jdbcType=VARCHAR},
+      yh_name = #{record.yhName,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      tj_time = #{record.tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=VARCHAR},
+      c3 = #{record.c3,jdbcType=VARCHAR},
+      c4 = #{record.c4,jdbcType=VARCHAR},
+      c5 = #{record.c5,jdbcType=VARCHAR},
+      c6 = #{record.c6,jdbcType=VARCHAR},
+      c7 = #{record.c7,jdbcType=VARCHAR},
+      c8 = #{record.c8,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord" >
+    update person_gov_record
+    <set >
+      <if test="govName != null" >
+        gov_name = #{govName,jdbcType=VARCHAR},
+      </if>
+      <if test="szProvice != null" >
+        sz_provice = #{szProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="szCity != null" >
+        sz_city = #{szCity,jdbcType=VARCHAR},
+      </if>
+      <if test="szHsien != null" >
+        sz_hsien = #{szHsien,jdbcType=VARCHAR},
+      </if>
+      <if test="szTown != null" >
+        sz_town = #{szTown,jdbcType=VARCHAR},
+      </if>
+      <if test="szVillage != null" >
+        sz_village = #{szVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="govDesc != null" >
+        gov_desc = #{govDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="yhName != null" >
+        yh_name = #{yhName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="tjTime != null" >
+        tj_time = #{tjTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        c5 = #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        c6 = #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        c7 = #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        c8 = #{c8,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord" >
+    update person_gov_record
+    set gov_name = #{govName,jdbcType=VARCHAR},
+      sz_provice = #{szProvice,jdbcType=VARCHAR},
+      sz_city = #{szCity,jdbcType=VARCHAR},
+      sz_hsien = #{szHsien,jdbcType=VARCHAR},
+      sz_town = #{szTown,jdbcType=VARCHAR},
+      sz_village = #{szVillage,jdbcType=VARCHAR},
+      gov_desc = #{govDesc,jdbcType=VARCHAR},
+      yh_name = #{yhName,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      tj_time = #{tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=VARCHAR},
+      c4 = #{c4,jdbcType=VARCHAR},
+      c5 = #{c5,jdbcType=VARCHAR},
+      c6 = #{c6,jdbcType=VARCHAR},
+      c7 = #{c7,jdbcType=VARCHAR},
+      c8 = #{c8,jdbcType=VARCHAR},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord" >
+    update person_gov_record
+    set gov_name = #{govName,jdbcType=VARCHAR},
+      sz_provice = #{szProvice,jdbcType=VARCHAR},
+      sz_city = #{szCity,jdbcType=VARCHAR},
+      sz_hsien = #{szHsien,jdbcType=VARCHAR},
+      sz_town = #{szTown,jdbcType=VARCHAR},
+      sz_village = #{szVillage,jdbcType=VARCHAR},
+      gov_desc = #{govDesc,jdbcType=VARCHAR},
+      yh_name = #{yhName,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      tj_time = #{tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=VARCHAR},
+      c4 = #{c4,jdbcType=VARCHAR},
+      c5 = #{c5,jdbcType=VARCHAR},
+      c6 = #{c6,jdbcType=VARCHAR},
+      c7 = #{c7,jdbcType=VARCHAR},
+      c8 = #{c8,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update person_gov_record set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update person_gov_record set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from person_gov_record where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and id = #{record.id,jdbcType=INTEGER} </if><if test='record.govName != null and record.govName != "" '> and gov_name = #{record.govName,jdbcType=VARCHAR} </if><if test='record.szProvice != null and record.szProvice != "" '> and sz_provice = #{record.szProvice,jdbcType=VARCHAR} </if><if test='record.szCity != null and record.szCity != "" '> and sz_city = #{record.szCity,jdbcType=VARCHAR} </if><if test='record.szHsien != null and record.szHsien != "" '> and sz_hsien = #{record.szHsien,jdbcType=VARCHAR} </if><if test='record.szTown != null and record.szTown != "" '> and sz_town = #{record.szTown,jdbcType=VARCHAR} </if><if test='record.szVillage != null and record.szVillage != "" '> and sz_village = #{record.szVillage,jdbcType=VARCHAR} </if><if test='record.govDesc != null and record.govDesc != "" '> and gov_desc = #{record.govDesc,jdbcType=VARCHAR} </if><if test='record.yhName != null and record.yhName != "" '> and yh_name = #{record.yhName,jdbcType=VARCHAR} </if><if test='record.operator != null and record.operator != "" '> and operator = #{record.operator,jdbcType=VARCHAR} </if><if test='record.tjTime != null and record.tjTime != "" '> and tj_time = #{record.tjTime,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and c1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and c2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and c3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and c4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and c5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and c6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and c7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and c8 = #{record.c8,jdbcType=VARCHAR} </if><if test='record.note != null and record.note != "" '> and note = #{record.note,jdbcType=LONGVARCHAR} </if> limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(ID) from person_gov_record where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and id = #{record.id,jdbcType=INTEGER} </if><if test='record.govName != null and record.govName != "" '> and gov_name = #{record.govName,jdbcType=VARCHAR} </if><if test='record.szProvice != null and record.szProvice != "" '> and sz_provice = #{record.szProvice,jdbcType=VARCHAR} </if><if test='record.szCity != null and record.szCity != "" '> and sz_city = #{record.szCity,jdbcType=VARCHAR} </if><if test='record.szHsien != null and record.szHsien != "" '> and sz_hsien = #{record.szHsien,jdbcType=VARCHAR} </if><if test='record.szTown != null and record.szTown != "" '> and sz_town = #{record.szTown,jdbcType=VARCHAR} </if><if test='record.szVillage != null and record.szVillage != "" '> and sz_village = #{record.szVillage,jdbcType=VARCHAR} </if><if test='record.govDesc != null and record.govDesc != "" '> and gov_desc = #{record.govDesc,jdbcType=VARCHAR} </if><if test='record.yhName != null and record.yhName != "" '> and yh_name = #{record.yhName,jdbcType=VARCHAR} </if><if test='record.operator != null and record.operator != "" '> and operator = #{record.operator,jdbcType=VARCHAR} </if><if test='record.tjTime != null and record.tjTime != "" '> and tj_time = #{record.tjTime,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and c1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and c2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and c3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and c4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and c5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and c6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and c7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and c8 = #{record.c8,jdbcType=VARCHAR} </if><if test='record.note != null and record.note != "" '> and note = #{record.note,jdbcType=LONGVARCHAR} </if>
+  </select>
+</mapper>

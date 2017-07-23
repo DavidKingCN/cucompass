@@ -1,0 +1,29 @@
+package com.gcx.citygovcreditndrc.service.personInfo;
+
+import com.gcx.citygovcreditndrc.model.MyResult;
+import com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput;
+
+public interface PersonInfoInputService {
+	
+	/**
+	 * 根据ID查询数据
+	 * @param id
+	 * @return
+	 */
+	public MyResult<Object> findById(PersonInfoInput personInfoInput,int pagenow,int pagesize);
+	
+	/**
+	 * 新增数据
+	 * @param governmentAssessment
+	 * @return
+	 */
+	public MyResult<Object> insert(PersonInfoInput personInfoInput);
+	
+	/**
+	 * 根据ID修改
+	 * @param governmentAssessment
+	 * @return
+	 */
+	public MyResult<Object> updateById(PersonInfoInput personInfoInput);
+
+}

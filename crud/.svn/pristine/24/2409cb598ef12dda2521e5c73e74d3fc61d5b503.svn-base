@@ -1,0 +1,66 @@
+package com.gcx.citygovcreditndrc.service.cityGvoInfo.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.cityGvoInfo.CityGvoInfoMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfo;
+import com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfoAo;
+import com.gcx.citygovcreditndrc.service.cityGvoInfo.CityGvoInfoService;
+
+@Service("cityGvoInfoService")
+public class CityGvoInfoServiceImpl implements CityGvoInfoService{
+
+	@Autowired
+	private CityGvoInfoMapper cityGvoInfoDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(CityGvoInfoAo record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<CityGvoInfo> list = cityGvoInfoDao.findByRecord(record, limitStart, limitEnd);
+		int count = cityGvoInfoDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(CityGvoInfo record) {
+		
+		cityGvoInfoDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		cityGvoInfoDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(CityGvoInfo record) {
+		cityGvoInfoDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+}

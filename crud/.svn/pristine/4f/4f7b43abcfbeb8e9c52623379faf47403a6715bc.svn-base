@@ -1,0 +1,51 @@
+package com.gcx.citygovcreditndrc.model.govServe;
+/**
+ * 
+ * @author 戴凯
+ *	查看审批历史RO
+ */
+public class HisGS {
+	private String applyServe;	//申请服务
+	private String applyUnit;	//申请单位
+	private String applyTime;	//提交时间
+	private String auditDept;	//回复单位
+	private String auditContent;//回复内容
+	private String auditTime;	//回复时间
+	public String getApplyServe() {
+		return applyServe;
+	}
+	public void setApplyServe(String applyServe) {
+		this.applyServe = applyServe;
+	}
+	public String getApplyUnit() {
+		return applyUnit;
+	}
+	public void setApplyUnit(String applyUnit) {
+		this.applyUnit = applyUnit;
+	}
+	public String getApplyTime() {
+		return applyTime;
+	}
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
+	}
+	public String getAuditDept() {
+		return auditDept;
+	}
+	public void setAuditDept(String auditDept) {
+		this.auditDept = auditDept;
+	}
+	public String getAuditContent() {
+		return auditContent;
+	}
+	public void setAuditContent(String auditContent) {
+		this.auditContent = auditContent;
+	}
+	public String getAuditTime() {
+		return auditTime;
+	}
+	public void setAuditTime(String auditTime) {
+		this.auditTime = auditTime;
+	}
+	
+}

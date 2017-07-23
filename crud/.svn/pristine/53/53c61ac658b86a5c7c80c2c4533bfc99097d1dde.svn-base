@@ -1,0 +1,65 @@
+package com.gcx.citygovcreditndrc.service.personGovRecord.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.personGovRecord.PersonGovRecordMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.personGovRecord.PersonGovRecord;
+import com.gcx.citygovcreditndrc.service.personGovRecord.PersonGovRecordService;
+
+@Service("personGovRecordService")
+public class PersonGovRecordServiceImpl implements PersonGovRecordService{
+
+	@Autowired
+	private PersonGovRecordMapper personGovRecordDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(PersonGovRecord record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<PersonGovRecord> list = personGovRecordDao.findByRecord(record, limitStart, limitEnd);
+		int count = personGovRecordDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(PersonGovRecord record) {
+		
+		personGovRecordDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		personGovRecordDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(PersonGovRecord record) {
+		personGovRecordDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+}

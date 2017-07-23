@@ -1,0 +1,84 @@
+package com.gcx.citygovcreditndrc.model.common;
+
+public class Enclosure {
+    private Integer id;
+
+    private String materialTitle;
+
+    private String material;
+
+    private String r1;
+
+    private String r2;
+
+    private String r3;
+
+    private String r4;
+    
+    private Integer isDelete;
+    
+
+    public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMaterialTitle() {
+        return materialTitle;
+    }
+
+    public void setMaterialTitle(String materialTitle) {
+        this.materialTitle = materialTitle == null ? null : materialTitle.trim();
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material == null ? null : material.trim();
+    }
+
+    public String getR1() {
+        return r1;
+    }
+
+    public void setR1(String r1) {
+        this.r1 = r1 == null ? null : r1.trim();
+    }
+
+    public String getR2() {
+        return r2;
+    }
+
+    public void setR2(String r2) {
+        this.r2 = r2 == null ? null : r2.trim();
+    }
+
+    public String getR3() {
+        return r3;
+    }
+
+    public void setR3(String r3) {
+        this.r3 = r3 == null ? null : r3.trim();
+    }
+
+    public String getR4() {
+        return r4;
+    }
+
+    public void setR4(String r4) {
+        this.r4 = r4 == null ? null : r4.trim();
+    }
+}

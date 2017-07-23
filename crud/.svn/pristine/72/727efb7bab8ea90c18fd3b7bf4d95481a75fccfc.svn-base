@@ -1,0 +1,47 @@
+package com.gcx.citygovcreditndrc.controller.assess;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gcx.citygovcreditndrc.model.MyResult;
+import com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment;
+import com.gcx.citygovcreditndrc.service.assess.AssessService;
+import com.gcx.citygovcreditndrc.service.impl.CommonImpl;
+
+@Controller
+@RequestMapping("/assess")
+public class AssessController {
+	
+	@Resource
+	AssessService assessService;
+	@Resource
+	CommonImpl commonImpl;
+	@ResponseBody
+	@RequestMapping("/findConditions")
+	public MyResult<Object> findByConditions(HttpServletRequest request,HttpServletResponse response,GovernmentAssessment governmentAssessment,int pagenow,int pagesize){
+		String userId=commonImpl.getUserId(request, response);
+		if(!"".equals(userId) || userId != null){
+		 governmentAssessment.setOperator(userId);
+		}
+		MyResult<Object> result=assessService.findById(governmentAssessment, pagenow, pagesize);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/insertByConditions")
+	public MyResult<Object> insertByConditions(HttpServletRequest request,HttpServletResponse response,GovernmentAssessment governmentAssessment){
+		MyResult<Object> result=new MyResult<>();
+		int resultCount=assessService.insert(governmentAssessment);
+		result.setData(resultCount);
+		result.setMsg("操作成功");
+		result.setStatus(200);
+		return result;
+	}
+
+}

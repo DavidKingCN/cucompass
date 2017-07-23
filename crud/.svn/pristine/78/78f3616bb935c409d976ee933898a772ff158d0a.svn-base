@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.govdevelopment.GovdevelopmentMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NEWS_TITLE" property="newsTitle" jdbcType="VARCHAR" />
+    <result column="DEPT_NAME" property="deptName" jdbcType="CHAR" />
+    <result column="SUBMITOR" property="submitor" jdbcType="VARCHAR" />
+    <result column="SUB_NAME" property="subName" jdbcType="VARCHAR" />
+    <result column="SUB_TIME" property="subTime" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="ART_TYPE" property="artType" jdbcType="VARCHAR" />
+    <result column="ART_RESOURCE" property="artResource" jdbcType="VARCHAR" />
+    <result column="DETAIL" property="detail" jdbcType="VARCHAR" />
+    <result column="SUGGESTION" property="suggestion" jdbcType="VARCHAR" />
+    <result column="AUDITOR" property="auditor" jdbcType="VARCHAR" />
+    <result column="AUD_NAME" property="audName" jdbcType="VARCHAR" />
+    <result column="AUD_TIME" property="audTime" jdbcType="VARCHAR" />
+    <result column="CITYCODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+    <result column="C1" property="c1" jdbcType="VARCHAR" />
+    <result column="C2" property="c2" jdbcType="VARCHAR" />
+    <result column="C3" property="c3" jdbcType="VARCHAR" />
+    <result column="C4" property="c4" jdbcType="VARCHAR" />
+    <result column="C5" property="c5" jdbcType="VARCHAR" />
+    <result column="C6" property="c6" jdbcType="VARCHAR" />
+    <result column="C7" property="c7" jdbcType="VARCHAR" />
+    <result column="C8" property="c8" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NEWS_TITLE, DEPT_NAME, SUBMITOR, SUB_NAME, SUB_TIME, STATUS, ART_TYPE, ART_RESOURCE, 
+    DETAIL, SUGGESTION, AUDITOR, AUD_NAME, AUD_TIME, CITYCODE, IS_DELETE, C1, C2, C3, C4, 
+    C5, C6, C7, C8
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from GOV_DEVELOPMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from GOV_DEVELOPMENT
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from GOV_DEVELOPMENT
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentExample" >
+    delete from GOV_DEVELOPMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment" >
+    insert into GOV_DEVELOPMENT (ID, NEWS_TITLE, DEPT_NAME, 
+      SUBMITOR, SUB_NAME, SUB_TIME, 
+      STATUS, ART_TYPE, ART_RESOURCE, 
+      DETAIL, SUGGESTION, AUDITOR, 
+      AUD_NAME, AUD_TIME, CITYCODE, 
+      IS_DELETE, C1, C2, C3, 
+      C4, C5, C6, C7, 
+      C8)
+    values (#{id,jdbcType=INTEGER}, #{newsTitle,jdbcType=VARCHAR}, #{deptName,jdbcType=CHAR}, 
+      #{submitor,jdbcType=VARCHAR}, #{subName,jdbcType=VARCHAR}, #{subTime,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{artType,jdbcType=VARCHAR}, #{artResource,jdbcType=VARCHAR}, 
+      #{detail,jdbcType=VARCHAR}, #{suggestion,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{audName,jdbcType=VARCHAR}, #{audTime,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=CHAR}, #{c1,jdbcType=VARCHAR}, #{c2,jdbcType=VARCHAR}, #{c3,jdbcType=VARCHAR}, 
+      #{c4,jdbcType=VARCHAR}, #{c5,jdbcType=VARCHAR}, #{c6,jdbcType=VARCHAR}, #{c7,jdbcType=VARCHAR}, 
+      #{c8,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment" >
+    insert into GOV_DEVELOPMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="newsTitle != null" >
+        NEWS_TITLE,
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME,
+      </if>
+      <if test="submitor != null" >
+        SUBMITOR,
+      </if>
+      <if test="subName != null" >
+        SUB_NAME,
+      </if>
+      <if test="subTime != null" >
+        SUB_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="artType != null" >
+        ART_TYPE,
+      </if>
+      <if test="artResource != null" >
+        ART_RESOURCE,
+      </if>
+      <if test="detail != null" >
+        DETAIL,
+      </if>
+      <if test="suggestion != null" >
+        SUGGESTION,
+      </if>
+      <if test="auditor != null" >
+        AUDITOR,
+      </if>
+      <if test="audName != null" >
+        AUD_NAME,
+      </if>
+      <if test="audTime != null" >
+        AUD_TIME,
+      </if>
+      <if test="cityCode != null" >
+        CITYCODE,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="c1 != null" >
+        C1,
+      </if>
+      <if test="c2 != null" >
+        C2,
+      </if>
+      <if test="c3 != null" >
+        C3,
+      </if>
+      <if test="c4 != null" >
+        C4,
+      </if>
+      <if test="c5 != null" >
+        C5,
+      </if>
+      <if test="c6 != null" >
+        C6,
+      </if>
+      <if test="c7 != null" >
+        C7,
+      </if>
+      <if test="c8 != null" >
+        C8,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="newsTitle != null" >
+        #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=CHAR},
+      </if>
+      <if test="submitor != null" >
+        #{submitor,jdbcType=VARCHAR},
+      </if>
+      <if test="subName != null" >
+        #{subName,jdbcType=VARCHAR},
+      </if>
+      <if test="subTime != null" >
+        #{subTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="artType != null" >
+        #{artType,jdbcType=VARCHAR},
+      </if>
+      <if test="artResource != null" >
+        #{artResource,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion != null" >
+        #{suggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="audName != null" >
+        #{audName,jdbcType=VARCHAR},
+      </if>
+      <if test="audTime != null" >
+        #{audTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        #{c8,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentExample" resultType="java.lang.Integer" >
+    select count(*) from GOV_DEVELOPMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update GOV_DEVELOPMENT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.newsTitle != null" >
+        NEWS_TITLE = #{record.newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptName != null" >
+        DEPT_NAME = #{record.deptName,jdbcType=CHAR},
+      </if>
+      <if test="record.submitor != null" >
+        SUBMITOR = #{record.submitor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subName != null" >
+        SUB_NAME = #{record.subName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subTime != null" >
+        SUB_TIME = #{record.subTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artType != null" >
+        ART_TYPE = #{record.artType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artResource != null" >
+        ART_RESOURCE = #{record.artResource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detail != null" >
+        DETAIL = #{record.detail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggestion != null" >
+        SUGGESTION = #{record.suggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null" >
+        AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audName != null" >
+        AUD_NAME = #{record.audName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audTime != null" >
+        AUD_TIME = #{record.audTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null" >
+        CITYCODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.c1 != null" >
+        C1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c2 != null" >
+        C2 = #{record.c2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c3 != null" >
+        C3 = #{record.c3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c4 != null" >
+        C4 = #{record.c4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c5 != null" >
+        C5 = #{record.c5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c6 != null" >
+        C6 = #{record.c6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c7 != null" >
+        C7 = #{record.c7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c8 != null" >
+        C8 = #{record.c8,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update GOV_DEVELOPMENT
+    set ID = #{record.id,jdbcType=INTEGER},
+      NEWS_TITLE = #{record.newsTitle,jdbcType=VARCHAR},
+      DEPT_NAME = #{record.deptName,jdbcType=CHAR},
+      SUBMITOR = #{record.submitor,jdbcType=VARCHAR},
+      SUB_NAME = #{record.subName,jdbcType=VARCHAR},
+      SUB_TIME = #{record.subTime,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      ART_TYPE = #{record.artType,jdbcType=VARCHAR},
+      ART_RESOURCE = #{record.artResource,jdbcType=VARCHAR},
+      DETAIL = #{record.detail,jdbcType=VARCHAR},
+      SUGGESTION = #{record.suggestion,jdbcType=VARCHAR},
+      AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      AUD_NAME = #{record.audName,jdbcType=VARCHAR},
+      AUD_TIME = #{record.audTime,jdbcType=VARCHAR},
+      CITYCODE = #{record.cityCode,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      C1 = #{record.c1,jdbcType=VARCHAR},
+      C2 = #{record.c2,jdbcType=VARCHAR},
+      C3 = #{record.c3,jdbcType=VARCHAR},
+      C4 = #{record.c4,jdbcType=VARCHAR},
+      C5 = #{record.c5,jdbcType=VARCHAR},
+      C6 = #{record.c6,jdbcType=VARCHAR},
+      C7 = #{record.c7,jdbcType=VARCHAR},
+      C8 = #{record.c8,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment" >
+    update GOV_DEVELOPMENT
+    <set >
+      <if test="newsTitle != null" >
+        NEWS_TITLE = #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME = #{deptName,jdbcType=CHAR},
+      </if>
+      <if test="submitor != null" >
+        SUBMITOR = #{submitor,jdbcType=VARCHAR},
+      </if>
+      <if test="subName != null" >
+        SUB_NAME = #{subName,jdbcType=VARCHAR},
+      </if>
+      <if test="subTime != null" >
+        SUB_TIME = #{subTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="artType != null" >
+        ART_TYPE = #{artType,jdbcType=VARCHAR},
+      </if>
+      <if test="artResource != null" >
+        ART_RESOURCE = #{artResource,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        DETAIL = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion != null" >
+        SUGGESTION = #{suggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        AUDITOR = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="audName != null" >
+        AUD_NAME = #{audName,jdbcType=VARCHAR},
+      </if>
+      <if test="audTime != null" >
+        AUD_TIME = #{audTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        CITYCODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        C1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        C2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        C3 = #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        C4 = #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        C5 = #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        C6 = #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        C7 = #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        C8 = #{c8,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment" >
+    update GOV_DEVELOPMENT
+    set NEWS_TITLE = #{newsTitle,jdbcType=VARCHAR},
+      DEPT_NAME = #{deptName,jdbcType=CHAR},
+      SUBMITOR = #{submitor,jdbcType=VARCHAR},
+      SUB_NAME = #{subName,jdbcType=VARCHAR},
+      SUB_TIME = #{subTime,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ART_TYPE = #{artType,jdbcType=VARCHAR},
+      ART_RESOURCE = #{artResource,jdbcType=VARCHAR},
+      DETAIL = #{detail,jdbcType=VARCHAR},
+      SUGGESTION = #{suggestion,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUD_NAME = #{audName,jdbcType=VARCHAR},
+      AUD_TIME = #{audTime,jdbcType=VARCHAR},
+      CITYCODE = #{cityCode,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      C1 = #{c1,jdbcType=VARCHAR},
+      C2 = #{c2,jdbcType=VARCHAR},
+      C3 = #{c3,jdbcType=VARCHAR},
+      C4 = #{c4,jdbcType=VARCHAR},
+      C5 = #{c5,jdbcType=VARCHAR},
+      C6 = #{c6,jdbcType=VARCHAR},
+      C7 = #{c7,jdbcType=VARCHAR},
+      C8 = #{c8,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update GOV_DEVELOPMENT set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update GOV_DEVELOPMENT set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from GOV_DEVELOPMENT where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.newsTitle != null and record.newsTitle != "" '> and NEWS_TITLE = #{record.newsTitle,jdbcType=VARCHAR} </if><if test='record.deptName != null and record.deptName != "" '> and DEPT_NAME = #{record.deptName,jdbcType=CHAR} </if><if test='record.submitor != null and record.submitor != "" '> and SUBMITOR = #{record.submitor,jdbcType=VARCHAR} </if><if test='record.subName != null and record.subName != "" '> and SUB_NAME = #{record.subName,jdbcType=VARCHAR} </if><if test='record.subTime != null and record.subTime != "" '> and SUB_TIME = #{record.subTime,jdbcType=VARCHAR} </if><if test='record.status != null and record.status != "" '> and STATUS = #{record.status,jdbcType=VARCHAR} </if><if test='record.artType != null and record.artType != "" '> and ART_TYPE = #{record.artType,jdbcType=VARCHAR} </if><if test='record.artResource != null and record.artResource != "" '> and ART_RESOURCE = #{record.artResource,jdbcType=VARCHAR} </if><if test='record.detail != null and record.detail != "" '> and DETAIL = #{record.detail,jdbcType=VARCHAR} </if><if test='record.suggestion != null and record.suggestion != "" '> and SUGGESTION = #{record.suggestion,jdbcType=VARCHAR} </if><if test='record.auditor != null and record.auditor != "" '> and AUDITOR = #{record.auditor,jdbcType=VARCHAR} </if><if test='record.audName != null and record.audName != "" '> and AUD_NAME = #{record.audName,jdbcType=VARCHAR} </if><if test='record.audTime != null and record.audTime != "" '> and AUD_TIME = #{record.audTime,jdbcType=VARCHAR} </if><if test='record.cityCode != null and record.cityCode != "" '> and CITYCODE = #{record.cityCode,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and C1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and C2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and C3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and C4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and C5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and C6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and C7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and C8 = #{record.c8,jdbcType=VARCHAR} </if> order by SUB_TIME DESC limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(ID) from GOV_DEVELOPMENT where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.newsTitle != null and record.newsTitle != "" '> and NEWS_TITLE = #{record.newsTitle,jdbcType=VARCHAR} </if><if test='record.deptName != null and record.deptName != "" '> and DEPT_NAME = #{record.deptName,jdbcType=CHAR} </if><if test='record.submitor != null and record.submitor != "" '> and SUBMITOR = #{record.submitor,jdbcType=VARCHAR} </if><if test='record.subName != null and record.subName != "" '> and SUB_NAME = #{record.subName,jdbcType=VARCHAR} </if><if test='record.subTime != null and record.subTime != "" '> and SUB_TIME = #{record.subTime,jdbcType=VARCHAR} </if><if test='record.status != null and record.status != "" '> and STATUS = #{record.status,jdbcType=VARCHAR} </if><if test='record.artType != null and record.artType != "" '> and ART_TYPE = #{record.artType,jdbcType=VARCHAR} </if><if test='record.artResource != null and record.artResource != "" '> and ART_RESOURCE = #{record.artResource,jdbcType=VARCHAR} </if><if test='record.detail != null and record.detail != "" '> and DETAIL = #{record.detail,jdbcType=VARCHAR} </if><if test='record.suggestion != null and record.suggestion != "" '> and SUGGESTION = #{record.suggestion,jdbcType=VARCHAR} </if><if test='record.auditor != null and record.auditor != "" '> and AUDITOR = #{record.auditor,jdbcType=VARCHAR} </if><if test='record.audName != null and record.audName != "" '> and AUD_NAME = #{record.audName,jdbcType=VARCHAR} </if><if test='record.audTime != null and record.audTime != "" '> and AUD_TIME = #{record.audTime,jdbcType=VARCHAR} </if><if test='record.cityCode != null and record.cityCode != "" '> and CITYCODE = #{record.cityCode,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and C1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and C2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and C3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and C4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and C5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and C6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and C7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and C8 = #{record.c8,jdbcType=VARCHAR} </if>
+  </select>
+</mapper>

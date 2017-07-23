@@ -1,0 +1,22 @@
+package com.gcx.citygovcreditndrc.service.evaluationrecord;
+
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.evaluationrecord.Evaluationrecord;
+import com.gcx.citygovcreditndrc.model.evaluationrecord.EvaluationrecordAo;
+
+
+public interface EvaluationrecordService {
+
+	ServiceResult<Object> findRecords(Evaluationrecord record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(Evaluationrecord record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(Evaluationrecord record);
+	
+	int findByRecordCount( EvaluationrecordAo record);
+}

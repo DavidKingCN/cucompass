@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.common.EnclosureMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.common.Enclosure" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MATERIAL_TITLE" property="materialTitle" jdbcType="VARCHAR" />
+    <result column="MATERIAL" property="material" jdbcType="VARCHAR" />
+    <result column="R1" property="r1" jdbcType="VARCHAR" />
+    <result column="R2" property="r2" jdbcType="VARCHAR" />
+    <result column="R3" property="r3" jdbcType="VARCHAR" />
+    <result column="R4" property="r4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MATERIAL_TITLE, MATERIAL, R1, R2, R3, R4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.common.EnclosureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ENCLOSURE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ENCLOSURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ENCLOSURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.common.EnclosureExample" >
+    delete from ENCLOSURE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.common.Enclosure" >
+    insert into ENCLOSURE (ID, MATERIAL_TITLE, MATERIAL, 
+      R1, R2, R3, R4
+      )
+    values (#{id,jdbcType=INTEGER}, #{materialTitle,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR}, 
+      #{r1,jdbcType=VARCHAR}, #{r2,jdbcType=VARCHAR}, #{r3,jdbcType=VARCHAR}, #{r4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.common.Enclosure" >
+    insert into ENCLOSURE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="materialTitle != null" >
+        MATERIAL_TITLE,
+      </if>
+      <if test="material != null" >
+        MATERIAL,
+      </if>
+      <if test="r1 != null" >
+        R1,
+      </if>
+      <if test="r2 != null" >
+        R2,
+      </if>
+      <if test="r3 != null" >
+        R3,
+      </if>
+      <if test="r4 != null" >
+        R4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="materialTitle != null" >
+        #{materialTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="r1 != null" >
+        #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="r3 != null" >
+        #{r3,jdbcType=VARCHAR},
+      </if>
+      <if test="r4 != null" >
+        #{r4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.common.EnclosureExample" resultType="java.lang.Integer" >
+    select count(*) from ENCLOSURE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ENCLOSURE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.materialTitle != null" >
+        MATERIAL_TITLE = #{record.materialTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.material != null" >
+        MATERIAL = #{record.material,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r1 != null" >
+        R1 = #{record.r1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r2 != null" >
+        R2 = #{record.r2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r3 != null" >
+        R3 = #{record.r3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r4 != null" >
+        R4 = #{record.r4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ENCLOSURE
+    set ID = #{record.id,jdbcType=INTEGER},
+      MATERIAL_TITLE = #{record.materialTitle,jdbcType=VARCHAR},
+      MATERIAL = #{record.material,jdbcType=VARCHAR},
+      R1 = #{record.r1,jdbcType=VARCHAR},
+      R2 = #{record.r2,jdbcType=VARCHAR},
+      R3 = #{record.r3,jdbcType=VARCHAR},
+      R4 = #{record.r4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.common.Enclosure" >
+    update ENCLOSURE
+    <set >
+      <if test="materialTitle != null" >
+        MATERIAL_TITLE = #{materialTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        MATERIAL = #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="r1 != null" >
+        R1 = #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        R2 = #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="r3 != null" >
+        R3 = #{r3,jdbcType=VARCHAR},
+      </if>
+      <if test="r4 != null" >
+        R4 = #{r4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.common.Enclosure" >
+    update ENCLOSURE
+    set MATERIAL_TITLE = #{materialTitle,jdbcType=VARCHAR},
+      MATERIAL = #{material,jdbcType=VARCHAR},
+      R1 = #{r1,jdbcType=VARCHAR},
+      R2 = #{r2,jdbcType=VARCHAR},
+      R3 = #{r3,jdbcType=VARCHAR},
+      R4 = #{r4,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update ENCLOSURE set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update ENCLOSURE set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from ENCLOSURE where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.materialTitle != null and record.materialTitle != "" '> and MATERIAL_TITLE = #{record.materialTitle,jdbcType=VARCHAR} </if><if test='record.material != null and record.material != "" '> and MATERIAL = #{record.material,jdbcType=VARCHAR} </if><if test='record.r1 != null and record.r1 != "" '> and R1 = #{record.r1,jdbcType=VARCHAR} </if><if test='record.r2 != null and record.r2 != "" '> and R2 = #{record.r2,jdbcType=VARCHAR} </if><if test='record.r3 != null and record.r3 != "" '> and R3 = #{record.r3,jdbcType=VARCHAR} </if><if test='record.r4 != null and record.r4 != "" '> and R4 = #{record.r4,jdbcType=VARCHAR} </if> limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(ID) from ENCLOSURE where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.materialTitle != null and record.materialTitle != "" '> and MATERIAL_TITLE = #{record.materialTitle,jdbcType=VARCHAR} </if><if test='record.material != null and record.material != "" '> and MATERIAL = #{record.material,jdbcType=VARCHAR} </if><if test='record.r1 != null and record.r1 != "" '> and R1 = #{record.r1,jdbcType=VARCHAR} </if><if test='record.r2 != null and record.r2 != "" '> and R2 = #{record.r2,jdbcType=VARCHAR} </if><if test='record.r3 != null and record.r3 != "" '> and R3 = #{record.r3,jdbcType=VARCHAR} </if><if test='record.r4 != null and record.r4 != "" '> and R4 = #{record.r4,jdbcType=VARCHAR} </if>
+  </select>
+</mapper>

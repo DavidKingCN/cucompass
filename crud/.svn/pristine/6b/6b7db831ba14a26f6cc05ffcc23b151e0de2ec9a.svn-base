@@ -1,0 +1,69 @@
+package com.gcx.gov.credit.test;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gcx.citygovcreditndrc.model.ResponseData;
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.service.common.EnclosureService;
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+import com.gcx.gov.credit.base.BaseTestCase;
+
+public class TestAttach extends BaseTestCase {
+	@Autowired
+	EnclosureService enclosureService;
+	@Test
+	public void testAdd(){
+		
+	}
+	@Test
+	public void sltByFk(){
+		Integer id = 231;
+		List<Enclosure> es = enclosureService.findAttachmentsByPid(id,1);
+		
+		for(Enclosure e:es){
+			System.out.println(JSONUtil.toJson(e));
+		}
+	}
+	
+	@Test
+	public void sltByFk2(){
+		Integer id = 231;
+		String es = enclosureService.getAttachStrByPid(id, 2);
+		
+		System.out.println(es);
+	}
+	
+	
+	@Test
+	public void sltByFk3(){
+		Integer id = 231;
+		List<Enclosure> es = enclosureService.allAttsByPid(id, 2);
+		
+		for(Enclosure e:es){
+			System.out.println(JSONUtil.toJson(e));
+		}
+	}
+	@Test
+	public void saveOrUpdate(){
+//		Enclosure enclosure = null;
+//		enclosureService.addRecord(enclosure);
+		ResponseData ok = ResponseData.ok();
+		
+		ok.putDataValue("insert", "success");
+		System.out.println(JSONUtil.toJson(ok));
+		
+	}
+	@Test
+	public void testFile(){
+		String file = TestAttach.class.getClassLoader().getResource("").getFile();
+		System.out.println("file="+file);
+		String filePath = "\\desktop.tmp.file\\aaaaaa\\a.doc";
+		filePath = filePath.replaceAll("\\\\", "/");
+		
+		System.out.println(filePath);
+	}
+	
+}

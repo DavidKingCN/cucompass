@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>添加多个对象页面的处理方式二</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/xmfb_qyxm_new.css"/>
+		<script src="../js/jquery-1.7.1.min.js"></script>
+		<script src="../js/jquery.form.js"></script>
+		<script src="../js/json2.js"></script>
+		<script src="../js/set.js"></script>
+		<script src="../js/map.js"></script>
+		<script src="../js/extraData.js"></script>
+		<style type="text/css">
+	    .mask{width:100%;height:100%;position: fixed;top:0; left:0;background: rgba(0,0,0,0.2);display: none;}
+        .mask_container{width:438px;height:310px;margin:0 auto;background:#fff;margin-top:10%;border-radius:5px;}
+        .mask_head{height:40px;line-height:40px;padding-left: 15px;box-sizing: border-box;font-size:16px;border-bottom:1px solid #ddd;}
+        .mask_close{display:inline-block;float:right;font-size:30px;width:24px;height:24px;line-height:21px;text-align:center;border-radius:50%;background:#c5c5c5;color:#fff;margin-right: 15px;margin-top:7px;cursor: pointer;}
+        .mask_detail{box-sizing: border-box;padding: 30px 60px;}
+        .mask_detail p{text-align:center;color:red;font-size: 18px;margin:10px 0;}
+        .mask_handle{width:250px;height:30px;margin:0 auto;margin-top: 60px;}
+        .mask_handle a{display:inline-block;width:160px;height:30px;background: #eee;border-radius:5px;line-height: 30px;text-align: center;cursor: pointer;margin-left:50px}
+		</style>
+</head>
+<body>
+<form id='userForm' name='userForm' action="" method="post" >
+		<div class="section">
+		<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;组信息：
+			<table id="groupTab">
+				<tr>
+					<td>组名：</td>
+					<td><input prefix='group' type="text" name="groupName" value=''/></td>
+				</tr>
+			</table>
+			<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户信息：
+			<table id="userTab">
+				<tr>
+					<td>用户名：</td>
+					<td><input prefix='user' type="text" name="userName" value=''/></td>
+				</tr>
+				<tr>
+					<td>密码：</td>
+					<td><input prefix='user' type="password" name="userPwd" value=''/></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td><input prefix='user' type="text" name="userSex" value=''/></td>
+				</tr>
+				<tr>
+					<td>年龄：</td>
+					<td><input prefix='user' dataType='digit' type="text" name="userAge" value=''/></td>
+				</tr>
+			</table>
+			
+		  <div class="mask">
+            <div class="mask_container">
+                <div class="mask_head">温馨提示 <a class="mask_close">&times;</a>
+                </div>
+                <div class="mask_detail">
+                    <p> 您的信息已提交，请等待审核</p>
+                    <div class="mask_handle">
+                        <a class="submit">确定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		</div>
+		</form>
+		<div class="foot">
+			<a class="active">保存</a>
+			<a href="demo_query_users.html">返回</a>
+		</div>
+</body>
+</html>
+<script>
+
+
+	$('.mask_close,.cancel').click(function(){
+	    $('.mask').fadeOut();
+	});
+	$('.active').click(function(){
+	    $('.mask').show();
+	});
+	$('.submit').click(function(){
+		
+		/**通过form表单提取数据**/
+		var jsonArgs = $("#userForm").formToJson();
+		
+		console.log('jsonArgs='+jsonArgs);
+		$.ajax({
+			url:'/ndrc/user/addUserByGroup',
+			type:'POST',
+			contentType:'application/json;charset=utf-8',
+			data:$("#userForm").formToJson(),
+    		async:true,
+			dataType:'json',
+			success:function(result){
+				//打印回调的相应正文
+				var msg = result.data.code;
+				if(msg==200){
+					alert("添加成功...");
+					
+				}else if(msg==500){
+					alert("添加失败...");
+				}
+				//延时刷新页面
+				//setTimeout("window.location.reload()", 5000);
+				window.location.href = 'demo_query_users.html';
+			}
+	 	});
+		$('.mask').fadeOut();
+	});
+</script>                

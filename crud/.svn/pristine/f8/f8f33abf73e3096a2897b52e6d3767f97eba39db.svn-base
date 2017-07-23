@@ -1,0 +1,18 @@
+package com.gcx.citygovcreditndrc.service.project;
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.project.Project;
+
+
+public interface ProjectService {
+
+	ServiceResult<Object> findRecords(Project record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(Project record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(Project record);
+}

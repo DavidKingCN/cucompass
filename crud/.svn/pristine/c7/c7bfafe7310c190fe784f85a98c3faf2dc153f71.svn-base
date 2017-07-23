@@ -1,0 +1,47 @@
+package com.gcx.citygovcreditndrc.dao.applyCommentRecord;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecord;
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecordAo;
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecordExample;
+
+public interface ApplyCommentRecordMapper {
+    int countByExample(ApplyCommentRecordExample example);
+
+    int deleteByExample(ApplyCommentRecordExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(ApplyCommentRecord record);
+
+    int insertSelective(ApplyCommentRecord record);
+
+    List<ApplyCommentRecord> selectByExampleWithBLOBs(ApplyCommentRecordExample example);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<ApplyCommentRecord> findByRecord(@Param("record") ApplyCommentRecordAo record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") ApplyCommentRecordAo record);
+
+    List<ApplyCommentRecord> selectByExample(ApplyCommentRecordExample example);
+
+    ApplyCommentRecord selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") ApplyCommentRecord record, @Param("example") ApplyCommentRecordExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") ApplyCommentRecord record, @Param("example") ApplyCommentRecordExample example);
+
+    int updateByExample(@Param("record") ApplyCommentRecord record, @Param("example") ApplyCommentRecordExample example);
+
+    int updateByPrimaryKeySelective(ApplyCommentRecord record);
+
+    int updateByPrimaryKeyWithBLOBs(ApplyCommentRecord record);
+
+    int updateByPrimaryKey(ApplyCommentRecord record);
+}

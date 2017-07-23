@@ -1,0 +1,305 @@
+package com.gcx.citygovcreditndrc.util;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+/**
+ * 时间工具类
+ * 
+ * @author lijia
+ */
+public class DateUtil {
+
+	/** DateFormat:yyyyMMddHHmmss */
+	public static final String FORMATE_YYYYMMDDHHMMSSZMINUS = "yyyyMMddHHmmssSSS";
+
+	/** DateFormat:yyyy-MM-dd */
+	public static final String FORMATE_YYYY_MM_DD_MINUS = "yyyy-MM-dd";
+
+	/** DateFormat:yyyy-MM-dd */
+	public static final String FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS = "yyyy-MM-dd HH:mm:ss";
+	
+	/** DateFormat:yyyyMMdd */
+	public static final String FORMATE_YYYY_MM_DD = "yyyyMMdd";
+
+	/** 年月日格式 */
+	public static final String CHN_FORMATE_YYYY_MM_DD = "yyyy年MM月dd日";
+
+	/** 年月日时分秒 */
+	public static final String CHN_FORMATE_YYYY_MM_DD_HH_MM_SS = "yyyy/MM/dd HH:mm:ss";
+
+	/**
+	 * 将字符串装换成日期类型
+	 * @param str 需要转换的字符串
+	 * @return Date 转换后的日期
+	 */
+	public static Date convertToDate(String format, String str) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		try {
+
+			return sdf.parse(str);
+		} catch (ParseException pse) {
+
+			return null;
+		}
+	}
+	
+	public static String convertDateToStr(Date date, String format){
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(date);
+	}
+
+	/**
+	 * 得到系统当前时间戳。(精确到毫秒)
+	 * @return String 系统当前时间戳X
+	 */
+	public static String getCurrentTimeStamp() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYYMMDDHHMMSSZMINUS);
+
+		Date date = new Date();
+		return sdf.format(date);
+	}
+
+	/**
+	 * 获取当前日期。
+	 * @return String 系统当前日期
+	 */
+	public static String getCurrentDateYMD() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYY_MM_DD);
+
+		Date date = new Date();
+		return sdf.format(date);
+	}
+
+	/**
+	 * 获取当前日期。
+	 * @return String 系统当前日期
+	 */
+	public static Date getCurrentDateAsDate() {
+
+		Date date = new Date();
+		return date;
+	}
+	
+	/**
+	 * 获取系统当前日期（YYYY年MM月DD日）
+	 * @return
+	 */
+	public static String getCurrentDateYMDChn() {
+		SimpleDateFormat sdf = new SimpleDateFormat(CHN_FORMATE_YYYY_MM_DD);
+
+		Date date = new Date();
+		return sdf.format(date);
+	}
+	
+	/**
+	 * 获取系统当前日时（YYYY年MM月DD日 HH：MMrSS）
+	 * @return
+	 */
+	public static String getCurrentDateYMDHMSChn() {
+		SimpleDateFormat sdf = new SimpleDateFormat(CHN_FORMATE_YYYY_MM_DD_HH_MM_SS);
+
+		Date date = new Date();
+		return sdf.format(date);
+	}
+	
+	/**
+	 * 增加分钟，计算时间
+	 * @param date
+	 * @param minute
+	 * @return
+	 */
+	public static Date addTimeByMinute(Date date, int minute){
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.MINUTE, minute);
+		return calendar.getTime();
+	}
+	
+	/**
+	 * 增加分钟，计算时间
+	 * @param date
+	 * @param minute
+	 * @param calendarField
+	 * @return
+	 */
+	public static Date calcTime(Date date, int addAmount, int calendarField){
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(calendarField, addAmount);
+		return calendar.getTime();
+	}
+	
+	/**
+	 * 获取当前系统时间和星期几
+	 * @return YYYY年MM月DD日 星期几
+	 */
+	public static String getCurrentDateAndWeekDay() {
+
+		String dayNames[] = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		String week_day = dayNames[day - 1];
+		
+		return getCurrentDateYMDChn() + " "+ week_day;
+	}
+	
+	/**
+	 * 获取当前系统时间和星期几
+	 * @return YYYY年MM月DD日 星期几
+	 */
+	public static String getCurrentDateAndWeek() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		int day = cal.get(Calendar.DAY_OF_WEEK)-1;
+		if (day==0){
+			day = 7;
+		} 		
+		return String.valueOf(day);
+	}
+	
+	
+	/**
+	 * 获取当前时间(yyyy-MM-dd HH:mm:ss 格式)
+	 * @return
+	 */
+	public static Date getCurrentDateTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS);
+		try {
+			return sdf.parse(sdf.format(new Date()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		} 
+	}
+	
+	/**
+	 * 获取当前时间(yyyy-MM-dd HH:mm:ss 格式)
+	 * @return String
+	 */
+	public static String getCurrentDateTimeStr() {
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS);
+		return sdf.format(new Date());
+	}
+	
+	public static boolean compareCurrentTime(String start,String end){
+		Date now = getCurrentDateTime();
+		String day =  convertDateToStr(now,FORMATE_YYYY_MM_DD_MINUS);
+		Date startTime =  convertToDate(FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS,day+" "+ start);
+		Date endTime =  convertToDate(FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS,day+" "+ end);
+		return startTime.before(now)&&now.before(endTime);
+	}
+	
+	public static boolean compareSpecifiedTime(Date specified, Date start,Date end){
+		return start.before(specified)&&specified.before(end);
+	}
+	
+	/**
+	 * 计算日期（dt1）是否在日期（dt2）- 期间（period）的之后
+	 * @param dt1 日期1
+	 * @param dt2 日期2
+	 * @param period 时间间隔
+	 * @return dt1 ≥ dt2 - period：返回true，否则返回false
+	 */
+	public static boolean compareTimeInDay(Date dt1, Date dt2, int period, boolean ... notCotainsTargetDayFlg) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYY_MM_DD_MINUS);
+		
+		try {
+			Date tmpDate1 = sdf.parse(sdf.format(dt1));
+			Calendar c = Calendar.getInstance();
+			c.setTime(dt2);
+			c.add(Calendar.HOUR, period * 24);
+			Date tmpDate2 = sdf.parse(sdf.format(c.getTime()));
+			if (notCotainsTargetDayFlg != null &&notCotainsTargetDayFlg.length > 0 && notCotainsTargetDayFlg[0]) {
+				if (tmpDate1.compareTo(tmpDate2) > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				if (tmpDate1.compareTo(tmpDate2) >= 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
+	
+	public static long calcDaysPeriod(Date dt1, Date dt2) {
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYY_MM_DD_MINUS);
+			Date dt01 = sdf.parse(sdf.format(dt1));
+			Date dt02 = sdf.parse(sdf.format(dt2));
+
+			return (dt02.getTime() - dt01.getTime())/(3600*24*1000);
+		} catch (Exception e) {
+			
+		}
+
+		return 0;
+	}
+	
+	public static Date getCurrentDaysDateTime(Date dt){
+		if (dt==null)
+			return null;
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS);
+		String currentTimeStr = convertDateToStr(dt,FORMATE_YYYY_MM_DD_MINUS);
+		try {
+			dt = sdf.parse(currentTimeStr+" 23:59:59");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return dt;
+	}
+	
+	/**
+	 * 返回指定Date值的时间值，格式：yyyy-MM-dd HH:mm:ss
+	 * @param date
+	 *            需要转换的日期
+	 * @return String值
+	 */
+	public static String dateToAllCode(Date date) {
+		try {
+			SimpleDateFormat simpledateformat = new SimpleDateFormat(FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS);
+			String s = simpledateformat.format(date);
+			return s;
+		} catch (Exception e) {
+			return "";
+		}
+	}
+	
+	public static void main(String[] args) throws ParseException{
+//		System.out.println(getCurrentDateAndWeek());
+//		System.out.println(compareCurrentTime("12:23:20","15:23:14"));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATE_YYYY_MM_DD_HH_MM_SS_MINUS);
+		String currentTimeStr = convertDateToStr(new Date(),FORMATE_YYYY_MM_DD_MINUS);
+		Date dt1 = sdf.parse(currentTimeStr+" 23:59:59");	
+		System.out.println(currentTimeStr);
+		System.out.println(dt1);
+//		Date dt1 = sdf.parse("2012-01-10 00:00:00");
+//		Date dt2 = sdf.parse("2012-01-11 00:00:00");
+		
+//		System.out.println(compareTimeInDay(dt1, dt2, 0));
+//		System.out.println(calcDaysPeriod(dt1, dt2));
+//		System.out.println(getCurrentDateAndWeek());
+	}
+	
+}

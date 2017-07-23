@@ -1,0 +1,15 @@
+package com.gcx.citygovcreditndrc.model.govServe;
+
+public class GSListItem extends GovServe {
+	private String attachment;
+
+	public String getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(String attachment) {
+		this.attachment = attachment;
+	}
+	
+	
+}

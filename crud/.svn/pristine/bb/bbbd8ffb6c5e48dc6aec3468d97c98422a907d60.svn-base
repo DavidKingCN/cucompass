@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.personInfo.PersonInfoInputMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="PROVINCE_CODE" property="provinceCode" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="TYPE_CODE" property="typeCode" jdbcType="CHAR" />
+    <result column="INPUT_USER" property="inputUser" jdbcType="VARCHAR" />
+    <result column="INPUT_TIME" property="inputTime" jdbcType="TIMESTAMP" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="PIC" property="pic" jdbcType="VARCHAR" />
+    <result column="R1" property="r1" jdbcType="VARCHAR" />
+    <result column="R2" property="r2" jdbcType="VARCHAR" />
+    <result column="CARD" property="card" jdbcType="VARCHAR" />
+    <result column="DEP" property="dep" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, PROVINCE, PROVINCE_CODE, CITY, CITY_CODE, TYPE, TYPE_CODE, INPUT_USER, 
+    INPUT_TIME, STATE, PIC, R1, R2, CARD, DEP, POSITION, CONTACT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInputExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from person_info_input
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="findPersonInfoInput" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput" >
+    select
+    <include refid="Base_Column_List" />
+    from person_info_input
+    where 1=1
+    
+        <if test="record.id != null and record.id != ''" >
+        AND ID=#{record.id,jdbcType=INTEGER}
+      </if>
+       <if test="record.name != null and record.name!= ''" >
+        AND NAME=#{record.name,jdbcType=INTEGER}
+      </if>
+      <if test="record.state != null and record.state != ''" >
+        AND STATE=#{record.state,jdbcType=VARCHAR}
+      </if>
+      <if test="record.province != null and record.province != ''" >
+        AND PROVINCE=#{record.province,jdbcType=VARCHAR}
+      </if>
+      <if test="record.city != null and record.city != ''" >
+        AND CITY=#{record.city,jdbcType=VARCHAR}
+      </if>
+      <if test="record.type != null and record.type != ''" >
+        AND TYPE=#{record.type,jdbcType=VARCHAR}
+      </if>
+        <if test="record.inputUser != null and record.inputUser != ''" >
+        AND INPUT_USER=#{record.inputUser,jdbcType=VARCHAR}
+      </if>
+         <if test="record.inputTime != null and record.inputTime != ''" >
+        AND INPUT_TIME=#{record.inputTime,jdbcType=VARCHAR}
+      </if>
+         <if test="record.pic != null and record.pic != ''" >
+        AND PIC=#{record.pic,jdbcType=VARCHAR}
+      </if>
+         <if test="record.r1 != null and record.r1 != ''" >
+        AND R1=#{record.r1,jdbcType=VARCHAR}
+      </if>
+        <if test="record.r2 != null and record.r2 != ''" >
+        AND R2=#{record.r2,jdbcType=VARCHAR}
+      </if>
+      <if test="record.card != null and record.card != ''" >
+        AND CARD=#{record.card,jdbcType=VARCHAR}
+      </if>
+       <if test="record.dep != null and record.dep != ''" >
+        AND DEP=#{record.dep,jdbcType=VARCHAR}
+      </if>
+      <if test="record.position != null and record.position != ''" >
+        AND POSITION=#{record.position,jdbcType=VARCHAR}
+      </if>
+      <if test="record.contact != null and record.contact != ''" >
+        AND CONTACT=#{record.contact,jdbcType=VARCHAR}
+      </if>
+    limit #{pagenow}, #{pagesize}
+  </select>
+  <select id="findPersonInfoInputCount"  resultType="java.lang.Integer" >
+    select
+     count(id) AS count 
+    from person_info_input
+     where 1=1
+    
+        <if test="record.id != null and record.id != ''" >
+        AND ID=#{record.id,jdbcType=INTEGER}
+      </if>
+       <if test="record.name != null and record.name!= ''" >
+        AND NAME=#{record.name,jdbcType=INTEGER}
+      </if>
+      <if test="record.state != null and record.state != ''" >
+        AND STATE=#{record.state,jdbcType=VARCHAR}
+      </if>
+      <if test="record.province != null and record.province != ''" >
+        AND PROVINCE=#{record.province,jdbcType=VARCHAR}
+      </if>
+      <if test="record.city != null and record.city != ''" >
+        AND CITY=#{record.city,jdbcType=VARCHAR}
+      </if>
+      <if test="record.type != null and record.type != ''" >
+        AND TYPE=#{record.type,jdbcType=VARCHAR}
+      </if>
+        
+         <if test="record.inputTime != null and record.inputTime != ''" >
+        AND INPUT_TIME=#{record.inputTime,jdbcType=VARCHAR}
+      </if>
+         <if test="record.pic != null and record.pic != ''" >
+        AND PIC=#{record.pic,jdbcType=VARCHAR}
+      </if>
+         <if test="record.r1 != null and record.r1 != ''" >
+        AND R1=#{record.r1,jdbcType=VARCHAR}
+      </if>
+        <if test="record.r2 != null and record.r2 != ''" >
+        AND R2=#{record.r2,jdbcType=VARCHAR}
+      </if>
+      <if test="record.card != null and record.card != ''" >
+        AND CARD=#{record.card,jdbcType=VARCHAR}
+      </if>
+       <if test="record.dep != null and record.dep != ''" >
+        AND DEP=#{record.dep,jdbcType=VARCHAR}
+      </if>
+      <if test="record.position != null and record.position != ''" >
+        AND POSITION=#{record.position,jdbcType=VARCHAR}
+      </if>
+      <if test="record.contact != null and record.contact != ''" >
+        AND CONTACT=#{record.contact,jdbcType=VARCHAR}
+      </if>
+      
+      
+      
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from person_info_input
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from person_info_input
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInputExample" >
+    delete from person_info_input
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput" >
+    insert into person_info_input (ID, NAME, PROVINCE, 
+      PROVINCE_CODE, CITY, CITY_CODE, 
+      TYPE, TYPE_CODE, INPUT_USER, 
+      INPUT_TIME, STATE, PIC, 
+      R1, R2, CARD, DEP, 
+      POSITION, CONTACT)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{provinceCode,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{typeCode,jdbcType=CHAR}, #{inputUser,jdbcType=VARCHAR}, 
+      #{inputTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{r1,jdbcType=VARCHAR}, #{r2,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR}, #{dep,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput" >
+    insert into person_info_input
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="provinceCode != null" >
+        PROVINCE_CODE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="typeCode != null" >
+        TYPE_CODE,
+      </if>
+      <if test="inputUser != null" >
+        INPUT_USER,
+      </if>
+      <if test="inputTime != null" >
+        INPUT_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="pic != null" >
+        PIC,
+      </if>
+      <if test="r1 != null" >
+        R1,
+      </if>
+      <if test="r2 != null" >
+        R2,
+      </if>
+      <if test="card != null" >
+        CARD,
+      </if>
+      <if test="dep != null" >
+        DEP,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCode != null" >
+        #{typeCode,jdbcType=CHAR},
+      </if>
+      <if test="inputUser != null" >
+        #{inputUser,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null" >
+        #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="r1 != null" >
+        #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="dep != null" >
+        #{dep,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInputExample" resultType="java.lang.Integer" >
+    select count(*) from person_info_input
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update person_info_input
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null" >
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null" >
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeCode != null" >
+        TYPE_CODE = #{record.typeCode,jdbcType=CHAR},
+      </if>
+      <if test="record.inputUser != null" >
+        INPUT_USER = #{record.inputUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputTime != null" >
+        INPUT_TIME = #{record.inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic != null" >
+        PIC = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r1 != null" >
+        R1 = #{record.r1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r2 != null" >
+        R2 = #{record.r2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.card != null" >
+        CARD = #{record.card,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dep != null" >
+        DEP = #{record.dep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contact != null" >
+        CONTACT = #{record.contact,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update person_info_input
+    set ID = #{record.id,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      TYPE_CODE = #{record.typeCode,jdbcType=CHAR},
+      INPUT_USER = #{record.inputUser,jdbcType=VARCHAR},
+      INPUT_TIME = #{record.inputTime,jdbcType=TIMESTAMP},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      PIC = #{record.pic,jdbcType=VARCHAR},
+      R1 = #{record.r1,jdbcType=VARCHAR},
+      R2 = #{record.r2,jdbcType=VARCHAR},
+      CARD = #{record.card,jdbcType=VARCHAR},
+      DEP = #{record.dep,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      CONTACT = #{record.contact,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput" >
+    update person_info_input
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCode != null" >
+        TYPE_CODE = #{typeCode,jdbcType=CHAR},
+      </if>
+      <if test="inputUser != null" >
+        INPUT_USER = #{inputUser,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null" >
+        INPUT_TIME = #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        PIC = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="r1 != null" >
+        R1 = #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        R2 = #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        CARD = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="dep != null" >
+        DEP = #{dep,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        CONTACT = #{contact,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput" >
+    update person_info_input
+    set NAME = #{name,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      TYPE_CODE = #{typeCode,jdbcType=CHAR},
+      INPUT_USER = #{inputUser,jdbcType=VARCHAR},
+      INPUT_TIME = #{inputTime,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=VARCHAR},
+      PIC = #{pic,jdbcType=VARCHAR},
+      R1 = #{r1,jdbcType=VARCHAR},
+      R2 = #{r2,jdbcType=VARCHAR},
+      CARD = #{card,jdbcType=VARCHAR},
+      DEP = #{dep,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

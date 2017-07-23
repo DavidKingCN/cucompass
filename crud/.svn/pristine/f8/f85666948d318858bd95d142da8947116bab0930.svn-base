@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/xmfb_qyxm_new.css"/>
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<script src="js/jquery.form.js"></script>
+		<style type="text/css">
+	    .mask{width:100%;height:100%;position: fixed;top:0; left:0;background: rgba(0,0,0,0.2);display: none;}
+        .mask_container{width:438px;height:310px;margin:0 auto;background:#fff;margin-top:10%;border-radius:5px;}
+        .mask_head{height:40px;line-height:40px;padding-left: 15px;box-sizing: border-box;font-size:16px;border-bottom:1px solid #ddd;}
+        .mask_close{display:inline-block;float:right;font-size:30px;width:24px;height:24px;line-height:21px;text-align:center;border-radius:50%;background:#c5c5c5;color:#fff;margin-right: 15px;margin-top:7px;cursor: pointer;}
+        .mask_detail{box-sizing: border-box;padding: 30px 60px;}
+        .mask_detail p{text-align:center;color:red;font-size: 18px;margin:10px 0;}
+        .mask_handle{width:250px;height:30px;margin:0 auto;margin-top: 60px;}
+        .mask_handle a{display:inline-block;width:160px;height:30px;background: #eee;border-radius:5px;line-height: 30px;text-align: center;cursor: pointer;margin-left:50px}
+        
+
+		</style>
+</head>
+<body>
+<form id='fileUploadForm' name='fileUploadForm' action="" method="post" enctype="multipart/form-data">
+		<div class="section">
+			<table id="fileTab">
+				
+				<tr>
+					
+					<td>
+						<input type="file" name="file" value='文件上传'/>
+						<a href="">办事指南</a>
+					</td>
+				</tr>
+				<tr>
+					
+					<td>
+						<input type="file" name="file1" value='文件上传'/>
+						<a href="">办事指南</a>
+					</td>
+				</tr>
+				
+			</table>
+			
+			
+		  <div class="mask">
+            <div class="mask_container">
+                <div class="mask_head">
+                    温馨提示
+                    <a class="mask_close">&times;</a>
+                </div>
+                <div class="mask_detail">
+                    <p>
+                        	您的信息已提交，请等待审核
+                    </p>
+                    <div class="mask_handle">
+                        <a class="submit">确定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		</div>
+		</form>
+</body>
+</html>
+<script>
+$('.mask_close,.cancel').click(function(){
+    $('.mask').fadeOut();
+});
+$('.active').click(function(){
+    $('.mask').show();
+});
+$('.submit').click(function(){
+$("#fileUploadForm").ajaxSubmit({
+            		url: '/keyprjlib/file/upload2',
+                    type: "post", 
+                    dataType: "json",
+                    //提交后的回调函数
+                    success: function (data) {
+                        
+                    },
+                    error: function (error) { alert(error); }
+                    
+                });
+$('.mask').fadeOut();
+});
+</script>                

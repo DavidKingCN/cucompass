@@ -1,0 +1,65 @@
+package com.gcx.citygovcreditndrc.model.common;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+
+public class EnclosureVo {
+	
+	
+	
+	private List<Enclosure> attachments ;
+
+	public List<Enclosure> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Enclosure> attachments) {
+		this.attachments = attachments;
+	}
+	
+	public static void main(String[] args) {
+		EnclosureVo enclouVo = new EnclosureVo();
+		
+		List<Enclosure> attachments = new ArrayList<>();
+		//附件一
+		Enclosure  enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+1);
+		enclosure.setMaterialTitle("title"+1);
+		enclosure.setR1(1);//主表外键
+		enclosure.setR2("登陆用户的主键");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		//附件2
+		enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+2);
+		enclosure.setMaterialTitle("title"+2);
+		enclosure.setR1(1);//主表外键
+		enclosure.setR2("登陆用户的主键");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		
+		//附件3
+		enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+3);
+		enclosure.setMaterialTitle("title"+3);
+		enclosure.setR1(1);//主表外键
+		enclosure.setR2("登陆用户的主键");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		
+		enclouVo.setAttachments(attachments);
+		
+		System.out.println(JSONUtil.toJson(enclouVo));
+	}
+}

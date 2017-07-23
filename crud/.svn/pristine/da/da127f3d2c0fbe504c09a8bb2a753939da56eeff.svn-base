@@ -1,0 +1,171 @@
+function fromFormToJson(formName){
+	
+	//取前缀
+	var prefixArr = [];
+	var data = $("#"+formName).serializeArray();
+	
+	
+	var prefixSet = new Set();
+	
+	$.each(data,function(i,item){
+		var itemName = item.name;
+		itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+		var iv = item.value;
+		var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+		if(ivNtNull){
+			var fieldDom = $("[name="+itemName+"]");
+			var attrVal = fieldDom.attr("prefix");
+			var hasAttrVal = attrVal != null && attrVal != '' && attrVal != undefined;
+			if(hasAttrVal)
+				prefixSet.add(attrVal);
+		}
+	});
+	
+	console.log(prefixSet.show());
+	var groups = new HashMap();
+	var prefixLen = prefixSet.size();
+	if(prefixLen==0){
+		$.each(data,function(i,item){
+			var itemName = item.name;
+			itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+			var iv = item.value;
+			var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+			if(ivNtNull){
+				var fieldDom = $("[name="+itemName+"]");
+				
+				var dataTypeVal = fieldDom.attr("dataType");
+				var hasDataTypeAttr = dataTypeVal != null && dataTypeVal != '' && dataTypeVal != undefined;
+				
+				groups.put(itemName,iv);
+				if(hasDataTypeAttr && dataTypeVal=='digit'){
+					groups.type('digit');
+				}else{
+					groups.type('string');
+				}
+			}
+		});
+	}else{
+		prefixArr = prefixSet.toArray();
+		
+		for(var i=0;i<prefixArr.length;i++){
+			groups.put(prefixArr[i],new HashMap());
+		}
+		
+		$.each(data,function(i,item){
+			var itemName = item.name;
+			itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+			var iv = item.value;
+			var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+			if(ivNtNull){
+				var fieldDom = $("[name="+itemName+"]");
+				var attrVal = fieldDom.attr("prefix");
+				
+				var dataTypeVal = fieldDom.attr("dataType");
+				var hasDataTypeAttr = dataTypeVal != null && dataTypeVal != '' && dataTypeVal != undefined;
+				
+				for(var i=0;i<prefixArr.length;i++){
+					if(attrVal==prefixArr[i]){
+						var vs = groups.get(attrVal);
+						vs.put(itemName,iv);
+						if(hasDataTypeAttr && dataTypeVal=='digit'){
+							vs.type('digit');
+						}else{
+							vs.type('string');
+						}
+						groups.put(attrVal,vs);
+						break;
+					}
+				}
+			}
+		});
+	}
+	return groups.toJson();
+}
+
+
+jQuery.fn.extend({
+	    ///这个函数是全部选择所有的元素
+	    formToJson: function() {
+	        //取前缀
+			var prefixArr = [];
+			var data = this.serializeArray();
+			
+			
+			var prefixSet = new Set();
+			
+			$.each(data,function(i,item){
+				var itemName = item.name;
+				itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+				var iv = item.value;
+				var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+				if(ivNtNull){
+					var fieldDom = $("[name="+itemName+"]");
+					var attrVal = fieldDom.attr("prefix");
+					var hasAttrVal = attrVal != null && attrVal != '' && attrVal != undefined;
+					if(hasAttrVal)
+						prefixSet.add(attrVal);
+				}
+			});
+			
+			console.log(prefixSet.show());
+			var groups = new HashMap();
+			var prefixLen = prefixSet.size();
+			if(prefixLen==0){
+				$.each(data,function(i,item){
+					var itemName = item.name;
+					itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+					var iv = item.value;
+					var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+					if(ivNtNull){
+						var fieldDom = $("[name="+itemName+"]");
+						
+						var dataTypeVal = fieldDom.attr("dataType");
+						var hasDataTypeAttr = dataTypeVal != null && dataTypeVal != '' && dataTypeVal != undefined;
+						
+						groups.put(itemName,iv);
+						if(hasDataTypeAttr && dataTypeVal=='digit'){
+							groups.type('digit');
+						}else{
+							groups.type('string');
+						}
+					}
+				});
+			}else{
+			
+				prefixArr = prefixSet.toArray();
+				
+				for(var i=0;i<prefixArr.length;i++){
+					groups.put(prefixArr[i],new HashMap());
+				}
+				
+				$.each(data,function(i,item){
+					var itemName = item.name;
+					itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+					var iv = item.value;
+					var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+					if(ivNtNull){
+						var fieldDom = $("[name="+itemName+"]");
+						var attrVal = fieldDom.attr("prefix");
+						
+						var dataTypeVal = fieldDom.attr("dataType");
+						var hasDataTypeAttr = dataTypeVal != null && dataTypeVal != '' && dataTypeVal != undefined;
+						
+						for(var i=0;i<prefixArr.length;i++){
+							if(attrVal==prefixArr[i]){
+								var vs = groups.get(attrVal);
+								vs.put(itemName,iv);
+								if(hasDataTypeAttr && dataTypeVal=='digit'){
+									vs.type('digit');
+								}else{
+									vs.type('string');
+								}
+								groups.put(attrVal,vs);
+								break;
+							}
+						}
+					}
+				});
+			}
+			return groups.toJson();
+	    }
+	}); 

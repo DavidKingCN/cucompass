@@ -1,0 +1,18 @@
+package com.gcx.citygovcreditndrc.service.demo;
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.demo.Group;
+
+
+public interface GroupService {
+
+	ServiceResult<Object> findRecords(Group record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(Group record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(Group record);
+}

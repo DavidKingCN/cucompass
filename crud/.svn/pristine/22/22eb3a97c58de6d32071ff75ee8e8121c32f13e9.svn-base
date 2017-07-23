@@ -1,0 +1,60 @@
+function fromFormToJson(formName){
+	
+	//取前缀
+	var prefixArr = [];
+	var data = $("#"+formName).serializeArray();
+	
+	
+	var prefixSet = new Set();
+	
+	$.each(data,function(i,item){
+		var itemName = item.name;
+		itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+		var iv = item.value;
+		var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+		if(ivNtNull){
+			var fieldDom = $("[name="+itemName+"]");
+			var attrVal = fieldDom.attr("prefix");
+			prefixSet.add(attrVal);
+		}
+	});
+	
+	console.log(prefixSet.show());
+	
+	prefixArr = prefixSet.toArray();
+	var groups = new HashMap();
+	
+	for(var i=0;i<prefixArr.length;i++){
+		groups.put(prefixArr[i],new HashMap());
+	}
+	
+	$.each(data,function(i,item){
+		var itemName = item.name;
+		itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+		var iv = item.value;
+		var ivNtNull = iv!=null&&iv!=''&&iv != undefined;
+		if(ivNtNull){
+			var fieldDom = $("[name="+itemName+"]");
+			var attrVal = fieldDom.attr("prefix");
+			
+			var dataTypeVal = fieldDom.attr("dataType");
+			var hasDataTypeAttr = dataTypeVal != null && dataTypeVal != '' && dataTypeVal != undefined;
+			
+			for(var i=0;i<prefixArr.length;i++){
+				if(attrVal==prefixArr[i]){
+					var vs = groups.get(attrVal);
+					vs.put(itemName,iv);
+					if(hasDataTypeAttr && dataTypeVal=='digit'){
+						vs.type('digit');
+					}else{
+						vs.type('string');
+					}
+					groups.put(attrVal,vs);
+					break;
+				}
+			}
+		}
+	});
+	
+	return groups.toJson();
+}

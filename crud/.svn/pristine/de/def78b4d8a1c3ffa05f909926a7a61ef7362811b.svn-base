@@ -1,0 +1,24 @@
+package com.gcx.citygovcreditndrc.service.applyCommentRecord;
+
+
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecord;
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecordAo;
+
+
+public interface ApplyCommentRecordService {
+
+	ServiceResult<Object> findRecords(HttpServletRequest request,HttpServletResponse response,ApplyCommentRecordAo record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(ApplyCommentRecord record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(ApplyCommentRecord record);
+
+	public ServiceResult<Object> findById(Integer record);
+}

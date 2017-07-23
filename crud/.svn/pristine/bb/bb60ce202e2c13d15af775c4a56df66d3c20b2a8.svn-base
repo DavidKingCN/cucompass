@@ -1,0 +1,112 @@
+package com.gcx.citygovcreditndrc.controller.govdevelopment;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gcx.citygovcreditndrc.model.ResponseData;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment;
+import com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentAo;
+import com.gcx.citygovcreditndrc.service.govdevelopment.GovdevelopmentService;
+import com.gcx.citygovcreditndrc.service.impl.CommonImpl;
+
+@SuppressWarnings("all")
+@Controller
+@RequestMapping("/govdevelopment")
+public class GovdevelopmentController {
+	@Resource
+	GovdevelopmentService govdevelopmentService;
+
+	@Resource
+	CommonImpl commonImpl;
+	
+	@RequestMapping(value="/page",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseData findRecords(HttpServletRequest request,HttpServletResponse response ,@RequestBody GovdevelopmentAo record){
+		
+		String userId=commonImpl.getUserId(request, response);
+		if(!"".equals(userId) || userId != null){
+			record.setSubmitor(userId);
+		}
+		ServiceResult<Object> result = govdevelopmentService.findRecords(record,record.getPagenow(), record.getPagesize());
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		if(result.getTotal() !=null){
+			responseData.putDataValue("count", result.getTotal());
+		}
+		return responseData;
+	}
+	
+	//保存的方法
+	@ResponseBody
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public ResponseData addRecord(@RequestBody Govdevelopment record){
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = formatter.format(currentTime);
+		record.setSubTime(dateString);
+		ServiceResult result =govdevelopmentService.addRecord(record);
+		
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/del/{id}",method=RequestMethod.GET)
+	public ResponseData delRecord(@PathVariable("id") Integer record){
+		ServiceResult<Object> result = govdevelopmentService.delRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	@ResponseBody
+	@RequestMapping(value="/findById/{id}",method=RequestMethod.GET)
+	public ResponseData findById(@PathVariable("id") Integer record){
+		ServiceResult<Object> result = govdevelopmentService.findById(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public ResponseData updateRecord(HttpServletRequest request,HttpServletResponse response,@RequestBody Govdevelopment record){
+		String userId=commonImpl.getUserId(request, response);
+		if(!"".equals(userId) || userId != null){
+			record.setAuditor(userId);
+		}
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = formatter.format(currentTime);
+		record.setAudTime(dateString);
+		ServiceResult<Object> result = govdevelopmentService.updateRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+}

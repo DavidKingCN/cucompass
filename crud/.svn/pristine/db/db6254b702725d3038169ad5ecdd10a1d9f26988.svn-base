@@ -1,0 +1,70 @@
+package com.gcx.citygovcreditndrc.service.common.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.common.EnclosureMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.service.common.EnclosureService;
+
+@Service("enclosureService")
+public class EnclosureServiceImpl implements EnclosureService{
+
+	@Autowired
+	private EnclosureMapper enclosureDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(Enclosure record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<Enclosure> list = enclosureDao.findByRecord(record, limitStart, limitEnd);
+		int count = enclosureDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(Enclosure record) {
+		
+		enclosureDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		enclosureDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(Enclosure record) {
+		enclosureDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public List<Enclosure> findAttachmentsByPid(int id) {
+		return enclosureDao.findAttachmentsByPid(id);
+	}
+
+}

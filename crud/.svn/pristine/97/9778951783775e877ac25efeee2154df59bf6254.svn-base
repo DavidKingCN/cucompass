@@ -1,0 +1,177 @@
+package com.gcx.citygovcreditndrc.model.govServe;
+
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+
+public class GovServe {
+    private Integer id;
+
+	private String state;
+
+	private String applyServe;
+
+	private String applyUnit;
+
+	private String applier;
+
+	private String applyTime;
+
+	private String auditor;
+
+	private String auditDept;
+
+	private String auditContent;
+
+	private String auditTime;
+
+	private String a1;
+
+	private String a2;
+
+	private String a3;
+
+	private String a4;
+
+	private String a5;
+
+	private String a6;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state == null ? null : state.trim();
+	}
+
+	public String getApplyServe() {
+		return applyServe;
+	}
+
+	public void setApplyServe(String applyServe) {
+		this.applyServe = applyServe == null ? null : applyServe.trim();
+	}
+
+	public String getApplyUnit() {
+		return applyUnit;
+	}
+
+	public void setApplyUnit(String applyUnit) {
+		this.applyUnit = applyUnit == null ? null : applyUnit.trim();
+	}
+
+	public String getApplier() {
+		return applier;
+	}
+
+	public void setApplier(String applier) {
+		this.applier = applier == null ? null : applier.trim();
+	}
+
+	public String getApplyTime() {
+		return applyTime;
+	}
+
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime == null ? null : applyTime.trim();
+	}
+
+	public String getAuditor() {
+		return auditor;
+	}
+
+	public void setAuditor(String auditor) {
+		this.auditor = auditor == null ? null : auditor.trim();
+	}
+
+	public String getAuditDept() {
+		return auditDept;
+	}
+
+	public void setAuditDept(String auditDept) {
+		this.auditDept = auditDept == null ? null : auditDept.trim();
+	}
+
+	public String getAuditContent() {
+		return auditContent;
+	}
+
+	public void setAuditContent(String auditContent) {
+		this.auditContent = auditContent == null ? null : auditContent.trim();
+	}
+
+	public String getAuditTime() {
+		return auditTime;
+	}
+
+	public void setAuditTime(String auditTime) {
+		this.auditTime = auditTime == null ? null : auditTime.trim();
+	}
+
+	public String getA1() {
+		return a1;
+	}
+
+	public void setA1(String a1) {
+		this.a1 = a1 == null ? null : a1.trim();
+	}
+
+	public String getA2() {
+		return a2;
+	}
+
+	public void setA2(String a2) {
+		this.a2 = a2 == null ? null : a2.trim();
+	}
+
+	public String getA3() {
+		return a3;
+	}
+
+	public void setA3(String a3) {
+		this.a3 = a3 == null ? null : a3.trim();
+	}
+
+	public String getA4() {
+		return a4;
+	}
+
+	public void setA4(String a4) {
+		this.a4 = a4 == null ? null : a4.trim();
+	}
+
+	public String getA5() {
+		return a5;
+	}
+
+	public void setA5(String a5) {
+		this.a5 = a5 == null ? null : a5.trim();
+	}
+
+	public String getA6() {
+		return a6;
+	}
+
+	public void setA6(String a6) {
+		this.a6 = a6 == null ? null : a6.trim();
+	}
+
+	public static void main(String[] args) {
+		GovServe govServe ;
+		govServe = new GovServe();
+		govServe .setApplier("戴凯");
+		govServe .setApplyUnit("北京大学教务处");
+		govServe .setAuditor("戴凯");
+		govServe .setAuditDept("北京大学教务处");
+		govServe .setState("待审核");
+		
+		System.out.println(JSONUtil.toJson(govServe));
+	}
+}

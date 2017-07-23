@@ -1,0 +1,19 @@
+package com.gcx.citygovcreditndrc.model.common;
+
+import com.gcx.citygovcreditndrc.model.Student;
+
+public class UploadVo {
+	private Student student;
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+
+	
+	
+}

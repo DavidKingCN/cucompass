@@ -1,0 +1,76 @@
+package com.gcx.citygovcreditndrc.controller.personInfo;
+
+import java.util.Date;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gcx.citygovcreditndrc.model.MyResult;
+import com.gcx.citygovcreditndrc.model.User;
+import com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput;
+import com.gcx.citygovcreditndrc.service.impl.CommonImpl;
+import com.gcx.citygovcreditndrc.service.personInfo.PersonInfoInputService;
+
+@Controller
+@RequestMapping("/personInfoInput")
+public class PersonInfoInputController {
+	
+	@Resource
+	CommonImpl commonImpl;
+	
+	@Resource
+	PersonInfoInputService personInfoInputService;
+	
+	@ResponseBody
+	@RequestMapping("/findByConditions")
+	private MyResult<Object> findByConditions(HttpServletRequest request,HttpServletResponse response,PersonInfoInput personInfoInput,int pagenow,int pagesize){
+		String userId=commonImpl.getUserId(request, response);
+		if(!"".equals(userId) || userId != null){
+			personInfoInput.setInputUser(userId);
+		}
+		MyResult<Object> result=personInfoInputService.findById(personInfoInput, pagenow, pagesize);
+		return result;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/insertByConditions")
+	public MyResult<Object> insertByConditions(HttpServletRequest request,HttpServletResponse response,PersonInfoInput personInfoInput){
+		String userId=commonImpl.getUserId(request, response);
+		String userName=commonImpl.getUserName(request, response);
+		personInfoInput.setInputUser(userId);
+		personInfoInput.setR1(userName);
+		personInfoInput.setInputTime(new Date());
+		if("".equals(personInfoInput.getId())){
+			personInfoInput.setState("01");
+		}else {
+			personInfoInput.setState("02");
+		}
+		MyResult<Object> result=personInfoInputService.insert(personInfoInput);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateByConditions")
+	public MyResult<Object> updateByConditions(HttpServletRequest request,HttpServletResponse response,PersonInfoInput personInfoInput){
+		MyResult<Object> result=personInfoInputService.updateById(personInfoInput);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findUserId")
+	public MyResult<Object> findUserId(HttpServletRequest request,HttpServletResponse response){
+		MyResult<Object> result=new MyResult<Object>();
+		User user=commonImpl.getUser(request, response);
+		result.setData(user);
+		result.setMsg("操作成功");
+		result.setStatus(200);
+		return result;
+	} 
+
+}

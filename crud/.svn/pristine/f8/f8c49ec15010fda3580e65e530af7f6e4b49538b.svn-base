@@ -1,0 +1,63 @@
+package com.gcx.citygovcreditndrc.service.personInfo.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.personInfo.PersonInfoInputMapper;
+import com.gcx.citygovcreditndrc.model.MyResult;
+import com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput;
+import com.gcx.citygovcreditndrc.service.personInfo.PersonInfoInputService;
+
+@Service("personInfoInputService")
+public class PersonInfoInputServiceImpl implements PersonInfoInputService{
+	
+	@Autowired
+	PersonInfoInputMapper personInfoInputMapper;
+
+	@Override
+	public MyResult<Object> findById(PersonInfoInput personInfoInput, int pagenow, int pagesize) {
+		// TODO Auto-generated method stub
+		MyResult<Object> result=new MyResult<>();
+		if(pagesize==0){
+			PersonInfoInput personInfo=personInfoInputMapper.selectByPrimaryKey(personInfoInput.getId());
+			result.setData(personInfo);
+		}else{
+			int limitStart = (pagenow-1)*pagesize;
+			List<PersonInfoInput> list=personInfoInputMapper.findPersonInfoInput(personInfoInput,limitStart,pagesize);
+			int count=personInfoInputMapper.findPersonInfoInputCount(personInfoInput);
+			result.setData(list);
+			result.setCount(count);
+		}
+		result.setStatus(200);
+		result.setMsg("操作成功");
+		return result;
+	}
+
+	@Override
+	public MyResult<Object> insert(PersonInfoInput personInfoInput) {
+		int resultCount=0;
+		if("".equals(personInfoInput.getId())){
+			resultCount=personInfoInputMapper.insertSelective(personInfoInput);
+		}else {
+			resultCount=personInfoInputMapper.updateByPrimaryKey(personInfoInput);
+		}
+		MyResult<Object> result=new MyResult<>();
+		result.setStatus(200);
+		result.setMsg("操作成功");
+		result.setData(resultCount);
+		return result;
+	}
+
+	@Override
+	public MyResult<Object> updateById(PersonInfoInput personInfoInput) {
+		int resultCount=personInfoInputMapper.updateByPrimaryKeySelective(personInfoInput);
+		MyResult<Object> result=new MyResult<>();
+		result.setStatus(200);
+		result.setMsg("操作成功");
+		result.setData(resultCount);
+		return result;
+	}
+
+}

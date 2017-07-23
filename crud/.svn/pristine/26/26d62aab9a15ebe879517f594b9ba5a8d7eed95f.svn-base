@@ -1,0 +1,84 @@
+package com.gcx.citygovcreditndrc.model.govServe;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+
+public class GovServeVo {
+   private GovServe govServe;
+   
+   private List<Enclosure> attachments ;
+
+	public GovServe getGovServe() {
+	return govServe;
+}
+
+public void setGovServe(GovServe govServe) {
+	this.govServe = govServe;
+}
+
+	public List<Enclosure> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Enclosure> attachments) {
+		this.attachments = attachments;
+	}
+	public static void main(String[] args) {
+		GovServeVo govServeVo = new GovServeVo();
+		
+		
+		GovServe govServe ;
+		govServe = new GovServe();
+		govServe .setApplier("戴凯");
+		govServe .setApplyUnit("北京大学教务处");
+		govServe .setAuditor("戴凯");
+		govServe .setAuditDept("北京大学教务处");
+		govServe .setState("待审核");
+		
+		govServeVo.setGovServe(govServe);
+		
+		
+		List<Enclosure> attachments = new ArrayList<>();
+		//附件一
+		Enclosure  enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+1);
+		enclosure.setMaterialTitle("title"+1);
+		//enclosure.setR4("1");//主表外键
+		enclosure.setR2("登陆用户的主键");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		//附件2
+		enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+2);
+		enclosure.setMaterialTitle("title"+2);
+		//enclosure.setR4("1");//主表外键
+		enclosure.setR2("登陆用户的主键");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		
+		//附件3
+		enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+3);
+		enclosure.setMaterialTitle("title"+3);
+		//enclosure.setR4("1");//主表外键
+		enclosure.setR2("登陆用户的主键");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		govServeVo.setAttachments(attachments);
+		
+		System.out.println(JSONUtil.toJson(govServeVo));
+		
+	}
+}

@@ -1,0 +1,24 @@
+package com.gcx.citygovcreditndrc.model.common;
+public class Comment{
+	private String content;
+	
+	private String tm;
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getTm() {
+		return tm;
+	}
+
+	public void setTm(String tm) {
+		this.tm = tm;
+	}
+	
+	
+}

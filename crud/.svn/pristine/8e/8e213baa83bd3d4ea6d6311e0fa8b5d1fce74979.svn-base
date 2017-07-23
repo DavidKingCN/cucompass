@@ -1,0 +1,313 @@
+package com.gcx.citygovcreditndrc.model.project;
+
+public class Project {
+    private Integer id;
+
+    private String proName;
+
+    private String proUnit;
+
+    private String proCharge;
+
+    private String contactWay;
+
+    private String proType;
+
+    private String proNature;
+
+    private String industry;
+
+    private String site;
+
+    private String proAddress;
+
+    private Long proSum;
+
+    private Long investSum;
+
+    private String gnInvestor;
+
+    private String gwInvestor;
+
+    private String proPics;
+
+    private String proProgress;
+
+    private String investWay;
+
+    private String proContentDetail;
+
+    private String status;
+
+    private String publishDt;
+
+    private String opertor;
+
+    private String operTime;
+
+    private String cityCode;
+    
+    private String isDelete;
+
+    private String r1;
+
+    private String r2;
+
+    private String r3;
+
+    private String r4;
+
+    private String r5;
+
+    private String r6;
+
+    private String note;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getProName() {
+        return proName;
+    }
+
+    public void setProName(String proName) {
+        this.proName = proName == null ? null : proName.trim();
+    }
+
+    public String getProUnit() {
+        return proUnit;
+    }
+
+    public void setProUnit(String proUnit) {
+        this.proUnit = proUnit == null ? null : proUnit.trim();
+    }
+
+    public String getProCharge() {
+        return proCharge;
+    }
+
+    public void setProCharge(String proCharge) {
+        this.proCharge = proCharge == null ? null : proCharge.trim();
+    }
+
+    public String getContactWay() {
+        return contactWay;
+    }
+
+    public void setContactWay(String contactWay) {
+        this.contactWay = contactWay == null ? null : contactWay.trim();
+    }
+
+    public String getProType() {
+        return proType;
+    }
+
+    public void setProType(String proType) {
+        this.proType = proType == null ? null : proType.trim();
+    }
+
+    public String getProNature() {
+        return proNature;
+    }
+
+    public void setProNature(String proNature) {
+        this.proNature = proNature == null ? null : proNature.trim();
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry == null ? null : industry.trim();
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site == null ? null : site.trim();
+    }
+
+    public String getProAddress() {
+        return proAddress;
+    }
+
+    public void setProAddress(String proAddress) {
+        this.proAddress = proAddress == null ? null : proAddress.trim();
+    }
+
+    public Long getProSum() {
+        return proSum;
+    }
+
+    public void setProSum(Long proSum) {
+        this.proSum = proSum;
+    }
+
+    public Long getInvestSum() {
+        return investSum;
+    }
+
+    public void setInvestSum(Long investSum) {
+        this.investSum = investSum;
+    }
+
+    public String getGnInvestor() {
+        return gnInvestor;
+    }
+
+    public void setGnInvestor(String gnInvestor) {
+        this.gnInvestor = gnInvestor == null ? null : gnInvestor.trim();
+    }
+
+    public String getGwInvestor() {
+        return gwInvestor;
+    }
+
+    public void setGwInvestor(String gwInvestor) {
+        this.gwInvestor = gwInvestor == null ? null : gwInvestor.trim();
+    }
+
+    public String getProPics() {
+        return proPics;
+    }
+
+    public void setProPics(String proPics) {
+        this.proPics = proPics == null ? null : proPics.trim();
+    }
+
+    public String getProProgress() {
+        return proProgress;
+    }
+
+    public void setProProgress(String proProgress) {
+        this.proProgress = proProgress == null ? null : proProgress.trim();
+    }
+
+    public String getInvestWay() {
+        return investWay;
+    }
+
+    public void setInvestWay(String investWay) {
+        this.investWay = investWay == null ? null : investWay.trim();
+    }
+
+    public String getProContentDetail() {
+        return proContentDetail;
+    }
+
+    public void setProContentDetail(String proContentDetail) {
+        this.proContentDetail = proContentDetail == null ? null : proContentDetail.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
+    public String getPublishDt() {
+        return publishDt;
+    }
+
+    public void setPublishDt(String publishDt) {
+        this.publishDt = publishDt == null ? null : publishDt.trim();
+    }
+
+    public String getOpertor() {
+        return opertor;
+    }
+
+    public void setOpertor(String opertor) {
+        this.opertor = opertor == null ? null : opertor.trim();
+    }
+
+    public String getOperTime() {
+        return operTime;
+    }
+
+    public void setOperTime(String operTime) {
+        this.operTime = operTime == null ? null : operTime.trim();
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode == null ? null : cityCode.trim();
+    }
+
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public String getR1() {
+        return r1;
+    }
+
+    public void setR1(String r1) {
+        this.r1 = r1 == null ? null : r1.trim();
+    }
+
+    public String getR2() {
+        return r2;
+    }
+
+    public void setR2(String r2) {
+        this.r2 = r2 == null ? null : r2.trim();
+    }
+
+    public String getR3() {
+        return r3;
+    }
+
+    public void setR3(String r3) {
+        this.r3 = r3 == null ? null : r3.trim();
+    }
+
+    public String getR4() {
+        return r4;
+    }
+
+    public void setR4(String r4) {
+        this.r4 = r4 == null ? null : r4.trim();
+    }
+
+    public String getR5() {
+        return r5;
+    }
+
+    public void setR5(String r5) {
+        this.r5 = r5 == null ? null : r5.trim();
+    }
+
+    public String getR6() {
+        return r6;
+    }
+
+    public void setR6(String r6) {
+        this.r6 = r6 == null ? null : r6.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+}

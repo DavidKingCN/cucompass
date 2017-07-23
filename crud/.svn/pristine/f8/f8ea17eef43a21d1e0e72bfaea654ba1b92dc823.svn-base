@@ -1,0 +1,23 @@
+*{ margin:0; padding:0; list-style:none;}
+a{ text-decoration:none;}
+a:hover{ text-decoration:none;}
+.tcdPageCode{padding: 15px 20px;text-align: left;color: #ccc;text-align:center;}
+.tcdPageCode a{display: inline-block;color: #327e33;display: inline-block;height: 25px;	line-height: 25px;	padding: 0 10px;border: 1px solid #ddd;	margin: 0 2px;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode a:hover{text-decoration: none;border: 1px solid #327e33;}
+.tcdPageCode span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;color: #fff;background-color: #327e33;	border: 1px solid #327e33;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode span.disabled{	display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;border-radius: 4px;vertical-align: middle;}
+.money_con_head #error{ border:none; background:#fff; color:red; }
+
+.tcdPageCode1{padding: 15px 20px;text-align: left;color: #ccc;text-align:center;}
+.tcdPageCode1 a{display: inline-block;color: #327e33;display: inline-block;height: 25px;	line-height: 25px;	padding: 0 10px;border: 1px solid #ddd;	margin: 0 2px;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode1 a:hover{text-decoration: none;border: 1px solid #327e33;}
+.tcdPageCode1 span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;color: #fff;background-color: #327e33;	border: 1px solid #327e33;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode1 span.disabled{	display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;border-radius: 4px;vertical-align: middle;}
+
+
+.tcdPageCode_yang{padding: 15px 20px;text-align: left;color: #ccc;text-align:center;}
+.tcdPageCode_yang a{display: inline-block;color: #327e33;display: inline-block;height: 25px;	line-height: 25px;	padding: 0 10px;border: 1px solid #ddd;	margin: 0 2px;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode_yang a:hover{text-decoration: none;border: 1px solid #327e33;}
+.tcdPageCode_yang span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;color: #fff;background-color: #327e33;	border: 1px solid #327e33;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode_yang span.disabled{	display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;border-radius: 4px;vertical-align: middle;}
+

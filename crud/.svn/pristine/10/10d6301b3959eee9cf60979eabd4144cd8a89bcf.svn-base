@@ -1,0 +1,58 @@
+package com.gcx.citygovcreditndrc.util;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.mapping.ResultMap;
+import org.apache.ibatis.mapping.ResultMapping;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+public class SysUtils {
+	public static List<String> fromOrderStrToArr(SqlSessionFactory sqlSession,String orderStrs,String mapperId){
+		Map<String,String> propColMap = null;
+		try {
+			
+			Configuration conf = sqlSession.getConfiguration();
+			
+			ResultMap resultMap = conf.getResultMap(mapperId);
+			
+			List<ResultMapping> propertyResultMappings = resultMap.getPropertyResultMappings();
+			propColMap = new HashMap<String,String>();
+			
+			for(ResultMapping propertyResultMapping:propertyResultMappings){
+				String col = propertyResultMapping.getColumn();
+				String prop = propertyResultMapping.getProperty();
+				
+				propColMap.put(prop, col);
+			}
+		}catch(Exception e){
+			
+		}
+		List<String> orderArrs_b = null;
+		if(orderStrs!=null && !orderStrs.equals("")){
+			String[] colStrs = orderStrs.split(",");
+			orderArrs_b = Arrays.asList(colStrs);
+		}
+		List<String> orderArrs = null;
+		if(orderArrs_b!=null && orderArrs_b.size()!=0){
+			
+			orderArrs = new ArrayList<>();
+			
+			for(String arr:orderArrs_b){
+				String targetArr = "";
+				for(Map.Entry<String, String> kv:propColMap.entrySet()){
+					if(arr.contains(kv.getKey())){
+						targetArr=arr.replace(kv.getKey(), kv.getValue());
+						break;
+					}
+				}
+				orderArrs.add(targetArr);
+			}
+		}
+		return orderArrs;
+	}
+}

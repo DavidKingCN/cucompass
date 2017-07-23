@@ -1,0 +1,185 @@
+package com.gcx.citygovcreditndrc.model.personInfo;
+
+import java.util.Date;
+
+public class PersonInfoInput {
+    private Integer id;
+
+    private String name;
+
+    private String province;
+
+    private String provinceCode;
+
+    private String city;
+
+    private String cityCode;
+
+    private String type;
+
+    private String typeCode;
+
+    private String inputUser;
+
+    private Date inputTime;
+
+    private String state;
+
+    private String pic;
+
+    private String r1;
+
+    private String r2;
+
+    private String card;
+
+    private String dep;
+
+    private String position;
+
+    private String contact;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    public String getProvinceCode() {
+        return provinceCode;
+    }
+
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode == null ? null : provinceCode.trim();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode == null ? null : cityCode.trim();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode == null ? null : typeCode.trim();
+    }
+
+    public String getInputUser() {
+        return inputUser;
+    }
+
+    public void setInputUser(String inputUser) {
+        this.inputUser = inputUser == null ? null : inputUser.trim();
+    }
+
+    public Date getInputTime() {
+        return inputTime;
+    }
+
+    public void setInputTime(Date inputTime) {
+        this.inputTime = inputTime;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic == null ? null : pic.trim();
+    }
+
+    public String getR1() {
+        return r1;
+    }
+
+    public void setR1(String r1) {
+        this.r1 = r1 == null ? null : r1.trim();
+    }
+
+    public String getR2() {
+        return r2;
+    }
+
+    public void setR2(String r2) {
+        this.r2 = r2 == null ? null : r2.trim();
+    }
+
+    public String getCard() {
+        return card;
+    }
+
+    public void setCard(String card) {
+        this.card = card == null ? null : card.trim();
+    }
+
+    public String getDep() {
+        return dep;
+    }
+
+    public void setDep(String dep) {
+        this.dep = dep == null ? null : dep.trim();
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position == null ? null : position.trim();
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact == null ? null : contact.trim();
+    }
+}

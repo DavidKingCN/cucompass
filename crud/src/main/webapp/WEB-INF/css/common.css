@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+*{ margin:0; padding:0; font-family:"微软雅黑";}
+li{ list-style:none; }
+a{ text-decoration:none; }
+em,i{ font-style:normal; }
+b,strong{ font-weight:normal; }
+input,textarea,button,select{ outline:none; resize:none; }
+table{ border-collapse:collapse; width:100%; }
+.fl{ float:left; }
+.fr{ float:right; }
+.clearFix:after{ display:block; clear:both; content:""; }
+.clearFix{zoom:1; }
+a{ color:#333; }
+body{ font-size:14px; color:#333; min-width:1200px; }
+.warp{ width:1200px; margin:0 auto; }
+body,html{ height:auto; }
+table td a{cursor:pointer;}
+
+/*底部*/
+.footer{background: #2c3e50; min-width:1200px; margin-top:35px; }
+.footer h5{color:#e4a428;margin-top:30px;font-weight: bold;font-family: ""; font-size:14px; }
+.footer li{ height:22px; line-height:22px; }
+.footer .erwei{margin-top:20px}
+.footer a{color: #a8a8a8;display:inline-block;font-size: 14px;font-family: "simhei";}
+.footer a:hover{color:white;text-decoration: none;font-family: "simhei";font-size: 14px;}
+.bott{background:#333333;height:50px;}
+.bott p{color: #999999;height:50px;line-height: 50px;font-size: 14px; width:1092px; margin:0 auto; text-align:center; }
+.container{ width:920px; margin:0 auto; padding-bottom:20px; }
+.container .list{ margin:0 28px; }
+/* 意见反馈弹出框*/
+#suggest1{width:100%;height:100%; background:rgba(0,0,0,0.3);position:fixed;top:0;left:0; display:none;z-index:99999;}
+#suggest2{width:487px;height:338px;background:url("../../images/suggest.png");margin-left:37%;margin-top:19%;}
+#suggest3{width:487px;height:338px;position:relative;} 
+#suggest3 .close{display:block;width:26px;height:20px;position:absolute;top:9%;right:8%;cursor:pointer;}
+#suggest3 .xiangqing{width:412px;height:169px; position:absolute;top:21%;left:7%;font-size:12px;}
+#suggest3 .email{width:301px;height:41px; background:url("../../images/email.png") no-repeat; position:absolute;top:75%;left:7%; border:none; padding-left:9%;font-size:12px;}
+#suggest3 .submit{display:block;width:98px;height:43px;position:absolute;top:74.5%;right:8%;cursor:pointer;}
+a:focus{ color:#a8a8a8; }
+#suggest{cursor:pointer;}
+
+/*地址栏*/
+.node_city_container_location{width:100%;height:65px;line-height:65px;margin-bottom:15px;font-size:16px;box-sizing:border-box;}
+

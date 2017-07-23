@@ -1,0 +1,187 @@
+package com.gcx.citygovcreditndrc.model;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class User {
+    private BigDecimal userId;
+
+    private String userName;
+
+    private String password;
+
+    private String mobileNumber;
+
+    private String email;
+
+    private Short status;
+
+    private Short accCate;
+
+    private BigDecimal relatedId;
+
+    private Date registTime;
+
+    private Date lastLoginTime;
+
+    private Date modifyPwdTime;
+
+    private Integer loginNum;
+
+    private String source;
+
+    private String headPortraits;
+
+    private String registType;
+
+    private Integer deleteFlag;
+
+    private String other;
+
+    public BigDecimal getUserId() {
+        return userId;
+    }
+
+    public void setUserId(BigDecimal userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber == null ? null : mobileNumber.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public Short getStatus() {
+        return status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    public Short getAccCate() {
+        return accCate;
+    }
+
+    public void setAccCate(Short accCate) {
+        this.accCate = accCate;
+    }
+
+    public BigDecimal getRelatedId() {
+        return relatedId;
+    }
+
+    public void setRelatedId(BigDecimal relatedId) {
+        this.relatedId = relatedId;
+    }
+
+    public Date getRegistTime() {
+        return registTime;
+    }
+
+    public void setRegistTime(Date registTime) {
+        this.registTime = registTime;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Date getModifyPwdTime() {
+        return modifyPwdTime;
+    }
+
+    public void setModifyPwdTime(Date modifyPwdTime) {
+        this.modifyPwdTime = modifyPwdTime;
+    }
+
+    public Integer getLoginNum() {
+        return loginNum;
+    }
+
+    public void setLoginNum(Integer loginNum) {
+        this.loginNum = loginNum;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source == null ? null : source.trim();
+    }
+
+    public String getHeadPortraits() {
+        return headPortraits;
+    }
+
+    public void setHeadPortraits(String headPortraits) {
+        this.headPortraits = headPortraits == null ? null : headPortraits.trim();
+    }
+
+    public String getRegistType() {
+        return registType;
+    }
+
+    public void setRegistType(String registType) {
+        this.registType = registType == null ? null : registType.trim();
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other == null ? null : other.trim();
+    }
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", mobileNumber="
+				+ mobileNumber + ", email=" + email + ", status=" + status + ", accCate=" + accCate + ", relatedId="
+				+ relatedId + ", registTime=" + registTime + ", lastLoginTime=" + lastLoginTime + ", modifyPwdTime="
+				+ modifyPwdTime + ", loginNum=" + loginNum + ", source=" + source + ", headPortraits=" + headPortraits
+				+ ", registType=" + registType + ", deleteFlag=" + deleteFlag + ", other=" + other + "]";
+	}
+    
+    
+}

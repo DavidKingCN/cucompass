@@ -1,0 +1,66 @@
+package com.gcx.citygovcreditndrc.service.dealRecord.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.dealRecord.DealRecordMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.dealRecord.DealRecord;
+import com.gcx.citygovcreditndrc.model.dealRecord.DealRecordAo;
+import com.gcx.citygovcreditndrc.service.dealRecord.DealRecordService;
+
+@Service("dealRecordService")
+public class DealRecordServiceImpl implements DealRecordService{
+
+	@Autowired
+	private DealRecordMapper dealRecordDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(DealRecordAo record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<DealRecord> list = dealRecordDao.findByRecord(record, limitStart, limitEnd);
+		int count = dealRecordDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(DealRecord record) {
+		
+		dealRecordDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		dealRecordDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(DealRecord record) {
+		dealRecordDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+}

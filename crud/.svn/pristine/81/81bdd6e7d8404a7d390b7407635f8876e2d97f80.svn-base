@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.assess.GovernmentAssessmentMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="CHAR" />
+    <result column="budgetIsOpen" property="budgetisopen" jdbcType="CHAR" />
+    <result column="projectIsOpen" property="projectisopen" jdbcType="CHAR" />
+    <result column="buyIsOpen" property="buyisopen" jdbcType="CHAR" />
+    <result column="emergencyIsOpen" property="emergencyisopen" jdbcType="CHAR" />
+    <result column="landIsOpen" property="landisopen" jdbcType="CHAR" />
+    <result column="infoIsUpdate" property="infoisupdate" jdbcType="CHAR" />
+    <result column="isAppeal" property="isappeal" jdbcType="CHAR" />
+    <result column="participation" property="participation" jdbcType="VARCHAR" />
+    <result column="growthRate" property="growthrate" jdbcType="VARCHAR" />
+    <result column="deficit" property="deficit" jdbcType="CHAR" />
+    <result column="debt" property="debt" jdbcType="CHAR" />
+    <result column="detection" property="detection" jdbcType="CHAR" />
+    <result column="jobless" property="jobless" jdbcType="CHAR" />
+    <result column="technologyFunds" property="technologyfunds" jdbcType="CHAR" />
+    <result column="researchFunds" property="researchfunds" jdbcType="CHAR" />
+    <result column="replyRate" property="replyrate" jdbcType="CHAR" />
+    <result column="dishonestyRecord" property="dishonestyrecord" jdbcType="CHAR" />
+    <result column="isAssessment" property="isassessment" jdbcType="CHAR" />
+    <result column="relevantIllegalCount" property="relevantillegalcount" jdbcType="VARCHAR" />
+    <result column="irrelevantIllegalCount" property="irrelevantillegalcount" jdbcType="VARCHAR" />
+    <result column="onceIrrelevantIllegalCount" property="onceirrelevantillegalcount" jdbcType="VARCHAR" />
+    <result column="onceRelevantIllegalCount" property="oncerelevantillegalcount" jdbcType="VARCHAR" />
+    <result column="isPropertyDeclare" property="ispropertydeclare" jdbcType="CHAR" />
+    <result column="isCivilDishonesty" property="iscivildishonesty" jdbcType="CHAR" />
+    <result column="isCivilTrain" property="isciviltrain" jdbcType="CHAR" />
+    <result column="isAccordRules" property="isaccordrules" jdbcType="CHAR" />
+    <result column="isAccordCar" property="isaccordcar" jdbcType="CHAR" />
+    <result column="isAccordReception" property="isaccordreception" jdbcType="CHAR" />
+    <result column="isOfficialCard" property="isofficialcard" jdbcType="CHAR" />
+    <result column="operatorDate" property="operatordate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, operator, budgetIsOpen, projectIsOpen, buyIsOpen, emergencyIsOpen, landIsOpen, 
+    infoIsUpdate, isAppeal, participation, growthRate, deficit, debt, detection, jobless, 
+    technologyFunds, researchFunds, replyRate, dishonestyRecord, isAssessment, relevantIllegalCount, 
+    irrelevantIllegalCount, onceIrrelevantIllegalCount, onceRelevantIllegalCount, isPropertyDeclare, 
+    isCivilDishonesty, isCivilTrain, isAccordRules, isAccordCar, isAccordReception, isOfficialCard, 
+    operatorDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from government_assessment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="findAssessment" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment" >
+    select
+    <include refid="Base_Column_List" />
+    from government_assessment
+    limit #{pagenow}, #{pagesize}
+  </select>
+  <select id="findAssessmentCount" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+     count(id) AS count 
+    from government_assessment
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from government_assessment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from government_assessment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessmentExample" >
+    delete from government_assessment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment" >
+    insert into government_assessment (id, operator, budgetIsOpen, 
+      projectIsOpen, buyIsOpen, emergencyIsOpen, 
+      landIsOpen, infoIsUpdate, isAppeal, 
+      participation, growthRate, deficit, 
+      debt, detection, jobless, technologyFunds, 
+      researchFunds, replyRate, dishonestyRecord, 
+      isAssessment, relevantIllegalCount, irrelevantIllegalCount, 
+      onceIrrelevantIllegalCount, onceRelevantIllegalCount, 
+      isPropertyDeclare, isCivilDishonesty, isCivilTrain, 
+      isAccordRules, isAccordCar, isAccordReception, 
+      isOfficialCard, operatorDate)
+    values (#{id,jdbcType=INTEGER}, #{operator,jdbcType=CHAR}, #{budgetisopen,jdbcType=CHAR}, 
+      #{projectisopen,jdbcType=CHAR}, #{buyisopen,jdbcType=CHAR}, #{emergencyisopen,jdbcType=CHAR}, 
+      #{landisopen,jdbcType=CHAR}, #{infoisupdate,jdbcType=CHAR}, #{isappeal,jdbcType=CHAR}, 
+      #{participation,jdbcType=VARCHAR}, #{growthrate,jdbcType=VARCHAR}, #{deficit,jdbcType=CHAR}, 
+      #{debt,jdbcType=CHAR}, #{detection,jdbcType=CHAR}, #{jobless,jdbcType=CHAR}, #{technologyfunds,jdbcType=CHAR}, 
+      #{researchfunds,jdbcType=CHAR}, #{replyrate,jdbcType=CHAR}, #{dishonestyrecord,jdbcType=CHAR}, 
+      #{isassessment,jdbcType=CHAR}, #{relevantillegalcount,jdbcType=VARCHAR}, #{irrelevantillegalcount,jdbcType=VARCHAR}, 
+      #{onceirrelevantillegalcount,jdbcType=VARCHAR}, #{oncerelevantillegalcount,jdbcType=VARCHAR}, 
+      #{ispropertydeclare,jdbcType=CHAR}, #{iscivildishonesty,jdbcType=CHAR}, #{isciviltrain,jdbcType=CHAR}, 
+      #{isaccordrules,jdbcType=CHAR}, #{isaccordcar,jdbcType=CHAR}, #{isaccordreception,jdbcType=CHAR}, 
+      #{isofficialcard,jdbcType=CHAR}, #{operatordate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment" >
+    insert into government_assessment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="budgetisopen != null" >
+        budgetIsOpen,
+      </if>
+      <if test="projectisopen != null" >
+        projectIsOpen,
+      </if>
+      <if test="buyisopen != null" >
+        buyIsOpen,
+      </if>
+      <if test="emergencyisopen != null" >
+        emergencyIsOpen,
+      </if>
+      <if test="landisopen != null" >
+        landIsOpen,
+      </if>
+      <if test="infoisupdate != null" >
+        infoIsUpdate,
+      </if>
+      <if test="isappeal != null" >
+        isAppeal,
+      </if>
+      <if test="participation != null" >
+        participation,
+      </if>
+      <if test="growthrate != null" >
+        growthRate,
+      </if>
+      <if test="deficit != null" >
+        deficit,
+      </if>
+      <if test="debt != null" >
+        debt,
+      </if>
+      <if test="detection != null" >
+        detection,
+      </if>
+      <if test="jobless != null" >
+        jobless,
+      </if>
+      <if test="technologyfunds != null" >
+        technologyFunds,
+      </if>
+      <if test="researchfunds != null" >
+        researchFunds,
+      </if>
+      <if test="replyrate != null" >
+        replyRate,
+      </if>
+      <if test="dishonestyrecord != null" >
+        dishonestyRecord,
+      </if>
+      <if test="isassessment != null" >
+        isAssessment,
+      </if>
+      <if test="relevantillegalcount != null" >
+        relevantIllegalCount,
+      </if>
+      <if test="irrelevantillegalcount != null" >
+        irrelevantIllegalCount,
+      </if>
+      <if test="onceirrelevantillegalcount != null" >
+        onceIrrelevantIllegalCount,
+      </if>
+      <if test="oncerelevantillegalcount != null" >
+        onceRelevantIllegalCount,
+      </if>
+      <if test="ispropertydeclare != null" >
+        isPropertyDeclare,
+      </if>
+      <if test="iscivildishonesty != null" >
+        isCivilDishonesty,
+      </if>
+      <if test="isciviltrain != null" >
+        isCivilTrain,
+      </if>
+      <if test="isaccordrules != null" >
+        isAccordRules,
+      </if>
+      <if test="isaccordcar != null" >
+        isAccordCar,
+      </if>
+      <if test="isaccordreception != null" >
+        isAccordReception,
+      </if>
+      <if test="isofficialcard != null" >
+        isOfficialCard,
+      </if>
+      <if test="operatordate != null" >
+        operatorDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=CHAR},
+      </if>
+      <if test="budgetisopen != null" >
+        #{budgetisopen,jdbcType=CHAR},
+      </if>
+      <if test="projectisopen != null" >
+        #{projectisopen,jdbcType=CHAR},
+      </if>
+      <if test="buyisopen != null" >
+        #{buyisopen,jdbcType=CHAR},
+      </if>
+      <if test="emergencyisopen != null" >
+        #{emergencyisopen,jdbcType=CHAR},
+      </if>
+      <if test="landisopen != null" >
+        #{landisopen,jdbcType=CHAR},
+      </if>
+      <if test="infoisupdate != null" >
+        #{infoisupdate,jdbcType=CHAR},
+      </if>
+      <if test="isappeal != null" >
+        #{isappeal,jdbcType=CHAR},
+      </if>
+      <if test="participation != null" >
+        #{participation,jdbcType=VARCHAR},
+      </if>
+      <if test="growthrate != null" >
+        #{growthrate,jdbcType=VARCHAR},
+      </if>
+      <if test="deficit != null" >
+        #{deficit,jdbcType=CHAR},
+      </if>
+      <if test="debt != null" >
+        #{debt,jdbcType=CHAR},
+      </if>
+      <if test="detection != null" >
+        #{detection,jdbcType=CHAR},
+      </if>
+      <if test="jobless != null" >
+        #{jobless,jdbcType=CHAR},
+      </if>
+      <if test="technologyfunds != null" >
+        #{technologyfunds,jdbcType=CHAR},
+      </if>
+      <if test="researchfunds != null" >
+        #{researchfunds,jdbcType=CHAR},
+      </if>
+      <if test="replyrate != null" >
+        #{replyrate,jdbcType=CHAR},
+      </if>
+      <if test="dishonestyrecord != null" >
+        #{dishonestyrecord,jdbcType=CHAR},
+      </if>
+      <if test="isassessment != null" >
+        #{isassessment,jdbcType=CHAR},
+      </if>
+      <if test="relevantillegalcount != null" >
+        #{relevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="irrelevantillegalcount != null" >
+        #{irrelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="onceirrelevantillegalcount != null" >
+        #{onceirrelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="oncerelevantillegalcount != null" >
+        #{oncerelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="ispropertydeclare != null" >
+        #{ispropertydeclare,jdbcType=CHAR},
+      </if>
+      <if test="iscivildishonesty != null" >
+        #{iscivildishonesty,jdbcType=CHAR},
+      </if>
+      <if test="isciviltrain != null" >
+        #{isciviltrain,jdbcType=CHAR},
+      </if>
+      <if test="isaccordrules != null" >
+        #{isaccordrules,jdbcType=CHAR},
+      </if>
+      <if test="isaccordcar != null" >
+        #{isaccordcar,jdbcType=CHAR},
+      </if>
+      <if test="isaccordreception != null" >
+        #{isaccordreception,jdbcType=CHAR},
+      </if>
+      <if test="isofficialcard != null" >
+        #{isofficialcard,jdbcType=CHAR},
+      </if>
+      <if test="operatordate != null" >
+        #{operatordate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessmentExample" resultType="java.lang.Integer" >
+    select count(*) from government_assessment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update government_assessment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=CHAR},
+      </if>
+      <if test="record.budgetisopen != null" >
+        budgetIsOpen = #{record.budgetisopen,jdbcType=CHAR},
+      </if>
+      <if test="record.projectisopen != null" >
+        projectIsOpen = #{record.projectisopen,jdbcType=CHAR},
+      </if>
+      <if test="record.buyisopen != null" >
+        buyIsOpen = #{record.buyisopen,jdbcType=CHAR},
+      </if>
+      <if test="record.emergencyisopen != null" >
+        emergencyIsOpen = #{record.emergencyisopen,jdbcType=CHAR},
+      </if>
+      <if test="record.landisopen != null" >
+        landIsOpen = #{record.landisopen,jdbcType=CHAR},
+      </if>
+      <if test="record.infoisupdate != null" >
+        infoIsUpdate = #{record.infoisupdate,jdbcType=CHAR},
+      </if>
+      <if test="record.isappeal != null" >
+        isAppeal = #{record.isappeal,jdbcType=CHAR},
+      </if>
+      <if test="record.participation != null" >
+        participation = #{record.participation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.growthrate != null" >
+        growthRate = #{record.growthrate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deficit != null" >
+        deficit = #{record.deficit,jdbcType=CHAR},
+      </if>
+      <if test="record.debt != null" >
+        debt = #{record.debt,jdbcType=CHAR},
+      </if>
+      <if test="record.detection != null" >
+        detection = #{record.detection,jdbcType=CHAR},
+      </if>
+      <if test="record.jobless != null" >
+        jobless = #{record.jobless,jdbcType=CHAR},
+      </if>
+      <if test="record.technologyfunds != null" >
+        technologyFunds = #{record.technologyfunds,jdbcType=CHAR},
+      </if>
+      <if test="record.researchfunds != null" >
+        researchFunds = #{record.researchfunds,jdbcType=CHAR},
+      </if>
+      <if test="record.replyrate != null" >
+        replyRate = #{record.replyrate,jdbcType=CHAR},
+      </if>
+      <if test="record.dishonestyrecord != null" >
+        dishonestyRecord = #{record.dishonestyrecord,jdbcType=CHAR},
+      </if>
+      <if test="record.isassessment != null" >
+        isAssessment = #{record.isassessment,jdbcType=CHAR},
+      </if>
+      <if test="record.relevantillegalcount != null" >
+        relevantIllegalCount = #{record.relevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.irrelevantillegalcount != null" >
+        irrelevantIllegalCount = #{record.irrelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onceirrelevantillegalcount != null" >
+        onceIrrelevantIllegalCount = #{record.onceirrelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oncerelevantillegalcount != null" >
+        onceRelevantIllegalCount = #{record.oncerelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ispropertydeclare != null" >
+        isPropertyDeclare = #{record.ispropertydeclare,jdbcType=CHAR},
+      </if>
+      <if test="record.iscivildishonesty != null" >
+        isCivilDishonesty = #{record.iscivildishonesty,jdbcType=CHAR},
+      </if>
+      <if test="record.isciviltrain != null" >
+        isCivilTrain = #{record.isciviltrain,jdbcType=CHAR},
+      </if>
+      <if test="record.isaccordrules != null" >
+        isAccordRules = #{record.isaccordrules,jdbcType=CHAR},
+      </if>
+      <if test="record.isaccordcar != null" >
+        isAccordCar = #{record.isaccordcar,jdbcType=CHAR},
+      </if>
+      <if test="record.isaccordreception != null" >
+        isAccordReception = #{record.isaccordreception,jdbcType=CHAR},
+      </if>
+      <if test="record.isofficialcard != null" >
+        isOfficialCard = #{record.isofficialcard,jdbcType=CHAR},
+      </if>
+      <if test="record.operatordate != null" >
+        operatorDate = #{record.operatordate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update government_assessment
+    set id = #{record.id,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=CHAR},
+      budgetIsOpen = #{record.budgetisopen,jdbcType=CHAR},
+      projectIsOpen = #{record.projectisopen,jdbcType=CHAR},
+      buyIsOpen = #{record.buyisopen,jdbcType=CHAR},
+      emergencyIsOpen = #{record.emergencyisopen,jdbcType=CHAR},
+      landIsOpen = #{record.landisopen,jdbcType=CHAR},
+      infoIsUpdate = #{record.infoisupdate,jdbcType=CHAR},
+      isAppeal = #{record.isappeal,jdbcType=CHAR},
+      participation = #{record.participation,jdbcType=VARCHAR},
+      growthRate = #{record.growthrate,jdbcType=VARCHAR},
+      deficit = #{record.deficit,jdbcType=CHAR},
+      debt = #{record.debt,jdbcType=CHAR},
+      detection = #{record.detection,jdbcType=CHAR},
+      jobless = #{record.jobless,jdbcType=CHAR},
+      technologyFunds = #{record.technologyfunds,jdbcType=CHAR},
+      researchFunds = #{record.researchfunds,jdbcType=CHAR},
+      replyRate = #{record.replyrate,jdbcType=CHAR},
+      dishonestyRecord = #{record.dishonestyrecord,jdbcType=CHAR},
+      isAssessment = #{record.isassessment,jdbcType=CHAR},
+      relevantIllegalCount = #{record.relevantillegalcount,jdbcType=VARCHAR},
+      irrelevantIllegalCount = #{record.irrelevantillegalcount,jdbcType=VARCHAR},
+      onceIrrelevantIllegalCount = #{record.onceirrelevantillegalcount,jdbcType=VARCHAR},
+      onceRelevantIllegalCount = #{record.oncerelevantillegalcount,jdbcType=VARCHAR},
+      isPropertyDeclare = #{record.ispropertydeclare,jdbcType=CHAR},
+      isCivilDishonesty = #{record.iscivildishonesty,jdbcType=CHAR},
+      isCivilTrain = #{record.isciviltrain,jdbcType=CHAR},
+      isAccordRules = #{record.isaccordrules,jdbcType=CHAR},
+      isAccordCar = #{record.isaccordcar,jdbcType=CHAR},
+      isAccordReception = #{record.isaccordreception,jdbcType=CHAR},
+      isOfficialCard = #{record.isofficialcard,jdbcType=CHAR},
+      operatorDate = #{record.operatordate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment" >
+    update government_assessment
+    <set >
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=CHAR},
+      </if>
+      <if test="budgetisopen != null" >
+        budgetIsOpen = #{budgetisopen,jdbcType=CHAR},
+      </if>
+      <if test="projectisopen != null" >
+        projectIsOpen = #{projectisopen,jdbcType=CHAR},
+      </if>
+      <if test="buyisopen != null" >
+        buyIsOpen = #{buyisopen,jdbcType=CHAR},
+      </if>
+      <if test="emergencyisopen != null" >
+        emergencyIsOpen = #{emergencyisopen,jdbcType=CHAR},
+      </if>
+      <if test="landisopen != null" >
+        landIsOpen = #{landisopen,jdbcType=CHAR},
+      </if>
+      <if test="infoisupdate != null" >
+        infoIsUpdate = #{infoisupdate,jdbcType=CHAR},
+      </if>
+      <if test="isappeal != null" >
+        isAppeal = #{isappeal,jdbcType=CHAR},
+      </if>
+      <if test="participation != null" >
+        participation = #{participation,jdbcType=VARCHAR},
+      </if>
+      <if test="growthrate != null" >
+        growthRate = #{growthrate,jdbcType=VARCHAR},
+      </if>
+      <if test="deficit != null" >
+        deficit = #{deficit,jdbcType=CHAR},
+      </if>
+      <if test="debt != null" >
+        debt = #{debt,jdbcType=CHAR},
+      </if>
+      <if test="detection != null" >
+        detection = #{detection,jdbcType=CHAR},
+      </if>
+      <if test="jobless != null" >
+        jobless = #{jobless,jdbcType=CHAR},
+      </if>
+      <if test="technologyfunds != null" >
+        technologyFunds = #{technologyfunds,jdbcType=CHAR},
+      </if>
+      <if test="researchfunds != null" >
+        researchFunds = #{researchfunds,jdbcType=CHAR},
+      </if>
+      <if test="replyrate != null" >
+        replyRate = #{replyrate,jdbcType=CHAR},
+      </if>
+      <if test="dishonestyrecord != null" >
+        dishonestyRecord = #{dishonestyrecord,jdbcType=CHAR},
+      </if>
+      <if test="isassessment != null" >
+        isAssessment = #{isassessment,jdbcType=CHAR},
+      </if>
+      <if test="relevantillegalcount != null" >
+        relevantIllegalCount = #{relevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="irrelevantillegalcount != null" >
+        irrelevantIllegalCount = #{irrelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="onceirrelevantillegalcount != null" >
+        onceIrrelevantIllegalCount = #{onceirrelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="oncerelevantillegalcount != null" >
+        onceRelevantIllegalCount = #{oncerelevantillegalcount,jdbcType=VARCHAR},
+      </if>
+      <if test="ispropertydeclare != null" >
+        isPropertyDeclare = #{ispropertydeclare,jdbcType=CHAR},
+      </if>
+      <if test="iscivildishonesty != null" >
+        isCivilDishonesty = #{iscivildishonesty,jdbcType=CHAR},
+      </if>
+      <if test="isciviltrain != null" >
+        isCivilTrain = #{isciviltrain,jdbcType=CHAR},
+      </if>
+      <if test="isaccordrules != null" >
+        isAccordRules = #{isaccordrules,jdbcType=CHAR},
+      </if>
+      <if test="isaccordcar != null" >
+        isAccordCar = #{isaccordcar,jdbcType=CHAR},
+      </if>
+      <if test="isaccordreception != null" >
+        isAccordReception = #{isaccordreception,jdbcType=CHAR},
+      </if>
+      <if test="isofficialcard != null" >
+        isOfficialCard = #{isofficialcard,jdbcType=CHAR},
+      </if>
+      <if test="operatordate != null" >
+        operatorDate = #{operatordate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.assess.GovernmentAssessment" >
+    update government_assessment
+    set operator = #{operator,jdbcType=CHAR},
+      budgetIsOpen = #{budgetisopen,jdbcType=CHAR},
+      projectIsOpen = #{projectisopen,jdbcType=CHAR},
+      buyIsOpen = #{buyisopen,jdbcType=CHAR},
+      emergencyIsOpen = #{emergencyisopen,jdbcType=CHAR},
+      landIsOpen = #{landisopen,jdbcType=CHAR},
+      infoIsUpdate = #{infoisupdate,jdbcType=CHAR},
+      isAppeal = #{isappeal,jdbcType=CHAR},
+      participation = #{participation,jdbcType=VARCHAR},
+      growthRate = #{growthrate,jdbcType=VARCHAR},
+      deficit = #{deficit,jdbcType=CHAR},
+      debt = #{debt,jdbcType=CHAR},
+      detection = #{detection,jdbcType=CHAR},
+      jobless = #{jobless,jdbcType=CHAR},
+      technologyFunds = #{technologyfunds,jdbcType=CHAR},
+      researchFunds = #{researchfunds,jdbcType=CHAR},
+      replyRate = #{replyrate,jdbcType=CHAR},
+      dishonestyRecord = #{dishonestyrecord,jdbcType=CHAR},
+      isAssessment = #{isassessment,jdbcType=CHAR},
+      relevantIllegalCount = #{relevantillegalcount,jdbcType=VARCHAR},
+      irrelevantIllegalCount = #{irrelevantillegalcount,jdbcType=VARCHAR},
+      onceIrrelevantIllegalCount = #{onceirrelevantillegalcount,jdbcType=VARCHAR},
+      onceRelevantIllegalCount = #{oncerelevantillegalcount,jdbcType=VARCHAR},
+      isPropertyDeclare = #{ispropertydeclare,jdbcType=CHAR},
+      isCivilDishonesty = #{iscivildishonesty,jdbcType=CHAR},
+      isCivilTrain = #{isciviltrain,jdbcType=CHAR},
+      isAccordRules = #{isaccordrules,jdbcType=CHAR},
+      isAccordCar = #{isaccordcar,jdbcType=CHAR},
+      isAccordReception = #{isaccordreception,jdbcType=CHAR},
+      isOfficialCard = #{isofficialcard,jdbcType=CHAR},
+      operatorDate = #{operatordate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

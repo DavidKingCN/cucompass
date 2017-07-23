@@ -1,0 +1,18 @@
+package com.gcx.citygovcreditndrc.service.common;
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+
+
+public interface EnclosureService {
+
+	ServiceResult<Object> findRecords(Enclosure record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(Enclosure record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(Enclosure record);
+}

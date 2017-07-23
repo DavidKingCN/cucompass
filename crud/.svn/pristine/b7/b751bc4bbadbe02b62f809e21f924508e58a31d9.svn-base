@@ -1,0 +1,84 @@
+package com.gcx.citygovcreditndrc.model;
+
+import java.io.Serializable;
+
+/**
+ * 数据返回返回结果
+ * @author ywb
+ *
+ * @param <T>
+ */
+public class MyResult<T> implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private T  status;
+	private T  msg;
+	private T data;
+	private T count;
+	public static MyResult<Object> error(){
+		MyResult<Object> result = new MyResult<Object>();
+		result.setStatus(1);
+		result.setMsg("fail");
+		result.setData(null);
+		result.setCount(0);
+		return result;
+	}
+	public static MyResult<Object> error(Object object){
+		MyResult<Object> result = new MyResult<Object>();
+		result.setStatus(1);
+		result.setMsg("fail");
+		result.setData(object);
+		result.setCount(0);
+		return result;
+	}
+	public static MyResult<Object> ok(){
+		MyResult<Object> result = new MyResult<Object>();
+		result.setStatus(0);
+		result.setMsg("success");
+		result.setData(null);
+		result.setCount(0);
+		return result;
+	}
+	public static MyResult<Object> ok(Object object){
+		MyResult<Object> result = new MyResult<Object>();
+		result.setStatus(0);
+		result.setMsg("success");
+		result.setData(object);
+		result.setCount(0);
+		return result;
+	}
+	
+	public T getData() {
+		return data;
+	}
+	public void setData(T data) {
+		this.data = data;
+	}
+	public T getStatus() {
+		return status;
+	}
+	public void setStatus(T status) {
+		this.status = status;
+	}
+	public T getMsg() {
+		return msg;
+	}
+	public void setMsg(T msg) {
+		this.msg = msg;
+	}
+	public T getCount() {
+		return count;
+	}
+	public void setCount(T count) {
+		this.count = count;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	
+	
+	
+}

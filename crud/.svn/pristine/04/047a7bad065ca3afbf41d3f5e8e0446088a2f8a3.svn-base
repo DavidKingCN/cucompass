@@ -1,0 +1,66 @@
+package com.gcx.citygovcreditndrc.service.govServe.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.govServe.GovServeMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.govServe.GovServe;
+import com.gcx.citygovcreditndrc.service.govServe.GovServeService;
+
+@Service("govServeService")
+public class GovServeServiceImpl implements GovServeService{
+
+	@Autowired
+	private GovServeMapper govServeDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(GovServe record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<GovServe> list = govServeDao.findByRecord(record, limitStart, limitEnd);
+		int count = govServeDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		result.setTotal(count);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(GovServe record) {
+		
+		govServeDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		govServeDao.deleteLogicById(1, record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(GovServe record) {
+		govServeDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+}

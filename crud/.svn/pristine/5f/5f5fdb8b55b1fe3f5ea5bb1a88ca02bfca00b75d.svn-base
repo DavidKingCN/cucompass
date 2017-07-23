@@ -1,0 +1,35 @@
+package com.gcx.citygovcreditndrc.dao.personInfo;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInput;
+import com.gcx.citygovcreditndrc.model.personInfo.PersonInfoInputExample;
+
+public interface PersonInfoInputMapper {
+    int countByExample(PersonInfoInputExample example);
+
+    int deleteByExample(PersonInfoInputExample example);
+
+    int deleteByPrimaryKey(@Param("r2") int r2, @Param("id")Integer id);
+
+    int insert(PersonInfoInput record);
+
+    int insertSelective(PersonInfoInput record);
+
+    List<PersonInfoInput> selectByExample(PersonInfoInputExample example);
+
+    PersonInfoInput selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") PersonInfoInput record, @Param("example") PersonInfoInputExample example);
+
+    int updateByExample(@Param("record") PersonInfoInput record, @Param("example") PersonInfoInputExample example);
+
+    int updateByPrimaryKeySelective(PersonInfoInput record);
+
+    int updateByPrimaryKey(PersonInfoInput record);
+    
+    List<PersonInfoInput> findPersonInfoInput(@Param("record") PersonInfoInput record,@Param("pagenow") int pagenow,@Param("pagesize") int pagesize);
+    
+    int findPersonInfoInputCount(@Param("record") PersonInfoInput record);
+}

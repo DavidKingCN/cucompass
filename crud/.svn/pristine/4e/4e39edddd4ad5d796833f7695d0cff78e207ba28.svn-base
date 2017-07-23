@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.govServe.GovServeMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.govServe.GovServe" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="STATE" property="state" jdbcType="CHAR" />
+    <result column="APPLY_SERVE" property="applyServe" jdbcType="VARCHAR" />
+    <result column="APPLY_UNIT" property="applyUnit" jdbcType="VARCHAR" />
+    <result column="APPLIER" property="applier" jdbcType="CHAR" />
+    <result column="APPLY_TIME" property="applyTime" jdbcType="VARCHAR" />
+    <result column="AUDITOR" property="auditor" jdbcType="VARCHAR" />
+    <result column="AUDIT_DEPT" property="auditDept" jdbcType="VARCHAR" />
+    <result column="AUDIT_CONTENT" property="auditContent" jdbcType="CHAR" />
+    <result column="AUDIT_TIME" property="auditTime" jdbcType="CHAR" />
+    <result column="A1" property="a1" jdbcType="VARCHAR" />
+    <result column="A2" property="a2" jdbcType="VARCHAR" />
+    <result column="A3" property="a3" jdbcType="VARCHAR" />
+    <result column="A4" property="a4" jdbcType="VARCHAR" />
+    <result column="A5" property="a5" jdbcType="VARCHAR" />
+    <result column="A6" property="a6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, STATE, APPLY_SERVE, APPLY_UNIT, APPLIER, APPLY_TIME, AUDITOR, AUDIT_DEPT, AUDIT_CONTENT, 
+    AUDIT_TIME, A1, A2, A3, A4, A5, A6
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.govServe.GovServeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from GOV_SERVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from GOV_SERVE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from GOV_SERVE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.govServe.GovServeExample" >
+    delete from GOV_SERVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.govServe.GovServe" >
+    insert into GOV_SERVE (ID, STATE, APPLY_SERVE, 
+      APPLY_UNIT, APPLIER, APPLY_TIME, 
+      AUDITOR, AUDIT_DEPT, AUDIT_CONTENT, 
+      AUDIT_TIME, A1, A2, A3, 
+      A4, A5, A6)
+    values (#{id,jdbcType=INTEGER}, #{state,jdbcType=CHAR}, #{applyServe,jdbcType=VARCHAR}, 
+      #{applyUnit,jdbcType=VARCHAR}, #{applier,jdbcType=CHAR}, #{applyTime,jdbcType=VARCHAR}, 
+      #{auditor,jdbcType=VARCHAR}, #{auditDept,jdbcType=VARCHAR}, #{auditContent,jdbcType=CHAR}, 
+      #{auditTime,jdbcType=CHAR}, #{a1,jdbcType=VARCHAR}, #{a2,jdbcType=VARCHAR}, #{a3,jdbcType=VARCHAR}, 
+      #{a4,jdbcType=VARCHAR}, #{a5,jdbcType=VARCHAR}, #{a6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.govServe.GovServe" >
+    insert into GOV_SERVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="applyServe != null" >
+        APPLY_SERVE,
+      </if>
+      <if test="applyUnit != null" >
+        APPLY_UNIT,
+      </if>
+      <if test="applier != null" >
+        APPLIER,
+      </if>
+      <if test="applyTime != null" >
+        APPLY_TIME,
+      </if>
+      <if test="auditor != null" >
+        AUDITOR,
+      </if>
+      <if test="auditDept != null" >
+        AUDIT_DEPT,
+      </if>
+      <if test="auditContent != null" >
+        AUDIT_CONTENT,
+      </if>
+      <if test="auditTime != null" >
+        AUDIT_TIME,
+      </if>
+      <if test="a1 != null" >
+        A1,
+      </if>
+      <if test="a2 != null" >
+        A2,
+      </if>
+      <if test="a3 != null" >
+        A3,
+      </if>
+      <if test="a4 != null" >
+        A4,
+      </if>
+      <if test="a5 != null" >
+        A5,
+      </if>
+      <if test="a6 != null" >
+        A6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="applyServe != null" >
+        #{applyServe,jdbcType=VARCHAR},
+      </if>
+      <if test="applyUnit != null" >
+        #{applyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="applier != null" >
+        #{applier,jdbcType=CHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDept != null" >
+        #{auditDept,jdbcType=VARCHAR},
+      </if>
+      <if test="auditContent != null" >
+        #{auditContent,jdbcType=CHAR},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=CHAR},
+      </if>
+      <if test="a1 != null" >
+        #{a1,jdbcType=VARCHAR},
+      </if>
+      <if test="a2 != null" >
+        #{a2,jdbcType=VARCHAR},
+      </if>
+      <if test="a3 != null" >
+        #{a3,jdbcType=VARCHAR},
+      </if>
+      <if test="a4 != null" >
+        #{a4,jdbcType=VARCHAR},
+      </if>
+      <if test="a5 != null" >
+        #{a5,jdbcType=VARCHAR},
+      </if>
+      <if test="a6 != null" >
+        #{a6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.govServe.GovServeExample" resultType="java.lang.Integer" >
+    select count(*) from GOV_SERVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update GOV_SERVE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.applyServe != null" >
+        APPLY_SERVE = #{record.applyServe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyUnit != null" >
+        APPLY_UNIT = #{record.applyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applier != null" >
+        APPLIER = #{record.applier,jdbcType=CHAR},
+      </if>
+      <if test="record.applyTime != null" >
+        APPLY_TIME = #{record.applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null" >
+        AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditDept != null" >
+        AUDIT_DEPT = #{record.auditDept,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditContent != null" >
+        AUDIT_CONTENT = #{record.auditContent,jdbcType=CHAR},
+      </if>
+      <if test="record.auditTime != null" >
+        AUDIT_TIME = #{record.auditTime,jdbcType=CHAR},
+      </if>
+      <if test="record.a1 != null" >
+        A1 = #{record.a1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a2 != null" >
+        A2 = #{record.a2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a3 != null" >
+        A3 = #{record.a3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a4 != null" >
+        A4 = #{record.a4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a5 != null" >
+        A5 = #{record.a5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a6 != null" >
+        A6 = #{record.a6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update GOV_SERVE
+    set ID = #{record.id,jdbcType=INTEGER},
+      STATE = #{record.state,jdbcType=CHAR},
+      APPLY_SERVE = #{record.applyServe,jdbcType=VARCHAR},
+      APPLY_UNIT = #{record.applyUnit,jdbcType=VARCHAR},
+      APPLIER = #{record.applier,jdbcType=CHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=VARCHAR},
+      AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      AUDIT_DEPT = #{record.auditDept,jdbcType=VARCHAR},
+      AUDIT_CONTENT = #{record.auditContent,jdbcType=CHAR},
+      AUDIT_TIME = #{record.auditTime,jdbcType=CHAR},
+      A1 = #{record.a1,jdbcType=VARCHAR},
+      A2 = #{record.a2,jdbcType=VARCHAR},
+      A3 = #{record.a3,jdbcType=VARCHAR},
+      A4 = #{record.a4,jdbcType=VARCHAR},
+      A5 = #{record.a5,jdbcType=VARCHAR},
+      A6 = #{record.a6,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.govServe.GovServe" >
+    update GOV_SERVE
+    <set >
+      <if test="state != null" >
+        STATE = #{state,jdbcType=CHAR},
+      </if>
+      <if test="applyServe != null" >
+        APPLY_SERVE = #{applyServe,jdbcType=VARCHAR},
+      </if>
+      <if test="applyUnit != null" >
+        APPLY_UNIT = #{applyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="applier != null" >
+        APPLIER = #{applier,jdbcType=CHAR},
+      </if>
+      <if test="applyTime != null" >
+        APPLY_TIME = #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        AUDITOR = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDept != null" >
+        AUDIT_DEPT = #{auditDept,jdbcType=VARCHAR},
+      </if>
+      <if test="auditContent != null" >
+        AUDIT_CONTENT = #{auditContent,jdbcType=CHAR},
+      </if>
+      <if test="auditTime != null" >
+        AUDIT_TIME = #{auditTime,jdbcType=CHAR},
+      </if>
+      <if test="a1 != null" >
+        A1 = #{a1,jdbcType=VARCHAR},
+      </if>
+      <if test="a2 != null" >
+        A2 = #{a2,jdbcType=VARCHAR},
+      </if>
+      <if test="a3 != null" >
+        A3 = #{a3,jdbcType=VARCHAR},
+      </if>
+      <if test="a4 != null" >
+        A4 = #{a4,jdbcType=VARCHAR},
+      </if>
+      <if test="a5 != null" >
+        A5 = #{a5,jdbcType=VARCHAR},
+      </if>
+      <if test="a6 != null" >
+        A6 = #{a6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.govServe.GovServe" >
+    update GOV_SERVE
+    set STATE = #{state,jdbcType=CHAR},
+      APPLY_SERVE = #{applyServe,jdbcType=VARCHAR},
+      APPLY_UNIT = #{applyUnit,jdbcType=VARCHAR},
+      APPLIER = #{applier,jdbcType=CHAR},
+      APPLY_TIME = #{applyTime,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUDIT_DEPT = #{auditDept,jdbcType=VARCHAR},
+      AUDIT_CONTENT = #{auditContent,jdbcType=CHAR},
+      AUDIT_TIME = #{auditTime,jdbcType=CHAR},
+      A1 = #{a1,jdbcType=VARCHAR},
+      A2 = #{a2,jdbcType=VARCHAR},
+      A3 = #{a3,jdbcType=VARCHAR},
+      A4 = #{a4,jdbcType=VARCHAR},
+      A5 = #{a5,jdbcType=VARCHAR},
+      A6 = #{a6,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update GOV_SERVE set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update GOV_SERVE set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from GOV_SERVE where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.state != null and record.state != "" '> and STATE = #{record.state,jdbcType=CHAR} </if><if test='record.applyServe != null and record.applyServe != "" '> and APPLY_SERVE = #{record.applyServe,jdbcType=VARCHAR} </if><if test='record.applyUnit != null and record.applyUnit != "" '> and APPLY_UNIT = #{record.applyUnit,jdbcType=VARCHAR} </if><if test='record.applier != null and record.applier != "" '> and APPLIER = #{record.applier,jdbcType=CHAR} </if><if test='record.applyTime != null and record.applyTime != "" '> and APPLY_TIME = #{record.applyTime,jdbcType=VARCHAR} </if><if test='record.auditor != null and record.auditor != "" '> and AUDITOR = #{record.auditor,jdbcType=VARCHAR} </if><if test='record.auditDept != null and record.auditDept != "" '> and AUDIT_DEPT = #{record.auditDept,jdbcType=VARCHAR} </if><if test='record.auditContent != null and record.auditContent != "" '> and AUDIT_CONTENT = #{record.auditContent,jdbcType=CHAR} </if><if test='record.auditTime != null and record.auditTime != "" '> and AUDIT_TIME = #{record.auditTime,jdbcType=CHAR} </if><if test='record.a1 != null and record.a1 != "" '> and A1 = #{record.a1,jdbcType=VARCHAR} </if><if test='record.a2 != null and record.a2 != "" '> and A2 = #{record.a2,jdbcType=VARCHAR} </if><if test='record.a3 != null and record.a3 != "" '> and A3 = #{record.a3,jdbcType=VARCHAR} </if><if test='record.a4 != null and record.a4 != "" '> and A4 = #{record.a4,jdbcType=VARCHAR} </if><if test='record.a5 != null and record.a5 != "" '> and A5 = #{record.a5,jdbcType=VARCHAR} </if><if test='record.a6 != null and record.a6 != "" '> and A6 = #{record.a6,jdbcType=VARCHAR} </if> limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(ID) from GOV_SERVE where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and ID = #{record.id,jdbcType=INTEGER} </if><if test='record.state != null and record.state != "" '> and STATE = #{record.state,jdbcType=CHAR} </if><if test='record.applyServe != null and record.applyServe != "" '> and APPLY_SERVE = #{record.applyServe,jdbcType=VARCHAR} </if><if test='record.applyUnit != null and record.applyUnit != "" '> and APPLY_UNIT = #{record.applyUnit,jdbcType=VARCHAR} </if><if test='record.applier != null and record.applier != "" '> and APPLIER = #{record.applier,jdbcType=CHAR} </if><if test='record.applyTime != null and record.applyTime != "" '> and APPLY_TIME = #{record.applyTime,jdbcType=VARCHAR} </if><if test='record.auditor != null and record.auditor != "" '> and AUDITOR = #{record.auditor,jdbcType=VARCHAR} </if><if test='record.auditDept != null and record.auditDept != "" '> and AUDIT_DEPT = #{record.auditDept,jdbcType=VARCHAR} </if><if test='record.auditContent != null and record.auditContent != "" '> and AUDIT_CONTENT = #{record.auditContent,jdbcType=CHAR} </if><if test='record.auditTime != null and record.auditTime != "" '> and AUDIT_TIME = #{record.auditTime,jdbcType=CHAR} </if><if test='record.a1 != null and record.a1 != "" '> and A1 = #{record.a1,jdbcType=VARCHAR} </if><if test='record.a2 != null and record.a2 != "" '> and A2 = #{record.a2,jdbcType=VARCHAR} </if><if test='record.a3 != null and record.a3 != "" '> and A3 = #{record.a3,jdbcType=VARCHAR} </if><if test='record.a4 != null and record.a4 != "" '> and A4 = #{record.a4,jdbcType=VARCHAR} </if><if test='record.a5 != null and record.a5 != "" '> and A5 = #{record.a5,jdbcType=VARCHAR} </if><if test='record.a6 != null and record.a6 != "" '> and A6 = #{record.a6,jdbcType=VARCHAR} </if>
+  </select>
+</mapper>

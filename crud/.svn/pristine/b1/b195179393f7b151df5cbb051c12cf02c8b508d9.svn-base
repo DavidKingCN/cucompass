@@ -1,0 +1,14 @@
+package com.gcx.citygovcreditndrc.util;
+
+import com.alibaba.fastjson.JSON;
+
+public final class JSONUtil {
+
+	public static<T>  String toJson(T t){
+		return JSON.toJSONString(t);
+	}
+	
+	public static<T> T parseJson(String text,Class<T> clazz){
+		return JSON.parseObject(text, clazz);
+	}
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改页面的处理</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/xmfb_qyxm_new.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/jquery.page.css">
+		
+		<script src="../js/jquery-1.7.1.min.js"></script>
+		<script src="../js/util.1.0.js"></script>
+		<script src="../js/jquery.page.js"></script> 
+		<script src="../js/json2.js"></script>
+		<script src="../js/set.js"></script>
+		<script src="../js/map.js"></script>
+		<script src="../js/extraData.js"></script>
+		
+		<style type="text/css">
+	    .mask{width:100%;height:100%;position: fixed;top:0; left:0;background: rgba(0,0,0,0.2);display: none;}
+        .mask_container{width:438px;height:310px;margin:0 auto;background:#fff;margin-top:10%;border-radius:5px;}
+        .mask_head{height:40px;line-height:40px;padding-left: 15px;box-sizing: border-box;font-size:16px;border-bottom:1px solid #ddd;}
+        .mask_close{display:inline-block;float:right;font-size:30px;width:24px;height:24px;line-height:21px;text-align:center;border-radius:50%;background:#c5c5c5;color:#fff;margin-right: 15px;margin-top:7px;cursor: pointer;}
+        .mask_detail{box-sizing: border-box;padding: 30px 60px;}
+        .mask_detail p{text-align:center;color:red;font-size: 18px;margin:10px 0;}
+        .mask_handle{width:250px;height:30px;margin:0 auto;margin-top: 60px;}
+        .mask_handle a{display:inline-block;width:160px;height:30px;background: #eee;border-radius:5px;line-height: 30px;text-align: center;cursor: pointer;margin-left:50px}
+		</style>
+		<script type="text/javascript">
+		
+		</script>
+</head>
+<body>
+	<br/>
+	<br/>
+	<form id='userForm' name='userForm' action="" method="post">
+		<div class="section">
+			<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		组信息：
+			<table id="groupTab">
+				<tr>
+				<input prefix='group' type="hidden" name="groupId" value=''/>
+					<td>组名：</td>
+					<td><input prefix='group' type="text" name="groupName" value=''/></td>
+				</tr>
+			</table>
+			<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			用户信息：
+			<br/><br/>
+			<table id="userTab">
+			<input type="hidden" prefix='user' name='userId'/>
+				<tr><td>用户名:</td><td><input prefix='user' type="text" name='userName'/></td></tr>
+				<tr><td>密码:</td><td><input prefix='user' type="text" name='userPwd'/></td></tr>
+				<tr><td>性别:</td><td><input prefix='user' type="text" name='userSex'/></td></tr>
+				<tr><td>年龄:</td><td><input prefix='user' type="text" dataType='digit' name='userAge'/></td></tr>
+			</table>
+		</div>
+		</form>
+		<div class="mask">
+            <div class="mask_container">
+                <div class="mask_head">温馨提示 <a class="mask_close">&times;</a>
+                </div>
+                <div class="mask_detail">
+                    <p> 您的信息已提交，请等待审核</p>
+                    <div class="mask_handle">
+                        <a class="submit">确定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		</div>
+		<div class="foot">
+			<a class="active">保存</a>
+			<a href="demo_query_users.html">返回</a>
+		</div>
+</body>
+</html>
+<script src="../js/module_demo_user.js"></script>
+<script>
+$(document).ready(function(){
+	loadModifyPage();
+	submitModifyForm();
+});
+
+</script>

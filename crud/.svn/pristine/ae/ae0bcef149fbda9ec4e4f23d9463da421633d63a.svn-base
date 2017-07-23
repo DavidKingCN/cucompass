@@ -1,0 +1,45 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<dics>
+	<table id="info">
+	
+	   <field id="seCatelog">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[信息异议审核]]></desc>
+			</row>
+		
+		</field>
+		<field id="thCatelog">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[信息更正审核]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[02]]></value>
+				<desc><![CDATA[信息消除审核]]></desc>
+			</row>
+	
+		
+		</field>
+		  <field id="status">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[未提交]]></desc>
+			</row>
+			<row>
+			    <value><![CDATA[02]]></value>
+			    <desc><![CDATA[未审核]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[03]]></value>
+				<desc><![CDATA[审核失败]]></desc>
+			</row>
+			<row>
+			    <value><![CDATA[04]]></value>
+			    <desc><![CDATA[审核成功]]></desc>
+			</row>
+		</field>
+		
+		
+	</table>
+</dics>

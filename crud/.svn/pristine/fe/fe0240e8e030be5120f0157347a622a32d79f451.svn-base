@@ -1,0 +1,72 @@
+package com.gcx.citygovcreditndrc.service.evaluationrecord.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.evaluationrecord.EvaluationrecordMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.evaluationrecord.Evaluationrecord;
+import com.gcx.citygovcreditndrc.model.evaluationrecord.EvaluationrecordAo;
+import com.gcx.citygovcreditndrc.service.evaluationrecord.EvaluationrecordService;
+
+@Service("evaluationrecordService")
+public class EvaluationrecordServiceImpl implements EvaluationrecordService{
+
+	@Autowired
+	private EvaluationrecordMapper evaluationrecordDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(EvaluationrecordAo record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<Evaluationrecord> list = evaluationrecordDao.findByRecord(record, limitStart, limitEnd);
+		int count = evaluationrecordDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		result.setTotal(count);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(Evaluationrecord record) {
+		
+		evaluationrecordDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		evaluationrecordDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(Evaluationrecord record) {
+		evaluationrecordDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public int findByRecordCount(EvaluationrecordAo record) {
+		return evaluationrecordDao.findByRecordCount(record);
+	}
+
+}

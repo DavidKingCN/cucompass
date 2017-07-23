@@ -1,0 +1,65 @@
+package com.gcx.citygovcreditndrc.service.personComRecord.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.personComRecord.PersonComRecordMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord;
+import com.gcx.citygovcreditndrc.service.personComRecord.PersonComRecordService;
+
+@Service("personComRecordService")
+public class PersonComRecordServiceImpl implements PersonComRecordService{
+
+	@Autowired
+	private PersonComRecordMapper personComRecordDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(PersonComRecord record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<PersonComRecord> list = personComRecordDao.findByRecord(record, limitStart, limitEnd);
+		int count = personComRecordDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(PersonComRecord record) {
+		
+		personComRecordDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		personComRecordDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(PersonComRecord record) {
+		personComRecordDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+}

@@ -1,0 +1,18 @@
+package com.gcx.citygovcreditndrc.service.personComRecord;
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord;
+
+
+public interface PersonComRecordService {
+
+	ServiceResult<Object> findRecords(PersonComRecord record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(PersonComRecord record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(PersonComRecord record);
+}

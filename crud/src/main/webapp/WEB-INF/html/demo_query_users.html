@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>查询分页页面的处理</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/xmfb_qyxm_new.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/jquery.page.css">
+		
+		<script src="../js/jquery-1.7.1.min.js"></script>
+		<script src="../js/util.1.0.js"></script>
+		<script src="../js/jquery.page.js"></script> 
+		<script src="../js/json2.js"></script>
+		
+		<style type="text/css">
+	    .mask{width:100%;height:100%;position: fixed;top:0; left:0;background: rgba(0,0,0,0.2);display: none;}
+        .mask_container{width:438px;height:310px;margin:0 auto;background:#fff;margin-top:10%;border-radius:5px;}
+        .mask_head{height:40px;line-height:40px;padding-left: 15px;box-sizing: border-box;font-size:16px;border-bottom:1px solid #ddd;}
+        .mask_close{display:inline-block;float:right;font-size:30px;width:24px;height:24px;line-height:21px;text-align:center;border-radius:50%;background:#c5c5c5;color:#fff;margin-right: 15px;margin-top:7px;cursor: pointer;}
+        .mask_detail{box-sizing: border-box;padding: 30px 60px;}
+        .mask_detail p{text-align:center;color:red;font-size: 18px;margin:10px 0;}
+        .mask_handle{width:250px;height:30px;margin:0 auto;margin-top: 60px;}
+        .mask_handle a{display:inline-block;width:160px;height:30px;background: #eee;border-radius:5px;line-height: 30px;text-align: center;cursor: pointer;margin-left:50px}
+        
+        .sel_btn{height: 21px;line-height: 21px;padding: 0 11px;background: #02bafa;border: 1px #26bbdb solid;border-radius: 3px;/*color: #fff;*/display: inline-block;text-decoration: none;font-size: 12px;outline: none;}
+        .ch_cls{ background: #e4e4e4;}
+		</style>
+</head>
+<body>
+		<form action="userQueryForm">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			用户名：<input type='text' name='userName' value=''> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type='button' name='userQuery' value='点击查询' onclick='load_list()'>
+		</form>
+		<br/><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='button' value='添加用户方式1' onclick='toAdd1()'/>
+		&nbsp;&nbsp;
+		<input type='button' value='添加用户方式2' onclick='toAdd2()'/>
+		&nbsp;&nbsp;
+		<a class="sel_btn ch_cls" href='demo_group.html'>新增组</a>
+		&nbsp;&nbsp;
+		<a class="sel_btn " href='multiFileUpload.html'>多文件上传测试</a>
+		<br/><br/>
+		<div class="section">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户信息：
+			<table id="userTab">
+				<tr><th>用户名</th><th>密码</th>	<th>性别</th></tr>
+			</table>
+		</div>
+		<div class="tcdPageCode"></div>
+</body>
+</html>
+<script src="../js/module_demo_user.js"></script>
+<script>
+$(document).ready(function(){
+	load_list();
+});
+</script>

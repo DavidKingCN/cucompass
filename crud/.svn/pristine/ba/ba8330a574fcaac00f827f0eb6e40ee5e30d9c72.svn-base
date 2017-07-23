@@ -1,0 +1,23 @@
+package com.gcx.citygovcreditndrc.service.govdevelopment;
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.govdevelopment.Govdevelopment;
+import com.gcx.citygovcreditndrc.model.govdevelopment.GovdevelopmentAo;
+
+
+public interface GovdevelopmentService {
+
+	ServiceResult<Object> findRecords(GovdevelopmentAo record,int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(Govdevelopment record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(Govdevelopment record);
+
+	ServiceResult<Object> findById(Integer record);
+
+	
+}

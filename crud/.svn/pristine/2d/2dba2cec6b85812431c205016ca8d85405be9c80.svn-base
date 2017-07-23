@@ -1,0 +1,27 @@
+package com.gcx.citygovcreditndrc.model.project;
+
+public class ProjectAo  extends Project{
+	
+	private Integer pagenow;
+	
+	private Integer pagesize;
+
+	public Integer getPagenow() {
+		return pagenow;
+	}
+
+	public void setPagenow(Integer pagenow) {
+		this.pagenow = pagenow;
+	}
+
+	public Integer getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(Integer pagesize) {
+		this.pagesize = pagesize;
+	}
+	
+	
+    
+}

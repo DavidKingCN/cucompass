@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.slf.crud.dao.demo.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.slf.crud.model.demo.Group" >
+    <id column="group_Id" property="groupId" jdbcType="INTEGER" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    group_Id, group_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.slf.crud.model.demo.GroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DEMO_GROUP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DEMO_GROUP
+    where group_Id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DEMO_GROUP
+    where group_Id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.slf.crud.model.demo.GroupExample" >
+    delete from DEMO_GROUP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.slf.crud.model.demo.Group" >
+    insert into DEMO_GROUP (group_Id, group_name)
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slf.crud.model.demo.Group" >
+    insert into DEMO_GROUP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_Id,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.slf.crud.model.demo.GroupExample" resultType="java.lang.Integer" >
+    select count(*) from DEMO_GROUP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DEMO_GROUP
+    <set >
+      <if test="record.groupId != null" >
+        group_Id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupName != null" >
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DEMO_GROUP
+    set group_Id = #{record.groupId,jdbcType=INTEGER},
+      group_name = #{record.groupName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slf.crud.model.demo.Group" >
+    update DEMO_GROUP
+    <set >
+      <if test="groupName != null" >
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where group_Id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slf.crud.model.demo.Group" >
+    update DEMO_GROUP
+    set group_name = #{groupName,jdbcType=VARCHAR}
+    where group_Id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update DEMO_GROUP set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update DEMO_GROUP set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from DEMO_GROUP where 1 = 1 <if test='record.groupId != null and record.groupId != "" '> and group_Id = #{record.groupId,jdbcType=INTEGER} </if><if test='record.groupName != null and record.groupName != "" '> and group_name = #{record.groupName,jdbcType=VARCHAR} </if> limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(*) from DEMO_GROUP where 1 = 1 <if test='record.groupId != null and record.groupId != "" '> and group_Id = #{record.groupId,jdbcType=INTEGER} </if><if test='record.groupName != null and record.groupName != "" '> and group_name = #{record.groupName,jdbcType=VARCHAR} </if>
+  </select>
+  <insert id="saveOrUpdate" useGeneratedKeys="true" keyProperty="groupId"  parameterType="com.slf.crud.model.demo.Group" >
+    insert into DEMO_GROUP (group_Id, group_name)
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR})
+	  ON DUPLICATE KEY UPDATE 
+      group_name = <if test="groupName!=null">#{groupName,jdbcType=VARCHAR}</if><if test="groupName==null">group_name</if>
+  </insert>
+  <select id="findOneByRecord" resultType="com.slf.crud.model.demo.Group" >
+    select <include refid='Base_Column_List' /> from DEMO_GROUP where 1= 1 <if test='record.groupId != null and record.groupId != "" '> and group_Id = #{record.groupId,jdbcType=INTEGER} </if><if test='record.groupName != null and record.groupName != "" '> and group_name = #{record.groupName,jdbcType=VARCHAR} </if>
+  </select>
+  
+   <select id="findOneByRecord2" resultType="com.slf.crud.model.demo.Group" parameterType="com.slf.crud.model.demo.Group">
+    select <include refid='Base_Column_List' /> from DEMO_GROUP where 1= 1 <if test='record.groupId != null and record.groupId != "" '> and group_Id = #{record.groupId,jdbcType=INTEGER} </if><if test='groupName != null and groupName != "" '> and group_name = #{groupName,jdbcType=VARCHAR} </if>
+  </select>
+  
+  
+</mapper>

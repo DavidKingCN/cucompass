@@ -1,0 +1,41 @@
+package com.gcx.citygovcreditndrc.dao.evaluationrecord;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.evaluationrecord.Evaluationrecord;
+import com.gcx.citygovcreditndrc.model.evaluationrecord.EvaluationrecordAo;
+import com.gcx.citygovcreditndrc.model.evaluationrecord.EvaluationrecordExample;
+
+public interface EvaluationrecordMapper {
+    int countByExample(EvaluationrecordExample example);
+
+    int deleteByExample(EvaluationrecordExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Evaluationrecord record);
+
+    int insertSelective(Evaluationrecord record);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<Evaluationrecord> findByRecord(@Param("record") EvaluationrecordAo record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") EvaluationrecordAo record);
+
+    List<Evaluationrecord> selectByExample(EvaluationrecordExample example);
+
+    Evaluationrecord selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Evaluationrecord record, @Param("example") EvaluationrecordExample example);
+
+    int updateByExample(@Param("record") Evaluationrecord record, @Param("example") EvaluationrecordExample example);
+
+    int updateByPrimaryKeySelective(Evaluationrecord record);
+
+    int updateByPrimaryKey(Evaluationrecord record);
+}

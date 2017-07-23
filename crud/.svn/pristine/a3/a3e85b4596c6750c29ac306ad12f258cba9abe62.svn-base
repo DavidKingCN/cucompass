@@ -1,0 +1,86 @@
+package com.gcx.citygovcreditndrc.model.evaluationrecord;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.model.common.EnclosureVo;
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+
+public class EvaluationrecordVo  /*extends Evaluationrecord*/ {
+   
+  
+	private Evaluationrecord evaluation;
+//	private Enclosure enclosure;
+   
+	private List<Enclosure> attachments ;
+
+	public List<Enclosure> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Enclosure> attachments) {
+		this.attachments = attachments;
+	}
+	
+	
+	
+	public Evaluationrecord getEvaluation() {
+		return evaluation;
+	}
+
+	public void setEvaluation(Evaluationrecord evaluation) {
+		this.evaluation = evaluation;
+	}
+
+	public static void main(String[] args) {
+		
+		EvaluationrecordVo evaluationrecordVo = new EvaluationrecordVo();
+		
+		Evaluationrecord evaluation = new Evaluationrecord();
+		
+		evaluation.setState("未审核");
+		evaluation.setSelectedYear("2017");
+		evaluation.setSelectedDepartment("金融部");
+		evaluation.setCityCode("xxxxxxxxxxxxxxxx");
+		evaluation.setUserid("");
+		evaluationrecordVo.setEvaluation(evaluation);
+		
+		
+		List<Enclosure> attachments = new ArrayList<>();
+		//附件一
+		Enclosure  enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+1);
+		enclosure.setMaterialTitle("title"+1);
+		enclosure.setR2("");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		//附件2
+		enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+2);
+		enclosure.setMaterialTitle("title"+2);
+		enclosure.setR2("");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		
+		//附件3
+		enclosure = new Enclosure();
+		
+		enclosure.setMaterial("lujing path"+3);
+		enclosure.setMaterialTitle("title"+3);
+		enclosure.setR2("");
+		enclosure.setR3("城市代码");
+		
+		attachments.add(enclosure);
+		
+		evaluationrecordVo.setAttachments(attachments);
+		
+		System.out.println(JSONUtil.toJson(evaluationrecordVo));
+	}
+}

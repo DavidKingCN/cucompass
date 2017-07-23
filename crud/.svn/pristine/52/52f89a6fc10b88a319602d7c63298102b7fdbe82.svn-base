@@ -1,0 +1,200 @@
+package com.gcx.citygovcreditndrc.controller.govServe;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSON;
+import com.gcx.citygovcreditndrc.model.ResponseData;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.model.common.HisGSAttachRo;
+import com.gcx.citygovcreditndrc.model.common.NowGSAttachRo;
+import com.gcx.citygovcreditndrc.model.govServe.GSListItem;
+import com.gcx.citygovcreditndrc.model.govServe.GovServe;
+import com.gcx.citygovcreditndrc.model.govServe.GovServeAo;
+import com.gcx.citygovcreditndrc.model.govServe.GovServeVo;
+import com.gcx.citygovcreditndrc.model.govServe.HisGS;
+import com.gcx.citygovcreditndrc.model.govServe.NowGSRo;
+import com.gcx.citygovcreditndrc.model.govServe.ToSupplyRo;
+import com.gcx.citygovcreditndrc.service.common.EnclosureService;
+import com.gcx.citygovcreditndrc.service.govServe.GovServeService;
+@SuppressWarnings("all")
+@Controller
+@RequestMapping("/govServe")
+public class GovServeController {
+	@Resource
+	GovServeService govServeService;
+	@Resource
+	EnclosureService enclosureService;
+
+	@RequestMapping(value="/page/{pagenow}/{pagesize}",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseData findRecords(@RequestBody String record,@PathVariable("pagenow") int pagenow,@PathVariable("pagesize") int pagesize){
+		GovServe recordObj = new GovServe();
+		if(record!=null && !record.equals("")){
+			recordObj  = JSON.parseObject(record, GovServe.class);
+		}
+		ServiceResult<Object> result = govServeService.findRecords(recordObj, pagenow, pagesize);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addGSAndAtts",method=RequestMethod.POST)
+	public ResponseData addServAndAttch(@RequestBody GovServeVo record){
+		ServiceResult result =null;
+		GovServe GS = record.getGovServe();
+		//check 
+		String applyServe = GS.getApplyServe().trim();
+		GS.setApplyServe(applyServe);
+		
+		GovServe govServeCond = new GovServe();
+		govServeCond.setApplyServe(applyServe);
+		
+		int count = govServeService.findByRecordCount(govServeCond);
+		ResponseData responseData = ResponseData.ok();
+		if(count > 0){
+			responseData.putDataValue("result", "申请服务【"+applyServe+"】已经存在！");
+		}
+		Integer pk = govServeService.insertRecord(GS);
+		List<Enclosure> es = record.getAttachments();
+		for(Enclosure e:es){
+			
+			e.setR4(pk+"");
+			enclosureService.addRecord(e);
+		}
+		
+		responseData.putDataValue("result", "申请服务【"+applyServe+"】申请服务！");
+		return responseData;
+
+	}
+	//保存的方法
+	@ResponseBody
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public ResponseData addRecord(@RequestBody GovServe record){
+		ServiceResult result =govServeService.addRecord(record);
+		
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/{id}/del",method=RequestMethod.GET)
+	public ResponseData delRecord(@PathVariable("id") Integer record){
+		ServiceResult<Object> result = govServeService.delRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public ResponseData updateRecord(@RequestBody GovServe record){
+		ServiceResult<Object> result = govServeService.updateRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+	@RequestMapping(value="/queryEntry",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData queryEntry(GovServeAo govServe){
+		ServiceResult<Object> result = govServeService.findRecords(govServe, govServe.getPageNo(), govServe.getPageSize());
+		
+//		enclosureService.findAttachmentsByPid(id)
+		List<GovServe> list = (List<GovServe>)result.getData();
+		List<GSListItem> items = new ArrayList<GSListItem>();
+		GSListItem item = null;
+		for(GovServe serve:list){
+			int id = serve.getId();
+			item = new GSListItem();
+			BeanUtils.copyProperties(serve, item);
+			item.setAttachment(enclosureService.getAttachStrByPid(id));
+			items.add(item);
+		}
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", items).putDataValue("total", result.getTotal());
+		}
+		return responseData;
+	}
+	
+	@RequestMapping(value="/seeHisGovServ",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData seeHisGovServ(GovServeAo govServe){
+		Integer id = govServe.getId();
+		GovServe targetObj = govServeService.findById(id);
+		HisGS hisGs = new HisGS();
+		BeanUtils.copyProperties(targetObj, hisGs);
+		List<Enclosure> attachments = enclosureService.findAttachmentsByPid(id);
+		List<HisGSAttachRo> hisAttachs = new ArrayList<>();
+		HisGSAttachRo hisAttach = null;
+		for(Enclosure enc : attachments){
+			hisAttach = new HisGSAttachRo();
+			
+			BeanUtils.copyProperties(enc, hisAttach);
+			hisAttachs.add(hisAttach);
+		}
+		return ResponseData.ok().putDataValue("govServe", hisGs).putDataValue("attachments", hisAttachs);
+	}
+	
+	
+	@RequestMapping(value="/seeDetailNow",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData seeDetailNow(GovServeAo govServe){
+		Integer id = govServe.getId();
+		GovServe targetObj = govServeService.findById(id);
+		NowGSRo nowGs = new NowGSRo();
+		BeanUtils.copyProperties(targetObj, nowGs);
+		List<Enclosure> attachments = enclosureService.findAttachmentsByPid(id);
+		List<NowGSAttachRo> nowAttachs = new ArrayList<>();
+		NowGSAttachRo nowAttach = null;
+		for(Enclosure enc : attachments){
+			nowAttach = new NowGSAttachRo();
+			
+			BeanUtils.copyProperties(enc, nowAttach);
+			nowAttachs.add(nowAttach);
+		}
+		return ResponseData.ok().putDataValue("govServe", nowGs).putDataValue("attachments", nowAttachs);
+	}
+	
+	
+	@RequestMapping(value="/toSupply",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData toSupply(GovServeAo govServe){
+		Integer id = govServe.getId();
+		GovServe targetObj = govServeService.findById(id);
+		ToSupplyRo toSupplyRo = new ToSupplyRo();
+		BeanUtils.copyProperties(targetObj, toSupplyRo);
+		List<Enclosure> attachments = enclosureService.findAttachmentsByPid(id);
+		List<HisGSAttachRo> hisAttachs = new ArrayList<>();
+		HisGSAttachRo hisAttach = null;
+		for(Enclosure enc : attachments){
+			hisAttach = new HisGSAttachRo();
+			
+			BeanUtils.copyProperties(enc, hisAttach);
+			hisAttachs.add(hisAttach);
+		}
+		return ResponseData.ok().putDataValue("govServe", toSupplyRo).putDataValue("attachments", hisAttachs);
+	}
+}

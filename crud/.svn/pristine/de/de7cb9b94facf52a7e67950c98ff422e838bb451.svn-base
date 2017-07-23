@@ -1,0 +1,21 @@
+package com.gcx.citygovcreditndrc.listener;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+import com.gcx.citygovcreditndrc.sys.Dom4jUtil;
+
+
+
+public class SysConfLoaderListener implements ServletContextListener {
+
+	@Override
+	public void contextInitialized(ServletContextEvent event) {
+		Dom4jUtil.initSysDics();
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent event) {
+	}
+
+}

@@ -1,0 +1,325 @@
+package com.gcx.citygovcreditndrc.model.assess;
+
+import java.util.Date;
+
+public class GovernmentAssessment {
+    private Integer id;
+
+    private String operator;
+
+    private String budgetisopen;
+
+    private String projectisopen;
+
+    private String buyisopen;
+
+    private String emergencyisopen;
+
+    private String landisopen;
+
+    private String infoisupdate;
+
+    private String isappeal;
+
+    private String participation;
+
+    private String growthrate;
+
+    private String deficit;
+
+    private String debt;
+
+    private String detection;
+
+    private String jobless;
+
+    private String technologyfunds;
+
+    private String researchfunds;
+
+    private String replyrate;
+
+    private String dishonestyrecord;
+
+    private String isassessment;
+
+    private String relevantillegalcount;
+
+    private String irrelevantillegalcount;
+
+    private String onceirrelevantillegalcount;
+
+    private String oncerelevantillegalcount;
+
+    private String ispropertydeclare;
+
+    private String iscivildishonesty;
+
+    private String isciviltrain;
+
+    private String isaccordrules;
+
+    private String isaccordcar;
+
+    private String isaccordreception;
+
+    private String isofficialcard;
+
+    private Date operatordate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator == null ? null : operator.trim();
+    }
+
+    public String getBudgetisopen() {
+        return budgetisopen;
+    }
+
+    public void setBudgetisopen(String budgetisopen) {
+        this.budgetisopen = budgetisopen == null ? null : budgetisopen.trim();
+    }
+
+    public String getProjectisopen() {
+        return projectisopen;
+    }
+
+    public void setProjectisopen(String projectisopen) {
+        this.projectisopen = projectisopen == null ? null : projectisopen.trim();
+    }
+
+    public String getBuyisopen() {
+        return buyisopen;
+    }
+
+    public void setBuyisopen(String buyisopen) {
+        this.buyisopen = buyisopen == null ? null : buyisopen.trim();
+    }
+
+    public String getEmergencyisopen() {
+        return emergencyisopen;
+    }
+
+    public void setEmergencyisopen(String emergencyisopen) {
+        this.emergencyisopen = emergencyisopen == null ? null : emergencyisopen.trim();
+    }
+
+    public String getLandisopen() {
+        return landisopen;
+    }
+
+    public void setLandisopen(String landisopen) {
+        this.landisopen = landisopen == null ? null : landisopen.trim();
+    }
+
+    public String getInfoisupdate() {
+        return infoisupdate;
+    }
+
+    public void setInfoisupdate(String infoisupdate) {
+        this.infoisupdate = infoisupdate == null ? null : infoisupdate.trim();
+    }
+
+    public String getIsappeal() {
+        return isappeal;
+    }
+
+    public void setIsappeal(String isappeal) {
+        this.isappeal = isappeal == null ? null : isappeal.trim();
+    }
+
+    public String getParticipation() {
+        return participation;
+    }
+
+    public void setParticipation(String participation) {
+        this.participation = participation == null ? null : participation.trim();
+    }
+
+    public String getGrowthrate() {
+        return growthrate;
+    }
+
+    public void setGrowthrate(String growthrate) {
+        this.growthrate = growthrate == null ? null : growthrate.trim();
+    }
+
+    public String getDeficit() {
+        return deficit;
+    }
+
+    public void setDeficit(String deficit) {
+        this.deficit = deficit == null ? null : deficit.trim();
+    }
+
+    public String getDebt() {
+        return debt;
+    }
+
+    public void setDebt(String debt) {
+        this.debt = debt == null ? null : debt.trim();
+    }
+
+    public String getDetection() {
+        return detection;
+    }
+
+    public void setDetection(String detection) {
+        this.detection = detection == null ? null : detection.trim();
+    }
+
+    public String getJobless() {
+        return jobless;
+    }
+
+    public void setJobless(String jobless) {
+        this.jobless = jobless == null ? null : jobless.trim();
+    }
+
+    public String getTechnologyfunds() {
+        return technologyfunds;
+    }
+
+    public void setTechnologyfunds(String technologyfunds) {
+        this.technologyfunds = technologyfunds == null ? null : technologyfunds.trim();
+    }
+
+    public String getResearchfunds() {
+        return researchfunds;
+    }
+
+    public void setResearchfunds(String researchfunds) {
+        this.researchfunds = researchfunds == null ? null : researchfunds.trim();
+    }
+
+    public String getReplyrate() {
+        return replyrate;
+    }
+
+    public void setReplyrate(String replyrate) {
+        this.replyrate = replyrate == null ? null : replyrate.trim();
+    }
+
+    public String getDishonestyrecord() {
+        return dishonestyrecord;
+    }
+
+    public void setDishonestyrecord(String dishonestyrecord) {
+        this.dishonestyrecord = dishonestyrecord == null ? null : dishonestyrecord.trim();
+    }
+
+    public String getIsassessment() {
+        return isassessment;
+    }
+
+    public void setIsassessment(String isassessment) {
+        this.isassessment = isassessment == null ? null : isassessment.trim();
+    }
+
+    public String getRelevantillegalcount() {
+        return relevantillegalcount;
+    }
+
+    public void setRelevantillegalcount(String relevantillegalcount) {
+        this.relevantillegalcount = relevantillegalcount == null ? null : relevantillegalcount.trim();
+    }
+
+    public String getIrrelevantillegalcount() {
+        return irrelevantillegalcount;
+    }
+
+    public void setIrrelevantillegalcount(String irrelevantillegalcount) {
+        this.irrelevantillegalcount = irrelevantillegalcount == null ? null : irrelevantillegalcount.trim();
+    }
+
+    public String getOnceirrelevantillegalcount() {
+        return onceirrelevantillegalcount;
+    }
+
+    public void setOnceirrelevantillegalcount(String onceirrelevantillegalcount) {
+        this.onceirrelevantillegalcount = onceirrelevantillegalcount == null ? null : onceirrelevantillegalcount.trim();
+    }
+
+    public String getOncerelevantillegalcount() {
+        return oncerelevantillegalcount;
+    }
+
+    public void setOncerelevantillegalcount(String oncerelevantillegalcount) {
+        this.oncerelevantillegalcount = oncerelevantillegalcount == null ? null : oncerelevantillegalcount.trim();
+    }
+
+    public String getIspropertydeclare() {
+        return ispropertydeclare;
+    }
+
+    public void setIspropertydeclare(String ispropertydeclare) {
+        this.ispropertydeclare = ispropertydeclare == null ? null : ispropertydeclare.trim();
+    }
+
+    public String getIscivildishonesty() {
+        return iscivildishonesty;
+    }
+
+    public void setIscivildishonesty(String iscivildishonesty) {
+        this.iscivildishonesty = iscivildishonesty == null ? null : iscivildishonesty.trim();
+    }
+
+    public String getIsciviltrain() {
+        return isciviltrain;
+    }
+
+    public void setIsciviltrain(String isciviltrain) {
+        this.isciviltrain = isciviltrain == null ? null : isciviltrain.trim();
+    }
+
+    public String getIsaccordrules() {
+        return isaccordrules;
+    }
+
+    public void setIsaccordrules(String isaccordrules) {
+        this.isaccordrules = isaccordrules == null ? null : isaccordrules.trim();
+    }
+
+    public String getIsaccordcar() {
+        return isaccordcar;
+    }
+
+    public void setIsaccordcar(String isaccordcar) {
+        this.isaccordcar = isaccordcar == null ? null : isaccordcar.trim();
+    }
+
+    public String getIsaccordreception() {
+        return isaccordreception;
+    }
+
+    public void setIsaccordreception(String isaccordreception) {
+        this.isaccordreception = isaccordreception == null ? null : isaccordreception.trim();
+    }
+
+    public String getIsofficialcard() {
+        return isofficialcard;
+    }
+
+    public void setIsofficialcard(String isofficialcard) {
+        this.isofficialcard = isofficialcard == null ? null : isofficialcard.trim();
+    }
+
+    public Date getOperatordate() {
+        return operatordate;
+    }
+
+    public void setOperatordate(Date operatordate) {
+        this.operatordate = operatordate;
+    }
+}

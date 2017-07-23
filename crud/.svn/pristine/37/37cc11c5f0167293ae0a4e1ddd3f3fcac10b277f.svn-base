@@ -1,0 +1,197 @@
+package com.gcx.gov.credit.test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gcx.citygovcreditndrc.model.ResponseData;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.model.common.HisGSAttachRo;
+import com.gcx.citygovcreditndrc.model.common.NowGSAttachRo;
+import com.gcx.citygovcreditndrc.model.govServe.GSListItem;
+import com.gcx.citygovcreditndrc.model.govServe.GovServe;
+import com.gcx.citygovcreditndrc.model.govServe.HisGS;
+import com.gcx.citygovcreditndrc.model.govServe.NowGSRo;
+import com.gcx.citygovcreditndrc.model.govServe.ToSupplyRo;
+import com.gcx.citygovcreditndrc.service.common.EnclosureService;
+import com.gcx.citygovcreditndrc.service.govServe.GovServeService;
+import com.gcx.citygovcreditndrc.util.JSONUtil;
+import com.gcx.gov.credit.base.BaseTestCase;
+
+public class TestGovServ extends BaseTestCase {
+
+	@Autowired
+	GovServeService govServeService;
+	@Autowired
+	EnclosureService enclosureService;
+	@Test
+	public void testAddGovServ(){
+		GovServe govServe = null;
+		for(int i=2;i<100;i++){
+			govServe = new GovServe();
+			govServe .setApplier("戴凯"+i);
+			govServe .setApplyUnit("北京大学教务处"+i);
+			govServe .setAuditor("戴凯"+i);
+			govServe .setAuditDept("北京大学教务处"+i);
+			govServe .setState("待审核");
+		
+		govServeService.addRecord(govServe);
+		}
+	}
+	@Test
+	public void testUpdateGovServ(){
+		GovServe record = new GovServe();
+		
+		record.setId(1);
+		
+		record.setA1("daikai");
+		
+		govServeService.updateRecord(record);
+	}
+	@Test
+	public void findByRecords(){
+		int pageSize = 3;
+		int pageNo = 1;
+		
+		ServiceResult<Object>  rs = govServeService.findRecords(new GovServe(), pageNo, pageSize);
+		
+		List<GovServe> list = (List<GovServe>)rs.getData();
+		Integer total = rs.getTotal();
+		ResponseData ok = ResponseData.ok();
+		
+		ok.putDataValue("result", list).putDataValue("total", total);
+		
+		System.out.println(JSONUtil.toJson(ok));
+		System.out.println("total="+total);
+		for(GovServe govServe : list){
+			System.out.println(JSONUtil.toJson(govServe));
+			
+		}
+		
+	}
+	@Test
+	public void page(){
+		int pageSize = 3;
+		int pageNo = 1;
+		ServiceResult<Object> result = govServeService.findRecords(new GovServe(), pageNo, pageSize);
+		
+		List<GovServe> list = (List<GovServe>)result.getData();
+		List<GSListItem> items = new ArrayList<GSListItem>();
+		GSListItem item = null;
+		for(GovServe serve:list){
+			int id = serve.getId();
+			item = new GSListItem();
+			BeanUtils.copyProperties(serve, item);
+			//item.setAttachment(enclosureService.getAttachStrByPid(id));
+			items.add(item);
+		}
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", items).putDataValue("total", result.getTotal());
+		}
+		System.out.println(JSONUtil.toJson(responseData));
+	}
+	@Test
+	public void seeHisDetail(){
+		int id = 1;
+		
+		GovServe targetObj = govServeService.findById(id);
+		HisGS hisGs = new HisGS();
+		BeanUtils.copyProperties(targetObj, hisGs);
+		List<Enclosure> attachments = null;//enclosureService.findAttachmentsByPid(id);
+		List<HisGSAttachRo> hisAttachs = new ArrayList<>();
+		HisGSAttachRo hisAttach = null;
+		for(Enclosure enc : attachments){
+			hisAttach = new HisGSAttachRo();
+			
+			BeanUtils.copyProperties(enc, hisAttach);
+			hisAttachs.add(hisAttach);
+		}
+		ResponseData rd = ResponseData.ok().putDataValue("govServe", hisGs).putDataValue("attachments", hisAttachs);
+		
+		System.out.println(JSONUtil.toJson(rd));
+	}
+	@Test
+	public void seeNowDetail(){
+		Integer id = 1;
+		GovServe targetObj = govServeService.findById(id);
+		NowGSRo nowGs = new NowGSRo();
+		BeanUtils.copyProperties(targetObj, nowGs);
+		List<Enclosure> attachments = null;//enclosureService.findAttachmentsByPid(id);
+		List<NowGSAttachRo> nowAttachs = new ArrayList<>();
+		NowGSAttachRo nowAttach = null;
+		for(Enclosure enc : attachments){
+			nowAttach = new NowGSAttachRo();
+			
+			BeanUtils.copyProperties(enc, nowAttach);
+			nowAttachs.add(nowAttach);
+		}
+		ResponseData rd =  ResponseData.ok().putDataValue("govServe", nowGs).putDataValue("attachments", nowAttachs);
+		System.out.println(JSONUtil.toJson(rd));
+	}
+	@Test
+	public void toSupply(){
+		Integer id = 1;
+		GovServe targetObj = govServeService.findById(id);
+		ToSupplyRo toSupplyRo = new ToSupplyRo();
+		BeanUtils.copyProperties(targetObj, toSupplyRo);
+		List<Enclosure> attachments = null;//enclosureService.findAttachmentsByPid(id);
+		List<HisGSAttachRo> hisAttachs = new ArrayList<>();
+		HisGSAttachRo hisAttach = null;
+		for(Enclosure enc : attachments){
+			hisAttach = new HisGSAttachRo();
+			
+			BeanUtils.copyProperties(enc, hisAttach);
+			hisAttachs.add(hisAttach);
+		}
+		ResponseData rd = ResponseData.ok().putDataValue("govServe", toSupplyRo).putDataValue("attachments", hisAttachs);
+		System.out.println(JSONUtil.toJson(rd));
+	}
+	
+	@Test
+	public void saveOrUpdate(){
+		GovServe record = new GovServe();
+//		record.setId(2);
+		record.setState("now");
+		record.setA1("daikai_NEW");
+		record.setAuditContent("{\"audits\":[{\"content\":\"第一次审批\"},{\"content\":\"第二次审批\"},{\"content\":\"第三次审批\"}]}");
+		int id  = govServeService.saveOrUpdate(record);
+		System.out.println("主键ID="+id);
+		
+	}
+	
+	@Test
+	public void saveOrUpdate2(){
+		GovServe record = new GovServe();
+//		record.setId(217);
+		record.setState("未提交");
+		record.setA1("daikai_");
+		record.setAuditContent("{\"audits\":[{\"content\":\"第一次审批\"},{\"content\":\"第二次审批\"},{\"content\":\"第三次审批\"}]}");
+		int id  = govServeService.saveOrUpdateGS(record);
+		System.out.println("主键ID="+id);
+		
+	}
+	@Test
+	public void findIdByRd(){
+		GovServe record = new GovServe();
+		record.setApplyServe("济南金融服务-1");
+		int pk = govServeService.findIdByRecord(record);
+		
+		System.out.println("主键="+pk);
+	}
+	
+	@Test
+	public void findOneByRd(){
+		GovServe record = new GovServe();
+		record.setApplyServe("济南金融服务");
+		GovServe pk = govServeService.findOneByRecord(record);
+		
+		System.out.println("对象="+JSONUtil.toJson(pk));
+	}
+	
+
+}

@@ -1,0 +1,21 @@
+package com.gcx.citygovcreditndrc.model.common;
+
+import java.util.List;
+
+
+public class EnclosureVo {
+	
+	
+	
+	private List<Enclosure> attachments ;
+
+	public List<Enclosure> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Enclosure> attachments) {
+		this.attachments = attachments;
+	}
+	
+	
+}

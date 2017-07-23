@@ -1,0 +1,26 @@
+package com.gcx.citygovcreditndrc.service.govServe;
+
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.govServe.GovServe;
+
+
+public interface GovServeService {
+
+	ServiceResult<Object> findRecords(GovServe record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(GovServe record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(GovServe record);
+	
+	public Integer insertRecord(GovServe record);
+	
+	
+	public GovServe findById(Integer id);
+	
+	int findByRecordCount(GovServe record);
+}

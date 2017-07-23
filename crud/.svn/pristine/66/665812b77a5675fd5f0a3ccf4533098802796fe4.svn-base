@@ -1,0 +1,59 @@
+package com.gcx.citygovcreditndrc.controller.dic;
+
+import java.util.LinkedHashMap;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gcx.citygovcreditndrc.model.ResponseData;
+import com.gcx.citygovcreditndrc.model.dic.DataDic;
+import com.gcx.citygovcreditndrc.sys.SysDicUtil;
+
+
+@Controller
+@RequestMapping("/dic")
+public class DicController {
+	@RequestMapping(value="/getAllFields",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData getAllFields(DataDic dataDic){
+		String table = dataDic.getTable();//---table name
+		ResponseData responseData = ResponseData.ok();
+		LinkedHashMap<String,LinkedHashMap<String, String>> maps = SysDicUtil.getAllFields(table);
+		
+		if(maps !=null){
+			responseData.putDataValue("result", maps);//data.result.proType
+		}
+		return responseData;
+	}
+	
+	@RequestMapping(value="/getField",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData getField(DataDic dataDic){
+		String table = dataDic.getTable();//---table name
+		String field = dataDic.getField();
+		ResponseData responseData = ResponseData.ok();
+		LinkedHashMap<String, String> map =  SysDicUtil.getAllFields(table,field);
+		
+		if(map !=null){
+			responseData.putDataValue("result", map);//data.result.proType
+		}
+		return responseData;
+	}
+	
+	@RequestMapping(value="/getFieldDescByCode",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData getFieldDescByCode(DataDic dataDic){
+		String table = dataDic.getTable();//---table name
+		String field = dataDic.getField();
+		String code = dataDic.getCode();
+		ResponseData responseData = ResponseData.ok();
+		String desc =  SysDicUtil.getFieldDesc(table,field,code);
+		
+		if(desc !=null){
+			responseData.putDataValue("result", desc);//data.result
+		}
+		return responseData;
+	}
+}

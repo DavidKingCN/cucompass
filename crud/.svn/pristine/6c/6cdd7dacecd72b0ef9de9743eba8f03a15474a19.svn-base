@@ -1,0 +1,28 @@
+package com.gcx.citygovcreditndrc.model.common;
+/***
+ * 
+ * @author 戴凯
+ * 查看审批历史的附件RO
+ *
+ */
+public class NowGSAttachRo {
+	private String materialTitle;
+	private String material;
+
+	public String getMaterialTitle() {
+		return materialTitle;
+	}
+
+	public void setMaterialTitle(String materialTitle) {
+		this.materialTitle = materialTitle;
+	}
+
+	public String getMaterial() {
+		return material;
+	}
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+	
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<dics>
+	<table id="comments">
+	
+	   <field id="p2">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[信用服务]]></desc>
+			</row>
+			
+		
+		</field>
+		<field id="p1">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[信息异议申请]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[02]]></value>
+				<desc><![CDATA[投诉举报建议]]></desc>
+			</row>
+	
+		</field>
+		  <field id="pjState">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[成功]]></desc>
+			</row>
+			<row>
+			    <value><![CDATA[02]]></value>
+			    <desc><![CDATA[失败]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[03]]></value>
+				<desc><![CDATA[移交中]]></desc>
+			</row>
+			<row>
+			    <value><![CDATA[04]]></value>
+			    <desc><![CDATA[未处理]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[05]]></value>
+				<desc><![CDATA[已处理]]></desc>
+			</row>	
+		</field>
+		  <field id="pjType">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[个人]]></desc>
+			</row>
+			<row>
+			    <value><![CDATA[02]]></value>
+			    <desc><![CDATA[城市]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[03]]></value>
+				<desc><![CDATA[企业]]></desc>
+			</row>
+		</field>
+		 <field id="hfState">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[未回复]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[02]]></value>
+				<desc><![CDATA[已回复]]></desc>
+			</row>
+		</field>
+		
+		
+			 <field id="hfShenhe">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[未提交]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[02]]></value>
+				<desc><![CDATA[审核中]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[03]]></value>
+				<desc><![CDATA[审核通过]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[04]]></value>
+				<desc><![CDATA[审核不通过]]></desc>
+			</row>
+		</field>
+		
+		 <field id="r2">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[审核者]]></desc>
+			</row>
+			
+		
+		</field>
+		<field id="r1">
+			<row>
+				<value><![CDATA[01]]></value>
+				<desc><![CDATA[信息异议审核]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[02]]></value>
+				<desc><![CDATA[投诉举报审核]]></desc>
+			</row>
+			<row>
+				<value><![CDATA[03]]></value>
+				<desc><![CDATA[人员信息审核]]></desc>
+			</row>
+		</field>
+		
+		
+		
+	</table>
+</dics>

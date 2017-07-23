@@ -1,0 +1,32 @@
+package com.gcx.citygovcreditndrc.model.govServe;
+/***
+ * 
+ * @author 戴凯
+ * 政务服务查看详情-立即查看页面
+ *
+ */
+public class NowGSRo {
+	private String applyServe;	//申请服务
+	private String applyUnit;	//申请单位
+	private String applyTime;	//提交时间
+	public String getApplyServe() {
+		return applyServe;
+	}
+	public void setApplyServe(String applyServe) {
+		this.applyServe = applyServe;
+	}
+	public String getApplyUnit() {
+		return applyUnit;
+	}
+	public void setApplyUnit(String applyUnit) {
+		this.applyUnit = applyUnit;
+	}
+	public String getApplyTime() {
+		return applyTime;
+	}
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
+	}
+	
+	
+}

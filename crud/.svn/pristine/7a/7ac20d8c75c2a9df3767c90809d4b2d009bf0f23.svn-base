@@ -1,0 +1,84 @@
+package com.gcx.citygovcreditndrc.service.applyCommentRecord.impl;
+
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.applyCommentRecord.ApplyCommentRecordMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecord;
+import com.gcx.citygovcreditndrc.model.applyCommentRecord.ApplyCommentRecordAo;
+import com.gcx.citygovcreditndrc.service.applyCommentRecord.ApplyCommentRecordService;
+import com.gcx.citygovcreditndrc.service.impl.CommonImpl;
+
+@Service("applyCommentRecordService")
+public class ApplyCommentRecordServiceImpl extends CommonImpl implements ApplyCommentRecordService{
+
+	@Autowired
+	private ApplyCommentRecordMapper applyCommentRecordDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(HttpServletRequest request,HttpServletResponse response, ApplyCommentRecordAo record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		String userId=getUserId(request, response);
+		List<ApplyCommentRecord> list = applyCommentRecordDao.findByRecord(record, limitStart, limitEnd);
+		int count = applyCommentRecordDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		result.setTotal(count);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(ApplyCommentRecord record) {
+		String operator = record.getOperator();
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		 if (operator !=null && operator !="") {
+			 applyCommentRecordDao.insertSelective(record);		 
+				result.setData(1);
+		} else {
+			result.setData(0);
+		}
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		applyCommentRecordDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(ApplyCommentRecord record) {
+		applyCommentRecordDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> findById(Integer record) {
+	 ApplyCommentRecord applyCommentRecord = applyCommentRecordDao.selectByPrimaryKey(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(applyCommentRecord);
+		
+		return result; 
+	}
+  
+
+}

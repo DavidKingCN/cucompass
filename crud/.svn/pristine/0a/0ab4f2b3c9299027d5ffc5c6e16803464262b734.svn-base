@@ -1,0 +1,41 @@
+package com.gcx.citygovcreditndrc.dao.cityGvoInfo;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfo;
+import com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfoAo;
+import com.gcx.citygovcreditndrc.model.cityGvoInfo.CityGvoInfoExample;
+
+public interface CityGvoInfoMapper {
+    int countByExample(CityGvoInfoExample example);
+
+    int deleteByExample(CityGvoInfoExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(CityGvoInfo record);
+
+    int insertSelective(CityGvoInfo record);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<CityGvoInfo> findByRecord(@Param("record") CityGvoInfoAo record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") CityGvoInfoAo record);
+
+    List<CityGvoInfo> selectByExample(CityGvoInfoExample example);
+
+    CityGvoInfo selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") CityGvoInfo record, @Param("example") CityGvoInfoExample example);
+
+    int updateByExample(@Param("record") CityGvoInfo record, @Param("example") CityGvoInfoExample example);
+
+    int updateByPrimaryKeySelective(CityGvoInfo record);
+
+    int updateByPrimaryKey(CityGvoInfo record);
+}

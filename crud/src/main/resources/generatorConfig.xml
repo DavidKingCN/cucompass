@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <!-- 数据库驱动 -->
+  <classPathEntry location="D:\jars\mysql-connector-java-5.1.21.jar" />
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	<!-- 生成逻辑删除操作，数据库并未真正删除数据 -->
+	 <plugin type="com.slf.crud.util.DeleteLogicByIdPlugin" />
+	<plugin type="com.slf.crud.util.DeleteLogicByIdsPlugin" />
+<!-- 	生成自定义查询 -->
+	<plugin type="com.slf.crud.util.FindByRecord" />
+	<plugin type="com.slf.crud.util.FindByRecordCount" />  
+	<!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+    <commentGenerator>  
+        <property name="suppressAllComments" value="true" /> 
+    </commentGenerator>
+    <!-- 数据库配置 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/crud?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true"
+        userId="root"
+        password="isoftadmin">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+
+    <!-- model配置 -->
+    <javaModelGenerator targetPackage="com.slf.crud.model.demo" targetProject="ndrc">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    <!-- xml配置文件 -->
+    <sqlMapGenerator targetPackage="com.slf.crud.mapping.demo"  targetProject="ndrc">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+    <!--接口-->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.slf.crud.dao.demo"  targetProject="ndrc">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+    <!-- <table  tableName="GCX_TENDER" domainObjectName="Tender" enableCountByExample="false" enableUpdateByExample="false" 
+    		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    </table>  -->
+    
+   <!--  <table  tableName="GCX_BIDDING" domainObjectName="Bidder" enableCountByExample="false" enableUpdateByExample="false" 
+    		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    </table> --> 													
+    <table  tableName="DEMO_GROUP" domainObjectName="Group"  enableSelectByExample="true" enableSelectByPrimaryKey="true"
+    	enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true" enableCountByExample="true" enableInsert="true">
+    </table> 
+    
+  <!--   <table  tableName="GCX_APPLY" domainObjectName="Apply" enableCountByExample="false" enableUpdateByExample="false" 
+    		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    </table> 
+ -->
+  </context>
+</generatorConfiguration>

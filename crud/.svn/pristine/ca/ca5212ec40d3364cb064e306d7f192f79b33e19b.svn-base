@@ -1,0 +1,213 @@
+package com.gcx.citygovcreditndrc.model.applyCommentRecord;
+
+public class ApplyCommentRecord {
+    private Integer id;
+
+    private String pjContent;
+
+    private String pjTime;
+
+    private String pjState;
+
+    private String pjType;
+
+    private String hfResult;
+
+    private String hfTime;
+
+    private String hfState;
+
+    private String operator;
+
+    private String tjTime;
+
+    private String isDelete;
+
+    private String c1;
+
+    private String c2;
+
+    private String c3;
+
+    private String c4;
+
+    private String c5;
+
+    private String c6;
+
+    private String c7;
+
+    private String c8;
+
+    private String column21;
+
+    private String note;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getPjContent() {
+        return pjContent;
+    }
+
+    public void setPjContent(String pjContent) {
+        this.pjContent = pjContent == null ? null : pjContent.trim();
+    }
+
+    public String getPjTime() {
+        return pjTime;
+    }
+
+    public void setPjTime(String pjTime) {
+        this.pjTime = pjTime == null ? null : pjTime.trim();
+    }
+
+    public String getPjState() {
+        return pjState;
+    }
+
+    public void setPjState(String pjState) {
+        this.pjState = pjState == null ? null : pjState.trim();
+    }
+
+    public String getPjType() {
+        return pjType;
+    }
+
+    public void setPjType(String pjType) {
+        this.pjType = pjType == null ? null : pjType.trim();
+    }
+
+    public String getHfResult() {
+        return hfResult;
+    }
+
+    public void setHfResult(String hfResult) {
+        this.hfResult = hfResult == null ? null : hfResult.trim();
+    }
+
+    public String getHfTime() {
+        return hfTime;
+    }
+
+    public void setHfTime(String hfTime) {
+        this.hfTime = hfTime == null ? null : hfTime.trim();
+    }
+
+    public String getHfState() {
+        return hfState;
+    }
+
+    public void setHfState(String hfState) {
+        this.hfState = hfState == null ? null : hfState.trim();
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator == null ? null : operator.trim();
+    }
+
+    public String getTjTime() {
+        return tjTime;
+    }
+
+    public void setTjTime(String tjTime) {
+        this.tjTime = tjTime == null ? null : tjTime.trim();
+    }
+
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public String getC1() {
+        return c1;
+    }
+
+    public void setC1(String c1) {
+        this.c1 = c1 == null ? null : c1.trim();
+    }
+
+    public String getC2() {
+        return c2;
+    }
+
+    public void setC2(String c2) {
+        this.c2 = c2 == null ? null : c2.trim();
+    }
+
+    public String getC3() {
+        return c3;
+    }
+
+    public void setC3(String c3) {
+        this.c3 = c3 == null ? null : c3.trim();
+    }
+
+    public String getC4() {
+        return c4;
+    }
+
+    public void setC4(String c4) {
+        this.c4 = c4 == null ? null : c4.trim();
+    }
+
+    public String getC5() {
+        return c5;
+    }
+
+    public void setC5(String c5) {
+        this.c5 = c5 == null ? null : c5.trim();
+    }
+
+    public String getC6() {
+        return c6;
+    }
+
+    public void setC6(String c6) {
+        this.c6 = c6 == null ? null : c6.trim();
+    }
+
+    public String getC7() {
+        return c7;
+    }
+
+    public void setC7(String c7) {
+        this.c7 = c7 == null ? null : c7.trim();
+    }
+
+    public String getC8() {
+        return c8;
+    }
+
+    public void setC8(String c8) {
+        this.c8 = c8 == null ? null : c8.trim();
+    }
+
+    public String getColumn21() {
+        return column21;
+    }
+
+    public void setColumn21(String column21) {
+        this.column21 = column21 == null ? null : column21.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+}

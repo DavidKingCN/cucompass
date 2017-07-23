@@ -1,0 +1,112 @@
+package com.gcx.citygovcreditndrc.service.common.impl;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.common.EnclosureMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.service.common.EnclosureService;
+import com.gcx.citygovcreditndrc.util.FileUtil;
+
+@Service("enclosureService")
+public class EnclosureServiceImpl implements EnclosureService{
+
+	@Autowired
+	private EnclosureMapper enclosureDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(Enclosure record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<Enclosure> list = enclosureDao.findByRecord(record, limitStart, limitEnd);
+		int count = enclosureDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(Enclosure record) {
+		
+		enclosureDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		enclosureDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(Enclosure record) {
+		enclosureDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public List<Enclosure> findAttachmentsByPid(int id,int batchNum) {
+		return enclosureDao.findAttachmentsByPid(id+"-"+batchNum);
+	}
+
+	@Override
+	public String getAttachStrByPid(int id,int batchNum) {
+		
+		if(batchNum==-1) return "";
+		List<Enclosure> es  = new ArrayList<>();
+		
+		for(int i=0;i<=batchNum;i++){
+			es.addAll(this.findAttachmentsByPid(id,i));
+		}
+		StringBuffer sb = new StringBuffer();
+		int length = es.size();
+		int idx = 0;
+		for(Enclosure e:es){
+			sb.append((e.getMaterialTitle()==null?"空":e.getMaterialTitle().toString())+"     "+FileUtil.getFileName(e.getMaterial()));
+			
+			sb.append(idx++==length-1?"":"<br/>");
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public List<List<Enclosure>> findAttsByPid(int id, int batchNum) {
+		List<List<Enclosure>> results = new ArrayList<>();
+		for(int i=0;i<=batchNum;i++){
+			results.add(this.findAttachmentsByPid(id , i));
+		}
+		
+		return results;
+	}
+
+	@Override
+	public List<Enclosure> allAttsByPid(int id, int batchNum) {
+		List<Enclosure> atts = new ArrayList<>();
+		for(int i=0;i<=batchNum;i++){
+			atts.addAll(this.findAttachmentsByPid(id , i));
+		}
+		
+		return atts;
+	}
+
+}

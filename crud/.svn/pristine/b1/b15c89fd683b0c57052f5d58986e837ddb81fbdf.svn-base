@@ -1,0 +1,554 @@
+//String.prototype.isEmpty = function(){
+//	return this == null || this == '' || this == undefined;
+//}
+function nullStr(obj){
+	return obj == null || obj == undefined ?"":obj;
+}
+ //检测字符串是否为空
+String.prototype.isEmpty = function () { 
+	return !(/.?[^/s　]+/.test(this)); 
+}
+
+String.prototype.regCheck = function (regExpr) { 
+	return new RegExp(regExpr).test(this); 
+}
+/**
+ * 表单数据校验
+ */
+jQuery.fn.extend({
+	formCheck : function() {
+		
+		var data = this.serializeArray();
+		var dataLen = data.length;
+		for(var i=0;i<dataLen;i++){
+			var item = data[i];
+			var itemName = item.name;
+			itemName = itemName.replace(/(^\s*)|(\s*$)/g, "");
+			var iv = item.value;
+			var ivNtNull = iv != null && iv != undefined;
+			if(ivNtNull){
+				var fieldDom = $("[name="+itemName+"]");
+				var prop = fieldDom.attr('prop');
+				prop = nullStr(prop);
+				var hasProp = prop.isEmpty();
+				//非空校验
+				var isNull = nullStr(fieldDom.attr('isNull'));
+				var isNullEmpty = isNull.isEmpty();
+				var isNull_ = true;
+				if(!isNullEmpty){
+					isNull_ = eval(isNull);
+				}
+				if(!isNull_&&iv==''){
+					alert("【"+prop+"】"+"不能为空！");
+					fieldDom.focus();
+					fieldDom.val("");
+					return false;
+				}
+				
+				var ruleExp = fieldDom.attr('ruleExp');
+				//正则表达式校验
+				var valid = iv.regCheck(ruleExp);
+				
+				var ruleTip = fieldDom.attr('ruleTip');
+				if(!valid){
+					alert("【"+prop+"】"+ruleTip);
+					fieldDom.focus();
+					fieldDom.val("");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+});
+
+jQuery.extend({			
+			// 校验是否全由数字组成
+			isDigit : function(s) {
+				var patrn = /^[0-9]{1,20}$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+
+			// 校验登录名：只能输入5-20个以字母开头、可带数字、“_”、“.”的字串
+			isRegisterUserName : function(s) {
+				var patrn = /^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			// 校验用户姓名：只能输入1-30个以字母开头的字串
+			isTrueName : function(s) {
+				var patrn = /^[a-zA-Z]{1,30}$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			// 校验密码：只能输入6-20个字母、数字、下划线
+			isPasswd : function(s) {
+				var patrn = /^(\w){6,20}$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			// 校验普通电话、传真号码：可以“+”开头，除数字外，可含有“-”
+			isTel : function(s) {
+				// var patrn=/^[+]{0,1}(\d){1,3}[ ]?([-]?(\d){1,12})+$/;
+				var patrn = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			// 校验手机号码：必须以数字开头，除数字外，可含有“-”
+			isMobil : function(s) {
+				var patrn = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			// 校验邮政编码
+			isPostalCode : function(s) {
+				// var patrn=/^[a-zA-Z0-9]{3,12}$/;
+				var patrn = /^[a-zA-Z0-9 ]{3,12}$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			// 校验搜索关键字
+			isSearch : function(s) {
+				var patrn = /^[^`~!@#$%^&*()+=|\\\][\]\{\}:;'\,.<>/?]{1}[^`~!@$%^&()+=|\\\][\]\{\}:;'\,.<>?]{0,19}$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			isIP : function(s) // by zergling
+			{
+				var patrn = /^[0-9.]{1,20}$/;
+				if (!patrn.exec(s))
+					return false
+				return true
+			},
+			/********************************************************************************* 
+			* FUNCTION: isBetween 
+			* PARAMETERS: val AS any value 
+			* lo AS Lower limit to check 
+			* hi AS Higher limit to check 
+			* CALLS: NOTHING 
+			* RETURNS: TRUE if val is between lo and hi both inclusive, otherwise false. 
+			*************** 
+			******************************************************************/ 
+			isBetween:function  (val, lo, hi) { 
+				if ((val < lo) || (val > hi)) { return(false); } 
+				else { return(true); } 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION: isDate checks a valid date 
+			* PARAMETERS: theStr AS String 
+			* CALLS: isBetween, isInt 
+			* RETURNS: TRUE if theStr is a valid date otherwise false. 
+			**********************************************************************************/ 
+			isDate:function  (theStr) { 
+				var the1st = theStr.indexOf('-'); 
+				var the2nd = theStr.lastIndexOf('-'); 
+				if (the1st == the2nd) { return(false); } 
+				else { 
+				var y = theStr.substring(0,the1st); 
+				var m = theStr.substring(the1st+1,the2nd); 
+				var d = theStr.substring(the2nd+1,theStr.length); 
+				var maxDays = 31; 
+				if (isInt(m)==false || isInt(d)==false || isInt(y)==false) { 
+				return(false); } 
+				else if (y.length < 4) { return(false); } 
+				else if (!isBetween (m, 1, 12)) { return(false); } 
+				else if (m==4 || m==6 || m==9 || m==11) maxDays = 30; 
+				else if (m==2) { 
+				if (y % 4 > 0) maxDays = 28; 
+				else if (y % 100 == 0 && y % 400 > 0) maxDays = 28; 
+				else maxDays = 29; 
+				} 
+				if (isBetween(d, 1, maxDays) == false) { return(false); } 
+				else { return(true); } 
+				} 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION: isEuDate checks a valid date in British format 
+			* PARAMETERS: theStr AS String 
+			* CALLS: isBetween, isInt 
+			* RETURNS: TRUE if theStr is a valid date otherwise false. 
+			**********************************************************************************/ 
+			isEuDate:function  (theStr) { 
+				if (isBetween(theStr.length, 8, 10) == false) { return(false); } 
+				else { 
+				var the1st = theStr.indexOf('/'); 
+				var the2nd = theStr.lastIndexOf('/'); 
+				if (the1st == the2nd) { return(false); } 
+				else { 
+				var m = theStr.substring(the1st+1,the2nd); 
+				var d = theStr.substring(0,the1st); 
+				var y = theStr.substring(the2nd+1,theStr.length); 
+				var maxDays = 31; 
+				if (isInt(m)==false || isInt(d)==false || isInt(y)==false) { 
+				return(false); } 
+				else if (y.length < 4) { return(false); } 
+				else if (isBetween (m, 1, 12) == false) { return(false); } 
+				else if (m==4 || m==6 || m==9 || m==11) maxDays = 30; 
+				else if (m==2) { 
+				if (y % 4 > 0) maxDays = 28; 
+				else if (y % 100 == 0 && y % 400 > 0) maxDays = 28; 
+				else maxDays = 29; 
+				} 
+				if (isBetween(d, 1, maxDays) == false) { return(false); } 
+				else { return(true); } 
+				} 
+				} 
+			} ,
+			/******************************************************************************** 
+			* FUNCTION: Compare Date! Which is the latest! 
+			* PARAMETERS: lessDate,moreDate AS String 
+			* CALLS: isDate,isBetween 
+			* RETURNS: TRUE if lessDate<moreDate 
+			*********************************************************************************/ 
+			isComdate:function  (lessDate , moreDate) 
+			{ 
+				if (!isDate(lessDate)) { return(false);} 
+				if (!isDate(moreDate)) { return(false);} 
+				var less1st = lessDate.indexOf('-'); 
+				var less2nd = lessDate.lastIndexOf('-'); 
+				var more1st = moreDate.indexOf('-'); 
+				var more2nd = moreDate.lastIndexOf('-'); 
+				var lessy = lessDate.substrin(0,less1st); 
+				var lessm = lessDate.substring(less1st+1,less2nd); 
+				var lessd = lessDate.substring(less2nd+1,lessDate.length); 
+				var morey = moreDate.substring(0,more1st); 
+				var morem = moreDate.substring(more1st+1,more2nd); 
+				var mored = moreDate.substring(more2nd+1,moreDate.length); 
+				var Date1 = new Date(lessy,lessm,lessd); 
+				var Date2 = new Date(morey,morem,mored); 
+				if (Date1>Date2) { return(false);} 
+				return(true); 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION isEmpty checks if the parameter is empty or null 
+			* PARAMETER str AS String 
+			**********************************************************************************/ 
+			isEmpty:function  (str) { 
+			if ((str==null)||(str.length==0)) return true; 
+			else return(false); 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION: isInt 
+			* PARAMETER: theStr AS String 
+			* RETURNS: TRUE if the passed parameter is an integer, otherwise FALSE 
+			* CALLS: isDigit 
+			**********************************************************************************/ 
+			isInt:function  (theStr) { 
+				var flag = true; 
+				if (isEmpty(theStr)) { flag=false; } 
+				else 
+				{ for (var i=0; i<theStr.length; i++) { 
+				if (isDigit(theStr.substring(i,i+1)) == false) { 
+				flag = false; break; 
+				} 
+				} 
+				} 
+				return(flag); 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION: isReal 
+			* PARAMETER: heStr AS String 
+			decLen AS Integer (how many digits after period) 
+			* RETURNS: TRUE if theStr is a float, otherwise FALSE 
+			* CALLS: isInt 
+			**********************************************************************************/ 
+			isReal:function  (theStr, decLen) { 
+				var dot1st = theStr.indexOf('.'); 
+				var dot2nd = theStr.lastIndexOf('.'); 
+				var K = true; 
+				if (isEmpty(theStr)) return false; 
+				if (dot1st == -1) { 
+				if (!isInt(theStr)) return(false); 
+				else return(true); 
+				} 
+				else if (dot1st != dot2nd) return (false); 
+				else if (dot1st==0) return (false); 
+				else { 
+				var intPart = theStr.substring(0, dot1st); 
+				var decPart = theStr.substring(dot2nd+1); 
+				if (decPart.length > decLen) return(false); 
+				else if (!isInt(intPart) || !isInt(decPart)) return (false); 
+				else if (isEmpty(decPart)) return (false); 
+				else return(true); 
+				} 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION: isEmail 
+			* PARAMETER: String (Email Address) 
+			* RETURNS: TRUE if the String is a valid Email address 
+			* FALSE if the passed string is not a valid Email Address 
+			* EMAIL FORMAT: AnyName@EmailServer e.g; webmaster@hotmail.com 
+			* @ sign can appear only once in the email address. 
+			*********************************************************************************/ 
+			isEmail:function  (theStr) { 
+				var atIndex = theStr.indexOf('@'); 
+				var dotIndex = theStr.indexOf('.', atIndex); 
+				var flag = true; 
+				theSub = theStr.substring(0, dotIndex+1) 
+				if ((atIndex < 1)||(atIndex != theStr.lastIndexOf('@'))||(dotIndex < atIndex + 2)||(theStr.length <= theSub.length)) 
+				{ return(false); } 
+				else { return(true); } 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION: newWindow 
+			* PARAMETERS: doc -> Document to open in the new window 
+			hite -> Height of the new window 
+			wide -> Width of the new window 
+			bars -> 1-Scrll bars = YES 0-Scroll Bars = NO 
+			resize -> 1-Resizable = YES 0-Resizable = NO 
+			* CALLS: NONE 
+			* RETURNS: New window instance 
+			**********************************************************************************/ 
+			newWindow:function  (doc, hite, wide, bars, resize) { 
+				var winNew="_blank"; 
+				var pt="toolbar=0,location=0,directories=0,status=0,menubar=0,"; 
+				opt+=("scrollbars="+bars+","); 
+				opt+=("resizable="+resize+","); 
+				opt+=("width="+wide+","); 
+				opt+=("height="+hite); 
+				winHandle=window.open(doc,winNew,opt); 
+				return; 
+			} ,
+			/********************************************************************************* 
+			* FUNCTION: DecimalFormat 
+			* PARAMETERS: paramValue -> Field value 
+			* CALLS: NONE 
+			* RETURNS: Formated string 
+			**********************************************************************************/ 
+			DecimalFormat:function  (paramValue) { 
+				var intPart = parseInt(paramValue); 
+				var decPart =parseFloat(paramValue) - intPart; 
+				str = ""; 
+				if ((decPart == 0) || (decPart == null)) str += (intPart + ".00"); 
+				else str += (intPart + decPart); 
+				return (str); 
+			} 
+
+		});
+
+/*
+"^\\d+$"　　//非负整数（正整数 + 0） 
+"^[0-9]*[1-9][0-9]*$"　　//正整数 
+"^((-\\d+)|(0+))$"　　//非正整数（负整数 + 0） 
+"^-[0-9]*[1-9][0-9]*$"　　//负整数 
+"^-?\\d+$"　　　　//整数 
+"^\\d+(\\.\\d+)?$"　　//非负浮点数（正浮点数 + 0） 
+"^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*))$"　　//正浮点数 
+"^((-\\d+(\\.\\d+)?)|(0+(\\.0+)?))$"　　//非正浮点数（负浮点数 + 0） 
+"^(-(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*)))$"　　//负浮点数 
+"^(-?\\d+)(\\.\\d+)?$"　　//浮点数 
+"^[A-Za-z]+$"　　//由26个英文字母组成的字符串 
+"^[A-Z]+$"　　//由26个英文字母的大写组成的字符串 
+"^[a-z]+$"　　//由26个英文字母的小写组成的字符串 
+"^[A-Za-z0-9]+$"　　//由数字和26个英文字母组成的字符串 
+"^\\w+$"　　//由数字、26个英文字母或者下划线组成的字符串 
+"^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$"　　　　//email地址 
+"^[a-zA-z]+://(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$"　　//url 
+*/
+
+
+//替换字符
+/*String.prototype.reserve = function(type) {
+ if (type == 'int') return this.replace(/^/d/g, ''); // 替换字符串中除了数字以外的所有字符
+ else if (type == 'en') return this.replace(/[^A-Za-z]/g, ''); // 替换字符串中除了英文以外的所有字符
+ else if (type == 'cn') return this.replace(/[^/u4e00-/u9fa5/uf900-/ufa2d]/g, ''); // 替换字符串中除了中文以外的所有字符
+ else return this;
+}
+//字符串反转
+String.prototype.reverse = function() {
+ return this.split('').reverse().join('');
+}
+//以一个中文算两个字符长度计算字符串的长度
+String.prototype.cnLength = function() { return this.replace(/[^/x00-/xff]/g, ' * * ' ).length; }
+//替换字符串中的空格
+String.prototype.trim = function(type, char) {
+ var type = type ? type.toUpperCase() : '';
+ switch (type) {
+  case 'B' : // 替换所有欲清除字符,未定义char则默认为替换空格
+   return this.replace(char ? new RegExp(char, 'g') : /(/s+|　)/g, '');
+  case 'O' : // 将两个以上的连续欲清除字符替换为一个,未定义char则默认为替换空格
+   return char ? this.replace(new RegExp(char + '{2,}', 'g'), char) : this.replace(/[/s　]{2,}/g, ' ');
+  case 'L' : // 替换除左边欲清除字符,未定义char则默认为替换空格
+   return this.replace(char ? new RegExp('^(' + char + ') * ', 'g') : /^(/s|　) * /g, '');
+  case 'R' : // 替换除右边欲清除字符,未定义char则默认为替换空格
+   return this.replace(char ? new RegExp('(' + char + ') * $', 'g') : /(/s|　) * $/g, '');
+  default : // 替换除左右两边欲清除字符,未定义char则默认为替换空格
+   return this.replace(char ? new RegExp('^(' + char + ') * |(' + char + ') * $', 'g') : /(^/s * |　)|(　|/s * $)/g, '');
+ }
+}
+//判断字符串是否是数字
+String.prototype.isNumer = function(flag) {
+ if (isNaN(this)) {return false;}
+ switch (flag) {
+  case '+' : return /(^/+?|^/d?)/d * /.?/d+$/.test(this); // 正数
+  case '-' : return /^-/d * /.?/d+$/.test(this); // 负数
+  case 'i' : return /(^-?|^/+?|/d)/d+$/.test(this); // 整数
+  case '+i' : return /(^/d+$)|(^/+?/d+$)/.test(this); // 正整数
+  case '-i' : return /^-/d+$/.test(this); // 负整数
+  case 'f' : return /(^-?|^/+?|^/d?)/d * /./d+$/.test(this); // 浮点数
+  case '+f' : return /(^/+?|^/d?)/d * /./d+$/.test(this); // 正浮点数
+  case '-f' : return /^-/d * /./d$/.test(this); // 负浮点数
+  default : return true; // 缺省
+ }
+}
+//仿PHP的str_pad
+String.prototype.pad = function (input, length, type) {
+ if (!input) return this;
+ if (!length || length < 1) var length = 1;
+ var input = Array(length + 1).join(input), value;
+ var type = type ? type.toUpperCase() : '';
+ switch (type) {
+  case 'LEFT' : return input + this;
+  case 'BOTH' : return input + this + input;
+  default : return this + input;
+ }
+}
+//获取url对应参数的值
+String.prototype.getQuery = function(name) {
+ var reg = new RegExp('(^|&)' + name + ' = ([^&] * )(&|$)');
+ var r = this.substr(this.indexOf('/?') + 1).match(reg);
+ return r[2]?unescape(r[2]) : null;
+}
+//判断是否是日期格式(YYYY-MM-DD YYYY/MM/DD YYYY.MM.DD)
+String.prototype.isDate = function() {
+ result = this.match(/^(/d{1, 4})(-|//|.)(/d{1, 2})/2(/d{1, 2})$/);
+ if (!result) return false;
+ var d = new Date(result[1], result[3]-1, result[4])
+ var str = d.getFullYear() + result[2] + (d.getMonth() + 1) + result[2] + d.getDate();
+ return this == str;
+}
+//将字符串转为日期
+String.prototype.toDate = function() {
+ var mDate = new Date(Date.parse(str));
+ if (isNaN(mDate)) {
+  var arr = this.split('-');
+  mDate = new Date(arr[0], arr[1], arr[2]);
+ }
+ return mDate;
+}
+//格式化日期, new Date().format('yyyy/mm/dd')
+Date.prototype.format = function(format) {
+ var format = format.toLowerCase();
+ var type = {
+  'm+' : this.getMonth()+1,
+  'd+' : this.getDate(),
+  'h+' : this.getHours(),
+  'i+' : this.getMinutes(),
+  's+' : this.getSeconds(),
+  'q+' : Math.floor((this.getMonth()+3)/3),
+  'ms' : this.getMilliseconds()
+ }
+ if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+ for(var k in type) {
+  if(new RegExp('('+ k +')').test(format)) {
+   format = format.replace(RegExp.$1, RegExp.$1.length==1 ? type[k] : ('00'+ type[k]).substr((''+ type[k]).length));
+  }
+ }
+ return format;
+}
+//添加日期，对应参数分别是：类型(y-年, q-季, m-月, w-周, d-日, h-时, i-分, s-秒)和增加的值
+Date.prototype.addDate = function(type, num) {
+ var type = type.toLowerCase();
+ switch (type) {
+  case 's' : return new Date.parse(Date.parse(this) + (1000 * num));
+  case 'i' : return new Date.parse(Date.parse(this) + (60000 * num));
+  case 'h' : return new Date(Date.parse(this) + (3600000 * num));
+  case 'd' : return new Date(Date.parse(this) + (86400000 * num));
+  case 'w' : return new Date(Date.parse(this) + ((86400000 * 7) * num));
+  case 'm' : return new Date(this.getFullYear(), (this.getMonth()) + num, this.getDate(), this.getHours(), this.getMinutes(), this.getSeconds());
+  case 'q' : return new Date(this.getFullYear(), (this.getMonth()) + num * 3, this.getDate(), this.getHours(), this.getMinutes(), this.getSeconds());
+  case 'y' : return new Date((this.getFullYear() + num), this.getMonth(), this.getDate(), this.getHours(), this.getMinutes(), this.getSeconds());
+ }
+}
+//计算两个日期
+Date.prototype.dateDiff = function(type, date) {
+ if (typeof date == 'string') date = date.toDate();
+ switch (type) {
+  case 's' : return parseInt((date - this) / 1000);
+  case 'i' : return parseInt((date - this) / 60000);
+  case 'h' : return parseInt((date - this) / 3600000);
+  case 'd' : return parseInt((date - this) / 86400000);
+  case 'w' : return parseInt((date - this) / (86400000 * 7));
+  case 'm' : return (date.getMonth() + 1) + ((date.getFullYear() - this.getFullYear()) * 12) - (this.getMonth() + 1);
+  case 'y' : return date.getFullYear() - this.getFullYear();
+ }
+}
+//判断对象是否是数组
+Object.prototype.isArray = function() {return Object.prototype.toString.apply(this) == '[object Array]';}
+//判断数组内是否存在指定的元素
+Array.prototype.inArray = function (value) {
+ if (this.length < 2) return this[0] == value;
+ this.sort(function(a) {
+  return new RegExp('^' + value).test(a) ? -1 : 1;
+ });
+ return this[0] == value;
+}
+//在数组中查找元素并返回第一次出现的位置索引，未找到则返回-1。
+Array.prototype.indexOf = function(string) {
+ var len = this.length, i = 0;
+ if (len < 2) return this[0] == value ? 0 : -1;
+ for (i; i < len; i++) {
+  if (this[i] == string) return i;
+ }
+ return -1;
+}
+//[1, 2, 3].each(function(x) {return x+1}) 得到2, 3, 4
+Array.prototype.each = function(c) {
+ var ret = [];
+ for(var i = 0; i < this.length; i++) {
+  ret.push(c(this[i]));
+ }
+ return ret;
+}
+//[1, -1, 2].any(function(x) {return x < 0}) 判断是否数组中有一个元素小于0
+Array.prototype.any = function(c) {
+ for(var i = 0; i < this.length; i++) {
+  if (c(this)) return true;
+ }
+ return false;
+}
+//[1, 2, 3].all(function(x) {return x > 0}) 判断是否数组中所有的元素都大于0
+Array.prototype.all = function(c) {
+ for(var i = 0; i < this.length; i++) {
+  if (!c(this)) return false;
+ }
+ return true;
+}
+//移除数组指定的元素,如果指定了limit,则仅移除limit个指定元素，如果省略limit或者其值为0，则所有指定元素都会被移除。
+Array.prototype.unset = function(string, limit) {
+ var len = this.length, i = 0, count = 0;
+ for (i; i < len; i++) {
+  if (this[i] == string) {
+   this.splice(i, 1);
+   if (limit && limit > 0) {
+    count++;
+    if (count == limit) break;
+   }
+  }
+ }
+ return this;
+}
+//移除数组中重复的元素
+Array.prototype.unique = function() {
+ var arr = tmp = [], i, len = this.length;
+ if (len < 2) return this;
+ for (i = 0; i < len; i++) {
+  if (tmp[this[i]]) {
+   arr.push(this[i]);
+   tmp[this[i]] = true;
+  }
+ }
+ return arr;
+}
+Array.prototype.min = function() {return Math.min.apply(null, this)} // 求数组中最小值
+Array.prototype.max = function() {return Math.max.apply(null, this)} // 
+*/

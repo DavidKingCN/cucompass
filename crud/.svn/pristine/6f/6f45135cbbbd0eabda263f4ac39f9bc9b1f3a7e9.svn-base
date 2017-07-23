@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcx.citygovcreditndrc.dao.personComRecord.PersonComRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="qy_name" property="qyName" jdbcType="VARCHAR" />
+    <result column="xy_code" property="xyCode" jdbcType="VARCHAR" />
+    <result column="law_person" property="lawPerson" jdbcType="VARCHAR" />
+    <result column="person_id" property="personId" jdbcType="VARCHAR" />
+    <result column="full_area" property="fullArea" jdbcType="VARCHAR" />
+    <result column="full_address" property="fullAddress" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="gq_mail" property="gqMail" jdbcType="VARCHAR" />
+    <result column="sq_contact" property="sqContact" jdbcType="VARCHAR" />
+    <result column="lx_phone" property="lxPhone" jdbcType="VARCHAR" />
+    <result column="yy_law_book" property="yyLawBook" jdbcType="VARCHAR" />
+    <result column="qy_grant_book" property="qyGrantBook" jdbcType="VARCHAR" />
+    <result column="law_id" property="lawId" jdbcType="VARCHAR" />
+    <result column="yh_name" property="yhName" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="tj_time" property="tjTime" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="c2" property="c2" jdbcType="VARCHAR" />
+    <result column="c3" property="c3" jdbcType="VARCHAR" />
+    <result column="c4" property="c4" jdbcType="VARCHAR" />
+    <result column="c5" property="c5" jdbcType="VARCHAR" />
+    <result column="c6" property="c6" jdbcType="VARCHAR" />
+    <result column="c7" property="c7" jdbcType="VARCHAR" />
+    <result column="c8" property="c8" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord" extends="BaseResultMap" >
+    <result column="note" property="note" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, qy_name, xy_code, law_person, person_id, full_area, full_address, industry, gq_mail, 
+    sq_contact, lx_phone, yy_law_book, qy_grant_book, law_id, yh_name, operator, tj_time, 
+    IS_DELETE, c1, c2, c3, c4, c5, c6, c7, c8
+  </sql>
+  <sql id="Blob_Column_List" >
+    note
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from person_com_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from person_com_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from person_com_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from person_com_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecordExample" >
+    delete from person_com_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord" >
+    insert into person_com_record (id, qy_name, xy_code, 
+      law_person, person_id, full_area, 
+      full_address, industry, gq_mail, 
+      sq_contact, lx_phone, yy_law_book, 
+      qy_grant_book, law_id, yh_name, 
+      operator, tj_time, IS_DELETE, 
+      c1, c2, c3, c4, 
+      c5, c6, c7, c8, 
+      note)
+    values (#{id,jdbcType=INTEGER}, #{qyName,jdbcType=VARCHAR}, #{xyCode,jdbcType=VARCHAR}, 
+      #{lawPerson,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{fullArea,jdbcType=VARCHAR}, 
+      #{fullAddress,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, #{gqMail,jdbcType=VARCHAR}, 
+      #{sqContact,jdbcType=VARCHAR}, #{lxPhone,jdbcType=VARCHAR}, #{yyLawBook,jdbcType=VARCHAR}, 
+      #{qyGrantBook,jdbcType=VARCHAR}, #{lawId,jdbcType=VARCHAR}, #{yhName,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{tjTime,jdbcType=VARCHAR}, #{isDelete,jdbcType=CHAR}, 
+      #{c1,jdbcType=VARCHAR}, #{c2,jdbcType=VARCHAR}, #{c3,jdbcType=VARCHAR}, #{c4,jdbcType=VARCHAR}, 
+      #{c5,jdbcType=VARCHAR}, #{c6,jdbcType=VARCHAR}, #{c7,jdbcType=VARCHAR}, #{c8,jdbcType=VARCHAR}, 
+      #{note,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord" >
+    insert into person_com_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="qyName != null" >
+        qy_name,
+      </if>
+      <if test="xyCode != null" >
+        xy_code,
+      </if>
+      <if test="lawPerson != null" >
+        law_person,
+      </if>
+      <if test="personId != null" >
+        person_id,
+      </if>
+      <if test="fullArea != null" >
+        full_area,
+      </if>
+      <if test="fullAddress != null" >
+        full_address,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="gqMail != null" >
+        gq_mail,
+      </if>
+      <if test="sqContact != null" >
+        sq_contact,
+      </if>
+      <if test="lxPhone != null" >
+        lx_phone,
+      </if>
+      <if test="yyLawBook != null" >
+        yy_law_book,
+      </if>
+      <if test="qyGrantBook != null" >
+        qy_grant_book,
+      </if>
+      <if test="lawId != null" >
+        law_id,
+      </if>
+      <if test="yhName != null" >
+        yh_name,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="tjTime != null" >
+        tj_time,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+      <if test="c5 != null" >
+        c5,
+      </if>
+      <if test="c6 != null" >
+        c6,
+      </if>
+      <if test="c7 != null" >
+        c7,
+      </if>
+      <if test="c8 != null" >
+        c8,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qyName != null" >
+        #{qyName,jdbcType=VARCHAR},
+      </if>
+      <if test="xyCode != null" >
+        #{xyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lawPerson != null" >
+        #{lawPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null" >
+        #{personId,jdbcType=VARCHAR},
+      </if>
+      <if test="fullArea != null" >
+        #{fullArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null" >
+        #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="gqMail != null" >
+        #{gqMail,jdbcType=VARCHAR},
+      </if>
+      <if test="sqContact != null" >
+        #{sqContact,jdbcType=VARCHAR},
+      </if>
+      <if test="lxPhone != null" >
+        #{lxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="yyLawBook != null" >
+        #{yyLawBook,jdbcType=VARCHAR},
+      </if>
+      <if test="qyGrantBook != null" >
+        #{qyGrantBook,jdbcType=VARCHAR},
+      </if>
+      <if test="lawId != null" >
+        #{lawId,jdbcType=VARCHAR},
+      </if>
+      <if test="yhName != null" >
+        #{yhName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="tjTime != null" >
+        #{tjTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        #{c8,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecordExample" resultType="java.lang.Integer" >
+    select count(*) from person_com_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update person_com_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.qyName != null" >
+        qy_name = #{record.qyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xyCode != null" >
+        xy_code = #{record.xyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawPerson != null" >
+        law_person = #{record.lawPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personId != null" >
+        person_id = #{record.personId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullArea != null" >
+        full_area = #{record.fullArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullAddress != null" >
+        full_address = #{record.fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null" >
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gqMail != null" >
+        gq_mail = #{record.gqMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqContact != null" >
+        sq_contact = #{record.sqContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxPhone != null" >
+        lx_phone = #{record.lxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yyLawBook != null" >
+        yy_law_book = #{record.yyLawBook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qyGrantBook != null" >
+        qy_grant_book = #{record.qyGrantBook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawId != null" >
+        law_id = #{record.lawId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yhName != null" >
+        yh_name = #{record.yhName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tjTime != null" >
+        tj_time = #{record.tjTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c5 != null" >
+        c5 = #{record.c5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c6 != null" >
+        c6 = #{record.c6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c7 != null" >
+        c7 = #{record.c7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c8 != null" >
+        c8 = #{record.c8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update person_com_record
+    set id = #{record.id,jdbcType=INTEGER},
+      qy_name = #{record.qyName,jdbcType=VARCHAR},
+      xy_code = #{record.xyCode,jdbcType=VARCHAR},
+      law_person = #{record.lawPerson,jdbcType=VARCHAR},
+      person_id = #{record.personId,jdbcType=VARCHAR},
+      full_area = #{record.fullArea,jdbcType=VARCHAR},
+      full_address = #{record.fullAddress,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      gq_mail = #{record.gqMail,jdbcType=VARCHAR},
+      sq_contact = #{record.sqContact,jdbcType=VARCHAR},
+      lx_phone = #{record.lxPhone,jdbcType=VARCHAR},
+      yy_law_book = #{record.yyLawBook,jdbcType=VARCHAR},
+      qy_grant_book = #{record.qyGrantBook,jdbcType=VARCHAR},
+      law_id = #{record.lawId,jdbcType=VARCHAR},
+      yh_name = #{record.yhName,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      tj_time = #{record.tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=VARCHAR},
+      c3 = #{record.c3,jdbcType=VARCHAR},
+      c4 = #{record.c4,jdbcType=VARCHAR},
+      c5 = #{record.c5,jdbcType=VARCHAR},
+      c6 = #{record.c6,jdbcType=VARCHAR},
+      c7 = #{record.c7,jdbcType=VARCHAR},
+      c8 = #{record.c8,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update person_com_record
+    set id = #{record.id,jdbcType=INTEGER},
+      qy_name = #{record.qyName,jdbcType=VARCHAR},
+      xy_code = #{record.xyCode,jdbcType=VARCHAR},
+      law_person = #{record.lawPerson,jdbcType=VARCHAR},
+      person_id = #{record.personId,jdbcType=VARCHAR},
+      full_area = #{record.fullArea,jdbcType=VARCHAR},
+      full_address = #{record.fullAddress,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      gq_mail = #{record.gqMail,jdbcType=VARCHAR},
+      sq_contact = #{record.sqContact,jdbcType=VARCHAR},
+      lx_phone = #{record.lxPhone,jdbcType=VARCHAR},
+      yy_law_book = #{record.yyLawBook,jdbcType=VARCHAR},
+      qy_grant_book = #{record.qyGrantBook,jdbcType=VARCHAR},
+      law_id = #{record.lawId,jdbcType=VARCHAR},
+      yh_name = #{record.yhName,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      tj_time = #{record.tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=CHAR},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=VARCHAR},
+      c3 = #{record.c3,jdbcType=VARCHAR},
+      c4 = #{record.c4,jdbcType=VARCHAR},
+      c5 = #{record.c5,jdbcType=VARCHAR},
+      c6 = #{record.c6,jdbcType=VARCHAR},
+      c7 = #{record.c7,jdbcType=VARCHAR},
+      c8 = #{record.c8,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord" >
+    update person_com_record
+    <set >
+      <if test="qyName != null" >
+        qy_name = #{qyName,jdbcType=VARCHAR},
+      </if>
+      <if test="xyCode != null" >
+        xy_code = #{xyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lawPerson != null" >
+        law_person = #{lawPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null" >
+        person_id = #{personId,jdbcType=VARCHAR},
+      </if>
+      <if test="fullArea != null" >
+        full_area = #{fullArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null" >
+        full_address = #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="gqMail != null" >
+        gq_mail = #{gqMail,jdbcType=VARCHAR},
+      </if>
+      <if test="sqContact != null" >
+        sq_contact = #{sqContact,jdbcType=VARCHAR},
+      </if>
+      <if test="lxPhone != null" >
+        lx_phone = #{lxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="yyLawBook != null" >
+        yy_law_book = #{yyLawBook,jdbcType=VARCHAR},
+      </if>
+      <if test="qyGrantBook != null" >
+        qy_grant_book = #{qyGrantBook,jdbcType=VARCHAR},
+      </if>
+      <if test="lawId != null" >
+        law_id = #{lawId,jdbcType=VARCHAR},
+      </if>
+      <if test="yhName != null" >
+        yh_name = #{yhName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="tjTime != null" >
+        tj_time = #{tjTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null" >
+        c5 = #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null" >
+        c6 = #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null" >
+        c7 = #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null" >
+        c8 = #{c8,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord" >
+    update person_com_record
+    set qy_name = #{qyName,jdbcType=VARCHAR},
+      xy_code = #{xyCode,jdbcType=VARCHAR},
+      law_person = #{lawPerson,jdbcType=VARCHAR},
+      person_id = #{personId,jdbcType=VARCHAR},
+      full_area = #{fullArea,jdbcType=VARCHAR},
+      full_address = #{fullAddress,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      gq_mail = #{gqMail,jdbcType=VARCHAR},
+      sq_contact = #{sqContact,jdbcType=VARCHAR},
+      lx_phone = #{lxPhone,jdbcType=VARCHAR},
+      yy_law_book = #{yyLawBook,jdbcType=VARCHAR},
+      qy_grant_book = #{qyGrantBook,jdbcType=VARCHAR},
+      law_id = #{lawId,jdbcType=VARCHAR},
+      yh_name = #{yhName,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      tj_time = #{tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=VARCHAR},
+      c4 = #{c4,jdbcType=VARCHAR},
+      c5 = #{c5,jdbcType=VARCHAR},
+      c6 = #{c6,jdbcType=VARCHAR},
+      c7 = #{c7,jdbcType=VARCHAR},
+      c8 = #{c8,jdbcType=VARCHAR},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gcx.citygovcreditndrc.model.personComRecord.PersonComRecord" >
+    update person_com_record
+    set qy_name = #{qyName,jdbcType=VARCHAR},
+      xy_code = #{xyCode,jdbcType=VARCHAR},
+      law_person = #{lawPerson,jdbcType=VARCHAR},
+      person_id = #{personId,jdbcType=VARCHAR},
+      full_area = #{fullArea,jdbcType=VARCHAR},
+      full_address = #{fullAddress,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      gq_mail = #{gqMail,jdbcType=VARCHAR},
+      sq_contact = #{sqContact,jdbcType=VARCHAR},
+      lx_phone = #{lxPhone,jdbcType=VARCHAR},
+      yy_law_book = #{yyLawBook,jdbcType=VARCHAR},
+      qy_grant_book = #{qyGrantBook,jdbcType=VARCHAR},
+      law_id = #{lawId,jdbcType=VARCHAR},
+      yh_name = #{yhName,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      tj_time = #{tjTime,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=CHAR},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=VARCHAR},
+      c4 = #{c4,jdbcType=VARCHAR},
+      c5 = #{c5,jdbcType=VARCHAR},
+      c6 = #{c6,jdbcType=VARCHAR},
+      c7 = #{c7,jdbcType=VARCHAR},
+      c8 = #{c8,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicById" >
+    update person_com_record set IS_DELETE = #{isDelete,jdbcType=INTEGER} where ID = #{id,jdbcType=INTEGER} 
+  </update>
+  <update id="deleteLogicByIds" >
+    update person_com_record set IS_DELETE = #{isDelete,jdbcType=INTEGER} where id in  <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">#{item}</foreach> 
+  </update>
+  <select id="findByRecord" resultMap="BaseResultMap" >
+    select <include refid='Base_Column_List' /> from person_com_record where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and id = #{record.id,jdbcType=INTEGER} </if><if test='record.qyName != null and record.qyName != "" '> and qy_name = #{record.qyName,jdbcType=VARCHAR} </if><if test='record.xyCode != null and record.xyCode != "" '> and xy_code = #{record.xyCode,jdbcType=VARCHAR} </if><if test='record.lawPerson != null and record.lawPerson != "" '> and law_person = #{record.lawPerson,jdbcType=VARCHAR} </if><if test='record.personId != null and record.personId != "" '> and person_id = #{record.personId,jdbcType=VARCHAR} </if><if test='record.fullArea != null and record.fullArea != "" '> and full_area = #{record.fullArea,jdbcType=VARCHAR} </if><if test='record.fullAddress != null and record.fullAddress != "" '> and full_address = #{record.fullAddress,jdbcType=VARCHAR} </if><if test='record.industry != null and record.industry != "" '> and industry = #{record.industry,jdbcType=VARCHAR} </if><if test='record.gqMail != null and record.gqMail != "" '> and gq_mail = #{record.gqMail,jdbcType=VARCHAR} </if><if test='record.sqContact != null and record.sqContact != "" '> and sq_contact = #{record.sqContact,jdbcType=VARCHAR} </if><if test='record.lxPhone != null and record.lxPhone != "" '> and lx_phone = #{record.lxPhone,jdbcType=VARCHAR} </if><if test='record.yyLawBook != null and record.yyLawBook != "" '> and yy_law_book = #{record.yyLawBook,jdbcType=VARCHAR} </if><if test='record.qyGrantBook != null and record.qyGrantBook != "" '> and qy_grant_book = #{record.qyGrantBook,jdbcType=VARCHAR} </if><if test='record.lawId != null and record.lawId != "" '> and law_id = #{record.lawId,jdbcType=VARCHAR} </if><if test='record.yhName != null and record.yhName != "" '> and yh_name = #{record.yhName,jdbcType=VARCHAR} </if><if test='record.operator != null and record.operator != "" '> and operator = #{record.operator,jdbcType=VARCHAR} </if><if test='record.tjTime != null and record.tjTime != "" '> and tj_time = #{record.tjTime,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and c1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and c2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and c3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and c4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and c5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and c6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and c7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and c8 = #{record.c8,jdbcType=VARCHAR} </if><if test='record.note != null and record.note != "" '> and note = #{record.note,jdbcType=LONGVARCHAR} </if> limit #{start}, #{end}
+  </select>
+  <select id="findByRecordCount" resultType="int" >
+    select count(ID) from person_com_record where IS_DELETE != 1 <if test='record.id != null and record.id != "" '> and id = #{record.id,jdbcType=INTEGER} </if><if test='record.qyName != null and record.qyName != "" '> and qy_name = #{record.qyName,jdbcType=VARCHAR} </if><if test='record.xyCode != null and record.xyCode != "" '> and xy_code = #{record.xyCode,jdbcType=VARCHAR} </if><if test='record.lawPerson != null and record.lawPerson != "" '> and law_person = #{record.lawPerson,jdbcType=VARCHAR} </if><if test='record.personId != null and record.personId != "" '> and person_id = #{record.personId,jdbcType=VARCHAR} </if><if test='record.fullArea != null and record.fullArea != "" '> and full_area = #{record.fullArea,jdbcType=VARCHAR} </if><if test='record.fullAddress != null and record.fullAddress != "" '> and full_address = #{record.fullAddress,jdbcType=VARCHAR} </if><if test='record.industry != null and record.industry != "" '> and industry = #{record.industry,jdbcType=VARCHAR} </if><if test='record.gqMail != null and record.gqMail != "" '> and gq_mail = #{record.gqMail,jdbcType=VARCHAR} </if><if test='record.sqContact != null and record.sqContact != "" '> and sq_contact = #{record.sqContact,jdbcType=VARCHAR} </if><if test='record.lxPhone != null and record.lxPhone != "" '> and lx_phone = #{record.lxPhone,jdbcType=VARCHAR} </if><if test='record.yyLawBook != null and record.yyLawBook != "" '> and yy_law_book = #{record.yyLawBook,jdbcType=VARCHAR} </if><if test='record.qyGrantBook != null and record.qyGrantBook != "" '> and qy_grant_book = #{record.qyGrantBook,jdbcType=VARCHAR} </if><if test='record.lawId != null and record.lawId != "" '> and law_id = #{record.lawId,jdbcType=VARCHAR} </if><if test='record.yhName != null and record.yhName != "" '> and yh_name = #{record.yhName,jdbcType=VARCHAR} </if><if test='record.operator != null and record.operator != "" '> and operator = #{record.operator,jdbcType=VARCHAR} </if><if test='record.tjTime != null and record.tjTime != "" '> and tj_time = #{record.tjTime,jdbcType=VARCHAR} </if><if test='record.isDelete != null and record.isDelete != "" '> and IS_DELETE = #{record.isDelete,jdbcType=CHAR} </if><if test='record.c1 != null and record.c1 != "" '> and c1 = #{record.c1,jdbcType=VARCHAR} </if><if test='record.c2 != null and record.c2 != "" '> and c2 = #{record.c2,jdbcType=VARCHAR} </if><if test='record.c3 != null and record.c3 != "" '> and c3 = #{record.c3,jdbcType=VARCHAR} </if><if test='record.c4 != null and record.c4 != "" '> and c4 = #{record.c4,jdbcType=VARCHAR} </if><if test='record.c5 != null and record.c5 != "" '> and c5 = #{record.c5,jdbcType=VARCHAR} </if><if test='record.c6 != null and record.c6 != "" '> and c6 = #{record.c6,jdbcType=VARCHAR} </if><if test='record.c7 != null and record.c7 != "" '> and c7 = #{record.c7,jdbcType=VARCHAR} </if><if test='record.c8 != null and record.c8 != "" '> and c8 = #{record.c8,jdbcType=VARCHAR} </if><if test='record.note != null and record.note != "" '> and note = #{record.note,jdbcType=LONGVARCHAR} </if>
+  </select>
+</mapper>

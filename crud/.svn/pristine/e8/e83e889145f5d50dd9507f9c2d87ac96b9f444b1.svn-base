@@ -1,0 +1,18 @@
+package com.gcx.citygovcreditndrc.util;
+
+import java.util.UUID;
+
+/** 
+ * @author	yang 
+ * @version 创建时间：2017年4月18日 上午9:38:57 
+ * 类说明:	
+ */
+public class UUIDUtils {
+
+	//生成UUID信息
+	public static String createUuid(){
+		String uuid = UUID.randomUUID().toString();
+		return uuid;
+	}
+	
+}

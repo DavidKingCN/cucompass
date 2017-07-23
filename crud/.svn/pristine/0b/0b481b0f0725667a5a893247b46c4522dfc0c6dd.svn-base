@@ -1,0 +1,116 @@
+package com.gcx.citygovcreditndrc.controller.project;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gcx.citygovcreditndrc.model.ResponseData;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.project.Project;
+import com.gcx.citygovcreditndrc.model.project.ProjectAo;
+import com.gcx.citygovcreditndrc.service.impl.CommonImpl;
+import com.gcx.citygovcreditndrc.service.project.ProjectService;
+@SuppressWarnings("all")
+@Controller
+@RequestMapping("/project")
+public class ProjectController {
+	@Resource
+	ProjectService projectService;
+	
+	@Resource
+	CommonImpl commonImpl;
+
+/*
+	@RequestMapping(value="/page/{pagenow}/{pagesize}",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseData findRecords(@RequestBody String record,@PathVariable("pagenow") int pagenow,@PathVariable("pagesize") int pagesize){
+		Project recordObj = new Project();
+		if(record!=null && !record.equals("")){
+			recordObj  = JSON.parseObject(record, Project.class);
+		}
+		ServiceResult<Object> result = projectService.findRecords(recordObj, pagenow, pagesize);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}*/
+	
+
+	@RequestMapping(value="/pageQuery",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseData findRecords(HttpServletRequest request,HttpServletResponse response,ProjectAo record){
+		
+		String userId=commonImpl.getUserId(request, response);
+		if(!"".equals(userId) || userId != null){
+			record.setOpertor(userId);
+		}
+		ServiceResult<Object> result = projectService.findRecords(record, record.getPagenow(), record.getPagesize());
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		if(result.getTotal() !=null){
+			responseData.putDataValue("count", result.getTotal());
+		}
+		return responseData;
+	}
+	
+	
+	
+	//保存的方法
+	@ResponseBody
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public ResponseData addRecord(HttpServletRequest request,HttpServletResponse response,@RequestBody Project record){
+		String userId=commonImpl.getUserId(request, response);
+		if(!"".equals(userId) || userId != null){
+			record.setOpertor(userId);
+		}
+
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(currentTime);
+		record.setPublishDt(dateString);
+		
+		ServiceResult result =projectService.addRecord(record);
+		
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/del/{id}",method=RequestMethod.GET)
+	public ResponseData delRecord(@PathVariable("id") Integer record){
+		ServiceResult<Object> result = projectService.delRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public ResponseData updateRecord(@RequestBody Project record){
+		ServiceResult<Object> result = projectService.updateRecord(record);
+		ResponseData responseData = ResponseData.ok();
+		if(result.getData() !=null){
+			responseData.putDataValue("result", result.getData());
+		}
+		return responseData;
+	}
+	
+}

@@ -1,0 +1,267 @@
+package com.gcx.citygovcreditndrc.model.govdevelopment;
+
+public class GovdevelopmentAo   {
+   
+	 private Integer id;
+
+	    private String newsTitle;
+
+	    private String deptName;
+
+	    private String submitor;
+
+	    private String subName;
+
+	    private String subTime;
+
+	    private String status;
+
+	    private String artType;
+
+	    private String artResource;
+
+	    private String detail;
+
+	    private String suggestion;
+
+	    private String auditor;
+
+	    private String audName;
+
+	    private String audTime;
+
+	    private String city;
+
+	    private String isDelete;
+
+	    private String c1;
+
+	    private String c2;
+
+	    private String c3;
+
+	    private String c4;
+
+	    private String c5;
+
+	    private String c6;
+
+	    private String c7;
+
+	    private String c8;
+
+	    private int pagenow;
+	    private int pagesize;
+	    
+	    public Integer getId() {
+	        return id;
+	    }
+
+	    public void setId(Integer id) {
+	        this.id = id;
+	    }
+
+	    public String getNewsTitle() {
+	        return newsTitle;
+	    }
+
+	    public void setNewsTitle(String newsTitle) {
+	        this.newsTitle = newsTitle == null ? null : newsTitle.trim();
+	    }
+
+	    public String getDeptName() {
+	        return deptName;
+	    }
+
+	    public void setDeptName(String deptName) {
+	        this.deptName = deptName == null ? null : deptName.trim();
+	    }
+
+	    public String getSubmitor() {
+	        return submitor;
+	    }
+
+	    public void setSubmitor(String submitor) {
+	        this.submitor = submitor == null ? null : submitor.trim();
+	    }
+
+	    public String getSubName() {
+	        return subName;
+	    }
+
+	    public void setSubName(String subName) {
+	        this.subName = subName == null ? null : subName.trim();
+	    }
+
+	    public String getSubTime() {
+	        return subTime;
+	    }
+
+	    public void setSubTime(String subTime) {
+	        this.subTime = subTime == null ? null : subTime.trim();
+	    }
+
+	    public String getStatus() {
+	        return status;
+	    }
+
+	    public void setStatus(String status) {
+	        this.status = status == null ? null : status.trim();
+	    }
+
+	    public String getArtType() {
+	        return artType;
+	    }
+
+	    public void setArtType(String artType) {
+	        this.artType = artType == null ? null : artType.trim();
+	    }
+
+	    public String getArtResource() {
+	        return artResource;
+	    }
+
+	    public void setArtResource(String artResource) {
+	        this.artResource = artResource == null ? null : artResource.trim();
+	    }
+
+	    public String getDetail() {
+	        return detail;
+	    }
+
+	    public void setDetail(String detail) {
+	        this.detail = detail == null ? null : detail.trim();
+	    }
+
+	    public String getSuggestion() {
+	        return suggestion;
+	    }
+
+	    public void setSuggestion(String suggestion) {
+	        this.suggestion = suggestion == null ? null : suggestion.trim();
+	    }
+
+	    public String getAuditor() {
+	        return auditor;
+	    }
+
+	    public void setAuditor(String auditor) {
+	        this.auditor = auditor == null ? null : auditor.trim();
+	    }
+
+	    public String getAudName() {
+	        return audName;
+	    }
+
+	    public void setAudName(String audName) {
+	        this.audName = audName == null ? null : audName.trim();
+	    }
+
+	    public String getAudTime() {
+	        return audTime;
+	    }
+
+	    public void setAudTime(String audTime) {
+	        this.audTime = audTime == null ? null : audTime.trim();
+	    }
+
+	    public String getCity() {
+	        return city;
+	    }
+
+	    public void setCity(String city) {
+	        this.city = city == null ? null : city.trim();
+	    }
+
+	    public String getIsDelete() {
+	        return isDelete;
+	    }
+
+	    public void setIsDelete(String isDelete) {
+	        this.isDelete = isDelete == null ? null : isDelete.trim();
+	    }
+
+	    public String getC1() {
+	        return c1;
+	    }
+
+	    public void setC1(String c1) {
+	        this.c1 = c1 == null ? null : c1.trim();
+	    }
+
+	    public String getC2() {
+	        return c2;
+	    }
+
+	    public void setC2(String c2) {
+	        this.c2 = c2 == null ? null : c2.trim();
+	    }
+
+	    public String getC3() {
+	        return c3;
+	    }
+
+	    public void setC3(String c3) {
+	        this.c3 = c3 == null ? null : c3.trim();
+	    }
+
+	    public String getC4() {
+	        return c4;
+	    }
+
+	    public void setC4(String c4) {
+	        this.c4 = c4 == null ? null : c4.trim();
+	    }
+
+	    public String getC5() {
+	        return c5;
+	    }
+
+	    public void setC5(String c5) {
+	        this.c5 = c5 == null ? null : c5.trim();
+	    }
+
+	    public String getC6() {
+	        return c6;
+	    }
+
+	    public void setC6(String c6) {
+	        this.c6 = c6 == null ? null : c6.trim();
+	    }
+
+	    public String getC7() {
+	        return c7;
+	    }
+
+	    public void setC7(String c7) {
+	        this.c7 = c7 == null ? null : c7.trim();
+	    }
+
+	    public String getC8() {
+	        return c8;
+	    }
+
+	    public void setC8(String c8) {
+	        this.c8 = c8 == null ? null : c8.trim();
+	    }
+
+		public int getPagenow() {
+			return pagenow;
+		}
+
+		public void setPagenow(int pagenow) {
+			this.pagenow = pagenow;
+		}
+
+		public int getPagesize() {
+			return pagesize;
+		}
+
+		public void setPagesize(int pagesize) {
+			this.pagesize = pagesize;
+		}
+  
+
+
+	
+}

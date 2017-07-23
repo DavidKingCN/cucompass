@@ -1,0 +1,66 @@
+package com.gcx.citygovcreditndrc.service.project.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gcx.citygovcreditndrc.dao.project.ProjectMapper;
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.project.Project;
+import com.gcx.citygovcreditndrc.service.project.ProjectService;
+
+@Service("projectService")
+public class ProjectServiceImpl implements ProjectService{
+
+	@Autowired
+	private ProjectMapper projectDao;
+	
+	@Override
+	public ServiceResult<Object> findRecords(Project record, int pagenow, int pagesize) {
+		int limitStart = (pagenow-1)*pagesize;
+		int limitEnd = pagesize;
+		
+		List<Project> list = projectDao.findByRecord(record, limitStart, limitEnd);
+		int count = projectDao.findByRecordCount(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(list);
+		result.setTotal(count);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> addRecord(Project record) {
+		
+		projectDao.insertSelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> delRecord(int record) {
+		projectDao.deleteLogicById(1, record);//1表示逻辑删除
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Object> updateRecord(Project record) {
+		projectDao.updateByPrimaryKeySelective(record);
+		
+		ServiceResult<Object> result = new ServiceResult<Object>();
+		result.setData(null);
+		
+		return result;
+	}
+
+}

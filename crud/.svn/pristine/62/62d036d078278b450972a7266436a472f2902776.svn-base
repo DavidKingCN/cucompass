@@ -1,0 +1,27 @@
+package com.gcx.citygovcreditndrc.model.govServe;
+
+import java.util.List;
+
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+
+public class GovServeVo {
+	private GovServe govServe;
+
+	private List<Enclosure> attachments;
+
+	public GovServe getGovServe() {
+		return govServe;
+	}
+
+	public void setGovServe(GovServe govServe) {
+		this.govServe = govServe;
+	}
+
+	public List<Enclosure> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Enclosure> attachments) {
+		this.attachments = attachments;
+	}
+}

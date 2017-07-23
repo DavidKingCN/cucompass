@@ -1,0 +1,24 @@
+package com.gcx.citygovcreditndrc.util;
+
+
+public class SendSMSUtil {
+		//服务器地址
+		private static final String SERVER_IP="sandboxapp.cloopen.com";
+		//服务器端口   		
+		private static final String SERVER_PORT="8883";
+		//主帐号
+		private static final String ACOUNT_SID="aaf98f894d328b13014d6672ee9b2576";
+		//主帐号令牌
+		private static final String AUTH_TOKEN="b58f2ec511fd4ea3949902ab98cb5c9a";
+		//应用ID  
+		private static final String APP_ID="aaf98f894d7439d8014d74f48dbb00b4";	
+		
+		//通知授权人有待处理的授权请求，授权短信通知模板1
+		public static final String To_Authorizer_AuthRequest_ToBeDealtWith="114079"; 
+		
+		//发送验证码到手机
+		public static boolean sendTemplateSMS(String templateName,String recievePhone,String[] params){
+			return true;
+		}
+
+}

@@ -1,0 +1,5 @@
+package com.gcx.citygovcreditndrc.model.common;
+
+public class ToSupplyGSAttachRo extends HisGSAttachRo {
+
+}

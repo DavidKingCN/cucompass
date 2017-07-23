@@ -1,0 +1,45 @@
+package com.gcx.citygovcreditndrc.dao.common;
+
+import com.gcx.citygovcreditndrc.model.common.Enclosure;
+import com.gcx.citygovcreditndrc.model.common.EnclosureAo;
+import com.gcx.citygovcreditndrc.model.common.EnclosureExample;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface EnclosureMapper {
+    int countByExample(EnclosureExample example);
+
+    int deleteByExample(EnclosureExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Enclosure record);
+
+    int insertSelective(Enclosure record);
+
+    int deleteLogicById(@Param("isDelete") int isDelete, @Param("id") Integer id);
+
+    int deleteLogicByIds(@Param("isDelete") int isDelete, @Param("ids") Integer[] ids);
+
+    List<Enclosure> findByRecord(@Param("record") Enclosure record, @Param("start") int start, @Param("end") int end);
+
+    int findByRecordCount(@Param("record") Enclosure record);
+
+    List<Enclosure> selectByExample(EnclosureExample example);
+
+    Enclosure selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Enclosure record, @Param("example") EnclosureExample example);
+
+    int updateByExample(@Param("record") Enclosure record, @Param("example") EnclosureExample example);
+
+    int updateByPrimaryKeySelective(Enclosure record);
+
+    int updateByPrimaryKey(Enclosure record);
+
+	List<Enclosure> findAttachmentsByPid(@Param("id")int id);
+	
+	List<Enclosure> findEvaluationrecordAoByR1(@Param("id")int id);
+}

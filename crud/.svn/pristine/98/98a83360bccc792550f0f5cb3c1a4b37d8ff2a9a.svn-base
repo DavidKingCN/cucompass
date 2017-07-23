@@ -1,0 +1,19 @@
+package com.gcx.citygovcreditndrc.service.dealRecord;
+
+
+
+import com.gcx.citygovcreditndrc.model.ServiceResult;
+import com.gcx.citygovcreditndrc.model.dealRecord.DealRecord;
+import com.gcx.citygovcreditndrc.model.dealRecord.DealRecordAo;
+
+
+public interface DealRecordService {
+
+	ServiceResult<Object> findRecords(DealRecordAo record, int pagenow, int pagesize);
+	
+	public ServiceResult<Object> addRecord(DealRecord record);
+	
+	public ServiceResult<Object> delRecord(int record);
+	
+	public ServiceResult<Object> updateRecord(DealRecord record);
+}

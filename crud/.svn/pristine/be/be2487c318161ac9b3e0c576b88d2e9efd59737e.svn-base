@@ -1,0 +1,57 @@
+/*
+ *    功能名称   ： 工具类 封裝实现1.0
+ *    
+ *    (C) Copyright DavidKing 2016
+ *    All Rights Reserved.
+ *	  
+ *    注意： 有问题联系作者13621151569@yeah.net
+ */
+package com.gcx.citygovcreditndrc.util;
+
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PropertiesUtil.
+ */
+@SuppressWarnings("all")
+public class PropUtil {
+	
+	public static void main(String[] args) {
+		
+	}
+
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 */
+	public static<T> T newInstanceByConf(Class<T> clz,String confCLzPath) {
+		Properties p = new Properties();
+		System.out.println("class path = "+PropUtil.class.getResource("/"));
+		InputStream in = PropUtil.class.getResourceAsStream(confCLzPath);
+		T t = null;
+		try {
+			p.load(in);
+			
+			Enumeration ks= p.keys();
+		
+			Map<String,String> rtKvs = new HashMap<String,String>();
+			while(ks.hasMoreElements()){
+				String curKey = ks.nextElement().toString();
+				String curVal = p.getProperty(curKey);
+				rtKvs.put(curKey, curVal);
+			}
+			t = clz.newInstance();
+			ReflectUtil.setFieldValue(t, rtKvs);
+		} catch (Exception e) {
+			t = null;
+		}
+		return t;
+	}
+	
+}
