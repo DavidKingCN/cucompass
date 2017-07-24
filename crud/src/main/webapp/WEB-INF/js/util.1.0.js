@@ -27,7 +27,7 @@ function isObjNotNull(iv){
 }
 
 
-jQuery.extend({
+Util = jQuery.extend({
 	/**
 	 * 查看缓存是否可用
 	 */
@@ -77,6 +77,26 @@ jQuery.extend({
 	decode:function(val){
 		return unescape(val);
 	},
+	
+	put:function(key,val){
+		if(this.cacheEnabled()){
+			this.setCache(key,val);
+		}else if(params != null && params != undefined){
+			params.put(key,val);
+		}
+	},
+	get:function(key){
+		var val = null;
+		if(this.cacheEnabled()){
+			val = this.getCache(key);
+			this.delCache(key);
+		}else if(params !=null && params != undefined){
+			
+			val =  params.get(key);
+			params.remove(key);
+		}
+		return val;
+	},
 	/**
 	 * 将json对象赋值到dom节点，dom节点满足<input type='text' name='' value=''/>
 	 * 满足大部分的input dom节点
@@ -84,16 +104,52 @@ jQuery.extend({
 	jsonToDom:function(jsonObj){
 		for(var key in jsonObj){
 			var val_=jsonObj[key];
-			var thisObj = $("[name="+key+"]");
+			var thisObj = $("[name='"+key+"']");
 			if(isObjNotNull(thisObj)){
-				if(isNotNull(val_)){
-					thisObj.val(val_);
+				
+				var tagName = thisObj.prop('tagName');
+				
+				var tagName = thisObj.prop('tagName');
+				var nodeName = thisObj.prop('nodeName');
+				if(isNotNull(val_))
+				if(tagName!=null && tagName != undefined){
+					
+					if(tagName=='INPUT'){
+						//如果是input输入域则直接赋值
+						
+						var inputType = thisObj.attr('type').toUpperCase();
+						if(inputType=='RADIO'){
+							if(val_=='是'){
+								thisObj.eq(0).attr('checked', true);
+							}else{
+								thisObj.eq(1).attr('checked', true);
+							}
+						}else{
+							thisObj.val(val_);
+						}
+					}else if(tagName=='SELECT'){
+						//如果是select下拉列表
+						thisObj.find("option[value='"+val_+"']").attr("selected",true);
+					}else if(tagName=='TEXTAREA'){
+						//如果是textarea多行文本域
+						thisObj.text(val_);
+					}else if(tagName=='SPAN'){
+						//如果是span块
+						thisObj.text(val_);
+					}else if(tagName=='IMG'){
+						thisObj.attr('src',val_);
+					}
+				}else{
+					continue;
 				}
+				
 			}
 		}
 	}
 }); 
 
+//alert('test = '+Util);
+//alert('test = '+Util.get('id'));
 
 
 /***
